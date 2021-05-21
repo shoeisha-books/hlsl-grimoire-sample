@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{7E02B89F-27AC-45A9-8793-FD68F5FB8266}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Sample00</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/Win32/Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/x64/Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/Win32/Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/x64/Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\MiniEngine\Animation.cpp" />
+    <ClCompile Include="..\..\MiniEngine\AnimationClip.cpp" />
+    <ClCompile Include="..\..\MiniEngine\AnimationPlayController.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Camera.cpp" />
+    <ClCompile Include="..\..\MiniEngine\ConstantBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\DescriptorHeap.cpp" />
+    <ClCompile Include="..\..\MiniEngine\font\Font.cpp" />
+    <ClCompile Include="..\..\MiniEngine\font\FontEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\GPUBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\GraphicsEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\HID\GamePad.cpp" />
+    <ClCompile Include="..\..\MiniEngine\IndexBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Material.cpp" />
+    <ClCompile Include="..\..\MiniEngine\math\Matrix.cpp" />
+    <ClCompile Include="..\..\MiniEngine\math\Vector.cpp" />
+    <ClCompile Include="..\..\MiniEngine\MeshParts.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Model.cpp" />
+    <ClCompile Include="..\..\MiniEngine\NullTextureMaps.cpp" />
+    <ClCompile Include="..\..\MiniEngine\PipelineState.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\BLASBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingInstance.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingPSO.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingWorld.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\TLASBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RootSignature.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RWStructuredBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Shader.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Skeleton.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Sprite.cpp" />
+    <ClCompile Include="..\..\MiniEngine\StructuredBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Texture.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkaFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkmFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="system\system.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\MiniEngine\Animation.h" />
+    <ClInclude Include="..\..\MiniEngine\AnimationClip.h" />
+    <ClInclude Include="..\..\MiniEngine\AnimationPlayController.h" />
+    <ClInclude Include="..\..\MiniEngine\Camera.h" />
+    <ClInclude Include="..\..\MiniEngine\ConstantBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\DescriptorHeap.h" />
+    <ClInclude Include="..\..\MiniEngine\font\Font.h" />
+    <ClInclude Include="..\..\MiniEngine\font\FontEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\GPUBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\GraphicsEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\HID\GamePad.h" />
+    <ClInclude Include="..\..\MiniEngine\IndexBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\IShaderResource.h" />
+    <ClInclude Include="..\..\MiniEngine\IUnorderAccessResource.h" />
+    <ClInclude Include="..\..\MiniEngine\Material.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Math.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Matrix.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Vector.h" />
+    <ClInclude Include="..\..\MiniEngine\MeshParts.h" />
+    <ClInclude Include="..\..\MiniEngine\MiniEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\Model.h" />
+    <ClInclude Include="..\..\MiniEngine\NullTextureMaps.h" />
+    <ClInclude Include="..\..\MiniEngine\PipelineState.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\BLASBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\Raytracing.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingInstance.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingPSO.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingWorld.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\TLASBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\RenderContext.h" />
+    <ClInclude Include="..\..\MiniEngine\RenderContext_inline.h" />
+    <ClInclude Include="..\..\MiniEngine\RenderTarget.h" />
+    <ClInclude Include="..\..\MiniEngine\RootSignature.h" />
+    <ClInclude Include="..\..\MiniEngine\RWStructuredBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\Shader.h" />
+    <ClInclude Include="..\..\MiniEngine\Skeleton.h" />
+    <ClInclude Include="..\..\MiniEngine\Sprite.h" />
+    <ClInclude Include="..\..\MiniEngine\StructuredBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\Texture.h" />
+    <ClInclude Include="..\..\MiniEngine\tkEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkaFile.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
+    <ClInclude Include="..\..\MiniEngine\util\Stopwatch.h" />
+    <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="system\system.h" />
+    <ClInclude Include="TrianglePolygon.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
