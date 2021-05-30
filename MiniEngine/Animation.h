@@ -134,8 +134,13 @@ private:
 	void PlayCommon(AnimationClip* nextClip, float interpolateTime)
 	{
 		int index = GetLastAnimationControllerIndex();
-		if (m_animationPlayController[index].GetAnimClip() == nextClip) {
-			return;
+		if( index < 0){
+			index = 0;
+		}else{
+			if (m_animationPlayController[index].GetAnimClip() == nextClip) {
+				//同じアニメーションを再生しようとしている。
+				return;
+			}
 		}
 		if (interpolateTime == 0.0f) {
 			//補完なし。
