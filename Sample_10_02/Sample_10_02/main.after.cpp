@@ -47,8 +47,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     Model plModel;
     plModel.Init(plModelInitData);
 
-    Vector3 plPos;
-
     // step-2 ポストエフェクト実行用のスプライトを初期化する
     // スプライトの初期化オブジェクトを作成する
     SpriteInitData spriteInitData;
@@ -75,13 +73,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     {
         // 1フレームの開始
         g_engine->BeginFrame();
-
-        // プレイヤーの座標をゲームパッドを使って動かす
-        plPos.x -= g_pad[0]->GetLStickXF();
-        plPos.z -= g_pad[0]->GetLStickYF();
-
-        // プレイヤーのワールド行列を更新する
-        plModel.UpdateWorldMatrix(plPos, g_quatIdentity, g_vec3One);
 
         //////////////////////////////////////
         // ここから絵を描くコードを記述する
