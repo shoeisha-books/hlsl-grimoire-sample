@@ -16,7 +16,11 @@ public:
 		const char* vsEntryPointFunc,
 		const char* vsSkinEntriyPointFunc,
 		const char* psEntryPointFunc,
-		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat
+		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat,
+		int numSrv,
+		int numCbv,
+		UINT offsetInDescriptorsFromTableStartCB,
+		UINT offsetInDescriptorsFromTableStartSRV
 	);
 	/// <summary>
 	/// レンダリングを開始するときに呼び出す関数。
@@ -103,11 +107,11 @@ private:
 		int hasNormalMap;	//法線マップを保持しているかどうかのフラグ。
 		int hasSpecMap;		//スペキュラマップを保持しているかどうかのフラグ。
 	};
-	Texture* m_albedoMap = nullptr;					//アルベドマップ。
-	Texture* m_normalMap = nullptr;					//法線マップ。
-	Texture* m_specularMap = nullptr;				//スペキュラマップ。
-	Texture* m_reflectionMap = nullptr;				//リフレクションマップ。
-	Texture* m_refractionMap = nullptr;				//屈折マップ。
+	Texture*	m_albedoMap;						//アルベドマップ。
+	Texture*	m_normalMap;						//法線マップ。
+	Texture*	m_specularMap;						//スペキュラマップ。
+	Texture*	m_reflectionMap;					//リフレクションマップ。
+	Texture*	m_refractionMap;					//屈折マップ。
 
 	ConstantBuffer m_constantBuffer;				//定数バッファ。
 	RootSignature m_rootSignature;					//ルートシグネチャ。

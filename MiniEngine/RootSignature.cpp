@@ -13,7 +13,10 @@ bool RootSignature::Init(
 	int numSampler,
 	UINT maxCbvDescriptor,
 	UINT maxSrvDescriptor,
-	UINT maxUavDescritor 
+	UINT maxUavDescritor,
+	UINT offsetInDescriptorsFromTableStartCB,
+	UINT offsetInDescriptorsFromTableStartSRV,
+	UINT offsetInDescriptorsFromTableStartUAV
 )
 {
 	auto d3dDevice = g_graphicsEngine->GetD3DDevice();
@@ -21,13 +24,13 @@ bool RootSignature::Init(
 	CD3DX12_DESCRIPTOR_RANGE1 ranges[enNumDescriptorHeap];
 	CD3DX12_ROOT_PARAMETER1 rootParameters[enNumDescriptorHeap];
 
-	ranges[enDescriptorHeap_CB].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, maxCbvDescriptor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	ranges[enDescriptorHeap_CB].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, maxCbvDescriptor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC, offsetInDescriptorsFromTableStartCB);
 	rootParameters[enDescriptorHeap_CB].InitAsDescriptorTable(1, &ranges[enDescriptorHeap_CB]);
 
-	ranges[enDescriptorHeap_SRV].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, maxSrvDescriptor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	ranges[enDescriptorHeap_SRV].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, maxSrvDescriptor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC, offsetInDescriptorsFromTableStartSRV);
 	rootParameters[enDescriptorHeap_SRV].InitAsDescriptorTable(1, &ranges[enDescriptorHeap_SRV]);
 
-	ranges[enDescriptorHeap_UAV].Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, maxUavDescritor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	ranges[enDescriptorHeap_UAV].Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, maxUavDescritor, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC, offsetInDescriptorsFromTableStartUAV);
 	rootParameters[enDescriptorHeap_UAV].InitAsDescriptorTable(1, &ranges[enDescriptorHeap_UAV]);
 
 	// Allow input layout and deny uneccessary access to certain pipeline stages.

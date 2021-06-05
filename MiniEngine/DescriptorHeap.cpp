@@ -2,6 +2,21 @@
 #include "DescriptorHeap.h"
 
 
+DescriptorHeap::DescriptorHeap()
+{
+	m_shaderResources.resize(MAX_SHADER_RESOURCE);
+	m_uavResoruces.resize(MAX_SHADER_RESOURCE);
+	m_constantBuffers.resize(MAX_CONSTANT_BUFFER);
+	for (auto& srv : m_shaderResources) {
+		srv = nullptr;
+	}
+	for (auto& uav : m_uavResoruces) {
+		uav = nullptr;
+	}
+	for (auto& cbv : m_constantBuffers) {
+		cbv = nullptr;
+	}
+}
 DescriptorHeap::~DescriptorHeap()
 {
 	for (auto& ds : m_descriptorHeap) {
@@ -40,6 +55,7 @@ void DescriptorHeap::CommitSamperHeap()
 	}
 
 }
+int g_numDescriptorHeap = 0;
 void DescriptorHeap::Commit()
 {
 	const auto& d3dDevice = g_graphicsEngine->GetD3DDevice();
@@ -51,6 +67,7 @@ void DescriptorHeap::Commit()
 
 	for (auto& ds : m_descriptorHeap) {
 		auto hr = d3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&ds));
+		g_numDescriptorHeap++;
 		if (FAILED(hr)) {
 			MessageBox(nullptr, L"DescriptorHeap::Commit ディスクリプタヒープの作成に失敗しました。", L"エラー", MB_OK);
 			std::abort();
@@ -64,6 +81,7 @@ void DescriptorHeap::Commit()
 
 		//定数バッファを登録していく。
 		for (int i = 0; i < m_numConstantBuffer; i++) {
+			//@todo bug
 			if (m_constantBuffers[i] != nullptr) {
 				m_constantBuffers[i]->RegistConstantBufferView(cpuHandle, bufferNo);
 			}

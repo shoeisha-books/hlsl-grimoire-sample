@@ -5,7 +5,10 @@
 /// </summary>
 class DescriptorHeap {
 public:
-	
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	DescriptorHeap();
 	/// <summary>
 	/// デストラクタ。
 	/// </summary>
@@ -28,7 +31,7 @@ public:
 		RegistResource(
 			registerNo,
 			&sr,
-			m_shaderResources,
+			&m_shaderResources.front(),
 			m_numShaderResource,
 			MAX_SHADER_RESOURCE,
 			L"DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。"
@@ -47,7 +50,7 @@ public:
 		RegistResource(
 			registerNo, 
 			&sr,
-			m_uavResoruces, 
+			&m_uavResoruces.front(), 
 			m_numUavResource, 
 			MAX_SHADER_RESOURCE, 
 			L"DescriptorHeap::RegistUnorderAccessResource() レジスタ番号が範囲外です。"
@@ -65,7 +68,7 @@ public:
 		RegistResource(
 			registerNo,
 			&cb,
-			m_constantBuffers,
+			&m_constantBuffers.front(),
 			m_numConstantBuffer,
 			MAX_CONSTANT_BUFFER,
 			L"DescriptorHeap::RegistConstantBuffer() レジスタ番号が範囲外です。"
@@ -212,18 +215,18 @@ private:
 	}
 private:
 	enum {
-		MAX_SHADER_RESOURCE = 512,	//シェーダーリソースの最大数。
-		MAX_CONSTANT_BUFFER = 512,	//定数バッファの最大数。
-		MAX_SAMPLER_STATE = 512,	//サンプラステートの最大数。
+		MAX_SHADER_RESOURCE = 1024 * 10,	//シェーダーリソースの最大数。
+		MAX_CONSTANT_BUFFER = 1024 * 10,	//定数バッファの最大数。
+		MAX_SAMPLER_STATE = 16,	//サンプラステートの最大数。
 	};
 	int m_numShaderResource = 0;	//シェーダーリソースの数。
 	int m_numConstantBuffer = 0;	//定数バッファの数。
 	int m_numUavResource = 0;		//アンオーダーアクセスリソースの数。
 	int m_numSamplerDesc = 0;		//サンプラの数。
 	ID3D12DescriptorHeap* m_descriptorHeap[2] = { nullptr };					//ディスクリプタヒープ。
-	IShaderResource* m_shaderResources[MAX_SHADER_RESOURCE] = {nullptr};		//シェーダーリソース。7
-	IUnorderAccessResrouce* m_uavResoruces[MAX_SHADER_RESOURCE] = { nullptr };	//UAVリソース。
-	ConstantBuffer* m_constantBuffers[MAX_CONSTANT_BUFFER] = { nullptr };		//定数バッファ。
+	std::vector<IShaderResource*> m_shaderResources;		//シェーダーリソース。
+	std::vector < IUnorderAccessResrouce*> m_uavResoruces;	//UAVリソース。
+	std::vector < ConstantBuffer*> m_constantBuffers;		//定数バッファ。
 	D3D12_SAMPLER_DESC m_samplerDescs[MAX_SAMPLER_STATE];						//サンプラステート。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_cbGpuDescriptorStart[2];						//定数バッファのディスクリプタヒープの開始ハンドル。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_srGpuDescriptorStart[2];						//シェーダーリソースのディスクリプタヒープの開始ハンドル。

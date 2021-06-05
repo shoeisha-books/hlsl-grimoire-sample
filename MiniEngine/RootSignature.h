@@ -42,7 +42,10 @@ public:
 		int numSampler,
 		UINT maxCbvDescriptor = 8,
 		UINT maxSrvDescriptor = 32,
-		UINT maxUavDescritor = 8
+		UINT maxUavDescritor = 8,
+		UINT offsetInDescriptorsFromTableStartCB = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND,
+		UINT offsetInDescriptorsFromTableStartSRV = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND,
+		UINT offsetInDescriptorsFromTableStartUAV = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
 	);
 	bool Init(Shader& shader);
 	ID3D12RootSignature* Get()

@@ -33,11 +33,13 @@ void MeshParts::InitFromTkmFile(
 {
 	m_meshs.resize(tkmFile.GetNumMesh());
 	int meshNo = 0;
+	int materianNo = 0;
 	tkmFile.QueryMeshParts([&](const TkmFile::SMesh& mesh) {
 		//tkmファイルのメッシュ情報からメッシュを作成する。
 		CreateMeshFromTkmMesh(
 			mesh, 
-			meshNo, 
+			meshNo,
+			materianNo,
 			fxFilePath, 
 			vsEntryPointFunc, 
 			vsSkinEntryPointFunc, 
@@ -62,43 +64,37 @@ void MeshParts::InitFromTkmFile(
 
 void MeshParts::CreateDescriptorHeaps()
 {
-	//ディスクリプタヒープはマテリアルの数分だけ作成される。
-	int numDescriptorHeap = 0;
-	for (auto& mesh : m_meshs) {
-		for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
-			numDescriptorHeap++;
-		}
-	}
-	//ディスクリプタヒープをドカッと確保。
-	m_descriptorHeap.resize(numDescriptorHeap);
+	
 	//ディスクリプタヒープを構築していく。
-	int descriptorHeapNo = 0;
+	int srvNo = 0;
+	int cbNo = 0;
 	for (auto& mesh : m_meshs) {
 		for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
-			auto& descriptorHeap = m_descriptorHeap[descriptorHeapNo];
+			
 			//ディスクリプタヒープにディスクリプタを登録していく。
-			descriptorHeap.RegistShaderResource(0, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ。
-			descriptorHeap.RegistShaderResource(1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ。
-			descriptorHeap.RegistShaderResource(2, mesh->m_materials[matNo]->GetSpecularMap());		//スペキュラマップ。
-			descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);							//ボーンのストラクチャードバッファ。
+			m_descriptorHeap.RegistShaderResource(srvNo, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ。
+			m_descriptorHeap.RegistShaderResource(srvNo+1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ。
+			m_descriptorHeap.RegistShaderResource(srvNo+2, mesh->m_materials[matNo]->GetSpecularMap());		//スペキュラマップ。
+			m_descriptorHeap.RegistShaderResource(srvNo+3, m_boneMatricesStructureBuffer);							//ボーンのストラクチャードバッファ。
 			for (int i = 0; i < MAX_MODEL_EXPAND_SRV; i++) {
 				if (m_expandShaderResourceView[i]) {
-					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO + i, *m_expandShaderResourceView[i]);
+					m_descriptorHeap.RegistShaderResource(srvNo + EXPAND_SRV_REG__START_NO + i, *m_expandShaderResourceView[i]);
 				}
 			}
-			descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);
+			srvNo += NUM_SRV_ONE_MATERIAL;
+			m_descriptorHeap.RegistConstantBuffer(cbNo, m_commonConstantBuffer);
 			if (m_expandConstantBuffer.IsValid()) {
-				descriptorHeap.RegistConstantBuffer(1, m_expandConstantBuffer);
+				m_descriptorHeap.RegistConstantBuffer(cbNo + 1, m_expandConstantBuffer);
 			}
-			//ディスクリプタヒープへの登録を確定させる。
-			descriptorHeap.Commit();
-			descriptorHeapNo++;
+			cbNo += NUM_CBV_ONE_MATERIAL;
 		}
 	}
+	m_descriptorHeap.Commit();
 }
 void MeshParts::CreateMeshFromTkmMesh(
 	const TkmFile::SMesh& tkmMesh, 
 	int meshNo,
+	int& materialNum,
 	const char* fxFilePath,
 	const char* vsEntryPointFunc,
 	const char* vsSkinEntryPointFunc,
@@ -162,8 +158,14 @@ void MeshParts::CreateMeshFromTkmMesh(
 			vsEntryPointFunc, 
 			vsSkinEntryPointFunc, 
 			psEntryPointFunc, 
-			colorBufferFormat
+			colorBufferFormat,
+			NUM_SRV_ONE_MATERIAL,
+			NUM_CBV_ONE_MATERIAL,
+			NUM_CBV_ONE_MATERIAL * materialNum,
+			NUM_SRV_ONE_MATERIAL * materialNum
 		);
+		//作成したマテリアル数をカウントする。
+		materialNum++;
 		mesh->m_materials.push_back(mat);
 	}
 
@@ -215,7 +217,7 @@ void MeshParts::Draw(
 			//このマテリアルが貼られているメッシュの描画開始。
 			mesh->m_materials[matNo]->BeginRender(rc, mesh->skinFlags[matNo]);
 			//2. ディスクリプタヒープを設定。
-			rc.SetDescriptorHeap(m_descriptorHeap.at(descriptorHeapNo));
+			rc.SetDescriptorHeap(m_descriptorHeap);
 			//3. インデックスバッファを設定。
 			auto& ib = mesh->m_indexBufferArray[matNo];
 			rc.SetIndexBuffer(*ib);

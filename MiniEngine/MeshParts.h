@@ -14,7 +14,7 @@ class IShaderResource;
 
 
 
-const int MAX_MODEL_EXPAND_SRV = 16;	//拡張SRVの最大数。
+const int MAX_MODEL_EXPAND_SRV = 6;	//拡張SRVの最大数。
 
 /// <summary>
 /// メッシュ
@@ -82,7 +82,7 @@ public:
 	void QueryMeshAndDescriptorHeap(std::function<void(const SMesh& mesh, const DescriptorHeap& ds)> queryFunc)
 	{
 		for( int i = 0; i < m_meshs.size(); i++ ){
-			queryFunc(*m_meshs[i], m_descriptorHeap[i]);
+			queryFunc(*m_meshs[i], m_descriptorHeap);
 		}
 	}
 	/// <summary>
@@ -103,6 +103,7 @@ private:
 	void CreateMeshFromTkmMesh(
 		const TkmFile::SMesh& mesh, 
 		int meshNo,
+		int& materialNum,
 		const char* fxFilePath,
 		const char* vsEntryPointFunc,
 		const char* vsSkinEntryPointFunc,
@@ -113,6 +114,10 @@ private:
 private:
 	//拡張SRVが設定されるレジスタの開始番号。
 	const int EXPAND_SRV_REG__START_NO = 10;
+	//１つのマテリアルで使用されるSRVの数。
+	const int NUM_SRV_ONE_MATERIAL = EXPAND_SRV_REG__START_NO + MAX_MODEL_EXPAND_SRV;
+	//１つのマテリアルで使用されるCBVの数。
+	const int NUM_CBV_ONE_MATERIAL = 2;
 	/// <summary>
 	/// 定数バッファ。
 	/// </summary>
@@ -128,8 +133,9 @@ private:
 	ConstantBuffer m_expandConstantBuffer;					//ユーザー拡張用の定数バッファ
 	std::array<IShaderResource*, MAX_MODEL_EXPAND_SRV> m_expandShaderResourceView = { nullptr };	//ユーザー拡張シェーダーリソースビュー。
 	StructuredBuffer m_boneMatricesStructureBuffer;	//ボーン行列の構造化バッファ。
-	std::vector< SMesh* > m_meshs;							//メッシュ。
-	std::vector< DescriptorHeap > m_descriptorHeap;		//ディスクリプタヒープ。
-	Skeleton* m_skeleton = nullptr;								//スケルトン。
+	std::vector< SMesh* > m_meshs;						//メッシュ。
+	//std::vector< DescriptorHeap > m_descriptorHeap;	//ディスクリプタヒープ。
+	DescriptorHeap m_descriptorHeap;					//ディスクリプタヒープ。
+	Skeleton* m_skeleton = nullptr;						//スケルトン。
 	void* m_expandData = nullptr;						//ユーザー拡張データ。
 };
