@@ -33,6 +33,11 @@ public:
 		unsigned int reflectionMapSize;			//リフレクションマップのサイズ。(ddsファイル)
 		std::unique_ptr<char[]>	refractionMap;	//ロードされた屈折マップ。(ddsファイル)
 		unsigned int refractionMapSize;			//屈折マップのサイズ。(ddsファイル)
+		std::string albedoMapFilePath;			//アルベドマップのファイルパス。
+		std::string normalMapFilePath;			//法線マップのファイルパス。
+		std::string specularMapFilePath;		//スペキュラマップのファイルパス。
+		std::string reflectionMapFilePath;		//リフレクションマップのファイルパス。
+		std::string refractionMapFilePath;		//屈折マップのファイルパス。
 	};
 	/// <summary>
 	/// 頂点。

@@ -6,6 +6,7 @@
 #include "Shader.h"
 
 class GraphicsEngine;
+class Texture;
 
 class TkEngine {
 public:
@@ -26,6 +27,24 @@ public:
 	/// </summary>
 	void Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
 	/// <summary>
+	/// バンクからテクスチャを取得。
+	/// </summary>
+	/// <param name="filePath">ファイルパス。</param>
+	/// <returns>テクスチャ。</returns>
+	Texture* GetTextureFromBank(const char* filePath)
+	{
+		return m_textureBank.Get(filePath);
+	}
+	/// <summary>
+	/// テクスチャをバンクに登録。
+	/// </summary>
+	/// <param name="filePath">ファイルパス。</param>
+	/// <param name="texture">テクスチャ。</param>
+	void RegistTextureToBank(const char* filePath, Texture* texture)
+	{
+		m_textureBank.Regist(filePath, texture);
+	}
+	/// <summary>
 	/// tkmファイルをバンクから取得。
 	/// </summary>
 	/// <param name="filePath">ファイルパス</param>
@@ -34,6 +53,7 @@ public:
 	{
 		return m_tkmFileBank.Get(filePath);
 	}
+	
 	/// <summary>
 	/// tkmファイルをバンクに登録。
 	/// </summary>
@@ -69,6 +89,7 @@ private:
 	GraphicsEngine* m_graphicsEngine = nullptr;		//グラフィックエンジン。
 	TResourceBank<TkmFile> m_tkmFileBank;			//tkmファイルバンク。
 	TResourceBank<Shader> m_shaderBank;				//シェーダーバンク
+	TResourceBank<Texture>	m_textureBank;			//テクスチャバンク。
 	GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ゲームパッド。
 	
 };
