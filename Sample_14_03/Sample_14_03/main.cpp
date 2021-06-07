@@ -33,7 +33,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     bgModelRender.InitDeferredRendering(renderingEngine, "Assets/modelData/bg/bg.tkm", true);
     
     // ティーポットモデルのレンダラーを初期化
-    ModelInitData modelInitData;
+    myRenderer::ModelInitDataFR modelInitData;
     modelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
     modelInitData.m_fxFilePath = "Assets/shader/sample.fx";
     modelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
