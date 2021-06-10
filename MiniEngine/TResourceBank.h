@@ -9,7 +9,6 @@ public:
 	{
 		auto it = m_resourceMap.find(filePath);
 		if (it != m_resourceMap.end()) {
-			//バンクに登録されている。
 			return it->second.get();
 		}
 		return nullptr;
@@ -18,7 +17,6 @@ public:
 	{
 		auto it = m_resourceMap.find(filePath);
 		if (it == m_resourceMap.end()) {
-			//未登録。
 			m_resourceMap.insert(
 				std::pair< std::string, TResourcePtr>(filePath, resource )
 			);
