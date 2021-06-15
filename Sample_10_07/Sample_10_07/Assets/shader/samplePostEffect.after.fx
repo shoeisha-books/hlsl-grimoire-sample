@@ -1,5 +1,5 @@
 /*!
- * @brief ブルーム
+ * @brief 被写界深度
  */
 
 cbuffer cb : register(b0)
