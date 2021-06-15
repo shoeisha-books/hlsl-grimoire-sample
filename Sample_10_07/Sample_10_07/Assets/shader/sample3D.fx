@@ -35,15 +35,11 @@ struct SPSIn
     float3 worldPos : TEXCOORD1;    // ワールド空間でのピクセルの座標
 
     // step-7 カメラ空間でのZ値を記録する変数を追加
-    float3 depthInView : TEXCOORD2; // カメラ空間でのZ値。
+
 };
 
 // step-8 ピクセルシェーダーからの出力構造体を定義する。
-struct SPSOut
-{
-    float4 color : SV_Target0;  // レンダリングターゲット0に描きこむ。
-    float depth : SV_Target1;   // レンダリングターゲット1に描きこむ。
-};
+
 
 ///////////////////////////////////////////////////
 // グローバル変数
