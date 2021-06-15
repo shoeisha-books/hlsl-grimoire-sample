@@ -71,7 +71,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     plModelInitData.m_expandConstantBufferSize = sizeof(light);
 
     // レンダリングするカラーバッファーのフォーマットを指定する
-    plModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    plModelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
     // 設定した初期化情報をもとにモデルを初期化する
     Model plModel;
