@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CascadeShadowMapMatrix.h"
 
@@ -7,22 +7,22 @@ namespace myRenderer
     namespace shadow
     {
         /// <summary>
-        /// ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æˆ—
+        /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»å‡¦ç†
         /// </summary>
         class ShadowMapRender
         {
         public:
             /// <summary>
-            /// ‰Šú‰»
+            /// åˆæœŸåŒ–
             /// </summary>
             void Init();
 
             /// <summary>
-            /// ƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹‚ğ’Ç‰Á
+            /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
             /// </summary>
-            /// <param name="model0">‹ßŒi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
-            /// <param name="model1">’†Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv1‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
-            /// <param name="model2">‰“Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv2‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
+            /// <param name="model0">è¿‘æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
+            /// <param name="model1">ä¸­æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—1ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
+            /// <param name="model2">é æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—2ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
             void Add3DModel(
                 Model& model0,
                 Model& model1,
@@ -34,16 +34,16 @@ namespace myRenderer
             }
 
             /// <summary>
-            /// •`‰æ
+            /// æç”»
             /// </summary>
-            /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
-            /// <param name="lightDirection">ƒ‰ƒCƒg‚Ì•ûŒü</param>
+            /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
+            /// <param name="lightDirection">ãƒ©ã‚¤ãƒˆã®æ–¹å‘</param>
             void Render(RenderContext& rc, Vector3& lightDirection);
 
             /// <summary>
-            /// ƒVƒƒƒhƒEƒ}ƒbƒv‚ğæ“¾
+            /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’å–å¾—
             /// </summary>
-            /// <param name="areaNo">ƒGƒŠƒA”Ô†</param>
+            /// <param name="areaNo">ã‚¨ãƒªã‚¢ç•ªå·</param>
             /// <returns></returns>
             Texture& GetShadowMap(int areaNo)
             {
@@ -51,7 +51,7 @@ namespace myRenderer
             }
 
             /// <summary>
-            /// ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾
+            /// ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’å–å¾—
             /// </summary>
             /// <returns></returns>
             const Matrix& GetLVPMatrix(int areaNo) const
@@ -60,9 +60,9 @@ namespace myRenderer
             }
 
         private:
-            CascadeShadowMapMatrix m_cascadeShadowMapMatrix;    // ƒJƒXƒP[ƒhƒVƒƒƒhƒEƒ}ƒbƒv‚Ìs—ñ‚ğˆµ‚¤ƒIƒuƒWƒFƒNƒg
-            RenderTarget m_shadowMaps[NUM_SHADOW_MAP];          // ƒVƒƒƒhƒEƒ}ƒbƒv
-            std::vector<Model*> m_modelsArray[NUM_SHADOW_MAP];  // ƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹‚Ì”z—ñ
+            CascadeShadowMapMatrix m_cascadeShadowMapMatrix;    // ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®è¡Œåˆ—ã‚’æ‰±ã†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+            RenderTarget m_shadowMaps[NUM_SHADOW_MAP];          // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—
+            std::vector<Model*> m_modelsArray[NUM_SHADOW_MAP];  // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã®é…åˆ—
         };
     }
 }

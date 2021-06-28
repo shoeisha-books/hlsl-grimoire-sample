@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
 class GraphicsEngine;
-extern HWND			g_hWnd ;				//ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹B
+extern HWND			g_hWnd ;				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã€‚
 
-//ƒQ[ƒ€‚Ì‰Šú‰»B
+//ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–ã€‚
 void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName);
-//ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ğƒfƒBƒXƒpƒbƒ`Bfalse‚ª•Ô‚Á‚Ä‚«‚½‚çAƒQ[ƒ€I—¹B
+//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã€‚falseãŒè¿”ã£ã¦ããŸã‚‰ã€ã‚²ãƒ¼ãƒ çµ‚äº†ã€‚
 bool DispatchWindowMessage();

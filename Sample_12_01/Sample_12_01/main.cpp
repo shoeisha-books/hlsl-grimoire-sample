@@ -1,38 +1,38 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "TrianglePolygon.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒg
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆ
 /// </summary>
 struct DirectionalLight
 {
     Vector3  color;
-    float pad0;         // ƒpƒfƒBƒ“ƒO
+    float pad0;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
     Vector3  direction;
-    float pad1;         // ƒpƒfƒBƒ“ƒO
+    float pad1;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
 };
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
     DirectionalLight light;
     light.direction.x = 1.0f;
     light.direction.y = 0.0f;
@@ -42,45 +42,45 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     light.color.y = 1.0f;
     light.color.z = 1.0f;
 
-    // step-1 ƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // step-1 ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
 
-    // step-2 G-Buffer‚ğì¬
+    // step-2 G-Bufferã‚’ä½œæˆ
 
-    // step-3 ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚ğs‚¤‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
+    // step-3 ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’è¡Œã†ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒtƒŒ[ƒ€ŠJn
+        // ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒ‰ƒCƒg‚ğ‰ñ‚·
+        // ãƒ©ã‚¤ãƒˆã‚’å›ã™
         Quaternion rotLig;
         rotLig.SetRotationDegY(2.0f);
         rotLig.Apply(light.direction);
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-4 ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğG-Buffer‚É•ÏX‚µ‚Ä‘‚«‚Ş
+        // step-4 ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’G-Bufferã«å¤‰æ›´ã—ã¦æ›¸ãè¾¼ã‚€
 
-        // step-5 ƒŒƒ“ƒ_ƒŠƒ“ƒOæ‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚É–ß‚µ‚ÄƒXƒvƒ‰ƒCƒg‚ğƒŒƒ“ƒ_ƒŠƒ“ƒO‚·‚é
+        // step-5 ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å…ˆã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«æˆ»ã—ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã™ã‚‹
 
         /////////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒtƒŒ[ƒ€I—¹
+        // ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,

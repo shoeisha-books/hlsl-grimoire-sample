@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "ModelStandard.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitLightCamera(Camera& lightCamera, Vector3& ligPos);
 void MoveCamera();
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
     g_camera3D->SetPosition(0, 50.0f, 250.0f);
@@ -24,24 +24,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     RootSignature rs;
     InitRootSignature(rs);
 
-    // ƒ‰ƒCƒg‚ÌÀ•W
+    // ãƒ©ã‚¤ãƒˆã®åº§æ¨™
     Vector3 ligPos = { 0, 300, 0 };
 
-    // ‰e•`‰æ—p‚Ìƒ‰ƒCƒgƒJƒƒ‰‚ðì¬‚·‚é
+    // å½±æç”»ç”¨ã®ãƒ©ã‚¤ãƒˆã‚«ãƒ¡ãƒ©ã‚’ä½œæˆã™ã‚‹
     Camera lightCamera;
     InitLightCamera(lightCamera, ligPos);
 
-    // step-1 ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðì¬‚·‚é
+    // step-1 ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—æç”»ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã™ã‚‹
 
-    // step-2 ƒVƒƒƒhƒEƒ}ƒbƒv‚ð‚Ú‚©‚·‚½‚ß‚ÌƒIƒuƒWƒFƒNƒg‚ð‰Šú‰»‚·‚é
+    // step-2 ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã‚’ã¼ã‹ã™ãŸã‚ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
 
-    // step-3 GPU‘¤‚Å—˜—p‚·‚éƒVƒƒƒhƒE—p‚Ì\‘¢‘Ì‚ð’è‹`‚·‚é
+    // step-3 GPUå´ã§åˆ©ç”¨ã™ã‚‹ã‚·ãƒ£ãƒ‰ã‚¦ç”¨ã®æ§‹é€ ä½“ã‚’å®šç¾©ã™ã‚‹
 
-    // step-4 GPU‘¤‚É‘—‚éƒf[ƒ^‚ðÝ’è‚·‚é
+    // step-4 GPUå´ã«é€ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
 
-    // step-5 ƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹‚ð‰Šú‰»‚·‚é
+    // step-5 ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
 
-    // ’Êí•`‰æ‚ÌƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ð‰Šú‰»
+    // é€šå¸¸æç”»ã®ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelStandard teapotModel;
     teapotModel.Init("Assets/modelData/teapot.tkm");
     teapotModel.Update(
@@ -50,65 +50,65 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_vec3One
     );
 
-    // step-6 ‰e‚ðŽó‚¯‚é”wŒiƒ‚ƒfƒ‹‚ð‰Šú‰»
+    // step-6 å½±ã‚’å—ã‘ã‚‹èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJŽn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒJƒƒ‰‚ð“®‚©‚·
+        // ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™
         MoveCamera();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ð•`‚­ƒR[ƒh‚ð‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // ƒVƒƒƒhƒEƒ}ƒbƒv‚ÉƒŒƒ“ƒ_ƒŠƒ“ƒO
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðƒVƒƒƒhƒEƒ}ƒbƒv‚É•ÏX‚·‚é
+        // ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã«å¤‰æ›´ã™ã‚‹
         renderContext.WaitUntilToPossibleSetRenderTarget(shadowMap);
         renderContext.SetRenderTargetAndViewport(shadowMap);
         renderContext.ClearRenderTargetView(shadowMap);
 
-        // ‰eƒ‚ƒfƒ‹‚ð•`‰æ
+        // å½±ãƒ¢ãƒ‡ãƒ«ã‚’æç”»
         teapotShadowModel.Draw(renderContext, lightCamera);
 
-        // ‘‚«ž‚ÝŠ®—¹‘Ò‚¿
+        // æ›¸ãè¾¼ã¿å®Œäº†å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTarget(shadowMap);
 
-        // step-7 ƒVƒƒƒhƒEƒ}ƒbƒv‚ð‚Ú‚©‚·‚½‚ß‚ÌƒKƒEƒVƒAƒ“ƒuƒ‰[‚ðŽÀs‚·‚é
+        // step-7 ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã‚’ã¼ã‹ã™ãŸã‚ã®ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ–ãƒ©ãƒ¼ã‚’å®Ÿè¡Œã™ã‚‹
 
-        // ’ÊíƒŒƒ“ƒ_ƒŠƒ“ƒO
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚É–ß‚·
+        // é€šå¸¸ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«æˆ»ã™
         renderContext.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
         renderContext.SetViewportAndScissor(g_graphicsEngine->GetFrameBufferViewport());
 
-        // ƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ð•`‰æ
+        // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã‚’æç”»
         teapotModel.Draw(renderContext);
 
-        // ‰e‚ðŽó‚¯‚é”wŒi‚ð•`‰æ
+        // å½±ã‚’å—ã‘ã‚‹èƒŒæ™¯ã‚’æç”»
         bgModel.Draw(renderContext);
 
         //////////////////////////////////////
-        //ŠG‚ð•`‚­ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
 
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -119,16 +119,16 @@ void InitRootSignature( RootSignature& rs )
 
 void InitLightCamera(Camera& lightCamera, Vector3& ligPos)
 {
-    // ƒJƒƒ‰‚ÌˆÊ’u‚ðÝ’èB‚±‚ê‚Íƒ‰ƒCƒg‚ÌˆÊ’u
+    // ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’è¨­å®šã€‚ã“ã‚Œã¯ãƒ©ã‚¤ãƒˆã®ä½ç½®
     lightCamera.SetPosition(ligPos);
 
-    // ƒJƒƒ‰‚Ì’Ž‹“_‚ðÝ’èB‚±‚ê‚ªƒ‰ƒCƒg‚ªÆ‚ç‚µ‚Ä‚¢‚éêŠ
+    // ã‚«ãƒ¡ãƒ©ã®æ³¨è¦–ç‚¹ã‚’è¨­å®šã€‚ã“ã‚ŒãŒãƒ©ã‚¤ãƒˆãŒç…§ã‚‰ã—ã¦ã„ã‚‹å ´æ‰€
     lightCamera.SetTarget(0, 0, 0);
 
-    // ã•ûŒü‚ðÝ’èB¡‰ñ‚Íƒ‰ƒCƒg‚ª^‰º‚ðŒü‚¢‚Ä‚¢‚é‚Ì‚ÅAX•ûŒü‚ðã‚É‚µ‚Ä‚¢‚é
+    // ä¸Šæ–¹å‘ã‚’è¨­å®šã€‚ä»Šå›žã¯ãƒ©ã‚¤ãƒˆãŒçœŸä¸‹ã‚’å‘ã„ã¦ã„ã‚‹ã®ã§ã€Xæ–¹å‘ã‚’ä¸Šã«ã—ã¦ã„ã‚‹
     lightCamera.SetUp(1, 0, 0);
 
-    // ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ðŒvŽZ‚µ‚Ä‚¢‚é
+    // ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’è¨ˆç®—ã—ã¦ã„ã‚‹
     lightCamera.Update();
 }
 

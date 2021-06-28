@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 inline ID3D12DescriptorHeap* DescriptorHeap::Get()const
 {

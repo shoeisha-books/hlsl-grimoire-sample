@@ -1,5 +1,5 @@
-/*!
- * @brief	�x�N�g���N���X�B
+﻿/*!
+ * @brief	ベクトルクラス。
  */
 
 #include "stdafx.h"
@@ -28,14 +28,14 @@ const Vector3 Vector3::One = { 1.0f, 1.0f, 1.0f };
 const Quaternion Quaternion::Identity = { 0.0f,  0.0f, 0.0f, 1.0f };
 
 /*!
-*@brief	�s�񂩂�N�H�[�^�j�I�����쐬�B
+*@brief	行列からクォータニオンを作成。
 */
 void Quaternion::SetRotation(const Matrix& m)
 {
 	DirectX::XMStoreFloat4(&vec, DirectX::XMQuaternionRotationMatrix(m));
 }
 /*!
-*@brief	from�x�N�g������to�x�N�g���ɉ�]������N�H�[�^�j�I�����쐬�B
+*@brief	fromベクトルからtoベクトルに回転させるクォータニオンを作成。
 */
 void Quaternion::SetRotation(Vector3 from, Vector3 to)
 {
@@ -44,11 +44,11 @@ from.Normalize();
 	auto t = ::Dot(from, to);
 	Vector3 rotAxis;
 	if (t > 0.998f) {
-		//�قړ��������Ȃ̂ŒP�ʃN�H�[�^�j�I���ɂ���B
+		//ほぼ同じ向きなので単位クォータニオンにする。
 		*this = Quaternion::Identity;
 	}
 	else if (t < -0.998f) {
-		//�قڋt�����Ȃ̂ŁA
+		//ほぼ逆向きなので、
 		if (fabsf(to.x) < 1.0f) {
 			//
 			rotAxis = Cross(Vector3::AxisX, to);

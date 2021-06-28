@@ -1,37 +1,37 @@
-#pragma once
+ï»¿#pragma once
 
 class Math{
 public:
-	//‰~ü—¦
+	//å††å‘¨ç‡
 	static constexpr float PI = 3.14159265358979323846f;
-	//‰~ü—¦‚Ì‚Qæ
+	//å††å‘¨ç‡ã®ï¼’ä¹—
 	static constexpr float PI2 = PI * 2.0f;
 
 	/// <summary>
-	/// Šp“x‚ğDegree’PˆÊ‚©‚çRadian’PˆÊ‚É•ÏŠ·‚·‚éB
+	/// è§’åº¦ã‚’Degreeå˜ä½ã‹ã‚‰Radianå˜ä½ã«å¤‰æ›ã™ã‚‹ã€‚
 	/// </summary>
-	/// <param name="deg">Degree’PˆÊ‚ÌŠp“xB</param>
-	/// <returns>Radian’PˆÊ‚ÌŠp“xB</returns>
+	/// <param name="deg">Degreeå˜ä½ã®è§’åº¦ã€‚</param>
+	/// <returns>Radianå˜ä½ã®è§’åº¦ã€‚</returns>
 	constexpr static inline float DegToRad( float deg )
 	{
 		return deg * (PI/180.0f);
 	}
 	/// <summary>
-	/// Šp“x‚ğRadian’PˆÊ‚©‚çDegree’PˆÊ‚É•ÏŠ·‚·‚éB
+	/// è§’åº¦ã‚’Radianå˜ä½ã‹ã‚‰Degreeå˜ä½ã«å¤‰æ›ã™ã‚‹ã€‚
 	/// </summary>
-	/// <param name="rad">Radian’PˆÊ‚ÌŠp“xB</param>
-	/// <returns>Degree’PˆÊ‚ÌŠp“xB</returns>
+	/// <param name="rad">Radianå˜ä½ã®è§’åº¦ã€‚</param>
+	/// <returns>Degreeå˜ä½ã®è§’åº¦ã€‚</returns>
 	constexpr static inline float RadToDeg( float rad )
 	{
 		return rad / (PI/180.0f);
 	}
 	/// <summary>
-	/// t0‚Æt1‚ÌŠÔ‚ğüŒ`•âŠ®B
+	/// t0ã¨t1ã®é–“ã‚’ç·šå½¢è£œå®Œã€‚
 	/// </summary>
-	/// <param name="rate">•âŠÔ—¦‚Í0.0`1.0</param>
-	/// <param name="t0">•âŠÔŠJn‚Ì’lB</param>
-	/// <param name="t1">•âŠÔI—¹‚Ì’lB</param>
-	/// <returns>•âŠÔ‚³‚ê‚½’lB</returns>
+	/// <param name="rate">è£œé–“ç‡ã¯0.0ï½1.0</param>
+	/// <param name="t0">è£œé–“é–‹å§‹ã®å€¤ã€‚</param>
+	/// <param name="t1">è£œé–“çµ‚äº†ã®å€¤ã€‚</param>
+	/// <returns>è£œé–“ã•ã‚ŒãŸå€¤ã€‚</returns>
 	template<class T> static inline T Lerp(float rate, T t0, T t1)
 	{
 		T ret;
@@ -39,12 +39,12 @@ public:
 		return ret;
 	}
 	/// <summary>
-	/// t0‚Æt1‚ÌŠÔ‚ğüŒ`•âŠ®B
+	/// t0ã¨t1ã®é–“ã‚’ç·šå½¢è£œå®Œã€‚
 	/// </summary>
-	/// <param name="rate">•âŠÔ—¦‚Í0.0`1.0</param>
-	/// <param name="t0">•âŠÔŠJn‚Ì’lB</param>
-	/// <param name="t1">•âŠÔI—¹‚Ì’lB</param>
-	/// <returns>•âŠÔ‚³‚ê‚½’lB</returns>
+	/// <param name="rate">è£œé–“ç‡ã¯0.0ï½1.0</param>
+	/// <param name="t0">è£œé–“é–‹å§‹ã®å€¤ã€‚</param>
+	/// <param name="t1">è£œé–“çµ‚äº†ã®å€¤ã€‚</param>
+	/// <returns>è£œé–“ã•ã‚ŒãŸå€¤ã€‚</returns>
 	template<> static inline float Lerp(float rate, float t0, float t1)
 	{
 		return t0 + (t1 - t0)*rate;

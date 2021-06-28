@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
 class Matrix;
 
 
 /// <summary>
-/// 2ŸŒ³ƒxƒNƒgƒ‹ƒNƒ‰ƒXB
+/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Vector2 {
 public:
 	static const Vector2 Zero;
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	explicit Vector2()
 	{
@@ -18,7 +18,7 @@ public:
 		y = 0.0f;
 	}
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -29,7 +29,7 @@ public:
 	}
 
 	/// <summary>
-	/// ‘ã“ü‰‰Zq
+	/// ä»£å…¥æ¼”ç®—å­
 	/// </summary>
 	/// <param name="_v"></param>
 	/// <returns></returns>
@@ -50,18 +50,18 @@ public:
 	};
 
 	/// <summary>
-	/// üŒ`•âŠ®B
+	/// ç·šå½¢è£œå®Œã€‚
 	/// </summary>
-	/// <param name="t">•âŠ®—¦</param>
-	/// <param name="v0">•âŠ®ŠJn‚ÌƒxƒNƒgƒ‹B</param>
-	/// <param name="v1">•âŠ®I—¹‚ÌƒxƒNƒgƒ‹B</param>
+	/// <param name="t">è£œå®Œç‡</param>
+	/// <param name="v0">è£œå®Œé–‹å§‹ã®ãƒ™ã‚¯ãƒˆãƒ«ã€‚</param>
+	/// <param name="v1">è£œå®Œçµ‚äº†ã®ãƒ™ã‚¯ãƒˆãƒ«ã€‚</param>
 	void Lerp(float t, const Vector2& v0, const Vector2& v1)
 	{
 		x = v0.x + (v1.x - v0.x) * t;
 		y = v0.y + (v1.y - v0.y) * t;
 	}
 	/// <summary>
-	/// ³‹K‰»B
+	/// æ­£è¦åŒ–ã€‚
 	/// </summary>
 	void Normalize()
 	{
@@ -71,7 +71,7 @@ public:
 	}
 };
 /// <summary>
-/// 3ŸŒ³ƒxƒNƒgƒ‹B
+/// 3æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã€‚
 /// </summary>
 class Vector3{
 public:
@@ -93,7 +93,7 @@ public:
 	static const Vector3 One;
 public:
 	/// <summary>
-	/// XMVECTOR‚Ö‚ÌˆÃ–Ù‚Ì•ÏŠ·B
+	/// XMVECTORã¸ã®æš—é»™ã®å¤‰æ›ã€‚
 	/// </summary>
 	/// <returns></returns>
 	operator DirectX::XMVECTOR() const
@@ -101,7 +101,7 @@ public:
 		return DirectX::XMLoadFloat3(&vec);
 	}
 	/// <summary>
-	/// ‘ã“ü‰‰ZqB
+	/// ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <param name="_v"></param>
 	/// <returns></returns>
@@ -111,17 +111,17 @@ public:
 		return *this;
 	}
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	/// <remarks>
-	/// x,y,z‘S‚Ä‚Ì—v‘f0‚Å‰Šú‰»‚³‚ê‚Ü‚·B
+	/// x,y,zå…¨ã¦ã®è¦ç´ 0ã§åˆæœŸåŒ–ã•ã‚Œã¾ã™ã€‚
 	/// </remarks>
 	explicit Vector3()
 	{
 		x = y = z = 0.0f;
 	}
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -131,14 +131,14 @@ public:
 		Set(x, y, z);
 	}
 	/// <summary>
-	/// üŒ`•âŠ®
+	/// ç·šå½¢è£œå®Œ
 	/// </summary>
 	/// <remarks>
 	/// this = v0 + (v1-v0) * t;
 	/// </remarks>
-	/// <param name="t">•âŠ®—¦B</param>
-	/// <param name="v0">•âŠ®ŠJn‚ÌƒxƒNƒgƒ‹B</param>
-	/// <param name="v1">•âŠ®I—¹‚ÌƒxƒNƒgƒ‹B</param>
+	/// <param name="t">è£œå®Œç‡ã€‚</param>
+	/// <param name="v0">è£œå®Œé–‹å§‹ã®ãƒ™ã‚¯ãƒˆãƒ«ã€‚</param>
+	/// <param name="v1">è£œå®Œçµ‚äº†ã®ãƒ™ã‚¯ãƒˆãƒ«ã€‚</param>
 	void Lerp(float t, const Vector3& v0, const Vector3& v1)
 	{
 		DirectX::XMVECTOR _v = DirectX::XMVectorLerp(
@@ -148,7 +148,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, _v);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌƒRƒs[B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®ã‚³ãƒ”ãƒ¼ã€‚
 	/// </summary>
 	template<class TVector>
 	void CopyTo(TVector& dst) const
@@ -158,7 +158,7 @@ public:
 		dst.z = z;
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ìİ’èB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®è¨­å®šã€‚
 	/// </summary>
 	/// <param name="_x"></param>
 	/// <param name="_y"></param>
@@ -176,12 +176,12 @@ public:
 	}
 		
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì‰ÁZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®åŠ ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this += _v;
 	/// </remarks>
-	/// <param name="_v">‰ÁZ‚³‚ê‚éƒxƒNƒgƒ‹B</param>
+	/// <param name="_v">åŠ ç®—ã•ã‚Œã‚‹ãƒ™ã‚¯ãƒˆãƒ«ã€‚</param>
 	void Add( const Vector3& _v) 
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
@@ -190,7 +190,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì‰ÁZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®åŠ ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this = v0 + v1;
@@ -203,7 +203,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌŒ¸ZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®æ¸›ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this -= _v;
@@ -216,7 +216,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌŒ¸ZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®æ¸›ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this = v0 - v1;
@@ -230,7 +230,7 @@ public:
 	}
 
 	/// <summary>
-	/// “àÏ‚ğŒvZB
+	/// å†…ç©ã‚’è¨ˆç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// float d = this->x * _v.x + this->y * _v.y + this->z * _v.z;
@@ -244,7 +244,7 @@ public:
 	}
 
 	/// <summary>
-	/// ŠOÏB
+	/// å¤–ç©ã€‚
 	/// </summary>
 	/// <remarks>
 	/// Vector3 v ;
@@ -261,7 +261,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
 	/// <summary>
-	/// ŠOÏB
+	/// å¤–ç©ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this->x = v0.y * v1.z - v0.z * v1.y;
@@ -276,7 +276,7 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì’·‚³‚ğæ“¾
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’å–å¾—
 	/// </summary>
 	float Length() const
 	{
@@ -284,7 +284,7 @@ public:
 		return DirectX::XMVector3Length(xmv).m128_f32[0];
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì“ñæ‚ğæ“¾B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã®äºŒä¹—ã‚’å–å¾—ã€‚
 	/// </summary>
 	float LengthSq() const
 	{
@@ -293,10 +293,10 @@ public:
 	}
 
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğƒXƒJƒ‰[‚ÅŠg‘åB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã‚¹ã‚«ãƒ©ãƒ¼ã§æ‹¡å¤§ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
+	/// ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
 	/// this->x *= s;
 	/// this->y *= s;
 	/// this->z *= s;
@@ -309,14 +309,14 @@ public:
 	}
 
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğ³‹K‰»B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ã€‚
 	/// </summary>
 	/// <remarks>
-	///		‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
-	///		//ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğ‹‚ß‚éB
+	///		ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
+	///		//ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’æ±‚ã‚ã‚‹ã€‚
 	///		float len = this->x * this->x + this->y * this->y + this->z * this->z;
 	///		len = sqrt(len);
-	///		//ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ÅAŠe—v‘f‚ğœZ‚·‚éB
+	///		//ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã§ã€å„è¦ç´ ã‚’é™¤ç®—ã™ã‚‹ã€‚
 	///		this->x /= len;
 	///		this->y /= len;
 	///		this->z /= len;
@@ -328,10 +328,10 @@ public:
 		DirectX::XMStoreFloat3(&vec, xmv);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğƒXƒJƒ‰[‚ÅœZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã‚¹ã‚«ãƒ©ãƒ¼ã§é™¤ç®—ã€‚
 	/// </summary>
 	/// <remarks>
-	///		‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
+	///		ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
 	///		this->x /= d;
 	///		this->y /= d;
 	///		this->z /= d;
@@ -343,10 +343,10 @@ public:
 	}
 
 	/// <summary>
-	/// Å‘å’l‚ğİ’èB
+	/// æœ€å¤§å€¤ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// ‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
+	/// ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
 	/// this->x = max( this->x, v.x );
 	/// this->y = max( this->y, v.y );
 	/// this->z = max( this->z, v.z );
@@ -359,10 +359,10 @@ public:
 	}
 
 	/// <summary>
-	/// Å¬’l‚ğİ’èB
+	/// æœ€å°å€¤ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// ‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
+	/// ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
 	/// this->x = min( this->x, v.x );
 	/// this->y = min( this->y, v.y );
 	/// this->z = min( this->z, v.z );
@@ -375,10 +375,10 @@ public:
 	}
 
 	/// <summary>
-	/// ‰ÁZ‘ã“ü‰‰ZqB
+	/// åŠ ç®—ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <remarks>
-	///	ƒxƒNƒgƒ‹ƒNƒ‰ƒX‚É‰º‹L‚Ì‚æ‚¤‚È‰ÁZ‘ã“ü‚Ì‹@”\‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	///	ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã«ä¸‹è¨˜ã®ã‚ˆã†ãªåŠ ç®—ä»£å…¥ã®æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 	///	Vector3 v0 = {20.0f, 30.0f, 40.0f};
 	///	Vector3 v1 = {10.0f, 20.0f, 30.0f};
 	///	v0 += v1;
@@ -389,10 +389,10 @@ public:
 		return *this;
 	}
 	/// <summary>
-	/// æZ‘ã“ü‰‰ZqB
+	/// ä¹—ç®—ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <remarks>
-	///	ƒxƒNƒgƒ‹ƒNƒ‰ƒX‚É‰º‹L‚Ì‚æ‚¤‚ÈæZ‘ã“ü‰‰Z‚Ì‹@”\‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	///	ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã«ä¸‹è¨˜ã®ã‚ˆã†ãªä¹—ç®—ä»£å…¥æ¼”ç®—ã®æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 	/// Vector3 v = {20.0f, 30.0f, 40.0f};
 	///	v *= 10;
 	/// </remarks>
@@ -402,10 +402,10 @@ public:
 		return *this;
 	}
 	/// <summary>
-	/// Œ¸Z‘ã“ü‰‰ZqB
+	/// æ¸›ç®—ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ƒxƒNƒgƒ‹ƒNƒ‰ƒX‚É‰º‹L‚Ì‚æ‚¤‚ÈŒ¸Z‘ã“ü‰‰Z‚Ì‹@”\‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã«ä¸‹è¨˜ã®ã‚ˆã†ãªæ¸›ç®—ä»£å…¥æ¼”ç®—ã®æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 	/// Vector3 v0 = {20.0f, 30.0f, 40.0f};
 	///	Vector3 v1 = {10.0f, 20.0f, 30.0f};
 	///	v0 -= v1;
@@ -416,10 +416,10 @@ public:
 		return *this;
 	}
 	/// <summary>
-	/// œZ‘ã“ü‰‰ZqB
+	/// é™¤ç®—ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ƒxƒNƒgƒ‹ƒNƒ‰ƒX‚É‰º‹L‚Ì‚æ‚¤‚ÈœZ‘ã“ü‰‰Z‚Ì‹@”\‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã«ä¸‹è¨˜ã®ã‚ˆã†ãªé™¤ç®—ä»£å…¥æ¼”ç®—ã®æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 	/// Vector3 v = {20.0f, 30.0f, 40.0f};
 	///	v /= 10;
 	/// </remarks>
@@ -430,7 +430,7 @@ public:
 	}
 };
 /// <summary>
-/// 4ŸŒ³ƒxƒNƒgƒ‹ƒNƒ‰ƒXB
+/// 4æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Vector4{
 public:
@@ -446,7 +446,7 @@ public:
 	static const Vector4 Gray;
 public:
 	/// <summary>
-	/// XMVECTOR‚Ö‚ÌˆÃ–Ù‚ÌŒ^•ÏŠ·B
+	/// XMVECTORã¸ã®æš—é»™ã®å‹å¤‰æ›ã€‚
 	/// </summary>
 	/// <returns></returns>
 	operator DirectX::XMVECTOR() const
@@ -454,10 +454,10 @@ public:
 		return DirectX::XMLoadFloat4(&vec);
 	}
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	/// <remarks>
-	/// x,y,z‚ª0.0Aw‚Í1.0‚Å‰Šú‰»‚³‚ê‚Ü‚·B
+	/// x,y,zãŒ0.0ã€wã¯1.0ã§åˆæœŸåŒ–ã•ã‚Œã¾ã™ã€‚
 	/// </remarks>
 	explicit Vector4()
 	{
@@ -465,7 +465,7 @@ public:
 		w = 1.0f;
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌƒRƒs[B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®ã‚³ãƒ”ãƒ¼ã€‚
 	/// </summary>
 	template<class TVector4>
 	void CopyTo(TVector4& dst) const
@@ -477,10 +477,10 @@ public:
 	}
 	
 	/// <summary>
-	/// ‘ã“ü‰‰ZqB
+	/// ä»£å…¥æ¼”ç®—å­ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ƒxƒNƒgƒ‹ƒNƒ‰ƒX‚É‰º‹L‚Ì‚æ‚¤‚È‘ã“ü‰‰Z‚Ì‹@”\‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã«ä¸‹è¨˜ã®ã‚ˆã†ãªä»£å…¥æ¼”ç®—ã®æ©Ÿèƒ½ã‚’æä¾›ã—ã¾ã™ã€‚
 	/// Vector4 v0 = {10.0f, 20.0f, 30.0f, 10.0f};
 	/// Vector4 v1;
 	/// v1 = v0;
@@ -492,24 +492,24 @@ public:
 	}
 
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	Vector4(float x, float y, float z, float w)
 	{
 		Set(x, y, z, w);
 	}
 	/// <summary>
-	/// 3ŸŒ³‚ÌƒxƒNƒgƒ‹ƒf[ƒ^‚ğˆø”‚Åó‚¯æ‚éƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// 3æ¬¡å…ƒã®ãƒ™ã‚¯ãƒˆãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’å¼•æ•°ã§å—ã‘å–ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	/// <remarks>
-	/// w‚É‚Í1.0‚ªŠi”[‚³‚ê‚Ü‚·B
+	/// wã«ã¯1.0ãŒæ ¼ç´ã•ã‚Œã¾ã™ã€‚
 	/// </remarks>
 	Vector4(const Vector3& v)
 	{
 		Set(v);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌŠe—v‘f‚ğİ’èB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®å„è¦ç´ ã‚’è¨­å®šã€‚
 	/// </summary>
 	void Set(float _x, float _y, float _z, float _w)
 	{
@@ -519,7 +519,7 @@ public:
 		this->w = _w;
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğ³‹K‰»B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ã€‚
 	/// </summary>
 	void Normalize()
 	{
@@ -528,7 +528,7 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmv);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğİ’èB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <param name="_v"></param>
 	void Set(const Vector4& _v)
@@ -536,10 +536,10 @@ public:
 		*this = _v;
 	}
 	/// <summary>
-	/// 3ŸŒ³ƒxƒNƒgƒ‹ƒf[ƒ^‚ğ‚à‚Æ‚ÉAƒxƒNƒgƒ‹‚ğİ’èB
+	/// 3æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ã‚‚ã¨ã«ã€ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// w‚É‚Í1.0‚ªİ’è‚³‚ê‚Ü‚·B
+	/// wã«ã¯1.0ãŒè¨­å®šã•ã‚Œã¾ã™ã€‚
 	/// </remarks>
 	void Set(const Vector3& _v)
 	{
@@ -549,7 +549,7 @@ public:
 		this->w = 1.0f;
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğ‰ÁZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’åŠ ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this += _v;
@@ -562,7 +562,7 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì‰ÁZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®åŠ ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this = v0 + v1;
@@ -575,7 +575,7 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌŒ¸ZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®æ¸›ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this -= _v;
@@ -588,7 +588,7 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmvr);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÌŒ¸ZB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®æ¸›ç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// this = v0 - v1;
@@ -602,7 +602,7 @@ public:
 	}
 
 	/// <summary>
-	/// “àÏ‚ğŒvZB
+	/// å†…ç©ã‚’è¨ˆç®—ã€‚
 	/// </summary>
 	/// <remarks>
 	/// float d = this->x * _v.x + this->y * _v.y + this->z * _v.z + this->w * _v.w;
@@ -615,7 +615,7 @@ public:
 		return DirectX::XMVector4Dot(xmv0, xmv1).m128_f32[0];
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì’·‚³‚ğæ“¾
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’å–å¾—
 	/// </summary>
 	float Length()
 	{
@@ -623,7 +623,7 @@ public:
 		return DirectX::XMVector4Length(xmv).m128_f32[0];
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì’·‚³‚Ì“ñæ‚ğæ“¾B
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã®äºŒä¹—ã‚’å–å¾—ã€‚
 	/// </summary>
 	float LengthSq()
 	{
@@ -631,10 +631,10 @@ public:
 		return DirectX::XMVector4LengthSq(xmv).m128_f32[0];
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ğƒXƒJƒ‰[‚ÅŠg‘åB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã‚¹ã‚«ãƒ©ãƒ¼ã§æ‹¡å¤§ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ‰º‹L‚Ì‚æ‚¤‚Èˆ—‚ªs‚í‚ê‚Ä‚¢‚Ü‚·B
+	/// ä¸‹è¨˜ã®ã‚ˆã†ãªå‡¦ç†ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã™ã€‚
 	/// this->x *= s;
 	/// this->y *= s;
 	/// this->z *= s;
@@ -667,25 +667,25 @@ const Vector4 g_vec4Gray = { 0.5f, 0.5f, 0.5f, 1.0f };
 const Vector4 g_vec4Yellow = { 1.0f, 1.0f, 0.0f, 1.0f };
 
 /// <summary>
-/// ƒNƒH[ƒ^ƒjƒIƒ“ƒNƒ‰ƒXB
+/// ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Quaternion : public Vector4{
 public:
-	static const Quaternion Identity;		//!<’PˆÊƒNƒH[ƒ^ƒjƒIƒ“B
+	static const Quaternion Identity;		//!<å˜ä½ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã€‚
 	Quaternion() 
 	{
 		x = y = z = 0.0f;
 		w = 1.0f;
 	}
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	Quaternion(float x, float y, float z, float w) :
 		Vector4(x, y, z, w)
 	{
 	}
 	/// <summary>
-	/// X²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Xè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
 	/// <param name="axis"></param>
 	/// <param name="angle"></param>
@@ -694,15 +694,15 @@ public:
 		SetRotation(g_vec3AxisX, angle);
 	}
 	/// <summary>
-	/// X²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Xè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="angle">‰ñ“]Šp“xB’PˆÊDegree</param>
+	/// <param name="angle">å›è»¢è§’åº¦ã€‚å˜ä½Degree</param>
 	void SetRotationDegX(float angle)
 	{
 		SetRotationDeg(g_vec3AxisX, angle);
 	}
 	/// <summary>
-	/// Y²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Yè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
 	/// <param name="axis"></param>
 	/// <param name="angle"></param>
@@ -711,16 +711,16 @@ public:
 		SetRotation(g_vec3AxisY, angle);
 	}
 	/// <summary>
-	/// Y²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Yè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="angle">‰ñ“]Šp“xB’PˆÊDegree</param>
+	/// <param name="angle">å›è»¢è§’åº¦ã€‚å˜ä½Degree</param>
 	void SetRotationDegY(float angle)
 	{
 		SetRotationDeg(g_vec3AxisY, angle);
 	}
 
 	/// <summary>
-	/// Z²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Zè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
 	/// <param name="axis"></param>
 	/// <param name="angle"></param>
@@ -729,9 +729,9 @@ public:
 		SetRotation(g_vec3AxisZ, angle);
 	}
 	/// <summary>
-	/// Z²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// Zè»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="angle">‰ñ“]Šp“xB’PˆÊDegree</param>
+	/// <param name="angle">å›è»¢è§’åº¦ã€‚å˜ä½Degree</param>
 	void SetRotationDegZ(float angle)
 	{
 		SetRotationDeg(g_vec3AxisZ, angle);
@@ -740,10 +740,10 @@ public:
 	
 
 	/// <summary>
-	/// ”CˆÓ‚Ì²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// ä»»æ„ã®è»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="axis">‰ñ“]²</param>
-	/// <param name="angle">‰ñ“]Šp“xB’PˆÊƒ‰ƒWƒAƒ“B</param>
+	/// <param name="axis">å›è»¢è»¸</param>
+	/// <param name="angle">å›è»¢è§’åº¦ã€‚å˜ä½ãƒ©ã‚¸ã‚¢ãƒ³ã€‚</param>
 	void SetRotation( const Vector3& axis, float angle )
 	{
 		float s;
@@ -755,10 +755,10 @@ public:
 		z = axis.z * s;
 	}
 	/// <summary>
-	/// ”CˆÓ‚Ì²ü‚è‚Ì‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// ä»»æ„ã®è»¸å‘¨ã‚Šã®å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="axis">‰ñ“]²</param>
-	/// <param name="angle">‰ñ“]Šp“xB’PˆÊDegree</param>
+	/// <param name="axis">å›è»¢è»¸</param>
+	/// <param name="angle">å›è»¢è§’åº¦ã€‚å˜ä½Degree</param>
 	void SetRotationDeg(const Vector3& axis, float angle)
 	{
 		float s;
@@ -770,22 +770,22 @@ public:
 		z = axis.z * s;
 	}
 	/// <summary>
-	/// s—ñ‚©‚çƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// è¡Œåˆ—ã‹ã‚‰ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="m">s—ñ</param>
+	/// <param name="m">è¡Œåˆ—</param>
 	void SetRotation(const Matrix& m);
 	/// <summary>
-	/// fromƒxƒNƒgƒ‹‚©‚çtoƒxƒNƒgƒ‹‚É‰ñ“]‚³‚¹‚éƒNƒH[ƒ^ƒjƒIƒ“‚ğì¬B
+	/// fromãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰toãƒ™ã‚¯ãƒˆãƒ«ã«å›è»¢ã•ã›ã‚‹ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’ä½œæˆã€‚
 	/// </summary>
-	/// <param name="from">‰ñ“]‘O‚ÌƒxƒNƒgƒ‹</param>
-	/// <param name="to">‰ñ“]Œã‚ÌƒxƒNƒgƒ‹</param>
+	/// <param name="from">å›è»¢å‰ã®ãƒ™ã‚¯ãƒˆãƒ«</param>
+	/// <param name="to">å›è»¢å¾Œã®ãƒ™ã‚¯ãƒˆãƒ«</param>
 	void SetRotation( Vector3 from,  Vector3 to);
 	/// <summary>
-	/// ‹…–ÊüŒ`•âŠ®
+	/// çƒé¢ç·šå½¢è£œå®Œ
 	/// </summary>
-	/// <param name="t">•âŠ®—¦</param>
-	/// <param name="q1">ŠJnƒNƒH[ƒ^ƒjƒIƒ“B</param>
-	/// <param name="q2">I—¹ƒNƒH[ƒ^ƒjƒIƒ“B</param>
+	/// <param name="t">è£œå®Œç‡</param>
+	/// <param name="q1">é–‹å§‹ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã€‚</param>
+	/// <param name="q2">çµ‚äº†ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã€‚</param>
 	void Slerp(float t, Quaternion q1, Quaternion q2)
 	{
 		DirectX::XMVECTOR xmv = DirectX::XMQuaternionSlerp(
@@ -796,9 +796,9 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmv);
 	}
 	/// <summary>
-	/// Y²ü‚è‚Ì‰ñ“]‚ğ‰ÁZB
+	/// Yè»¸å‘¨ã‚Šã®å›è»¢ã‚’åŠ ç®—ã€‚
 	/// </summary>
-	/// <returns>‰ÁZ‚·‚é‰ñ“]Šp“xBƒ‰ƒWƒAƒ“’PˆÊB</returns>
+	/// <returns>åŠ ç®—ã™ã‚‹å›è»¢è§’åº¦ã€‚ãƒ©ã‚¸ã‚¢ãƒ³å˜ä½ã€‚</returns>
 	void AddRotationY(float angle)
 	{
 		Quaternion addRot;
@@ -806,7 +806,7 @@ public:
 		*this *= addRot;
 	}
 	/// <summary>
-	/// ƒNƒH[ƒ^ƒjƒIƒ““¯m‚ÌæZ
+	/// ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³åŒå£«ã®ä¹—ç®—
 	/// </summary>
 	/// <param name="rot"></param>
 	void Multiply(const Quaternion& rot)
@@ -824,7 +824,7 @@ public:
 
 	}
 	/// <summary>
-	/// ƒNƒH[ƒ^ƒjƒIƒ““¯m‚ÌæZB
+	/// ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³åŒå£«ã®ä¹—ç®—ã€‚
 	/// </summary>
 	/// <param name="rot0"></param>
 	/// <param name="rot1"></param>
@@ -842,7 +842,7 @@ public:
 		z = pw * qz + px * qy - py * qx + pz * qw;
 	}
 	/// <summary>
-	/// ƒNƒH[ƒ^ƒjƒIƒ“‚Ì‘ã“üæZ‰‰Zq
+	/// ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã®ä»£å…¥ä¹—ç®—æ¼”ç®—å­
 	/// </summary>
 	const Quaternion& operator*=(const Quaternion& rot0)
 	{
@@ -850,7 +850,7 @@ public:
 		return *this;
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÉƒNƒH[ƒ^ƒjƒIƒ“‚ğ“K—p‚·‚éB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã«ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’é©ç”¨ã™ã‚‹ã€‚
 	/// </summary>
 	void Apply(Vector4& _v) const
 	{
@@ -858,7 +858,7 @@ public:
 		DirectX::XMStoreFloat4(&_v.vec, xmv);
 	}
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚ÉƒNƒH[ƒ^ƒjƒIƒ“‚ğ“K—p‚·‚éB
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã«ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’é©ç”¨ã™ã‚‹ã€‚
 	/// </summary>
 	void Apply(Vector3& _v) const
 	{
@@ -867,7 +867,7 @@ public:
 	}
 };
 	
-//®”Œ^‚ÌƒxƒNƒgƒ‹ƒNƒ‰ƒXB
+//æ•´æ•°å‹ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚¯ãƒ©ã‚¹ã€‚
 __declspec(align(16)) class Vector4i {
 public:
 	union {
@@ -876,7 +876,7 @@ public:
 	};
 };
 /// <summary>
-/// ƒxƒNƒgƒ‹“¯m‚Ì‰ÁZB
+/// ãƒ™ã‚¯ãƒˆãƒ«åŒå£«ã®åŠ ç®—ã€‚
 /// </summary>
 static inline Vector3 operator+(const Vector3& v0, const Vector3& v1)
 {
@@ -885,7 +885,7 @@ static inline Vector3 operator+(const Vector3& v0, const Vector3& v1)
 	return result;
 }
 /// <summary>
-/// ƒxƒNƒgƒ‹‚ÆƒXƒJƒ‰[‚ÌæZB
+/// ãƒ™ã‚¯ãƒˆãƒ«ã¨ã‚¹ã‚«ãƒ©ãƒ¼ã®ä¹—ç®—ã€‚
 /// </summary>
 
 static inline Vector3 operator*(const Vector3& v, float s)
@@ -896,7 +896,7 @@ static inline Vector3 operator*(const Vector3& v, float s)
 	return result;
 }
 /// <summary>
-/// ƒxƒNƒgƒ‹‚ÆƒXƒJƒ‰[‚ÌœZB
+/// ãƒ™ã‚¯ãƒˆãƒ«ã¨ã‚¹ã‚«ãƒ©ãƒ¼ã®é™¤ç®—ã€‚
 /// </summary>
 static inline Vector3 operator/(const Vector3& v, float s)
 {
@@ -906,7 +906,7 @@ static inline Vector3 operator/(const Vector3& v, float s)
 	return result;
 }
 /// <summary>
-/// ƒxƒNƒgƒ‹“¯m‚ÌŒ¸ZB
+/// ãƒ™ã‚¯ãƒˆãƒ«åŒå£«ã®æ¸›ç®—ã€‚
 /// </summary>
 static inline Vector3 operator-(const Vector3& v0, const Vector3& v1)
 {
@@ -916,7 +916,7 @@ static inline Vector3 operator-(const Vector3& v0, const Vector3& v1)
 }
 
 /// <summary>
-/// ŠOÏ‚ğŒvZB
+/// å¤–ç©ã‚’è¨ˆç®—ã€‚
 /// </summary>
 static inline Vector3 Cross(const Vector3& v0, const Vector3& v1)
 {
@@ -925,7 +925,7 @@ static inline Vector3 Cross(const Vector3& v0, const Vector3& v1)
 	return result;
 }
 /// <summary>
-/// “àÏ‚ğŒvZB
+/// å†…ç©ã‚’è¨ˆç®—ã€‚
 /// </summary>
 static inline float Dot(const Vector3& v0, const Vector3& v1)
 {
@@ -933,7 +933,7 @@ static inline float Dot(const Vector3& v0, const Vector3& v1)
 }
 
 /// <summary>
-/// ƒxƒNƒgƒ‹“¯m‚Ì‰ÁZB
+/// ãƒ™ã‚¯ãƒˆãƒ«åŒå£«ã®åŠ ç®—ã€‚
 /// </summary>
 
 static inline Vector4 operator+(const Vector4& v0, const Vector4& v1)
@@ -943,7 +943,7 @@ static inline Vector4 operator+(const Vector4& v0, const Vector4& v1)
 	return result;
 }
 /// <summary>
-/// ƒxƒNƒgƒ‹‚ÆƒXƒJƒ‰[‚ÌæZB
+/// ãƒ™ã‚¯ãƒˆãƒ«ã¨ã‚¹ã‚«ãƒ©ãƒ¼ã®ä¹—ç®—ã€‚
 /// </summary>
 
 static inline Vector4 operator*(const Vector4& v, float s)
@@ -955,7 +955,7 @@ static inline Vector4 operator*(const Vector4& v, float s)
 }
 
 /// <summary>
-/// ƒxƒNƒgƒ‹“¯m‚ÌŒ¸ZB
+/// ãƒ™ã‚¯ãƒˆãƒ«åŒå£«ã®æ¸›ç®—ã€‚
 /// </summary>
 static inline Vector4 operator-(const Vector4& v0, const Vector4& v1)
 {
@@ -966,7 +966,7 @@ static inline Vector4 operator-(const Vector4& v0, const Vector4& v1)
 
 
 /// <summary>
-/// “àÏ‚ğŒvZB
+/// å†…ç©ã‚’è¨ˆç®—ã€‚
 /// </summary>
 static inline float Dot(const Vector4& v0, const Vector4& v1)
 {
@@ -975,7 +975,7 @@ static inline float Dot(const Vector4& v0, const Vector4& v1)
 
 
 /// <summary>
-/// ƒNƒH[ƒ^ƒjƒIƒ““¯m‚ÌæZB
+/// ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³åŒå£«ã®ä¹—ç®—ã€‚
 /// </summary>
 static inline Quaternion operator*(const Quaternion& q1, const Quaternion q2)
 {

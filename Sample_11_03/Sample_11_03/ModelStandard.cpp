@@ -1,17 +1,17 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "ModelStandard.h"
 
 
 void ModelStandard::Init(const char* tkmFilePath)
 {
 	ModelInitData initData;
-	//ƒXƒ^ƒ“ƒ_[ƒhƒVƒF[ƒ_[‚ğw’è‚·‚éB
+	//ã‚¹ã‚¿ãƒ³ãƒ€ãƒ¼ãƒ‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹ã€‚
 	initData.m_fxFilePath = "Assets/shader/preset/modelStandard.fx";
 	initData.m_tkmFilePath = tkmFilePath;
 	initData.m_expandConstantBuffer = &m_light;
 	initData.m_expandConstantBufferSize = sizeof(m_light);
 
-	//Œõ‚ğ‹­‚ß‚Éİ’è‚·‚éB
+	//å…‰ã‚’å¼·ã‚ã«è¨­å®šã™ã‚‹ã€‚
 	m_light.directionalLight[0].color.x = 2.0f;
 	m_light.directionalLight[0].color.y = 2.0f;
 	m_light.directionalLight[0].color.z = 2.0f;

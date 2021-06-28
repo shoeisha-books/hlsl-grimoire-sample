@@ -1,38 +1,38 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    //  ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    //  ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // step-1 ƒIƒtƒXƒNƒŠ[ƒ“•`‰æ—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬
-    // RenderTargetƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg‚ğ’è‹`
+    // step-1 ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
+    // RenderTargetã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å®šç¾©
     RenderTarget offscreenRenderTarget;
 
-    // RenderTarget::Create()‚ğ—˜—p‚µ‚ÄAƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬‚·‚é
+    // RenderTarget::Create()ã‚’åˆ©ç”¨ã—ã¦ã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã™ã‚‹
     offscreenRenderTarget.Create(
-        1280,                       // ƒeƒNƒXƒ`ƒƒ‚Ì•
-        720,                        // ƒeƒNƒXƒ`ƒƒ‚Ì‚‚³
-        1,                          // MipmapƒŒƒxƒ‹
-        1,                          // ƒeƒNƒXƒ`ƒƒ”z—ñ‚ÌƒTƒCƒY
-        DXGI_FORMAT_R8G8B8A8_UNORM, // ƒJƒ‰[ƒoƒbƒtƒ@‚ÌƒtƒH[ƒ}ƒbƒg
-        DXGI_FORMAT_D32_FLOAT       // ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚ÌƒtƒH[ƒ}ƒbƒg
+        1280,                       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å¹…
+        720,                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®é«˜ã•
+        1,                          // Mipmapãƒ¬ãƒ™ãƒ«
+        1,                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£é…åˆ—ã®ã‚µã‚¤ã‚º
+        DXGI_FORMAT_R8G8B8A8_UNORM, // ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+        DXGI_FORMAT_D32_FLOAT       // ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
     );
 
-    // step-2 Šeíƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
-    // ” ƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // step-2 å„ç¨®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
+    // ç®±ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     ModelInitData boxModelInitData;
     boxModelInitData.m_tkmFilePath = "Assets/modelData/box.tkm";
     boxModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
@@ -40,24 +40,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     boxModel.Init(boxModelInitData);
     boxModel.UpdateWorldMatrix({ 100.0f, 0.0f, 0.0f }, g_quatIdentity, g_vec3One);
 
-    // ”wŒiƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelInitData bgModelInitData;
     bgModelInitData.m_tkmFilePath = "Assets/modelData/bg/bg.tkm";
     bgModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
 
-    // ”wŒiƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     Model bgModel;
     bgModel.Init(bgModelInitData);
 
-    // ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelInitData plModelInitData;
     plModelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
     plModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
     Model plModel;
     plModel.Init(plModelInitData);
 
-    // step-3 ” ƒ‚ƒfƒ‹‚É“\‚è•t‚¯‚éƒeƒNƒXƒ`ƒƒ‚ğ•ÏX‚·‚é
-    // ” ƒ‚ƒfƒ‹‚ÌƒeƒNƒXƒ`ƒƒ‚ğƒIƒtƒXƒNƒŠ[ƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒO‚³‚ê‚éƒeƒNƒXƒ`ƒƒ‚ÉØ‚è‘Ö‚¦‚é
+    // step-3 ç®±ãƒ¢ãƒ‡ãƒ«ã«è²¼ã‚Šä»˜ã‘ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å¤‰æ›´ã™ã‚‹
+    // ç®±ãƒ¢ãƒ‡ãƒ«ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã•ã‚Œã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã«åˆ‡ã‚Šæ›¿ãˆã‚‹
     boxModel.ChangeAlbedoMap(
         "",
         offscreenRenderTarget.GetRenderTargetTexture()
@@ -66,75 +66,75 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     Vector3 plPos;
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒvƒŒƒCƒ„[‚ÌÀ•W‚ğƒQ[ƒ€ƒpƒbƒh‚ğg‚Á‚Ä“®‚©‚·
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™ã‚’ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã‚’ä½¿ã£ã¦å‹•ã‹ã™
         plPos.x -= g_pad[0]->GetLStickXF();
         plPos.z -= g_pad[0]->GetLStickYF();
 
-        // ƒvƒŒƒCƒ„[‚Ìƒ[ƒ‹ƒhs—ñ‚ğXV‚·‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’æ›´æ–°ã™ã‚‹
         plModel.UpdateWorldMatrix(plPos, g_quatIdentity, g_vec3One);
 
         //////////////////////////////////////
-        //‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        //ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-4 ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğoffscreenRenderTarget‚É•ÏX‚·‚é
+        // step-4 ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’offscreenRenderTargetã«å¤‰æ›´ã™ã‚‹
         RenderTarget* rtArray[] = { &offscreenRenderTarget };
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Ä—˜—p‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦åˆ©ç”¨ã§ãã‚‹ã¾ã§å¾…ã¤
         renderContext.WaitUntilToPossibleSetRenderTargets(1, rtArray);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         renderContext.SetRenderTargets(1, rtArray);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         renderContext.ClearRenderTargetViews(1, rtArray);
 
-        // step-5 offscreenRenderTarget‚É”wŒiAƒvƒŒƒCƒ„[‚ğ•`‰æ‚·‚é
-        // ”wŒiƒ‚ƒfƒ‹‚ğƒhƒ[
+        // step-5 offscreenRenderTargetã«èƒŒæ™¯ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æç”»ã™ã‚‹
+        // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ‰ãƒ­ãƒ¼
         bgModel.Draw(renderContext);
 
-        // ƒvƒŒƒCƒ„[‚ğƒhƒ[
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ãƒ‰ãƒ­ãƒ¼
         plModel.Draw(renderContext);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTargets(1, rtArray);
 
-        // step-6 ‰æ–Ê‚É•\¦‚³‚ê‚éƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚É–ß‚·
+        // step-6 ç”»é¢ã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«æˆ»ã™
         renderContext.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
 
-        // step-7 ‰æ–Ê‚É•\¦‚³‚ê‚éƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÉŠeíƒ‚ƒfƒ‹‚ğ•`‰æ‚·‚é
-        // ”wŒiƒ‚ƒfƒ‹‚ğƒhƒ[
+        // step-7 ç”»é¢ã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å„ç¨®ãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã™ã‚‹
+        // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ‰ãƒ­ãƒ¼
         bgModel.Draw(renderContext);
 
-        // ƒvƒŒƒCƒ„[‚ğƒhƒ[
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ãƒ‰ãƒ­ãƒ¼
         plModel.Draw(renderContext);
 
-        // ” ‚ğ•`‰æ
+        // ç®±ã‚’æç”»
         boxModel.Draw(renderContext);
 
         //////////////////////////////////////
-        //ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -143,17 +143,17 @@ void InitRootSignature(RootSignature& rs)
             D3D12_TEXTURE_ADDRESS_MODE_WRAP);
 }
 
-// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ì‰Šú‰»
+// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®åˆæœŸåŒ–
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps)
 {
-    //  ’¸“_ƒŒƒCƒAƒEƒg‚ğ’è‹`‚·‚é
+    //  é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹
     D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
     {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
         { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 16, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
     };
 
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
     psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
     psoDesc.pRootSignature = rs.Get();

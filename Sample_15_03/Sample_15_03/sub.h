@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
 
-//�֐��錾
+//関数宣言
 void InitRootSignature(RootSignature& rs);
 void InitPipelineState(RootSignature& rs, PipelineState& pipelineState, Shader& cs);

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "ShadowMapRender.h"
 
 
@@ -10,7 +10,7 @@ namespace myRenderer
         {
             float clearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-            //‹ßŒi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv
+            //è¿‘æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—
             m_shadowMaps[0].Create(
                 2048,
                 2048,
@@ -21,7 +21,7 @@ namespace myRenderer
                 clearColor
             );
 
-            //’†Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv
+            //ä¸­æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—
             m_shadowMaps[1].Create(
                 1024,
                 1024,
@@ -32,7 +32,7 @@ namespace myRenderer
                 clearColor
             );
 
-            //‰“Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv
+            //é æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—
             m_shadowMaps[2].Create(
                 512,
                 512,
@@ -71,10 +71,10 @@ namespace myRenderer
                     );
                 }
 
-                // •`‰æ‚ªI‚í‚Á‚½‚çƒNƒŠƒA
+                // æç”»ãŒçµ‚ã‚ã£ãŸã‚‰ã‚¯ãƒªã‚¢
                 m_modelsArray[shadowMapNo].clear();
 
-                // ‘‚«‚İŠ®—¹‘Ò‚¿
+                // æ›¸ãè¾¼ã¿å®Œäº†å¾…ã¡
                 rc.WaitUntilFinishDrawingToRenderTarget(shadowMap);
                 shadowMapNo++;
             }

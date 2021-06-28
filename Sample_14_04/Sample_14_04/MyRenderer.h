@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
 namespace myRenderer
 {
-    // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚ÅŽg—p‚³‚ê‚éƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+    // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã§ä½¿ç”¨ã•ã‚Œã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
     const int NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT = 4;
-    // ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì”
+    // ã‚·ãƒ£ãƒ‰ã‚¦ãƒžãƒƒãƒ—ã®æ•°
     const int NUM_SHADOW_MAP = 3;
 }

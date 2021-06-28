@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "StructuredBuffer.h"
 #include "VertexBuffer.h"
 
 RWStructuredBuffer::~RWStructuredBuffer()
 {
-	//ƒAƒ“ƒ}[ƒbƒv
+	//ã‚¢ãƒ³ãƒãƒ¼ãƒƒãƒ—
 	CD3DX12_RANGE readRange(0, 0);
 	for (auto& buffer : m_buffersOnGPU) {
 		if (buffer) {
@@ -38,8 +38,8 @@ void RWStructuredBuffer::Init(int sizeOfElement, int numElement, void* initData)
 			nullptr,
 			IID_PPV_ARGS(&buffer)
 		);
-		//\‘¢‰»ƒoƒbƒtƒ@‚ğCPU‚©‚çƒAƒNƒZƒX‰Â”\‚È‰¼‘zƒAƒhƒŒƒX‹óŠÔ‚Éƒ}ƒbƒsƒ“ƒO‚·‚éB
-		//ƒ}ƒbƒvAƒAƒ“ƒ}ƒbƒv‚ÌƒI[ƒo[ƒwƒbƒh‚ğŒyŒ¸‚·‚é‚½‚ß‚É‚Í‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ª¶‚«‚Ä‚¢‚éŠÔ‚Ís‚í‚È‚¢B
+		//æ§‹é€ åŒ–ãƒãƒƒãƒ•ã‚¡ã‚’CPUã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªä»®æƒ³ã‚¢ãƒ‰ãƒ¬ã‚¹ç©ºé–“ã«ãƒãƒƒãƒ”ãƒ³ã‚°ã™ã‚‹ã€‚
+		//ãƒãƒƒãƒ—ã€ã‚¢ãƒ³ãƒãƒƒãƒ—ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ˜ãƒƒãƒ‰ã‚’è»½æ¸›ã™ã‚‹ãŸã‚ã«ã¯ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒç”Ÿãã¦ã„ã‚‹é–“ã¯è¡Œã‚ãªã„ã€‚
 		{
 			CD3DX12_RANGE readRange(0, 0);        //     intend to read from this resource on the CPU.
 			buffer->Map(0, &readRange, reinterpret_cast<void**>(&m_buffersOnCPU[bufferNo]));
@@ -56,7 +56,7 @@ void RWStructuredBuffer::Init(const VertexBuffer& vb, bool isUpdateByCPU )
 	m_sizeOfElement = vb.GetStrideInBytes();
 	m_numElement = vb.GetSizeInBytes() / m_sizeOfElement;
 	if (isUpdateByCPU) {
-		//–¢‘Î‰B
+		//æœªå¯¾å¿œã€‚
 		std::abort();
 	}
 	else {
@@ -65,7 +65,7 @@ void RWStructuredBuffer::Init(const VertexBuffer& vb, bool isUpdateByCPU )
 			gpuBuffer = vb.GetID3DResourceAddress();
 			gpuBuffer->AddRef();
 		}
-		//CPU‚©‚ç‚Í•ÏX‚Å‚«‚È‚¢‚Ì‚Åƒ}ƒbƒv‚µ‚È‚¢B
+		//CPUã‹ã‚‰ã¯å¤‰æ›´ã§ããªã„ã®ã§ãƒãƒƒãƒ—ã—ãªã„ã€‚
 		for (auto& cpuBuffer : m_buffersOnCPU) {
 			cpuBuffer = nullptr;
 		}
@@ -77,7 +77,7 @@ void RWStructuredBuffer::Init(const IndexBuffer& ib, bool isUpdateByCPU)
 	m_sizeOfElement = ib.GetStrideInBytes();
 	m_numElement = ib.GetSizeInBytes() / m_sizeOfElement;
 	if (isUpdateByCPU) {
-		//–¢‘Î‰B
+		//æœªå¯¾å¿œã€‚
 		std::abort();
 	}
 	else {
@@ -86,7 +86,7 @@ void RWStructuredBuffer::Init(const IndexBuffer& ib, bool isUpdateByCPU)
 			gpuBuffer = ib.GetID3DResourceAddress();
 			gpuBuffer->AddRef();
 		}
-		//CPU‚©‚ç‚Í•ÏX‚Å‚«‚È‚¢‚Ì‚Åƒ}ƒbƒv‚µ‚È‚¢B
+		//CPUã‹ã‚‰ã¯å¤‰æ›´ã§ããªã„ã®ã§ãƒãƒƒãƒ—ã—ãªã„ã€‚
 		for (auto& cpuBuffer : m_buffersOnCPU) {
 			cpuBuffer = nullptr;
 		}
@@ -99,7 +99,7 @@ ID3D12Resource* RWStructuredBuffer::GetD3DResoruce()
 	return m_buffersOnGPU[backBufferIndex];
 }
 /// <summary>
-/// CPU‚©‚çƒAƒNƒZƒX‰Â”\‚ÈƒŠƒ\[ƒX‚ğæ“¾‚·‚éB
+/// CPUã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªãƒªã‚½ãƒ¼ã‚¹ã‚’å–å¾—ã™ã‚‹ã€‚
 /// </summary>
 /// <returns></returns>
 void* RWStructuredBuffer::GetResourceOnCPU()

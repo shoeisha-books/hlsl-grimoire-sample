@@ -1,16 +1,16 @@
-#pragma once
+﻿#pragma once
 
 /// <summary>
-/// �f�B�X�N���v�^�q�[�v�B
+/// ディスクリプタヒープ。
 /// </summary>
 class DescriptorHeap {
 public:
 	/// <summary>
-	/// �R���X�g���N�^
+	/// コンストラクタ
 	/// </summary>
 	DescriptorHeap();
 	/// <summary>
-	/// �f�X�g���N�^�B
+	/// デストラクタ。
 	/// </summary>
 	~DescriptorHeap(); 
 	/// <summary>
@@ -20,12 +20,12 @@ public:
 	ID3D12DescriptorHeap* Get() const;
 	
 	/// <summary>
-	/// �V�F�[�_�[���\�[�X���f�B�X�N���v�^�q�[�v�ɓo�^�B
+	/// シェーダーリソースをディスクリプタヒープに登録。
 	/// </summary>
 	/// <param name="registerNo">
-	/// ���W�X�^�ԍ��B-1���w�肳�ꂽ��A���ݓo�^����Ă��郊�\�[�X���̎��̃��W�X�^���g�p�����B
+	/// レジスタ番号。-1が指定されたら、現在登録されているリソース数の次のレジスタが使用される。
 	/// </param>
-	/// <param name="sr">�V�F�[�_�[���\�[�X</param>
+	/// <param name="sr">シェーダーリソース</param>
 	void RegistShaderResource(int registerNo, IShaderResource& sr)
 	{
 		RegistResource(
@@ -34,17 +34,17 @@ public:
 			&m_shaderResources.front(),
 			m_numShaderResource,
 			MAX_SHADER_RESOURCE,
-			L"DescriptorHeap::RegistShaderResource() ���W�X�^�ԍ����͈͊O�ł��B"
+			L"DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。"
 		);
 	}
 	
 	/// <summary>
-	/// �A���I�[�_�[�A�N�Z�X���\�[�X��o�^�B
+	/// アンオーダーアクセスリソースを登録。
 	/// </summary>
 	/// <param name="registerNo">
-	/// ���W�X�^�ԍ��B-1���w�肳�ꂽ��A���ݓo�^����Ă��郊�\�[�X���̎��̃��W�X�^���g�p�����B
+	/// レジスタ番号。-1が指定されたら、現在登録されているリソース数の次のレジスタが使用される。
 	/// </param>
-	/// <param name="sr">�A���I�[�_�[���\�[�X</param>
+	/// <param name="sr">アンオーダーリソース</param>
 	void RegistUnorderAccessResource(int registerNo, IUnorderAccessResrouce& sr)
 	{
 		RegistResource(
@@ -53,16 +53,16 @@ public:
 			&m_uavResoruces.front(), 
 			m_numUavResource, 
 			MAX_SHADER_RESOURCE, 
-			L"DescriptorHeap::RegistUnorderAccessResource() ���W�X�^�ԍ����͈͊O�ł��B"
+			L"DescriptorHeap::RegistUnorderAccessResource() レジスタ番号が範囲外です。"
 		);
 	}
 	/// <summary>
-	/// �萔�o�b�t�@���f�B�X�N���v�^�q�[�v�ɓo�^�B
+	/// 定数バッファをディスクリプタヒープに登録。
 	/// </summary>
 	/// <param name="registerNo">
-	/// ���W�X�^�ԍ��B-1���w�肳�ꂽ��A���ݓo�^����Ă��郊�\�[�X���̎��̃��W�X�^���g�p�����B
+	/// レジスタ番号。-1が指定されたら、現在登録されているリソース数の次のレジスタが使用される。
 	/// </param>
-	/// <param name="cb">�萔�o�b�t�@</param>
+	/// <param name="cb">定数バッファ</param>
 	void RegistConstantBuffer(int registerNo, ConstantBuffer& cb)
 	{
 		RegistResource(
@@ -71,17 +71,17 @@ public:
 			&m_constantBuffers.front(),
 			m_numConstantBuffer,
 			MAX_CONSTANT_BUFFER,
-			L"DescriptorHeap::RegistConstantBuffer() ���W�X�^�ԍ����͈͊O�ł��B"
+			L"DescriptorHeap::RegistConstantBuffer() レジスタ番号が範囲外です。"
 		);
 	}
 	/// <summary>
-	/// �T���v����`���f�B�X�N���v�^�q�[�v�ɒǉ��B
+	/// サンプラ定義をディスクリプタヒープに追加。
 	/// </summary>
 	/// <param name="registerNo">
-	/// ���W�X�^�ԍ��B-1���w�肳�ꂽ��A���ݓo�^����Ă��郊�\�[�X���̎��̃��W�X�^���g�p�����B
+	/// レジスタ番号。-1が指定されたら、現在登録されているリソース数の次のレジスタが使用される。
 	/// </param>
 	/// <param name="desc">
-	/// �T���v����`
+	/// サンプラ定義
 	/// </param>
 	void RegistSamplerDesc(int registerNo, const D3D12_SAMPLER_DESC& desc)
 	{
@@ -91,38 +91,38 @@ public:
 			m_samplerDescs,
 			m_numSamplerDesc,
 			MAX_SAMPLER_STATE,
-			L"DescriptorHeap::RegistSamplerDesc() ���W�X�^�ԍ����͈͊O�ł��B"
+			L"DescriptorHeap::RegistSamplerDesc() レジスタ番号が範囲外です。"
 		);
 	}
 	/// <summary>
-	/// �f�B�X�N���v�^�q�[�v�ւ̓o�^���m��B
+	/// ディスクリプタヒープへの登録を確定。
 	/// </summary>
 	void Commit( );
 	/// <summary>
-	/// �T���v���X�e�[�g�p�̃f�B�X�N���v�^�q�[�v�ւ̓o�^�B
+	/// サンプラステート用のディスクリプタヒープへの登録。
 	/// </summary>
 	void CommitSamperHeap();
 	
 	/// <summary>
-	/// �萔�o�b�t�@�̃f�B�X�N���v�^�̊J�n�n���h�����擾�B
+	/// 定数バッファのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	/// <returns></returns>
 	D3D12_GPU_DESCRIPTOR_HANDLE GetConstantBufferGpuDescritorStartHandle() const;
 	/// <summary>
-	/// �V�F�[�_�[���\�[�X�̃f�B�X�N���v�^�̊J�n�n���h�����擾�B
+	/// シェーダーリソースのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	/// <returns></returns>
 	D3D12_GPU_DESCRIPTOR_HANDLE GetShaderResourceGpuDescritorStartHandle() const;
 	/// <summary>
-	/// Unorder Access ���\�[�X�̃f�B�X�N���v�^�̊J�n�n���h�����擾�B
+	/// Unorder Access リソースのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	D3D12_GPU_DESCRIPTOR_HANDLE GetUavResourceGpuDescritorStartHandle() const;
 	/// <summary>
-	/// Sampler�̃f�B�X�N���v�^�̊J�n�n���h�����擾�B
+	/// Samplerのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	D3D12_GPU_DESCRIPTOR_HANDLE GetSamplerResourceGpuDescritorStartHandle() const;
 	/// <summary>
-	/// �V�F�[�_�[���\�[�X����ł��o�^����Ă��邩����B
+	/// シェーダーリソースが一つでも登録されているか判定。
 	/// </summary>
 	/// <returns></returns>
 	bool IsRegistShaderResource() const
@@ -130,7 +130,7 @@ public:
 		return m_numShaderResource != 0;
 	}
 	/// <summary>
-	/// �萔�o�b�t�@����ł��o�^����Ă��邩����B
+	/// 定数バッファが一つでも登録されているか判定。
 	/// </summary>
 	/// <returns></returns>
 	bool IsRegistConstantBuffer() const
@@ -138,7 +138,7 @@ public:
 		return m_numConstantBuffer != 0;
 	}
 	/// <summary>
-	/// UAV���\�[�X����ł��o�^����Ă��邩����B
+	/// UAVリソースが一つでも登録されているか判定。
 	/// </summary>
 	/// <returns></returns>
 	bool IsRegistUavResource() const
@@ -146,13 +146,13 @@ public:
 		return m_numUavResource != 0;
 	}
 	/// <summary>
-	/// UAV�f�B�X�N���v�^���n�܂�z��ԍ����擾����B
+	/// UAVディスクリプタが始まる配列番号を取得する。
 	/// </summary>
 	/// <remarks>
-	/// UAV�f�B�X�N���v�^��SRV�f�B�X�N���v�^�̎�����o�^����Ă���B
-	/// �Ȃ̂ŁASRV�f�B�X�N���v�^��10�o�^����Ă���΁A
-	/// UAV�f�B�X�N���v�^�͔z���10�Ԗڂ���o�^����Ă��邱�ƂɂȂ�B
-	/// ���̊֐��͌��݃��C�g���G���W���Ŏg�p����Ă���B
+	/// UAVディスクリプタはSRVディスクリプタの次から登録されている。
+	/// なので、SRVディスクリプタが10個登録されていれば、
+	/// UAVディスクリプタは配列の10番目から登録されていることになる。
+	/// この関数は現在レイトレエンジンで使用されている。
 	/// </remarks>
 	/// <returns></returns>
 	int GetOffsetUAVDescriptorFromTableStart() const
@@ -160,7 +160,7 @@ public:
 		return m_numShaderResource + m_numConstantBuffer;
 	}
 	/// <summary>
-	/// SRV�f�B�X�N���v�^���n�܂�z��ԍ����擾����B
+	/// SRVディスクリプタが始まる配列番号を取得する。
 	/// </summary>
 	/// <returns></returns>
 	int GetOffsetSRVDescriptorFromTableStart() const
@@ -168,13 +168,13 @@ public:
 		return m_numConstantBuffer;
 	}
 	/// <summary>
-	/// �萔�o�b�t�@�f�B�X�N���v�^���n�܂�z��ԍ����擾����B
+	/// 定数バッファディスクリプタが始まる配列番号を取得する。
 	/// </summary>
 	/// /// <remarks>
-	/// �萔�o�b�t�@�f�B�X�N���v�^��SRV�f�B�X�N���v�^��UAV�f�B�X�N���v�^�̎�����o�^����Ă���B
-	/// �Ȃ̂ŁASRV�f�B�X�N���v�^��10�AUVA�f�B�X�N���v�^��5�o�^����Ă���΁A
-	/// �萔�o�b�t�@�f�B�X�N���v�^�͔z���15�Ԗڂ���o�^����Ă��邱�ƂɂȂ�B
-	/// ���̊֐��͌��݃��C�g���G���W���Ŏg�p����Ă���B
+	/// 定数バッファディスクリプタはSRVディスクリプタとUAVディスクリプタの次から登録されている。
+	/// なので、SRVディスクリプタが10個、UVAディスクリプタが5個登録されていれば、
+	/// 定数バッファディスクリプタは配列の15番目から登録されていることになる。
+	/// この関数は現在レイトレエンジンで使用されている。
 	/// <returns></returns>
 	int GetOffsetConstantBufferDescriptorFromTableStart() const
 	{
@@ -182,12 +182,12 @@ public:
 	}
 private:
 	/// <summary>
-	/// ���\�[�X���f�B�X�N���v�^�q�[�v�ɓo�^�B
+	/// リソースをディスクリプタヒープに登録。
 	/// </summary>
-	/// <param name="registerNo">�o�^�ԍ�</param>
-	/// <param name="res">�o�^���郊�\�[�X</param>
-	/// <param name="resTbl">���\�[�X�e�[�u���B���̃e�[�u���Ƀ��\�[�X���ǉ�����܂��B</param>
-	/// <param name="numRes">�o�^����Ă��郊�\�[�X�̐��B�{�֐����Ăяo���ƁA���̐����P�C���N�������g����܂��B</param>
+	/// <param name="registerNo">登録番号</param>
+	/// <param name="res">登録するリソース</param>
+	/// <param name="resTbl">リソーステーブル。このテーブルにリソースが追加されます。</param>
+	/// <param name="numRes">登録されているリソースの数。本関数を呼び出すと、この数が１インクリメントされます。</param>
 	template<class T>
 	void RegistResource(
 		int registerNo,
@@ -199,7 +199,7 @@ private:
 	)
 	{
 		if (registerNo == -1) {
-			//-1���w�肳��Ă�����A���ݓo�^����Ă��閖���̃��\�[�X�̎��ɓo�^�����B
+			//-1が指定されていたら、現在登録されている末尾のリソースの次に登録される。
 			registerNo = numRes;
 		}
 		if (registerNo < MAX_RESOURCE) {
@@ -209,27 +209,27 @@ private:
 			}
 		}
 		else {
-			MessageBox(nullptr, errorMessage, L"�G���[", MB_OK);
+			MessageBox(nullptr, errorMessage, L"エラー", MB_OK);
 			std::abort();
 		}
 	}
 private:
 	enum {
-		MAX_SHADER_RESOURCE = 1024 * 10,	//�V�F�[�_�[���\�[�X�̍ő吔�B
-		MAX_CONSTANT_BUFFER = 1024 * 10,	//�萔�o�b�t�@�̍ő吔�B
-		MAX_SAMPLER_STATE = 16,	//�T���v���X�e�[�g�̍ő吔�B
+		MAX_SHADER_RESOURCE = 1024 * 10,	//シェーダーリソースの最大数。
+		MAX_CONSTANT_BUFFER = 1024 * 10,	//定数バッファの最大数。
+		MAX_SAMPLER_STATE = 16,	//サンプラステートの最大数。
 	};
-	int m_numShaderResource = 0;	//�V�F�[�_�[���\�[�X�̐��B
-	int m_numConstantBuffer = 0;	//�萔�o�b�t�@�̐��B
-	int m_numUavResource = 0;		//�A���I�[�_�[�A�N�Z�X���\�[�X�̐��B
-	int m_numSamplerDesc = 0;		//�T���v���̐��B
-	ID3D12DescriptorHeap* m_descriptorHeap[2] = { nullptr };					//�f�B�X�N���v�^�q�[�v�B
-	std::vector<IShaderResource*> m_shaderResources;		//�V�F�[�_�[���\�[�X�B
-	std::vector < IUnorderAccessResrouce*> m_uavResoruces;	//UAV���\�[�X�B
-	std::vector < ConstantBuffer*> m_constantBuffers;		//�萔�o�b�t�@�B
-	D3D12_SAMPLER_DESC m_samplerDescs[MAX_SAMPLER_STATE];						//�T���v���X�e�[�g�B
-	D3D12_GPU_DESCRIPTOR_HANDLE m_cbGpuDescriptorStart[2];						//�萔�o�b�t�@�̃f�B�X�N���v�^�q�[�v�̊J�n�n���h���B
-	D3D12_GPU_DESCRIPTOR_HANDLE m_srGpuDescriptorStart[2];						//�V�F�[�_�[���\�[�X�̃f�B�X�N���v�^�q�[�v�̊J�n�n���h���B
-	D3D12_GPU_DESCRIPTOR_HANDLE m_uavGpuDescriptorStart[2];						//UAV���\�[�X�̃f�B�X�N���v�^�q�[�v�̊J�n�n���h���B
-	D3D12_GPU_DESCRIPTOR_HANDLE m_samplerGpuDescriptorStart[2];					//Sampler�̂ŃX�N���v�^�q�[�v�̊J�n�n���h���B
+	int m_numShaderResource = 0;	//シェーダーリソースの数。
+	int m_numConstantBuffer = 0;	//定数バッファの数。
+	int m_numUavResource = 0;		//アンオーダーアクセスリソースの数。
+	int m_numSamplerDesc = 0;		//サンプラの数。
+	ID3D12DescriptorHeap* m_descriptorHeap[2] = { nullptr };					//ディスクリプタヒープ。
+	std::vector<IShaderResource*> m_shaderResources;		//シェーダーリソース。
+	std::vector < IUnorderAccessResrouce*> m_uavResoruces;	//UAVリソース。
+	std::vector < ConstantBuffer*> m_constantBuffers;		//定数バッファ。
+	D3D12_SAMPLER_DESC m_samplerDescs[MAX_SAMPLER_STATE];						//サンプラステート。
+	D3D12_GPU_DESCRIPTOR_HANDLE m_cbGpuDescriptorStart[2];						//定数バッファのディスクリプタヒープの開始ハンドル。
+	D3D12_GPU_DESCRIPTOR_HANDLE m_srGpuDescriptorStart[2];						//シェーダーリソースのディスクリプタヒープの開始ハンドル。
+	D3D12_GPU_DESCRIPTOR_HANDLE m_uavGpuDescriptorStart[2];						//UAVリソースのディスクリプタヒープの開始ハンドル。
+	D3D12_GPU_DESCRIPTOR_HANDLE m_samplerGpuDescriptorStart[2];					//Samplerのでスクリプタヒープの開始ハンドル。
 };

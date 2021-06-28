@@ -1,40 +1,40 @@
-/*!
-*@brief	ƒpƒbƒh
+ï»¿/*!
+*@brief	ãƒ‘ãƒƒãƒ‰
 */
 
 #pragma once
 
 	
 /*!
-	*@brief	‰¼‘zƒ{ƒ^ƒ“’è‹`B
+	*@brief	ä»®æƒ³ãƒœã‚¿ãƒ³å®šç¾©ã€‚
 	*/
 enum EnButton{
-	enButtonUp,		//!<ãB
-	enButtonDown,		//!<‰ºB
-	enButtonLeft,		//!<¶B
-	enButtonRight,		//!<‰EB
-	enButtonA,			//!<Aƒ{ƒ^ƒ“B
-	enButtonB,			//!<Bƒ{ƒ^ƒ“B
-	enButtonX,			//!<Xƒ{ƒ^ƒ“B
-	enButtonY,			//!<Yƒ{ƒ^ƒ“B
-	enButtonSelect,	//!<ƒZƒŒƒNƒgƒ{ƒ^ƒ“B
-	enButtonStart,		//!<ƒXƒ^[ƒgƒ{ƒ^ƒ“B
-	enButtonRB1,		//!<RB1ƒ{ƒ^ƒ“B
-	enButtonRB2,		//!<RB2ƒ{ƒ^ƒ“B
-	enButtonRB3,		//!<RB3ƒ{ƒ^ƒ“B
-	enButtonLB1,		//!<LB1ƒ{ƒ^ƒ“B
-	enButtonLB2,		//!<LB2ƒ{ƒ^ƒ“B
-	enButtonLB3,		//!<LB3ƒ{ƒ^ƒ“B
-	enButtonNum,	//!<ƒ{ƒ^ƒ“‚Ì”B
+	enButtonUp,		//!<ä¸Šã€‚
+	enButtonDown,		//!<ä¸‹ã€‚
+	enButtonLeft,		//!<å·¦ã€‚
+	enButtonRight,		//!<å³ã€‚
+	enButtonA,			//!<Aãƒœã‚¿ãƒ³ã€‚
+	enButtonB,			//!<Bãƒœã‚¿ãƒ³ã€‚
+	enButtonX,			//!<Xãƒœã‚¿ãƒ³ã€‚
+	enButtonY,			//!<Yãƒœã‚¿ãƒ³ã€‚
+	enButtonSelect,	//!<ã‚»ãƒ¬ã‚¯ãƒˆãƒœã‚¿ãƒ³ã€‚
+	enButtonStart,		//!<ã‚¹ã‚¿ãƒ¼ãƒˆãƒœã‚¿ãƒ³ã€‚
+	enButtonRB1,		//!<RB1ãƒœã‚¿ãƒ³ã€‚
+	enButtonRB2,		//!<RB2ãƒœã‚¿ãƒ³ã€‚
+	enButtonRB3,		//!<RB3ãƒœã‚¿ãƒ³ã€‚
+	enButtonLB1,		//!<LB1ãƒœã‚¿ãƒ³ã€‚
+	enButtonLB2,		//!<LB2ãƒœã‚¿ãƒ³ã€‚
+	enButtonLB3,		//!<LB3ãƒœã‚¿ãƒ³ã€‚
+	enButtonNum,	//!<ãƒœã‚¿ãƒ³ã®æ•°ã€‚
 };
 /*!
-*@brief	ƒpƒbƒh
+*@brief	ãƒ‘ãƒƒãƒ‰
 */
 class GamePad {
 public:
-	static const int CONNECT_PAD_MAX = 4;		//Ú‘±‰Â”\‚Èƒpƒbƒh‚ÌÅ‘å”B
+	static const int CONNECT_PAD_MAX = 4;		//æ¥ç¶šå¯èƒ½ãªãƒ‘ãƒƒãƒ‰ã®æœ€å¤§æ•°ã€‚
 	/*!
-		*@brief	ƒpƒbƒhƒXƒe[ƒgB
+		*@brief	ãƒ‘ãƒƒãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã€‚
 		*/
 	struct PAD_STATE
 	{
@@ -42,44 +42,44 @@ public:
 		bool bConnected;
 	};
 	/*!
-		*@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+		*@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 		*/
 	GamePad();
 	/*!
-		*@brief	ƒfƒXƒgƒ‰ƒNƒ^B
+		*@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 		*/
 	~GamePad();
 	/*!
-	*@brief	‰Šú‰»B
-	*@param[in]	padNo	ƒpƒbƒh”Ô†B
+	*@brief	åˆæœŸåŒ–ã€‚
+	*@param[in]	padNo	ãƒ‘ãƒƒãƒ‰ç•ªå·ã€‚
 	*/
 	void Init(int padNo)
 	{
 		m_padNo = padNo;
 	}
 	/*!
-	*@brief	XVB
+	*@brief	æ›´æ–°ã€‚
 	*/
 	void Update();
 	/*!
-	*@brief	ƒ{ƒ^ƒ“‚ÌƒgƒŠƒK[”»’èB
-	*@return	true‚ª•Ô‚Á‚Ä‚«‚½‚çƒgƒŠƒK[“ü—ÍB
+	*@brief	ãƒœã‚¿ãƒ³ã®ãƒˆãƒªã‚¬ãƒ¼åˆ¤å®šã€‚
+	*@return	trueãŒè¿”ã£ã¦ããŸã‚‰ãƒˆãƒªã‚¬ãƒ¼å…¥åŠ›ã€‚
 	*/
 	bool IsTrigger(EnButton button) const
 	{
 		return m_trigger[button] != 0;
 	}
 	/*!
-	*@brief	ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»’èB
-	*@return	true‚ª•Ô‚Á‚Ä‚«‚½‚ç‰Ÿ‚³‚ê‚Ä‚¢‚éB
+	*@brief	ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹åˆ¤å®šã€‚
+	*@return	trueãŒè¿”ã£ã¦ããŸã‚‰æŠ¼ã•ã‚Œã¦ã„ã‚‹ã€‚
 	*/
 	bool IsPress(EnButton button) const
 	{
 		return m_press[button] != 0;
 	}
 	/*!
-	*@brief	‰½‚©‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»’è
-	*@return	true‚ª•Ô‚Á‚Ä‚«‚½‚ç‰Ÿ‚³‚ê‚Ä‚¢‚éB
+	*@brief	ä½•ã‹ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹åˆ¤å®š
+	*@return	trueãŒè¿”ã£ã¦ããŸã‚‰æŠ¼ã•ã‚Œã¦ã„ã‚‹ã€‚
 	*/
 	bool IsPressAnyKey() const
 	{
@@ -101,55 +101,55 @@ public:
 			|| IsPress(enButtonLB3);
 	}
 	/*!
-	*@brief	¶ƒXƒeƒBƒbƒN‚ÌX²‚Ì“ü—Í—Ê‚ğæ“¾B
-	*@return	-1.0`1.0‚Ì³‹K‰»‚³‚ê‚½’l‚ğ•Ô‚·B
+	*@brief	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Xè»¸ã®å…¥åŠ›é‡ã‚’å–å¾—ã€‚
+	*@return	-1.0ï½1.0ã®æ­£è¦åŒ–ã•ã‚ŒãŸå€¤ã‚’è¿”ã™ã€‚
 	*/
 	float GetLStickXF() const
 	{
 		return m_lStickX;
 	}
 	/*!
-	*@brief	¶ƒXƒeƒBƒbƒN‚ÌY²‚Ì“ü—Í—Ê‚ğæ“¾B
-	*@return	-1.0`1.0‚Ì³‹K‰»‚³‚ê‚½’l‚ğ•Ô‚·B
+	*@brief	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Yè»¸ã®å…¥åŠ›é‡ã‚’å–å¾—ã€‚
+	*@return	-1.0ï½1.0ã®æ­£è¦åŒ–ã•ã‚ŒãŸå€¤ã‚’è¿”ã™ã€‚
 	*/
 	float GetLStickYF() const
 	{
 		return m_lStickY;
 	}
 	/*!
-	*@brief	‰EƒXƒeƒBƒbƒN‚ÌX²‚Ì“ü—Í—Ê‚ğæ“¾B
-	*@return	-1.0`1.0‚Ì³‹K‰»‚³‚ê‚½’l‚ğ•Ô‚·B
+	*@brief	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Xè»¸ã®å…¥åŠ›é‡ã‚’å–å¾—ã€‚
+	*@return	-1.0ï½1.0ã®æ­£è¦åŒ–ã•ã‚ŒãŸå€¤ã‚’è¿”ã™ã€‚
 	*/
 	float GetRStickXF() const
 	{
 		return m_rStickX;
 	}
 	/*!
-	*@brief	‰EƒXƒeƒBƒbƒN‚ÌY²‚Ì“ü—Í—Ê‚ğæ“¾B
-	*@return	-1.0`1.0‚Ì³‹K‰»‚³‚ê‚½’l‚ğ•Ô‚·B
+	*@brief	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Yè»¸ã®å…¥åŠ›é‡ã‚’å–å¾—ã€‚
+	*@return	-1.0ï½1.0ã®æ­£è¦åŒ–ã•ã‚ŒãŸå€¤ã‚’è¿”ã™ã€‚
 	*/
 	float GetRStickYF() const
 	{
 		return m_rStickY;
 	}
-	//ƒtƒŒ[ƒ€‚ÌŠJn‚ÉŒÄ‚Î‚ê‚éŠÖ”B
+	//ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹æ™‚ã«å‘¼ã°ã‚Œã‚‹é–¢æ•°ã€‚
 	static void BeginFrame();
 public:
 	enum { MAX_PAD = 4 };
 	enum class EnXInputPadState {
-		Undef,		//•s–¾B
-		Connect,	//Ú‘±‚³‚ê‚Ä‚¢‚éB
-		Disconnect,	//Ú‘±‚³‚ê‚Ä‚¢‚È‚¢B
+		Undef,		//ä¸æ˜ã€‚
+		Connect,	//æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã€‚
+		Disconnect,	//æ¥ç¶šã•ã‚Œã¦ã„ãªã„ã€‚
 	};
 private:
-	PAD_STATE m_state;	//!<ƒpƒbƒhƒXƒe[ƒgB
-	int m_padNo = 0;			//!<ƒpƒbƒh”Ô†B
-	int m_trigger[enButtonNum];	//!<ƒgƒŠƒK[“ü—Í‚Ìƒtƒ‰ƒOB
-	int m_press[enButtonNum];	//!<press“ü—Í‚Ìƒtƒ‰ƒOB
-	float m_lStickX = 0.0f;		//!<¶ƒXƒeƒBƒbƒN‚ÌX²‚Ì“ü—Í—ÊB
-	float m_lStickY = 0.0f;		//!<¶ƒXƒeƒBƒbƒN‚ÌY²‚Ì“ü—Í—ÊB
-	float m_rStickX = 0.0f;		//!<‰EƒXƒeƒBƒbƒN‚ÌX²‚Ì“ü—Í—ÊB
-	float m_rStickY = 0.0f;		//!<‰EƒXƒeƒBƒbƒN‚ÌY²‚Ì“ü—Í—ÊB
+	PAD_STATE m_state;	//!<ãƒ‘ãƒƒãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã€‚
+	int m_padNo = 0;			//!<ãƒ‘ãƒƒãƒ‰ç•ªå·ã€‚
+	int m_trigger[enButtonNum];	//!<ãƒˆãƒªã‚¬ãƒ¼å…¥åŠ›ã®ãƒ•ãƒ©ã‚°ã€‚
+	int m_press[enButtonNum];	//!<presså…¥åŠ›ã®ãƒ•ãƒ©ã‚°ã€‚
+	float m_lStickX = 0.0f;		//!<å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Xè»¸ã®å…¥åŠ›é‡ã€‚
+	float m_lStickY = 0.0f;		//!<å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Yè»¸ã®å…¥åŠ›é‡ã€‚
+	float m_rStickX = 0.0f;		//!<å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Xè»¸ã®å…¥åŠ›é‡ã€‚
+	float m_rStickY = 0.0f;		//!<å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®Yè»¸ã®å…¥åŠ›é‡ã€‚
 
 	static EnXInputPadState m_padStates[MAX_PAD];
 };

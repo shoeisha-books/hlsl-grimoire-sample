@@ -1,48 +1,48 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "Bitmap.h"
 #include "sub.h"
 
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    //  ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    //  ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // step-1 ‰æ‘œƒf[ƒ^‚ğƒƒCƒ“ƒƒ‚ƒŠã‚Éƒ[ƒh‚·‚é
+    // step-1 ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ¢ãƒªä¸Šã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     Bitmap imagebmp;
     imagebmp.Load("Assets/image/original.bmp");
 
-    // step-2 ‰æ‘œƒf[ƒ^‚ğƒOƒ‰ƒtƒBƒbƒNƒXƒƒ‚ƒŠ‚É‘—‚é‚½‚ß‚ÉƒXƒgƒ‰ƒNƒ`ƒƒ[ƒhƒoƒbƒtƒ@‚ğì¬
+    // step-2 ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ¡ãƒ¢ãƒªã«é€ã‚‹ãŸã‚ã«ã‚¹ãƒˆãƒ©ã‚¯ãƒãƒ£ãƒ¼ãƒ‰ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
     StructuredBuffer inputImageBmpSB;
     inputImageBmpSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æˆêˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
-        imagebmp.GetNumPixel(),         // ƒsƒNƒZƒ‹‚Ì”‚ğæ“¾
-        imagebmp.GetImageAddress()      // ‰æ‘œƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬ä¸€å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
+        imagebmp.GetNumPixel(),         // ãƒ”ã‚¯ã‚»ãƒ«ã®æ•°ã‚’å–å¾—
+        imagebmp.GetImageAddress()      // ç”»åƒãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
     );
 
-    // step-3 ƒ‚ƒmƒNƒ‰»‚µ‚½‰æ‘œ‚ğó‚¯æ‚é‚½‚ß‚ÌRWƒXƒgƒ‰ƒNƒ`ƒƒƒoƒbƒtƒ@‚ğì¬
+    // step-3 ãƒ¢ãƒã‚¯ãƒ­åŒ–ã—ãŸç”»åƒã‚’å—ã‘å–ã‚‹ãŸã‚ã®RWã‚¹ãƒˆãƒ©ã‚¯ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
     RWStructuredBuffer outputImageBmpRWSB;
     outputImageBmpRWSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æˆêˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
-        imagebmp.GetNumPixel(),         // ƒsƒNƒZƒ‹‚Ì”‚ğæ“¾
-        imagebmp.GetImageAddress()      // ‰æ‘œƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬ä¸€å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
+        imagebmp.GetNumPixel(),         // ãƒ”ã‚¯ã‚»ãƒ«ã®æ•°ã‚’å–å¾—
+        imagebmp.GetImageAddress()      // ç”»åƒãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
     );
 
-    // step-4 “ü—Íƒf[ƒ^‚Æo—Íƒf[ƒ^‚ğƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚é
+    // step-4 å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¨å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹
     DescriptorHeap ds;
     ds.RegistShaderResource(0, inputImageBmpSB);
     ds.RegistUnorderAccessResource(0, outputImageBmpRWSB);
     ds.Commit();
 
-    //ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚Ìƒ[ƒh
+    //ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã®ãƒ­ãƒ¼ãƒ‰
     Shader cs;
     cs.LoadCS("Assets/shader/sample.fx", "CSMain");
 
@@ -53,39 +53,39 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     InitPipelineState(rs, pipelineState, cs);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒtƒŒ[ƒ€ŠJn
+        // ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çDirectCompute‚Ö‚ÌƒfƒBƒXƒpƒbƒ`–½—ß
+        // ã“ã“ã‹ã‚‰DirectComputeã¸ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‘½ä»¤
         //////////////////////////////////////
 
-        // step-5 ƒfƒBƒXƒpƒbƒ`ƒR[ƒ‹‚ğÀs‚·‚é
+        // step-5 ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã‚³ãƒ¼ãƒ«ã‚’å®Ÿè¡Œã™ã‚‹
         renderContext.SetComputeRootSignature(rs);
         renderContext.SetPipelineState(pipelineState);
         renderContext.SetComputeDescriptorHeap(ds);
 
-        // ƒsƒNƒZƒ‹”‚Í512~512 = 262,144ƒsƒNƒZƒ‹
-        // 4‚Â‚ÌƒXƒŒƒbƒh‚ğ¶¬‚·‚éƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_\‚È‚Ì‚ÅA
-        // 262,144 € 4 = 65,536ŒÂ‚ÌƒXƒŒƒbƒhƒOƒ‹[ƒv‚ğì¬‚·‚é
+        // ãƒ”ã‚¯ã‚»ãƒ«æ•°ã¯512Ã—512 = 262,144ãƒ”ã‚¯ã‚»ãƒ«
+        // 4ã¤ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ç”Ÿæˆã™ã‚‹ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€â€•ãªã®ã§ã€
+        // 262,144 Ã· 4 = 65,536å€‹ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ä½œæˆã™ã‚‹
         renderContext.Dispatch(65536, 1, 1);
 
-        // ƒtƒŒ[ƒ€I—¹
+        // ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
 
-        // step-6 ƒ‚ƒmƒNƒ‚É‚µ‚½‰æ‘œ‚ğ•Û‘¶
+        // step-6 ãƒ¢ãƒã‚¯ãƒ­ã«ã—ãŸç”»åƒã‚’ä¿å­˜
         imagebmp.Copy(outputImageBmpRWSB.GetResourceOnCPU());
         imagebmp.Save("Assets/image/monochrome.bmp");
 
-        MessageBox(nullptr, L"Š®¬", L"’Ê’m", MB_OK);
-        // ƒfƒXƒgƒƒC
+        MessageBox(nullptr, L"å®Œæˆ", L"é€šçŸ¥", MB_OK);
+        // ãƒ‡ã‚¹ãƒˆãƒ­ã‚¤
         DestroyWindow(g_hWnd);
     }
     return 0;

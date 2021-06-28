@@ -1,78 +1,78 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "TrianglePolygon.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    //ƒQ[ƒ€‚Ì‰Šú‰»
+    //ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    // OŠpŒ`ƒ|ƒŠƒSƒ“‚ğ’è‹`
+    // ä¸‰è§’å½¢ãƒãƒªã‚´ãƒ³ã‚’å®šç¾©
     TrianglePolygon triangle;
     triangle.Init(rootSignature);
 
-    // step-1 ’è”ƒoƒbƒtƒ@‚ğì¬
+    // step-1 å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
     ConstantBuffer cb;
     cb.Init( sizeof( Matrix ) );
 
-    // step-2 ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬
+    // step-2 ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
     DescriptorHeap ds;
-    ds.RegistConstantBuffer( 0, cb );   //ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É’è”ƒoƒbƒtƒ@‚ğ“o˜^
-    ds.Commit();                        //ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ö‚Ì“o˜^‚ğŠm’è
+    ds.RegistConstantBuffer( 0, cb );   //ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ç™»éŒ²
+    ds.Commit();                        //ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã¸ã®ç™»éŒ²ã‚’ç¢ºå®š
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        //ƒtƒŒ[ƒ€ŠJn
+        //ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        //‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        //ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        //ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğİ’è
+        //ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’è¨­å®š
         renderContext.SetRootSignature(rootSignature);
 
-        // step-3 ƒ[ƒ‹ƒhs—ñ‚ğì¬
+        // step-3 ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’ä½œæˆ
         Matrix mWorld;
         mWorld.MakeTranslation(0.5f, 0.4f, 0.0f);
         cb.CopyToVRAM(mWorld);
 
-        // step-4 ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğİ’è
+        // step-4 ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’è¨­å®š
         renderContext.SetDescriptorHeap(ds);
 
-        //OŠpŒ`‚ğƒhƒ[
+        //ä¸‰è§’å½¢ã‚’ãƒ‰ãƒ­ãƒ¼
         triangle.Draw(renderContext);
 
         /// //////////////////////////////////////
-        //ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        //ƒtƒŒ[ƒ€I—¹
+        //ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-//ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+//ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,

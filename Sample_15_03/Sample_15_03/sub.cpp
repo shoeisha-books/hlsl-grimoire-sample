@@ -1,7 +1,7 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "sub.h"
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -12,7 +12,7 @@ void InitRootSignature(RootSignature& rs)
 
 void InitPipelineState(RootSignature& rs, PipelineState& pipelineState, Shader& cs)
 {
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     D3D12_COMPUTE_PIPELINE_STATE_DESC  psoDesc = { 0 };
     psoDesc.pRootSignature = rs.Get();
     psoDesc.CS = CD3DX12_SHADER_BYTECODE(cs.GetCompiledBlob());

@@ -1,59 +1,59 @@
-#pragma once
+﻿#pragma once
 
 class VertexBuffer;
 class IndexBuffer;
 
 /// <summary>
-/// �\�����o�b�t�@
+/// 構造化バッファ
 /// </summary>
 class RWStructuredBuffer : public IUnorderAccessResrouce {
 public:
 	
 	/// <summary>
-	/// �f�X�g���N�^�B
+	/// デストラクタ。
 	/// </summary>
 	~RWStructuredBuffer();
 	/// <summary>
-	/// �\�����o�b�t�@���������B
+	/// 構造化バッファを初期化。
 	/// </summary>
-	/// <param name="sizeOfElement">�G�������g�̃T�C�Y�B</param>
-	/// <param name="numElement">�G�������g�̐��B</param>
-	/// <param name="initData">�����f�[�^�B</param>
+	/// <param name="sizeOfElement">エレメントのサイズ。</param>
+	/// <param name="numElement">エレメントの数。</param>
+	/// <param name="initData">初期データ。</param>
 	void Init(int sizeOfElement, int numElement, void* initData);
 	/// <summary>
-	/// ���_�o�b�t�@���g�p���č\�����o�b�t�@���������B
+	/// 頂点バッファを使用して構造化バッファを初期化。
 	/// </summary>
-	/// <param name="vb">���_�o�b�t�@</param>
+	/// <param name="vb">頂点バッファ</param>
 	/// <param name="isUpdateByCPU">
-	/// CPU���Œ��_�o�b�t�@���X�V���邩�ǂ����B
-	/// CPU���ōX�V����ꍇ�A�����œn���ꂽ���_�o�b�t�@�̕������������܂��B
-	/// ���̂��߁A�������̎g�p�ʂ͂R�{�ɂȂ�܂��B
+	/// CPU側で頂点バッファを更新するかどうか。
+	/// CPU側で更新する場合、引数で渡された頂点バッファの複製を二つ複製します。
+	/// そのため、メモリの使用量は３倍になります。
 	/// </param>
 	void Init(const VertexBuffer& vb, bool isUpdateByCPU);
 	/// <summary>
-	/// �C���f�b�N�X�o�b�t�@�𗘗p���č\�����o�b�t�@���������B
+	/// インデックスバッファを利用して構造化バッファを初期化。
 	/// </summary>
-	/// <param name="ib">�C���f�b�N�X�o�b�t�@</param>
+	/// <param name="ib">インデックスバッファ</param>
 	/// <param name="isUpdateByCPU">
-	/// CPU���ŃC���f�b�N�X�o�b�t�@���X�V���邩�ǂ����B
-	/// CPU���ōX�V����ꍇ�A�����œn���ꂽ�C���f�b�N�X�o�b�t�@�̕������������܂��B
-	/// ���̂��߁A�������̎g�p�ʂ͂R�{�ɂȂ�܂��B
+	/// CPU側でインデックスバッファを更新するかどうか。
+	/// CPU側で更新する場合、引数で渡されたインデックスバッファの複製を二つ複製します。
+	/// そのため、メモリの使用量は３倍になります。
 	/// </param>
 	void Init(const IndexBuffer& ib, bool isUpdateByCPU);
 	/// <summary>
-	/// UAV�ɓo�^�B
+	/// UAVに登録。
 	/// </summary>
 	/// <param name=""></param>
 	/// <param name="bufferNo"></param>
 	void RegistUnorderAccessView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo) override;
 	/// <summary>
-	/// SRV�ɓo�^�B
+	/// SRVに登録。
 	/// </summary>
 	/// <param name="descriptorHandle"></param>
 	/// <param name="bufferNo"></param>
 	void RegistShaderResourceView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo) override;
 	/// <summary>
-	/// ����������Ă��邩����B
+	/// 初期化されているか判定。
 	/// </summary>
 	/// <returns></returns>
 	bool IsInited() const
@@ -61,7 +61,7 @@ public:
 		return m_isInited;
 	}
 	/// <summary>
-	/// CPU����A�N�Z�X�\�ȃ��\�[�X���擾����B
+	/// CPUからアクセス可能なリソースを取得する。
 	/// </summary>
 	/// <returns></returns>
 	void* GetResourceOnCPU();
@@ -69,8 +69,8 @@ public:
 	ID3D12Resource* GetD3DResoruce() ;
 private:
 	ID3D12Resource* m_buffersOnGPU[2] = {nullptr};
-	void* m_buffersOnCPU[2] = { nullptr };		//CPU������A�N�Z�X�ł��邷��X�g���N�`���o�b�t�@�̃A�h���X�B
-	int m_numElement = 0;				//�v�f���B
-	int m_sizeOfElement = 0;			//�G�������g�̃T�C�Y�B
-	bool m_isInited = false;			//�������ς݁H
+	void* m_buffersOnCPU[2] = { nullptr };		//CPU側からアクセスできるするストラクチャバッファのアドレス。
+	int m_numElement = 0;				//要素数。
+	int m_sizeOfElement = 0;			//エレメントのサイズ。
+	bool m_isInited = false;			//初期化済み？
 };

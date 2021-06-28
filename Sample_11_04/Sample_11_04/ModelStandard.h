@@ -1,57 +1,57 @@
-#pragma once
+ï»¿#pragma once
 
 /// <summary>
-/// StandardƒVƒF[ƒ_[‚ğ—˜—p‚µ‚½ƒ‚ƒfƒ‹•\¦ˆ—
+/// Standardã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’åˆ©ç”¨ã—ãŸãƒ¢ãƒ‡ãƒ«è¡¨ç¤ºå‡¦ç†
 /// </summary>
 class ModelStandard
 {
 public:
-	enum { NUM_DIRECTIONAL_LIGHT = 4 };	//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”B
+	enum { NUM_DIRECTIONAL_LIGHT = 4 };	//ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°ã€‚
 
 	/// <summary>
-	/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
+	/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã€‚
 	/// </summary>
 	struct DirectionalLight {
-		Vector3 direction;	//ƒ‰ƒCƒg‚Ì•ûŒüB
-		float pad0;			//ƒpƒfƒBƒ“ƒOB
-		Vector4 color;		//ƒ‰ƒCƒg‚ÌƒJƒ‰[B
+		Vector3 direction;	//ãƒ©ã‚¤ãƒˆã®æ–¹å‘ã€‚
+		float pad0;			//ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ã€‚
+		Vector4 color;		//ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã€‚
 	};
 	/// <summary>
-	/// ƒ‰ƒCƒg\‘¢‘ÌB
+	/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“ã€‚
 	/// </summary>
 	struct Light {
-		DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];	//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
-		Vector3 eyePos;					//ƒJƒƒ‰‚ÌˆÊ’uB
-		float specPow;					//ƒXƒyƒLƒ…ƒ‰‚Ìi‚èB
-		Vector3 ambinetLight;			//ŠÂ‹«ŒõB
+		DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];	//ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã€‚
+		Vector3 eyePos;					//ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã€‚
+		float specPow;					//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Šã€‚
+		Vector3 ambinetLight;			//ç’°å¢ƒå…‰ã€‚
 	};
 public: 
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
-	/// <param name="tkmFilePath">tkmƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹ƒpƒXB</param>
+	/// <param name="tkmFilePath">tkmãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
 	void Init(const char* tkmFilePath);
 	/// <summary>
-	/// –ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·•K—v‚ª‚ ‚éXVˆ—B
+	/// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™å¿…è¦ãŒã‚ã‚‹æ›´æ–°å‡¦ç†ã€‚
 	/// </summary>
-	/// <param name="pos">À•W</param>
-	/// <param name="rot">‰ñ“]</param>
-	/// <param name="scale">Šg‘å—¦</param>
+	/// <param name="pos">åº§æ¨™</param>
+	/// <param name="rot">å›è»¢</param>
+	/// <param name="scale">æ‹¡å¤§ç‡</param>
 	void Update(Vector3 pos, Quaternion rot, Vector3 scale)
 	{
 		m_light.eyePos = g_camera3D->GetPosition();
 		m_model.UpdateWorldMatrix(pos, rot, scale);
 	}
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
-	/// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+	/// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
 	void Draw(RenderContext& rc)
 	{
 		m_model.Draw(rc);
 	}
 private:
-	Model m_model;	//ƒ‚ƒfƒ‹B
-	Light m_light;	//ƒ‰ƒCƒgB
+	Model m_model;	//ãƒ¢ãƒ‡ãƒ«ã€‚
+	Light m_light;	//ãƒ©ã‚¤ãƒˆã€‚
 };
 

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RenderingEngine.h"
 
 namespace myRenderer
@@ -17,7 +17,7 @@ namespace myRenderer
 
     void RenderingEngine::InitShadowMapRender()
     {
-        // ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì•`‰æˆ—‚Ì‰Šú‰»
+        // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®æç”»å‡¦ç†ã®åˆæœŸåŒ–
         for (auto& shadowMapRender : m_shadowMapRenders)
         {
             shadowMapRender.Init();
@@ -68,7 +68,7 @@ namespace myRenderer
         int frameBuffer_w = g_graphicsEngine->GetFrameBufferWidth();
         int frameBuffer_h = g_graphicsEngine->GetFrameBufferHeight();
 
-        // ƒAƒ‹ƒxƒhƒJƒ‰[‚ğo—Í—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»‚·‚é
+        // ã‚¢ãƒ«ãƒ™ãƒ‰ã‚«ãƒ©ãƒ¼ã‚’å‡ºåŠ›ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         m_gBuffer[enGBufferAlbedo].Create(
             frameBuffer_w,
             frameBuffer_h,
@@ -78,27 +78,27 @@ namespace myRenderer
             DXGI_FORMAT_D32_FLOAT
         );
 
-        // –@üo—Í—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»‚·‚é
+        // æ³•ç·šå‡ºåŠ›ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         m_gBuffer[enGBufferNormal].Create(
             frameBuffer_w,
             frameBuffer_h,
             1,
             1,
-            DXGI_FORMAT_R8G8B8A8_UNORM, //ƒƒ‚ƒŠg—p—Ê‚Æƒƒ‚ƒŠ‘‚«‚İ‘¬“x—Dæ‚ÅA8bit‚Ì•„†‚È‚µ®”ƒoƒbƒtƒ@‚ğg—p‚·‚éB
+            DXGI_FORMAT_R8G8B8A8_UNORM, //ãƒ¡ãƒ¢ãƒªä½¿ç”¨é‡ã¨ãƒ¡ãƒ¢ãƒªæ›¸ãè¾¼ã¿é€Ÿåº¦å„ªå…ˆã§ã€8bitã®ç¬¦å·ãªã—æ•´æ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ç”¨ã™ã‚‹ã€‚
             DXGI_FORMAT_UNKNOWN
         );
 
-        // ‹à‘®“x‚ÆŠŠ‚ç‚©‚³ƒ}ƒbƒvo—Í—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»‚·‚é
+        // é‡‘å±åº¦ã¨æ»‘ã‚‰ã‹ã•ãƒãƒƒãƒ—å‡ºåŠ›ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         m_gBuffer[enGBufferMetalSmooth].Create(
             frameBuffer_w,
             frameBuffer_h,
             1,
             1,
-            DXGI_FORMAT_R8G8B8A8_UNORM, //ƒƒ‚ƒŠg—p—Êƒƒ‚ƒŠ‘‚«‚İ‘¬“x—Dæ‚ÅA8bit‚Ì•„†‚È‚µ®”ƒoƒbƒtƒ@‚ğg—p‚·‚éBB
+            DXGI_FORMAT_R8G8B8A8_UNORM, //ãƒ¡ãƒ¢ãƒªä½¿ç”¨é‡ãƒ¡ãƒ¢ãƒªæ›¸ãè¾¼ã¿é€Ÿåº¦å„ªå…ˆã§ã€8bitã®ç¬¦å·ãªã—æ•´æ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ç”¨ã™ã‚‹ã€‚ã€‚
             DXGI_FORMAT_UNKNOWN
         );
 
-        // ƒ[ƒ‹ƒhÀ•Wo—Í—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»‚·‚é
+        // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å‡ºåŠ›ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         m_gBuffer[enGBufferWorldPos].Create(
             frameBuffer_w,
             frameBuffer_h,
@@ -120,18 +120,18 @@ namespace myRenderer
     void RenderingEngine::InitCopyMainRenderTargetToFrameBufferSprite()
     {
         SpriteInitData spriteInitData;
-        // ƒeƒNƒXƒ`ƒƒ‚ÍyBlurRenderTarget‚ÌƒJƒ‰[ƒoƒbƒtƒ@[
+        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯yBlurRenderTargetã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼
         spriteInitData.m_textures[0] = &m_mainRenderTarget.GetRenderTargetTexture();
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOæ‚ªƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚È‚Ì‚ÅA‰ğ‘œ“x‚ÍƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚Æ“¯‚¶
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å…ˆãŒãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ãªã®ã§ã€è§£åƒåº¦ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã¨åŒã˜
         spriteInitData.m_width = g_graphicsEngine->GetFrameBufferWidth();
         spriteInitData.m_height = g_graphicsEngine->GetFrameBufferHeight();
 
-        // ƒ{ƒP‰æ‘œ‚ğ‚»‚Ì‚Ü‚Ü“\‚è•t‚¯‚é‚¾‚¯‚È‚Ì‚ÅA’Êí‚Ì2D•`‰æ‚ÌƒVƒF[ƒ_[‚ğw’è‚·‚é
+        // ãƒœã‚±ç”»åƒã‚’ãã®ã¾ã¾è²¼ã‚Šä»˜ã‘ã‚‹ã ã‘ãªã®ã§ã€é€šå¸¸ã®2Dæç”»ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
         spriteInitData.m_fxFilePath = "Assets/shader/preset/sprite.fx";
         spriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 
-        // ‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğg‚Á‚ÄAƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+        // åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½¿ã£ã¦ã€ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         m_copyMainRtToFrameBufferSprite.Init(spriteInitData);
     }
 
@@ -140,7 +140,7 @@ namespace myRenderer
         int frameBuffer_w = g_graphicsEngine->GetFrameBufferWidth();
         int frameBuffer_h = g_graphicsEngine->GetFrameBufferHeight();
 
-        // ‘¾—zŒõ
+        // å¤ªé™½å…‰
         m_deferredLightingCB.m_light.directionalLight[0].color.x = 4.8f;
         m_deferredLightingCB.m_light.directionalLight[0].color.y = 4.8f;
         m_deferredLightingCB.m_light.directionalLight[0].color.z = 4.8f;
@@ -162,7 +162,7 @@ namespace myRenderer
         m_deferredLightingCB.m_light.directionalLight[1].direction.Normalize();
         m_deferredLightingCB.m_light.directionalLight[1].castShadow = true;
 
-        //’n–Ê‚©‚ç‚ÌÆ‚è•Ô‚µ
+        //åœ°é¢ã‹ã‚‰ã®ç…§ã‚Šè¿”ã—
         m_deferredLightingCB.m_light.directionalLight[2].color.x = 0.8f;
         m_deferredLightingCB.m_light.directionalLight[2].color.y = 0.8f;
         m_deferredLightingCB.m_light.directionalLight[2].color.z = 0.8f;
@@ -178,14 +178,14 @@ namespace myRenderer
         m_deferredLightingCB.m_light.eyePos = g_camera3D->GetPosition();
         m_deferredLightingCB.m_light.specPow = 5.0f;
 
-        // ƒ|ƒXƒgƒGƒtƒFƒNƒg“I‚ÉƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚ğs‚¤‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
+        // ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆçš„ã«ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’è¡Œã†ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
         SpriteInitData spriteInitData;
 
-        // ‰æ–Ê‘S‘Ì‚ÉƒŒƒ“ƒ_ƒŠƒ“ƒO‚·‚é‚Ì‚Å•‚Æ‚‚³‚ÍƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚Ì•‚Æ‚‚³‚Æ“¯‚¶
+        // ç”»é¢å…¨ä½“ã«ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã™ã‚‹ã®ã§å¹…ã¨é«˜ã•ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®å¹…ã¨é«˜ã•ã¨åŒã˜
         spriteInitData.m_width = frameBuffer_w;
         spriteInitData.m_height = frameBuffer_h;
 
-        // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚Åg—p‚·‚éƒeƒNƒXƒ`ƒƒ‚ğİ’è
+        // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã§ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è¨­å®š
         int texNo = 0;
         for (auto& gBuffer : m_gBuffer)
         {
@@ -204,37 +204,37 @@ namespace myRenderer
         }
         spriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
-        // ‰Šú‰»ƒf[ƒ^‚ğg‚Á‚ÄƒXƒvƒ‰ƒCƒg‚ğì¬
+        // åˆæœŸåŒ–ãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ã£ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’ä½œæˆ
         m_diferredLightingSprite.Init(spriteInitData);
     }
 
     void RenderingEngine::Execute(RenderContext& rc)
     {
-        // ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æ
+        // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»
         RenderToShadowMap(rc);
 
         // ZPrepass
         ZPrepass(rc);
 
-        // G-Buffer‚Ö‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
+        // G-Bufferã¸ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
         RenderToGBuffer(rc);
 
-        // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO
+        // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°
         DeferredLighting(rc);
 
-        // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚ªI‚í‚Á‚½“_‚ÅƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ğB‰e‚·‚é
+        // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ãŒçµ‚ã‚ã£ãŸæ™‚ç‚¹ã§ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã‚’æ’®å½±ã™ã‚‹
         SnapshotMainRenderTarget(rc, EnMainRTSnapshot::enDrawnOpacity);
 
-        // ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO
+        // ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
         ForwardRendering(rc);
 
-        // ƒ|ƒXƒgƒGƒtƒFƒNƒg‚ğÀs
+        // ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å®Ÿè¡Œ
         m_postEffect.Render(rc, m_mainRenderTarget);
 
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ì“à—e‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚ÉƒRƒs[
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å†…å®¹ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼
         CopyMainRenderTargetToFrameBuffer(rc);
 
-        // “o˜^‚³‚ê‚Ä‚¢‚é3Dƒ‚ƒfƒ‹‚ğƒNƒŠƒA
+        // ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹3Dãƒ¢ãƒ‡ãƒ«ã‚’ã‚¯ãƒªã‚¢
         m_renderToGBufferModels.clear();
         m_forwardRenderModels.clear();
         m_zprepassModels.clear();
@@ -255,13 +255,13 @@ namespace myRenderer
 
     void RenderingEngine::ZPrepass(RenderContext& rc)
     {
-        // ‚Ü‚¸AƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Äİ’è‚Å‚«‚é‚æ‚¤‚É‚È‚é‚Ü‚Å‘Ò‚Â
+        // ã¾ãšã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦è¨­å®šã§ãã‚‹ã‚ˆã†ã«ãªã‚‹ã¾ã§å¾…ã¤
         rc.WaitUntilToPossibleSetRenderTarget(m_zprepassRenderTarget);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         rc.SetRenderTargetAndViewport(m_zprepassRenderTarget);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         rc.ClearRenderTargetView(m_zprepassRenderTarget);
 
         for (auto& model : m_zprepassModels)
@@ -284,41 +284,41 @@ namespace myRenderer
             model->Draw(rc);
         }
 
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTarget(m_mainRenderTarget);
     }
 
     void RenderingEngine::RenderToGBuffer(RenderContext& rc)
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğG-Buffer‚É•ÏX
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’G-Bufferã«å¤‰æ›´
         RenderTarget* rts[enGBufferNum] = {
-            &m_gBuffer[enGBufferAlbedo],        // 0”Ô–Ú‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-            &m_gBuffer[enGBufferNormal],        // 1”Ô–Ú‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-            &m_gBuffer[enGBufferWorldPos],      // 2”Ô–Ú‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-            &m_gBuffer[enGBufferMetalSmooth],   // 3”Ô–Ú‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-            &m_gBuffer[enGBUfferShadowParam],   // 4”Ô–Ú‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
+            &m_gBuffer[enGBufferAlbedo],        // 0ç•ªç›®ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+            &m_gBuffer[enGBufferNormal],        // 1ç•ªç›®ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+            &m_gBuffer[enGBufferWorldPos],      // 2ç•ªç›®ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+            &m_gBuffer[enGBufferMetalSmooth],   // 3ç•ªç›®ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+            &m_gBuffer[enGBUfferShadowParam],   // 4ç•ªç›®ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
         };
 
-        // ‚Ü‚¸AƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Äİ’è‚Å‚«‚é‚æ‚¤‚É‚È‚é‚Ü‚Å‘Ò‚Â
+        // ã¾ãšã€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦è¨­å®šã§ãã‚‹ã‚ˆã†ã«ãªã‚‹ã¾ã§å¾…ã¤
         rc.WaitUntilToPossibleSetRenderTargets(ARRAYSIZE(rts), rts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         rc.SetRenderTargets(ARRAYSIZE(rts), rts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         rc.ClearRenderTargetViews(ARRAYSIZE(rts), rts);
         for (auto& model : m_renderToGBufferModels)
         {
             model->Draw(rc);
         }
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İ‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTargets(ARRAYSIZE(rts), rts);
     }
 
     void RenderingEngine::SnapshotMainRenderTarget(RenderContext& rc, EnMainRTSnapshot enSnapshot)
     {
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ì“à—e‚ğƒXƒiƒbƒvƒVƒ‡ƒbƒg
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å†…å®¹ã‚’ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆ
         rc.WaitUntilToPossibleSetRenderTarget(m_mainRTSnapshots[(int)enSnapshot]);
         rc.SetRenderTargetAndViewport(m_mainRTSnapshots[(int)enSnapshot]);
         m_copyMainRtToFrameBufferSprite.Draw(rc);
@@ -327,7 +327,7 @@ namespace myRenderer
 
     void RenderingEngine::DeferredLighting(RenderContext& rc)
     {
-        // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚É•K—v‚Èƒ‰ƒCƒgî•ñ‚ğXV‚·‚é
+        // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã«å¿…è¦ãªãƒ©ã‚¤ãƒˆæƒ…å ±ã‚’æ›´æ–°ã™ã‚‹
         m_deferredLightingCB.m_light.eyePos = g_camera3D->GetPosition();
         for (int i = 0; i < NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT; i++)
         {
@@ -337,27 +337,27 @@ namespace myRenderer
             }
         }
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOæ‚ğƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚É‚·‚é
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å…ˆã‚’ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ã™ã‚‹
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         rc.WaitUntilToPossibleSetRenderTarget(m_mainRenderTarget);
         rc.SetRenderTargetAndViewport(m_mainRenderTarget);
 
-        // G-Buffer‚Ì“à—e‚ğŒ³‚É‚µ‚ÄƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO
+        // G-Bufferã®å†…å®¹ã‚’å…ƒã«ã—ã¦ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°
         m_diferredLightingSprite.Draw(rc);
 
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTarget(m_mainRenderTarget);
     }
 
     void RenderingEngine::CopyMainRenderTargetToFrameBuffer(RenderContext& rc)
     {
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌŠG‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚ÉƒRƒs[
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®çµµã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«ã‚³ãƒ”ãƒ¼
         rc.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
 
-        // ƒrƒ…[ƒ|[ƒg‚ğw’è‚·‚é
+        // ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’æŒ‡å®šã™ã‚‹
         D3D12_VIEWPORT viewport;
         viewport.TopLeftX = 0;
         viewport.TopLeftY = 0;

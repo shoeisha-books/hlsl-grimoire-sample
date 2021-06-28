@@ -1,5 +1,5 @@
-/*!
- *@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒvB
+ï»¿/*!
+ *@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã€‚
  */
 
 #pragma once
@@ -8,106 +8,106 @@
 
 	
 /*!
-*@brief	ƒL[ƒtƒŒ[ƒ€B
+*@brief	ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã€‚
 */
 struct KeyFrame {
-	uint32_t boneIndex;	//!<ƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒXB
-	float time;					//!<ŠÔB
-	Matrix transform;			//!<ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€B
+	uint32_t boneIndex;	//!<ãƒœãƒ¼ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚
+	float time;					//!<æ™‚é–“ã€‚
+	Matrix transform;			//!<ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã€‚
 };
 
 /*!
-*@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgB
+*@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã€‚
 */
 class AnimationEvent {
 public:
 	
 	/*!
-	*@brief	ƒCƒxƒ“ƒg”­¶ŠÔ‚ğİ’èB
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚é–“ã‚’è¨­å®šã€‚
 	*/
 	float GetInvokeTime() const
 	{
 		return m_invokeTime;
 	}
 	/*!
-	*@brief	ƒCƒxƒ“ƒg–¼‚ğæ“¾B
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆåã‚’å–å¾—ã€‚
 	*/
 	const wchar_t* GetEventName() const
 	{
 		return m_eventName.c_str();
 	}
 	/*!
-	*@brief	ƒCƒxƒ“ƒg”­¶ŠÔ‚ğİ’èB
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚é–“ã‚’è¨­å®šã€‚
 	*/
 	void SetInvokeTime(float time)
 	{
 		m_invokeTime = time;
 	}
 	/*!
-	*@brief	ƒCƒxƒ“ƒg–¼‚ğİ’èB
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆåã‚’è¨­å®šã€‚
 	*/
 	void SetEventName(const wchar_t* name)
 	{
 		m_eventName = name;
 	}
 	/*!
-	*@brief	ƒCƒxƒ“ƒg‚ª”­¶Ï‚İ‚©”»’èB
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿæ¸ˆã¿ã‹åˆ¤å®šã€‚
 	*/
 	bool IsInvoked() const
 	{
 		return m_isInvoked;
 	}
 	/*!
-	*@brief	ƒCƒxƒ“ƒg‚ª”­¶Ï‚İ‚Ìƒtƒ‰ƒO‚ğİ’è‚·‚éB
+	*@brief	ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿæ¸ˆã¿ã®ãƒ•ãƒ©ã‚°ã‚’è¨­å®šã™ã‚‹ã€‚
 	*/
 	void SetInvokedFlag(bool flag)
 	{
 		m_isInvoked = flag;
 	}
 private:
-	bool m_isInvoked = false;	//!<ƒCƒxƒ“ƒg”­¶Ï‚İH
-	float m_invokeTime = 0.0f;	//!<ƒCƒxƒ“ƒg”­¶ŠÔB
-	std::wstring m_eventName;	//!<ƒCƒxƒ“ƒg–¼B
+	bool m_isInvoked = false;	//!<ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ¸ˆã¿ï¼Ÿ
+	float m_invokeTime = 0.0f;	//!<ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚é–“ã€‚
+	std::wstring m_eventName;	//!<ã‚¤ãƒ™ãƒ³ãƒˆåã€‚
 };
 /*!
-	*@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒvB
+	*@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã€‚
 	*/
 class AnimationClip  {
 public:
 	
 	using keyFramePtrList = std::vector<KeyFrame*>;
 	/*!
-	* @brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	* @brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	AnimationClip()
 	{
 	}
 	/*!
-		*@brief	ƒfƒXƒgƒ‰ƒNƒ^B
+		*@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 		*/
 	~AnimationClip();
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚ğ“¯Šúƒ[ƒhB
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã‚’åŒæœŸãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
 	/// <param name="filePath"></param>
 	void Load(const char* filePath);
 	
 	/// <summary>
-	/// ƒL[ƒtƒŒ[ƒ€‚ÆƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ğ\’z‚·‚éB
+	/// ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã¨ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ƒ[ƒh‚ªI‚í‚Á‚½‚Æ‚«‚ÉŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢B
+	/// ãƒ­ãƒ¼ãƒ‰ãŒçµ‚ã‚ã£ãŸã¨ãã«å‘¼ã³å‡ºã—ã¦ãã ã•ã„ã€‚
 	/// </remarks>
 	void BuildKeyFramesAndAnimationEvents();
 	/*!
-	*@brief	ƒ‹[ƒv‚·‚éH
+	*@brief	ãƒ«ãƒ¼ãƒ—ã™ã‚‹ï¼Ÿ
 	*/
 	bool IsLoop() const
 	{
 		return m_isLoop;
 	}
 	/*!
-	*@brief	ƒ‹[ƒvƒtƒ‰ƒO‚ğİ’è‚·‚éB
+	*@brief	ãƒ«ãƒ¼ãƒ—ãƒ•ãƒ©ã‚°ã‚’è¨­å®šã™ã‚‹ã€‚
 	*/
 	void SetLoopFlag(bool flag)
 	{
@@ -125,14 +125,14 @@ public:
 		return *m_topBoneKeyFramList;
 	}
 	/*!
-		*@brief	ƒNƒŠƒbƒv–¼‚ğæ“¾B
+		*@brief	ã‚¯ãƒªãƒƒãƒ—åã‚’å–å¾—ã€‚
 		*/
 	const wchar_t* GetName() const
 	{
 		return m_clipName.c_str();
 	}
 	/*!
-	*@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ğæ“¾B
+	*@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—ã€‚
 	*/
 	std::unique_ptr<AnimationEvent[]>& GetAnimationEvent()
 	{
@@ -140,7 +140,7 @@ public:
 	}
 
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì”‚ğæ“¾
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®æ•°ã‚’å–å¾—
 	/// </summary>
 	/// <returns></returns>
 	int GetNumAnimationEvent() const
@@ -149,13 +149,13 @@ public:
 	}
 private:
 	using KeyframePtr = std::unique_ptr<KeyFrame>;
-	std::wstring m_clipName;	//!<ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚Ì–¼‘OB
-	bool m_isLoop = false;	//!<ƒ‹[ƒvƒtƒ‰ƒOB
-	std::vector<KeyframePtr>			m_keyframes;				//ƒL[ƒtƒŒ[ƒ€B
-	std::vector<keyFramePtrList>		m_keyFramePtrListArray;		//ƒ{[ƒ“‚²‚Æ‚ÌƒL[ƒtƒŒ[ƒ€‚ÌƒŠƒXƒg‚ğŠÇ—‚·‚é‚½‚ß‚Ì”z—ñB
-	std::unique_ptr<AnimationEvent[]>	m_animationEvent;			//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgB
-	int									m_numAnimationEvent = 0;	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì”B
+	std::wstring m_clipName;	//!<ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã®åå‰ã€‚
+	bool m_isLoop = false;	//!<ãƒ«ãƒ¼ãƒ—ãƒ•ãƒ©ã‚°ã€‚
+	std::vector<KeyframePtr>			m_keyframes;				//ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã€‚
+	std::vector<keyFramePtrList>		m_keyFramePtrListArray;		//ãƒœãƒ¼ãƒ³ã”ã¨ã®ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒªã‚¹ãƒˆã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®é…åˆ—ã€‚
+	std::unique_ptr<AnimationEvent[]>	m_animationEvent;			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã€‚
+	int									m_numAnimationEvent = 0;	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®æ•°ã€‚
 	keyFramePtrList*					m_topBoneKeyFramList = nullptr;
-	TkaFile							m_tkaFile;			//tkaƒtƒ@ƒCƒ‹
+	TkaFile							m_tkaFile;			//tkaãƒ•ã‚¡ã‚¤ãƒ«
 };
 using AnimationClipPtr = std::unique_ptr<AnimationClip>;

@@ -1,5 +1,5 @@
-/*!
-* @brief	ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶ƒRƒ“ƒgƒ[ƒ‰B
+ï»¿/*!
+* @brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã€‚
 */
 
 #pragma once
@@ -11,32 +11,32 @@ class Animation;
 class Bone;
 
 /*!
-* @brief	ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶ƒRƒ“ƒgƒ[ƒ‰B
+* @brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã€‚
 * @details
-*  ˆê‚Â‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚É‘Î‚µ‚ÄƒAƒjƒ[ƒVƒ‡ƒ“‚ği‚ß‚ÄAƒ[ƒJƒ‹ƒ|[ƒY‚ğŒvZ‚µ‚Ü‚·B
+*  ä¸€ã¤ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã«å¯¾ã—ã¦ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é€²ã‚ã¦ã€ãƒ­ãƒ¼ã‚«ãƒ«ãƒãƒ¼ã‚ºã‚’è¨ˆç®—ã—ã¾ã™ã€‚
 */
 class AnimationPlayController{
 public:
 	/*!
-	* @brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	* @brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	*/
 	AnimationPlayController()
 	{
 	}
 	/*!
-	* @brief	ƒfƒXƒgƒ‰ƒNƒ^B
+	* @brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	*/
 	~AnimationPlayController()
 	{
 	}
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="skeleton">ƒXƒPƒ‹ƒgƒ“</param>
-	/// <param name="footStepBoneNo">footstepƒ{[ƒ“‚Ì”Ô†</param>
+	/// <param name="skeleton">ã‚¹ã‚±ãƒ«ãƒˆãƒ³</param>
+	/// <param name="footStepBoneNo">footstepãƒœãƒ¼ãƒ³ã®ç•ªå·</param>
 	void Init(Skeleton* skeleton, int footStepBoneNo);
 	/*!
-	* @brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚Ì•ÏXB
+	* @brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã®å¤‰æ›´ã€‚
 	*/
 	void ChangeAnimationClip(AnimationClip* clip);
 	
@@ -50,7 +50,7 @@ public:
 		m_interpolateTime = 0.0f;
 	}
 	/*!
-		*@brief	•âŠ®—¦‚ğæ“¾B
+		*@brief	è£œå®Œç‡ã‚’å–å¾—ã€‚
 		*/
 	float GetInterpolateRate() const
 	{
@@ -60,12 +60,12 @@ public:
 		return min( 1.0f, m_interpolateTime / m_interpolateEndTime );
 	}
 	/*!
-	* @brief	ƒAƒjƒ[ƒVƒ‡ƒ“‚ği‚ß‚éB
-	*@param[in]	deltaTime		ƒAƒjƒ[ƒVƒ‡ƒ“‚ği‚ß‚éŠÔB
+	* @brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é€²ã‚ã‚‹ã€‚
+	*@param[in]	deltaTime		ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é€²ã‚ã‚‹æ™‚é–“ã€‚
 	*/
 	void Update(float deltaTime, Animation* animation);
 	/*!
-		* @brief	ƒ[ƒJƒ‹ƒ{[ƒ“s—ñ‚ğæ“¾B
+		* @brief	ãƒ­ãƒ¼ã‚«ãƒ«ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’å–å¾—ã€‚
 		*/
 	const std::vector<Matrix>& GetBoneLocalMatrix() const
 	{
@@ -76,14 +76,14 @@ public:
 		return m_animationClip;
 	}
 	/*!
-	* @brief	Ä¶’†H
+	* @brief	å†ç”Ÿä¸­ï¼Ÿ
 	*/
 	bool IsPlaying() const
 	{
 		return m_isPlaying;
 	}
 	/// <summary>
-	/// UpdateŠÖ”‚ğŒÄ‚Ño‚µ‚½‚Æ‚«‚ÌAfootstepƒ{[ƒ“‚ÌˆÚ“®—Ê‚ğæ“¾B
+	/// Updateé–¢æ•°ã‚’å‘¼ã³å‡ºã—ãŸã¨ãã®ã€footstepãƒœãƒ¼ãƒ³ã®ç§»å‹•é‡ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	Vector3 GetFootStepDeltaValueOnUpdate() const
@@ -92,50 +92,50 @@ public:
 	}
 private:
 	/*!
-	*@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ğ‹N“®‚·‚éB
+	*@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’èµ·å‹•ã™ã‚‹ã€‚
 	*/
 	void InvokeAnimationEvent(Animation* animation);
 	/*!
-	*@brief	ƒ‹[ƒvÄ¶ŠJn‚·‚é‚Ìˆ—B
+	*@brief	ãƒ«ãƒ¼ãƒ—å†ç”Ÿé–‹å§‹ã™ã‚‹æ™‚ã®å‡¦ç†ã€‚
 	*/
 	void StartLoop();
 	/// <summary>
-	/// ƒ‹[ƒg‚Ìƒ{[ƒ“‹óŠÔ‚Å‚Ìƒ{[ƒ“s—ñ‚ğŒvZ‚·‚éB
+	/// ãƒ«ãƒ¼ãƒˆã®ãƒœãƒ¼ãƒ³ç©ºé–“ã§ã®ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 	/// </summary>
-	/// <param name="bone">ŒvZ‚·‚éœ</param>
-	/// <param name="parentMatrix">e‚Ìs—ñ</param>
+	/// <param name="bone">è¨ˆç®—ã™ã‚‹éª¨</param>
+	/// <param name="parentMatrix">è¦ªã®è¡Œåˆ—</param>
 	void CalcBoneMatrixInRootBoneSpace(Bone& bone, Matrix parentMatrix);
 	/// <summary>
-	/// ƒ{[ƒ“s—ñ‚ğƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚©‚çƒTƒ“ƒvƒŠƒ“ƒO‚·‚éB
+	/// ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã‹ã‚‰ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã™ã‚‹ã€‚
 	/// </summary>
 	void SamplingBoneMatrixFromAnimationClip();
 	/// <summary>
-	/// ƒ‹[ƒgƒ{[ƒ“‹óŠÔ‚Å‚Ìs—ñ‚ğŒvZ‚·‚éB
+	/// ãƒ«ãƒ¼ãƒˆãƒœãƒ¼ãƒ³ç©ºé–“ã§ã®è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 	/// </summary>
 	void CalcBoneMatrixInRootBoneSpace();
 	/// <summary>
-	/// footstepƒ{[ƒ“‚Ì•Ï‰»—Ê‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éB
+	/// footstepãƒœãƒ¼ãƒ³ã®å¤‰åŒ–é‡ã‚’ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã™ã‚‹ã€‚
 	/// </summary>
 	void SamplingDeltaValueFootstepBone();
 	/// <summary>
-	/// footstepƒ{[ƒ“‚ÌÀ•W‚ğ‘S‘Ì‚Ìœ‚©‚çŒ¸Z‚·‚éB
+	/// footstepãƒœãƒ¼ãƒ³ã®åº§æ¨™ã‚’å…¨ä½“ã®éª¨ã‹ã‚‰æ¸›ç®—ã™ã‚‹ã€‚
 	/// </summary>
 	void SubtractFootstepbonePosFromAllBone();
 	/// <summary>
-	/// ƒL[ƒtƒŒ[ƒ€”Ô†‚ği‚ß‚éB
+	/// ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·ã‚’é€²ã‚ã‚‹ã€‚
 	/// </summary>
 	void ProgressKeyframeNo(float deltaTime);
 private:
-	AnimationClip*			m_animationClip = nullptr;			//ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒvB
-	int						m_currentKeyFrameNoLastFrame = 0;	//ˆêƒtƒŒ[ƒ€‘O‚ÌƒL[ƒtƒŒ[ƒ€”Ô†B
-	int						m_currentKeyFrameNo = 0;			//Œ»İÄ¶’†‚ÌƒL[ƒtƒŒ[ƒ€”Ô†B
+	AnimationClip*			m_animationClip = nullptr;			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã€‚
+	int						m_currentKeyFrameNoLastFrame = 0;	//ä¸€ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·ã€‚
+	int						m_currentKeyFrameNo = 0;			//ç¾åœ¨å†ç”Ÿä¸­ã®ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·ã€‚
 	float					m_time = 0.0f;
-	std::vector<Matrix>		m_boneMatrix;						//!<‚±‚ÌƒRƒ“ƒgƒ[ƒ‰‚ÅÄ¶’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚Ìƒ{[ƒ“s—ñB
-	float					m_interpolateTime;					//!<•âŠ®ŠÔ
-	float					m_interpolateEndTime;				//!<•âŠ®I—¹ŠÔ
-	bool					m_isPlaying = false;				//!<Ä¶’†H
-	Skeleton*				m_skeleton = nullptr;				//!<ƒXƒPƒ‹ƒgƒ“B
-	Vector3					m_footstepDeltaValue = g_vec3Zero;	//ƒtƒbƒgƒXƒeƒbƒv‚ÌˆÚ“®ƒxƒNƒgƒ‹B
-	Vector3					m_footstepPos = g_vec3Zero;			//ƒtƒbƒgƒXƒeƒbƒvƒ{[ƒ“‚ÌÀ•WB
-	int						m_footstepBoneNo = -1;				//ƒtƒbƒgƒXƒeƒbƒv‚Ìƒ{[ƒ“‚Ì”Ô†B
+	std::vector<Matrix>		m_boneMatrix;						//!<ã“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã§å†ç”Ÿä¸­ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒœãƒ¼ãƒ³è¡Œåˆ—ã€‚
+	float					m_interpolateTime;					//!<è£œå®Œæ™‚é–“
+	float					m_interpolateEndTime;				//!<è£œå®Œçµ‚äº†æ™‚é–“
+	bool					m_isPlaying = false;				//!<å†ç”Ÿä¸­ï¼Ÿ
+	Skeleton*				m_skeleton = nullptr;				//!<ã‚¹ã‚±ãƒ«ãƒˆãƒ³ã€‚
+	Vector3					m_footstepDeltaValue = g_vec3Zero;	//ãƒ•ãƒƒãƒˆã‚¹ãƒ†ãƒƒãƒ—ã®ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã€‚
+	Vector3					m_footstepPos = g_vec3Zero;			//ãƒ•ãƒƒãƒˆã‚¹ãƒ†ãƒƒãƒ—ãƒœãƒ¼ãƒ³ã®åº§æ¨™ã€‚
+	int						m_footstepBoneNo = -1;				//ãƒ•ãƒƒãƒˆã‚¹ãƒ†ãƒƒãƒ—ã®ãƒœãƒ¼ãƒ³ã®ç•ªå·ã€‚
 };

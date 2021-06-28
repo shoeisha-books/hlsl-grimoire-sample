@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Bitmap.h"
 #include <fstream>
 
@@ -6,62 +6,62 @@ using namespace std;
 
 
 /// <summary>
-/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 /// </summary>
 Bitmap::Bitmap()
 {
 }
 
 /// <summary>
-/// ƒfƒXƒgƒ‰ƒNƒ^B
+/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 /// </summary>
 Bitmap::~Bitmap()
 {
 }
 
 /// <summary>
-/// Bitmap‚ğƒ[ƒhB
-/// Bitmap‚Ì‰ğ‘œ“x‚Í512~512‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
+/// Bitmapã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
+/// Bitmapã®è§£åƒåº¦ã¯512Ã—512ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 /// </summary>
-/// <param name="filePath">“Ç‚İ‚Şƒtƒ@ƒCƒ‹ƒpƒXB</param>
+/// <param name="filePath">èª­ã¿è¾¼ã‚€ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
 /// <returns>
-/// “Ç‚İ‚İ‚É¬Œ÷‚µ‚½‚çtrueA
-/// ¸”s‚µ‚½‚çfalse‚ğ•Ô‚µ‚Ü‚·B
+/// èª­ã¿è¾¼ã¿ã«æˆåŠŸã—ãŸã‚‰trueã€
+/// å¤±æ•—ã—ãŸã‚‰falseã‚’è¿”ã—ã¾ã™ã€‚
 /// </returns>
 bool Bitmap::Load(const char* filePath)
 {
-	//ƒtƒ@ƒCƒ‹ƒXƒgƒŠ[ƒ€‚ğì¬B
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’ä½œæˆã€‚
 	ifstream fs(filePath, std::ios::binary);
 
 	if (fs.fail() == true) {
-		//ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚½B
+		//ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ãŸã€‚
 		return false;
 	}
-	//ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğŒvZ‚·‚éB
-	fs.seekg(0, fstream::end);		//ƒtƒ@ƒCƒ‹‚ÌI’[‚ÉˆÚ“®‚·‚éB
-	uint32_t endPos = fs.tellg();	//Œ»İ‚Ìƒtƒ@ƒCƒ‹‚ÌˆÊ’u‚ğæ“¾B
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã™ã‚‹ã€‚
+	fs.seekg(0, fstream::end);		//ãƒ•ã‚¡ã‚¤ãƒ«ã®çµ‚ç«¯ã«ç§»å‹•ã™ã‚‹ã€‚
+	uint32_t endPos = fs.tellg();	//ç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®ä½ç½®ã‚’å–å¾—ã€‚
 	fs.clear();
-	fs.seekg(0, fstream::beg);		//ƒtƒ@ƒCƒ‹‚Ìæ“ª‚É–ß‚Ç‚éB
-	uint32_t begPos = fs.tellg();	//Œ»İ‚Ìƒtƒ@ƒCƒ‹‚ÌˆÊ’u‚ğæ“¾B
-	uint32_t fileSize = endPos - begPos;	//––”ö-‘K“’‚Åƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğŒvZB
+	fs.seekg(0, fstream::beg);		//ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­ã«æˆ»ã©ã‚‹ã€‚
+	uint32_t begPos = fs.tellg();	//ç¾åœ¨ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®ä½ç½®ã‚’å–å¾—ã€‚
+	uint32_t fileSize = endPos - begPos;	//æœ«å°¾-éŠ­æ¹¯ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã€‚
 
-	//“Ç‚İ‚Ş‚ºB
+	//èª­ã¿è¾¼ã‚€ãœã€‚
 	char* buf = new char[fileSize];
 	fs.read(buf, fileSize);
 
-	//ƒtƒ@ƒCƒ‹ƒwƒbƒ_[‚ÌƒAƒhƒŒƒX‚ğ‘ã“üB
+	//ãƒ•ã‚¡ã‚¤ãƒ«ãƒ˜ãƒƒãƒ€ãƒ¼ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä»£å…¥ã€‚
 	BITMAPFILEHEADER* header = (BITMAPFILEHEADER*)buf;
-	//ƒtƒ@ƒCƒ‹î•ñƒwƒbƒ_[‚ÌƒAƒhƒŒƒX‚ğ‘ã“üB
+	//ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ãƒ˜ãƒƒãƒ€ãƒ¼ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä»£å…¥ã€‚
 	BITMAPINFOHEADER* infoHeader = (BITMAPINFOHEADER*)(buf + sizeof(BITMAPFILEHEADER));
-	//‚Ù‚ñ‚Æ‚ÍFXƒ`ƒFƒbƒN‚ª‚¢‚é‚Ì‚¾‚ªA
-	//ƒtƒH[ƒ}ƒbƒg‚Í24bitƒJƒ‰[‚ÅA‰ğ‘œ“x‚Í512~512‚ÅŒˆ‚ß‘Å‚¿‚¾‚Á‚ºI
-	//“K“–‚ÉƒCƒ[ƒW‚ÉƒWƒƒƒ“ƒvB
+	//ã»ã‚“ã¨ã¯è‰²ã€…ãƒã‚§ãƒƒã‚¯ãŒã„ã‚‹ã®ã ãŒã€
+	//ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯24bitã‚«ãƒ©ãƒ¼ã§ã€è§£åƒåº¦ã¯512Ã—512ã§æ±ºã‚æ‰“ã¡ã ã£ãœï¼
+	//é©å½“ã«ã‚¤ãƒ¡ãƒ¼ã‚¸ã«ã‚¸ãƒ£ãƒ³ãƒ—ã€‚
 	char* pImage = buf + header->bfOffBits;
 
-	//ƒrƒbƒgƒ}ƒbƒv‚Ìî•ñ‚ğƒƒ“ƒo•Ï”‚ÉƒRƒs[B
+	//ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã®æƒ…å ±ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«ã‚³ãƒ”ãƒ¼ã€‚
 	memcpy(&m_bitmapHeader, header, sizeof(m_bitmapHeader));
 	memcpy(&m_bitmapInfoHeader, infoHeader, sizeof(m_bitmapInfoHeader));
-	//RGB24ƒrƒbƒg‚µ‚©l—¶‚µ‚Ä‚È‚¢‚æB
+	//RGB24ãƒ“ãƒƒãƒˆã—ã‹è€ƒæ…®ã—ã¦ãªã„ã‚ˆã€‚
 	m_numPixel = m_bitmapInfoHeader.biWidth * m_bitmapInfoHeader.biHeight;
 	m_imageSizeInBytes = m_numPixel * sizeof(SRgbRow);
 	m_imageRow = std::make_unique<SRgbRow[]>(m_numPixel);
@@ -77,33 +77,33 @@ bool Bitmap::Load(const char* filePath)
 	
 
 
-	//ƒRƒs[‚ªI‚í‚Á‚½‚Ì‚Å‚à‚¤‚¢‚ç‚È‚¢‚Ì‚ÅA‚à‚ë‚à‚ëíœB
-	//‰ğ•ú‰ğ•úB
+	//ã‚³ãƒ”ãƒ¼ãŒçµ‚ã‚ã£ãŸã®ã§ã‚‚ã†ã„ã‚‰ãªã„ã®ã§ã€ã‚‚ã‚ã‚‚ã‚å‰Šé™¤ã€‚
+	//è§£æ”¾è§£æ”¾ã€‚
 	delete[] buf;
-	//ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚éB
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹ã€‚
 	fs.close();
 
-	//“Ç‚İ‚İ‚ª¬Œ÷‚µ‚½‚Ì‚Åtrue‚ğ•Ô‚·B
+	//èª­ã¿è¾¼ã¿ãŒæˆåŠŸã—ãŸã®ã§trueã‚’è¿”ã™ã€‚
 	return true;
 }
 /// <summary>
-/// Bitmap‚Ì•Û‘¶B
+/// Bitmapã®ä¿å­˜ã€‚
 /// </summary>
-/// <param name="filePath">•Û‘¶‚·‚éƒtƒ@ƒCƒ‹ƒpƒXB</param>
+/// <param name="filePath">ä¿å­˜ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
 /// <returns>
-/// •Û‘¶‚É¬Œ÷‚µ‚½‚çtrueA
-/// ¸”s‚µ‚½‚çfalse‚ğ•Ô‚·B
+/// ä¿å­˜ã«æˆåŠŸã—ãŸã‚‰trueã€
+/// å¤±æ•—ã—ãŸã‚‰falseã‚’è¿”ã™ã€‚
 /// </returns>
 bool Bitmap::Save(const char* filePath)
 {
 	ofstream fs(filePath, std::ios::binary);
 
 	if (fs.fail() == true) {
-		//ƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚½B
+		//ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ãŸã€‚
 		return false;
 	}
 
-	//‘‚«‚ß\B
+	//æ›¸ãè¾¼ã‚â€•ã€‚
 	fs.write((char*)&m_bitmapHeader, sizeof(m_bitmapHeader));
 	fs.write((char*)&m_bitmapInfoHeader, sizeof(m_bitmapInfoHeader));
 	std::unique_ptr< SRgbRow[]> imageRow = std::make_unique<SRgbRow[]>(m_numPixel);
@@ -116,6 +116,6 @@ bool Bitmap::Save(const char* filePath)
 	fs.write((char*)imageRow.get(), m_imageSizeInBytes);
 
 	fs.close();
-	//•Û‘¶‚ª¬Œ÷‚µ‚½‚Ì‚ÅAtrue‚ğ•Ô‚·B
+	//ä¿å­˜ãŒæˆåŠŸã—ãŸã®ã§ã€trueã‚’è¿”ã™ã€‚
 	return true;
 }

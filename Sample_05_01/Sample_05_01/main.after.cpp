@@ -1,104 +1,104 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg—p‚Ìƒƒ“ƒo
-    Vector3 dirDirection;   // ƒ‰ƒCƒg‚Ì•ûŒü
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆç”¨ã®ãƒ¡ãƒ³ãƒ
+    Vector3 dirDirection;   // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
     float pad0;
-    Vector3 dirColor;       // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 dirColor;       // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
     float pad1;
 
-    // step-1 ƒ‰ƒCƒg\‘¢‘Ì‚Éƒ|ƒCƒ“ƒgƒ‰ƒCƒg—p‚Ìƒƒ“ƒo•Ï”‚ğ’Ç‰Á
-    Vector3 ptPosition;     // ˆÊ’u
-    float pad2;             // ƒpƒfƒBƒ“ƒO
-    Vector3 ptColor;        // ƒJƒ‰[
-    float ptRange;          // ‰e‹¿”ÍˆÍ
+    // step-1 ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“ã«ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆç”¨ã®ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’è¿½åŠ 
+    Vector3 ptPosition;     // ä½ç½®
+    float pad2;             // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+    Vector3 ptColor;        // ã‚«ãƒ©ãƒ¼
+    float ptRange;          // å½±éŸ¿ç¯„å›²
 
-    Vector3 eyePos;         // ‹“_‚ÌˆÊ’u
+    Vector3 eyePos;         // è¦–ç‚¹ã®ä½ç½®
     float pad3;
-    Vector3 ambientLight;   // ƒAƒ“ƒrƒGƒ“ƒgƒ‰ƒCƒg
+    Vector3 ambientLight;   // ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆãƒ©ã‚¤ãƒˆ
 };
 
 //////////////////////////////////////
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 //////////////////////////////////////
 void InitModel(Model& bgModel, Model& teapotModel, Model& lightModel, Light& light);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     g_camera3D->SetPosition({ 0.0f, 50.0f, 200.0f });
     g_camera3D->SetTarget({ 0.0f, 50.0f, 0.0f });
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒ‰ƒCƒg‚Ìƒf[ƒ^‚ğì¬‚·‚é
+    // ãƒ©ã‚¤ãƒˆã®ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
     Light light;
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ìƒf[ƒ^‚ğİ’è‚·‚é
-    // ƒ‰ƒCƒg‚Í‰E‘¤‚©‚ç“–‚½‚Á‚Ä‚¢‚é
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
+    // ãƒ©ã‚¤ãƒˆã¯å³å´ã‹ã‚‰å½“ãŸã£ã¦ã„ã‚‹
     light.dirDirection.x = 1.0f;
     light.dirDirection.y = -1.0f;
     light.dirDirection.z = -1.0f;
     light.dirDirection.Normalize();
 
-    // ƒ‰ƒCƒg‚ÌƒJƒ‰[‚Í”’
+    // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã¯ç™½
     light.dirColor.x = 0.5f;
     light.dirColor.y = 0.5f;
     light.dirColor.z = 0.5f;
 
-    // ‹“_‚ÌˆÊ’u‚ğİ’è‚·‚é
+    // è¦–ç‚¹ã®ä½ç½®ã‚’è¨­å®šã™ã‚‹
     light.eyePos = g_camera3D->GetPosition();
 
-    // ƒAƒ“ƒrƒGƒ“ƒgƒ‰ƒCƒg
+    // ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆãƒ©ã‚¤ãƒˆ
     light.ambientLight.x = 0.3f;
     light.ambientLight.y = 0.3f;
     light.ambientLight.z = 0.3f;
 
-    // step-3 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌÀ•W‚ğİ’è‚·‚é
+    // step-3 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®åº§æ¨™ã‚’è¨­å®šã™ã‚‹
     light.ptPosition.x = 0.0f;
     light.ptPosition.y = 50.0f;
     light.ptPosition.z = 50.0f;
 
-    // step-4 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌƒJƒ‰[‚ğİ’è‚·‚é
+    // step-4 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã‚’è¨­å®šã™ã‚‹
     light.ptColor.x = 15.0f;
     light.ptColor.y = 0.0f;
     light.ptColor.z = 0.0f;
 
-    // step-5 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì‰e‹¿”ÍˆÍ‚ğİ’è‚·‚é
+    // step-5 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®å½±éŸ¿ç¯„å›²ã‚’è¨­å®šã™ã‚‹
     light.ptRange = 100.0f;
 
-    // ƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
-    // ƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é‚½‚ß‚Ìî•ñ‚ğ\’z‚·‚é
+    // ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
+    // ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹ãŸã‚ã®æƒ…å ±ã‚’æ§‹ç¯‰ã™ã‚‹
     Model lightModel, bgModel, teapotModel;
     InitModel(bgModel, teapotModel, lightModel , light);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-5 ƒRƒ“ƒgƒ[ƒ‰[‚Åƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ğ“®‚©‚·
+        // step-5 ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã§ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã‚’å‹•ã‹ã™
         light.ptPosition.x -= g_pad[0]->GetLStickXF();
         if ( g_pad[0]->IsPress(enButtonB) )
         {
@@ -109,29 +109,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             light.ptPosition.z -= g_pad[0]->GetLStickYF();
         }
 
-        // “d‹…ƒ‚ƒfƒ‹‚Ìƒ[ƒ‹ƒhs—ñ‚ğXV‚·‚é
+        // é›»çƒãƒ¢ãƒ‡ãƒ«ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’æ›´æ–°ã™ã‚‹
         lightModel.UpdateWorldMatrix(light.ptPosition, g_quatIdentity, g_vec3One);
 
-        // ”wŒiƒ‚ƒfƒ‹‚ğƒhƒ[
+        // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ‰ãƒ­ãƒ¼
         bgModel.Draw(renderContext);
 
-        // ƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ğƒhƒ[
+        // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã‚’ãƒ‰ãƒ­ãƒ¼
         teapotModel.Draw(renderContext);
 
-        // “d‹…ƒ‚ƒfƒ‹‚ğƒhƒ[
+        // é›»çƒãƒ¢ãƒ‡ãƒ«ã‚’ãƒ‰ãƒ­ãƒ¼
         lightModel.Draw(renderContext);
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
 /// <summary>
-/// ƒ‚ƒfƒ‹‚ğ‰Šú‰»
+/// ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
 /// </summary>
 /// <param name="bgModel"></param>
 /// <param name="teapotModel"></param>
@@ -142,29 +142,29 @@ void InitModel(Model& bgModel, Model& teapotModel, Model& lightModel, Light& lig
     ModelInitData bgModelInitData;
     bgModelInitData.m_tkmFilePath = "Assets/modelData/bg.tkm";
 
-    // g—p‚·‚éƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹ƒpƒX‚ğİ’è‚·‚é
+    // ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’è¨­å®šã™ã‚‹
     bgModelInitData.m_fxFilePath = "Assets/shader/sample.fx";
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ìî•ñ‚ğ’è”ƒoƒbƒtƒ@‚Æ‚µ‚ÄƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚é‚½‚ß‚É
-    // ƒ‚ƒfƒ‹‚Ì‰Šú‰»î•ñ‚Æ‚µ‚Ä“n‚·
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æƒ…å ±ã‚’å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¨ã—ã¦ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹ãŸã‚ã«
+    // ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–æƒ…å ±ã¨ã—ã¦æ¸¡ã™
     bgModelInitData.m_expandConstantBuffer = &light;
     bgModelInitData.m_expandConstantBufferSize = sizeof(light);
 
-    // ‰Šú‰»î•ñ‚ğg‚Á‚Äƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–æƒ…å ±ã‚’ä½¿ã£ã¦ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     bgModel.Init(bgModelInitData);
 
     ModelInitData teapotModelInitData;
     teapotModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
 
-    // g—p‚·‚éƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹ƒpƒX‚ğİ’è‚·‚é
+    // ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’è¨­å®šã™ã‚‹
     teapotModelInitData.m_fxFilePath = "Assets/shader/sample.fx";
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ìî•ñ‚ğ’è”ƒoƒbƒtƒ@‚Æ‚µ‚ÄƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚é‚½‚ß‚É
-    // ƒ‚ƒfƒ‹‚Ì‰Šú‰»î•ñ‚Æ‚µ‚Ä“n‚·
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æƒ…å ±ã‚’å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¨ã—ã¦ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹ãŸã‚ã«
+    // ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–æƒ…å ±ã¨ã—ã¦æ¸¡ã™
     teapotModelInitData.m_expandConstantBuffer = &light;
     teapotModelInitData.m_expandConstantBufferSize = sizeof(light);
 
-    // ‰Šú‰»î•ñ‚ğg‚Á‚Äƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–æƒ…å ±ã‚’ä½¿ã£ã¦ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     teapotModel.Init(teapotModelInitData);
 
     teapotModel.UpdateWorldMatrix(
@@ -176,11 +176,11 @@ void InitModel(Model& bgModel, Model& teapotModel, Model& lightModel, Light& lig
     ModelInitData lightModelInitData;
     lightModelInitData.m_tkmFilePath = "Assets/modelData/light.tkm";
 
-    // g—p‚·‚éƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹ƒpƒX‚ğİ’è‚·‚é
+    // ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’è¨­å®šã™ã‚‹
     lightModelInitData.m_fxFilePath = "Assets/shader/other/light.fx";
     lightModelInitData.m_expandConstantBuffer = &light;
     lightModelInitData.m_expandConstantBufferSize = sizeof(light);
 
-    // ‰Šú‰»î•ñ‚ğg‚Á‚Äƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–æƒ…å ±ã‚’ä½¿ã£ã¦ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     lightModel.Init(lightModelInitData);
 }

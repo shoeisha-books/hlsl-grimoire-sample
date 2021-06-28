@@ -1,4 +1,4 @@
-//-------------------------------------------------------------------------------------
+﻿//-------------------------------------------------------------------------------------
 // SimpleMath.cpp -- Simplified C++ Math wrapper for DirectXMath
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "HID/GamePad.h"
 #include "TResourceBank.h"
@@ -11,60 +11,60 @@ class Texture;
 class TkEngine {
 public:
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^B
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	~TkEngine();
 	/// <summary>
-	/// ƒtƒŒ[ƒ€‚ÌŠJn‚ÉŒÄ‚Î‚ê‚éˆ—B
+	/// ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹æ™‚ã«å‘¼ã°ã‚Œã‚‹å‡¦ç†ã€‚
 	/// </summary>
 	void BeginFrame();
 	/// <summary>
-	/// ƒtƒŒ[ƒ€‚ÌI—¹‚ÉŒÄ‚Î‚ê‚éˆ—B
+	/// ãƒ•ãƒ¬ãƒ¼ãƒ ã®çµ‚äº†æ™‚ã«å‘¼ã°ã‚Œã‚‹å‡¦ç†ã€‚
 	/// </summary>
 	void EndFrame();
 	/// <summary>
-	/// ƒQ[ƒ€ƒGƒ“ƒWƒ“‚Ì‰Šú‰»B
+	/// ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–ã€‚
 	/// </summary>
 	void Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight);
 	/// <summary>
-	/// ƒoƒ“ƒN‚©‚çƒeƒNƒXƒ`ƒƒ‚ğæ“¾B
+	/// ãƒãƒ³ã‚¯ã‹ã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒXB</param>
-	/// <returns>ƒeƒNƒXƒ`ƒƒB</returns>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
+	/// <returns>ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€‚</returns>
 	Texture* GetTextureFromBank(const char* filePath)
 	{
 		return m_textureBank.Get(filePath);
 	}
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ‚ğƒoƒ“ƒN‚É“o˜^B
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒãƒ³ã‚¯ã«ç™»éŒ²ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒXB</param>
-	/// <param name="texture">ƒeƒNƒXƒ`ƒƒB</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
+	/// <param name="texture">ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€‚</param>
 	void RegistTextureToBank(const char* filePath, Texture* texture)
 	{
 		m_textureBank.Regist(filePath, texture);
 	}
 	/// <summary>
-	/// tkmƒtƒ@ƒCƒ‹‚ğƒoƒ“ƒN‚©‚çæ“¾B
+	/// tkmãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒãƒ³ã‚¯ã‹ã‚‰å–å¾—ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <returns>tkmƒtƒ@ƒCƒ‹Bnullptr‚ª•Ô‚Á‚Ä‚«‚½‚çƒoƒ“ƒN‚É“o˜^‚³‚ê‚Ä‚¢‚È‚¢B</returns>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <returns>tkmãƒ•ã‚¡ã‚¤ãƒ«ã€‚nullptrãŒè¿”ã£ã¦ããŸã‚‰ãƒãƒ³ã‚¯ã«ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã€‚</returns>
 	TkmFile* GetTkmFileFromBank(const char* filePath)
 	{
 		return m_tkmFileBank.Get(filePath);
 	}
 	
 	/// <summary>
-	/// tkmƒtƒ@ƒCƒ‹‚ğƒoƒ“ƒN‚É“o˜^B
+	/// tkmãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒãƒ³ã‚¯ã«ç™»éŒ²ã€‚
 	/// </summary>
-	/// <param name="filePath">tkmƒtƒ@ƒCƒ‹ƒpƒX</param>
+	/// <param name="filePath">tkmãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
 	/// <param name="tkmFile"></param>
 	void RegistTkmFileToBank(const char* filePath, TkmFile* tkmFile)
 	{
 		m_tkmFileBank.Regist(filePath, tkmFile);
 	}
 	/// <summary>
-	/// ƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹ƒoƒ“ƒN‚©‚çƒVƒF[ƒ_[‚ğæ“¾B
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ã‚¯ã‹ã‚‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <returns></returns>
@@ -86,12 +86,12 @@ public:
 		m_shaderBank.Regist(programName.c_str(), shader);
 	}
 private:
-	GraphicsEngine* m_graphicsEngine = nullptr;		//ƒOƒ‰ƒtƒBƒbƒNƒGƒ“ƒWƒ“B
-	TResourceBank<TkmFile> m_tkmFileBank;			//tkmƒtƒ@ƒCƒ‹ƒoƒ“ƒNB
-	TResourceBank<Shader> m_shaderBank;				//ƒVƒF[ƒ_[ƒoƒ“ƒN
-	TResourceBank<Texture>	m_textureBank;			//ƒeƒNƒXƒ`ƒƒƒoƒ“ƒNB
-	GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ƒQ[ƒ€ƒpƒbƒhB
+	GraphicsEngine* m_graphicsEngine = nullptr;		//ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¨ãƒ³ã‚¸ãƒ³ã€‚
+	TResourceBank<TkmFile> m_tkmFileBank;			//tkmãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ã‚¯ã€‚
+	TResourceBank<Shader> m_shaderBank;				//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒãƒ³ã‚¯
+	TResourceBank<Texture>	m_textureBank;			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ã‚¯ã€‚
+	GamePad m_pad[GamePad::CONNECT_PAD_MAX];		//ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã€‚
 	
 };
 
-extern TkEngine* g_engine;	//TKƒGƒ“ƒWƒ“B
+extern TkEngine* g_engine;	//TKã‚¨ãƒ³ã‚¸ãƒ³ã€‚

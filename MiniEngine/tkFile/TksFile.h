@@ -1,33 +1,33 @@
-/// <summary>
-/// tksƒtƒ@ƒCƒ‹
+ï»¿/// <summary>
+/// tksãƒ•ã‚¡ã‚¤ãƒ«
 /// </summary>
 /// <remarks>
-/// tksƒtƒ@ƒCƒ‹‚Í“Æ©‚ÌƒXƒPƒ‹ƒgƒ“ƒtƒH[ƒ}ƒbƒg‚Å‚·B
-/// ‚±‚ÌƒNƒ‰ƒX‚ğ—˜—p‚·‚é‚±‚Æ‚Åtksƒtƒ@ƒCƒ‹‚ğˆµ‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+/// tksãƒ•ã‚¡ã‚¤ãƒ«ã¯ç‹¬è‡ªã®ã‚¹ã‚±ãƒ«ãƒˆãƒ³ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§ã™ã€‚
+/// ã“ã®ã‚¯ãƒ©ã‚¹ã‚’åˆ©ç”¨ã™ã‚‹ã“ã¨ã§tksãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ‰±ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
 /// </remarks>
 #pragma once
 
 class TksFile {
 public:
 	/// <summary>
-	/// ƒ{[ƒ“B
+	/// ãƒœãƒ¼ãƒ³ã€‚
 	/// </summary>
 	struct SBone {
-		std::unique_ptr<char[]> name;	//œ‚Ì–¼‘OB
-		int parentNo;					//e‚Ì”Ô†B
-		float bindPose[4][3];			//ƒoƒCƒ“ƒhƒ|[ƒYB
-		float invBindPose[4][3];		//ƒoƒCƒ“ƒhƒ|[ƒY‚Ì‹t”B
-		int no;							//ƒ{[ƒ“‚Ì”Ô†B
+		std::unique_ptr<char[]> name;	//éª¨ã®åå‰ã€‚
+		int parentNo;					//è¦ªã®ç•ªå·ã€‚
+		float bindPose[4][3];			//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã€‚
+		float invBindPose[4][3];		//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®é€†æ•°ã€‚
+		int no;							//ãƒœãƒ¼ãƒ³ã®ç•ªå·ã€‚
 	};
 	/// <summary>
-	/// TKSƒtƒ@ƒCƒ‹‚ğƒ[ƒh‚·‚éB
+	/// TKSãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã€‚
 	/// </summary>
 	/// <param name="filePath"></param>
 	bool Load(const char* filePath);
 	/// <summary>
-	/// ƒ{[ƒ“‚É‘Î‚µ‚ÄƒNƒGƒŠ‚ğs‚¤B
+	/// ãƒœãƒ¼ãƒ³ã«å¯¾ã—ã¦ã‚¯ã‚¨ãƒªã‚’è¡Œã†ã€‚
 	/// </summary>
-	/// <param name="query">ƒNƒGƒŠŠÖ”</param>
+	/// <param name="query">ã‚¯ã‚¨ãƒªé–¢æ•°</param>
 	void QueryBone(std::function<void(SBone & bone)> query) 
 	{
 		for (auto& bone : m_bones) {
@@ -35,7 +35,7 @@ public:
 		}
 	}
 private:
-	int m_numBone = 0;			//œ‚Ì”B
-	std::vector<SBone> m_bones;	//œ‚ÌƒŠƒXƒgB
+	int m_numBone = 0;			//éª¨ã®æ•°ã€‚
+	std::vector<SBone> m_bones;	//éª¨ã®ãƒªã‚¹ãƒˆã€‚
 };
 

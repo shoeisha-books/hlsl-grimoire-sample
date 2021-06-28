@@ -1,28 +1,28 @@
-#pragma once
+ï»¿#pragma once
 
 /// <summary>
-/// NullƒeƒNƒXƒ`ƒƒƒ}ƒbƒv‚ğ•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒXB
+/// Nullãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ—ã‚’ä¿æŒã—ã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 /// <remarks>
-/// ‚±‚ÌƒNƒ‰ƒX‚ª•Û‚µ‚Ä‚¢‚é‚Ì‚ÍA
-/// ƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒvA–@üƒ}ƒbƒvA”½Ë—¦ƒ}ƒbƒv‚È‚Ç‚Ì
-/// ƒ}ƒeƒŠƒAƒ‹‚Åg—p‚·‚éƒeƒNƒXƒ`ƒƒƒ}ƒbƒv‚Å‚·B
-/// ‚±‚ÌƒNƒ‰ƒX‚Ìƒ}ƒbƒv‚Íƒ}ƒeƒŠƒAƒ‹‚ÉAã‹L‚Ìƒ}ƒbƒv‚ª
-/// “\‚è•t‚¯‚ç‚ê‚Ä‚¢‚È‚¢ê‡‚Å‚·B
-/// ‚Å‚·‚Ì‚ÅA‚±‚ÌƒNƒ‰ƒX‚ª•Û‚µ‚Ä‚¢‚éƒ}ƒbƒv‚ÍAƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒv‚Å‚ ‚ê‚Î
-/// ‹¾–Ê”½Ë—¦‚OA–@üƒ}ƒbƒv‚Å‚ ‚ê‚Î“Ê‰š‚È‚µAƒŠƒtƒŒƒNƒVƒ‡ƒ“ƒ}ƒbƒv‚Å‚ ‚ê‚Î”½Ë—¦‚O‚Æ‚È‚è‚Ü‚·B
-/// ƒ}ƒeƒŠƒAƒ‹‚Éƒ}ƒbƒv‚ª“\‚è•t‚¯‚ç‚ê‚Ä‚¢‚È‚¢ê‡‚ÉA‚±‚ÌƒNƒ‰ƒX‚Ìƒ}ƒbƒv‚ğ—˜—p‚·‚é‚±‚Æ‚ÅA
-/// ƒVƒF[ƒ_[‚Å‚Ì“®“I•ªŠò‚ğŒ¸‚ç‚·‚±‚Æ‚ª‚Å‚«AƒVƒF[ƒ_\ƒvƒƒOƒ‰ƒ€‚ğƒVƒ“ƒvƒ‹‚É‚·‚é‚±‚Æ‚ª‚Å‚«‚é‚æ‚¤‚É‚È‚Á‚Ä‚¢‚Ü‚·B
-/// ‚±‚ÌƒNƒ‰ƒX‚Åƒ[ƒh‚³‚ê‚Ä‚¢‚éƒeƒNƒXƒ`ƒƒ‚ÍAAssets/modelData/preset‚Ì‰º‚É—pˆÓ‚³‚ê‚Ä‚¢‚Ü‚·B
+/// ã“ã®ã‚¯ãƒ©ã‚¹ãŒä¿æŒã—ã¦ã„ã‚‹ã®ã¯ã€
+/// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã€æ³•ç·šãƒãƒƒãƒ—ã€åå°„ç‡ãƒãƒƒãƒ—ãªã©ã®
+/// ãƒãƒ†ãƒªã‚¢ãƒ«ã§ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ—ã§ã™ã€‚
+/// ã“ã®ã‚¯ãƒ©ã‚¹ã®ãƒãƒƒãƒ—ã¯ãƒãƒ†ãƒªã‚¢ãƒ«ã«ã€ä¸Šè¨˜ã®ãƒãƒƒãƒ—ãŒ
+/// è²¼ã‚Šä»˜ã‘ã‚‰ã‚Œã¦ã„ãªã„å ´åˆã§ã™ã€‚
+/// ã§ã™ã®ã§ã€ã“ã®ã‚¯ãƒ©ã‚¹ãŒä¿æŒã—ã¦ã„ã‚‹ãƒãƒƒãƒ—ã¯ã€ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã§ã‚ã‚Œã°
+/// é¡é¢åå°„ç‡ï¼ã€æ³•ç·šãƒãƒƒãƒ—ã§ã‚ã‚Œã°å‡¸å‡¹ãªã—ã€ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—ã§ã‚ã‚Œã°åå°„ç‡ï¼ã¨ãªã‚Šã¾ã™ã€‚
+/// ãƒãƒ†ãƒªã‚¢ãƒ«ã«ãƒãƒƒãƒ—ãŒè²¼ã‚Šä»˜ã‘ã‚‰ã‚Œã¦ã„ãªã„å ´åˆã«ã€ã“ã®ã‚¯ãƒ©ã‚¹ã®ãƒãƒƒãƒ—ã‚’åˆ©ç”¨ã™ã‚‹ã“ã¨ã§ã€
+/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã§ã®å‹•çš„åˆ†å²ã‚’æ¸›ã‚‰ã™ã“ã¨ãŒã§ãã€ã‚·ã‚§ãƒ¼ãƒ€â€•ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’ã‚·ãƒ³ãƒ—ãƒ«ã«ã™ã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ã«ãªã£ã¦ã„ã¾ã™ã€‚
+/// ã“ã®ã‚¯ãƒ©ã‚¹ã§ãƒ­ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯ã€Assets/modelData/presetã®ä¸‹ã«ç”¨æ„ã•ã‚Œã¦ã„ã¾ã™ã€‚
 /// </remarks>
 class NullTextureMaps {
 public:
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// –@üƒ}ƒbƒv‚ğæ“¾B
+	/// æ³•ç·šãƒãƒƒãƒ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetNormalMap() const
@@ -30,7 +30,7 @@ public:
 		return m_normalMap;
 	}
 	/// <summary>
-	/// –@üƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾B
+	/// æ³•ç·šãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	unsigned int GetNormalMapSize() const
@@ -42,7 +42,7 @@ public:
 		return m_normalMapFilePath;
 	}
 	/// <summary>
-	/// ƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒv‚ğæ“¾B
+	/// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetSpecularMap() const
@@ -50,7 +50,7 @@ public:
 		return m_specMap;
 	}
 	/// <summary>
-	/// ƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾B
+	/// ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	unsigned int GetSpecularMapSize() const
@@ -62,7 +62,7 @@ public:
 		return m_specMapFilePath;
 	}
 	/// <summary> 
-	/// ƒAƒ‹ƒxƒhƒ}ƒbƒv‚ğæ“¾B
+	/// ã‚¢ãƒ«ãƒ™ãƒ‰ãƒãƒƒãƒ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetAlbedoMap() const
@@ -70,7 +70,7 @@ public:
 		return m_albedoMap;
 	}
 	/// <summary>
-	/// ƒAƒ‹ƒxƒhƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾B
+	/// ã‚¢ãƒ«ãƒ™ãƒ‰ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	unsigned int GetAlbedoMapSize() const
@@ -82,7 +82,7 @@ public:
 		return m_albedoMapFilePath;
 	}
 	/// <summary>
-	/// ƒŠƒtƒŒƒNƒVƒ‡ƒ“ƒ}ƒbƒv‚ğæ“¾B
+	/// ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetReflectionMap() const
@@ -90,7 +90,7 @@ public:
 		return m_zeroValueMap;
 	}
 	/// <summary>
-	/// ƒŠƒtƒŒƒNƒVƒ‡ƒ“ƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾B
+	/// ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	unsigned int GetReflectionMapSize() const
@@ -102,7 +102,7 @@ public:
 		return m_zeroValueMapFilePath;
 	}
 	/// <summary>
-	/// ‹üÜƒ}ƒbƒv‚ğæ“¾B
+	/// å±ˆæŠ˜ãƒãƒƒãƒ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	const std::unique_ptr<char[]>& GetRefractionMap() const
@@ -110,7 +110,7 @@ public:
 		return m_zeroValueMap;
 	}
 	/// <summary>
-	/// ‹üÜƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾B
+	/// å±ˆæŠ˜ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	unsigned int GetRefractionMapSize() const
@@ -122,14 +122,14 @@ public:
 		return m_zeroValueMapFilePath;
 	}
 private:
-	std::unique_ptr<char[]> m_albedoMap;	//ƒAƒ‹ƒxƒhƒ}ƒbƒvB
-	unsigned int m_albedoMapSize = 0;		//ƒAƒ‹ƒxƒhƒ}ƒbƒv‚ÌƒTƒCƒYB
-	std::unique_ptr<char[]>	m_normalMap;	//–@üƒ}ƒbƒvB
-	unsigned int m_normalMapSize = 0;		//–@üƒ}ƒbƒv‚ÌƒTƒCƒYB
-	std::unique_ptr<char[]>	m_specMap;		//–@üƒ}ƒbƒvB
-	unsigned int m_specMapSize = 0;			//–@üƒ}ƒbƒv‚ÌƒTƒCƒYB
-	std::unique_ptr<char[]> m_zeroValueMap;	//0‚Ì’l‚ğŠi”[‚µ‚Ä‚¢‚éƒ}ƒbƒvB
-	unsigned int m_zeroValueMapSize = 0;	//0‚Ì’l‚ğŠi”[‚µ‚Ä‚¢‚éƒ}ƒbƒv‚ÌƒTƒCƒYB
+	std::unique_ptr<char[]> m_albedoMap;	//ã‚¢ãƒ«ãƒ™ãƒ‰ãƒãƒƒãƒ—ã€‚
+	unsigned int m_albedoMapSize = 0;		//ã‚¢ãƒ«ãƒ™ãƒ‰ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã€‚
+	std::unique_ptr<char[]>	m_normalMap;	//æ³•ç·šãƒãƒƒãƒ—ã€‚
+	unsigned int m_normalMapSize = 0;		//æ³•ç·šãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã€‚
+	std::unique_ptr<char[]>	m_specMap;		//æ³•ç·šãƒãƒƒãƒ—ã€‚
+	unsigned int m_specMapSize = 0;			//æ³•ç·šãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã€‚
+	std::unique_ptr<char[]> m_zeroValueMap;	//0ã®å€¤ã‚’æ ¼ç´ã—ã¦ã„ã‚‹ãƒãƒƒãƒ—ã€‚
+	unsigned int m_zeroValueMapSize = 0;	//0ã®å€¤ã‚’æ ¼ç´ã—ã¦ã„ã‚‹ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã€‚
 	const char*		m_albedoMapFilePath;
 	const char*		m_normalMapFilePath;
 	const char*		m_specMapFilePath;

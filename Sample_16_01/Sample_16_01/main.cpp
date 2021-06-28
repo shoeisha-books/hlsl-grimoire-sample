@@ -1,70 +1,70 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include <random>
 #include "util/stopwatch.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitStandardIOConsole();
 
-// step-1 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg\‘¢‘Ì‚ğ’è‹`‚·‚é
+// step-1 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆæ§‹é€ ä½“ã‚’å®šç¾©ã™ã‚‹
 
-// step-2 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”‚ğ•\‚·’è”‚ğ’è‹`‚·‚é
+// step-2 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æ•°ã‚’è¡¨ã™å®šæ•°ã‚’å®šç¾©ã™ã‚‹
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
-    // •W€“üo—ÍƒRƒ“ƒ\[ƒ‹‚Ì‰Šú‰»
+    // æ¨™æº–å…¥å‡ºåŠ›ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®åˆæœŸåŒ–
     InitStandardIOConsole();
 
     //////////////////////////////////////
-    //  ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    //  ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
     std::random_device seed_gen;
     std::mt19937 random(seed_gen());
 
     g_camera3D->SetPosition({ 0.0f, 200.0, 400.0f });
 
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    // step-3 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ğƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‚ÆƒJƒ‰[‚Å‰Šú‰»‚·‚é
+    // step-3 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã‚’ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®ã¨ã‚«ãƒ©ãƒ¼ã§åˆæœŸåŒ–ã™ã‚‹
 
-    // step-4 •\¦‚·‚éƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // step-4 è¡¨ç¤ºã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
     Stopwatch sw;
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
         sw.Start();
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-5 ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ğ–ˆƒtƒŒ[ƒ€‰ñ‚·
+        // step-5 ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å›ã™
 
-        // step-6 ƒ‚ƒfƒ‹‚Ìƒhƒ[ƒR[ƒ‹‚ğÀs‚·‚é
+        // step-6 ãƒ¢ãƒ‡ãƒ«ã®ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«ã‚’å®Ÿè¡Œã™ã‚‹
 
         /////////////////////////////////////////
-        //ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
         sw.Stop();
         printf("fps = %0.2f\n", 1.0f / sw.GetElapsed());
@@ -74,7 +74,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -84,12 +84,12 @@ void InitRootSignature(RootSignature& rs)
 }
 
 /// <summary>
-// / •W€“üo—ÍƒRƒ“ƒ\[ƒ‹‚ğ‰Šú‰»
+// / æ¨™æº–å…¥å‡ºåŠ›ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’åˆæœŸåŒ–
 /// </summary>
 void InitStandardIOConsole()
 {
-    ::AllocConsole();               // ƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚ª•\¦‚³‚ê‚é
-    freopen("CON", "w", stdout);    // •W€o—Í‚ÌŠ„‚è“–‚Ä
+    ::AllocConsole();               // ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆãŒè¡¨ç¤ºã•ã‚Œã‚‹
+    freopen("CON", "w", stdout);    // æ¨™æº–å‡ºåŠ›ã®å‰²ã‚Šå½“ã¦
 
     auto fhandle = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT rc;

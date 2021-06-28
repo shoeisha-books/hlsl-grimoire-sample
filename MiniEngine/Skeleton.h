@@ -1,20 +1,20 @@
-#pragma once
+ï»¿#pragma once
 
 #include "tkFile/TksFile.h"
 
 /// <summary>
-/// ƒ{[ƒ“B
+/// ãƒœãƒ¼ãƒ³ã€‚
 /// </summary>
 class Bone {
 public:
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
-	/// <param name="boneName">ƒ{[ƒ“‚Ì–¼‘O</param>
-	/// <param name="bindPose">ƒoƒCƒ“ƒhƒ|[ƒY‚Ìs—ñ</param>
-	/// <param name="invBindPose">ƒoƒCƒ“ƒhƒ|[ƒY‚Ì‹ts—ñ</param>
-	/// <param name="parentBoneNo">e‚Ìƒ{[ƒ“”Ô†</param>
-	/// <param name="boneId">ƒ{[ƒ“”Ô†</param>
+	/// <param name="boneName">ãƒœãƒ¼ãƒ³ã®åå‰</param>
+	/// <param name="bindPose">ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®è¡Œåˆ—</param>
+	/// <param name="invBindPose">ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®é€†è¡Œåˆ—</param>
+	/// <param name="parentBoneNo">è¦ªã®ãƒœãƒ¼ãƒ³ç•ªå·</param>
+	/// <param name="boneId">ãƒœãƒ¼ãƒ³ç•ªå·</param>
 	Bone(
 		const wchar_t* boneName,
 		const Matrix& bindPose,
@@ -31,49 +31,49 @@ public:
 	{
 	}
 	/// <summary>
-	/// ƒ[ƒJƒ‹s—ñ(e‚ÌÀ•WŒn‚Å‚Ìs—ñ)‚ğİ’èB
+	/// ãƒ­ãƒ¼ã‚«ãƒ«è¡Œåˆ—(è¦ªã®åº§æ¨™ç³»ã§ã®è¡Œåˆ—)ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetLocalMatrix(const Matrix& m)
 	{
 		m_localMatrix = m;
 	}
 	/// <summary>
-	/// ƒ[ƒJƒ‹s—ñ(e‚ÌÀ•WŒn‚Å‚Ìs—ñ)‚ğæ“¾B
+	/// ãƒ­ãƒ¼ã‚«ãƒ«è¡Œåˆ—(è¦ªã®åº§æ¨™ç³»ã§ã®è¡Œåˆ—)ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetLocalMatrix() const
 	{
 		return m_localMatrix;
 	}
 	/// <summary>
-	/// ƒ[ƒ‹ƒhs—ñ‚ğİ’èB
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetWorldMatrix(const Matrix& m)
 	{
 		m_worldMatrix = m;
 	}
 	/// <summary>
-	/// ƒ[ƒ‹ƒhs—ñ‚ğæ“¾B
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetWorldMatrix() const
 	{
 		return m_worldMatrix;
 	}
 	/// <summary>
-	/// ƒoƒCƒ“ƒhƒ|[ƒY‚Ìs—ñ‚ğæ“¾B
+	/// ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetBindPoseMatrix() const
 	{
 		return m_bindPose;
 	}
 	/// <summary>
-	/// ƒoƒCƒ“ƒhƒ|[ƒY‚Ì‹ts—ñ‚ğæ“¾B
+	/// ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®é€†è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetInvBindPoseMatrix() const
 	{
 		return m_invBindPose;
 	}
 	/// <summary>
-	/// e‚Ìƒ{[ƒ“”Ô†‚ğæ“¾B
+	/// è¦ªã®ãƒœãƒ¼ãƒ³ç•ªå·ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetParentBoneNo() const
@@ -81,7 +81,7 @@ public:
 		return m_parentBoneNo;
 	}
 	/// <summary>
-	/// ƒ{[ƒ“”Ô†‚ğæ“¾B
+	/// ãƒœãƒ¼ãƒ³ç•ªå·ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetNo() const
@@ -90,14 +90,14 @@ public:
 	}
 
 	/*!
-	*@brief	q‹Ÿ‚ğ’Ç‰ÁB
+	*@brief	å­ä¾›ã‚’è¿½åŠ ã€‚
 	*/
 	void AddChild(Bone* bone) 
 	{
 		m_children.push_back(bone);
 	}
 	/*!
-	*@brief	q‹Ÿ‚ğæ“¾B
+	*@brief	å­ä¾›ã‚’å–å¾—ã€‚
 	*/
 	std::list<Bone*>& GetChildren()
 	{
@@ -108,38 +108,38 @@ public:
 		return m_offsetLocalMatrix;
 	}
 	/*!
-		*@brief	–¼‘O‚Ìæ“¾B
+		*@brief	åå‰ã®å–å¾—ã€‚
 		*/
 	const wchar_t* GetName() const
 	{
 		return m_boneName.c_str();
 	}
 	/*!
-	*@brief	‚±‚Ìƒ{[ƒ“‚Ìƒ[ƒ‹ƒh‹óŠÔ‚Å‚ÌˆÊ’u‚Æ‰ñ“]‚ÆƒXƒP[ƒ‹‚ğŒvZ‚·‚éB
-	*@param[out]	trans		•½sˆÚ“®—Ê‚ÌŠi”[æB
-	*@param[out]	rot			‰ñ“]—Ê‚ÌŠi”[æB
-	*@param[out]	scale		Šg‘å—¦‚ÌŠi”[æB
+	*@brief	ã“ã®ãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã§ã®ä½ç½®ã¨å›è»¢ã¨ã‚¹ã‚±ãƒ¼ãƒ«ã‚’è¨ˆç®—ã™ã‚‹ã€‚
+	*@param[out]	trans		å¹³è¡Œç§»å‹•é‡ã®æ ¼ç´å…ˆã€‚
+	*@param[out]	rot			å›è»¢é‡ã®æ ¼ç´å…ˆã€‚
+	*@param[out]	scale		æ‹¡å¤§ç‡ã®æ ¼ç´å…ˆã€‚
 	*/
 	void CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale);
 		
 private:
 	
 	std::wstring	m_boneName;
-	int				m_parentBoneNo = -1;	//e‚Ìƒ{[ƒ“”Ô†B
-	int				m_boneId = -1;			//ƒ{[ƒ“”Ô†B
-	Matrix			m_bindPose;				//ƒoƒCƒ“ƒhƒ|[ƒYB
-	Matrix			m_invBindPose;			//ƒoƒCƒ“ƒhƒ|[ƒY‚Ì‹ts—ñB
-	Matrix			m_localMatrix;			//ƒ[ƒJƒ‹s—ñB
-	Matrix			m_worldMatrix;			//ƒ[ƒ‹ƒhs—ñB
+	int				m_parentBoneNo = -1;	//è¦ªã®ãƒœãƒ¼ãƒ³ç•ªå·ã€‚
+	int				m_boneId = -1;			//ãƒœãƒ¼ãƒ³ç•ªå·ã€‚
+	Matrix			m_bindPose;				//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã€‚
+	Matrix			m_invBindPose;			//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®é€†è¡Œåˆ—ã€‚
+	Matrix			m_localMatrix;			//ãƒ­ãƒ¼ã‚«ãƒ«è¡Œåˆ—ã€‚
+	Matrix			m_worldMatrix;			//ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã€‚
 	Matrix			m_offsetLocalMatrix;
-	Vector3			m_positoin;				//‚±‚Ìƒ{[ƒ“‚Ìƒ[ƒ‹ƒh‹óŠÔ‚Å‚ÌˆÊ’uBÅŒã‚ÉCalcWorldTRS‚ğÀs‚µ‚½‚Æ‚«‚ÌŒ‹‰Ê‚ªŠi”[‚³‚ê‚Ä‚¢‚éB
-	Vector3			m_scale;				//‚±‚Ìƒ{[ƒ“‚ÌŠg‘å—¦BÅŒã‚ÉCalcWorldTRS‚ğÀs‚µ‚½‚Æ‚«‚ÌŒ‹‰Ê‚ªŠi”[‚³‚ê‚Ä‚¢‚éB
-	Quaternion		m_rotation;				//‚±‚Ìƒ{[ƒ“‚Ì‰ñ“]BÅŒã‚ÉCalcWorldTRS‚ğÀs‚µ‚½‚Æ‚«‚ÌŒ‹‰Ê‚ªŠi”[‚³‚ê‚Ä‚¢‚éB
-	std::list<Bone*>	m_children;			//q‹Ÿ‚ÌƒŠƒXƒgB
+	Vector3			m_positoin;				//ã“ã®ãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã§ã®ä½ç½®ã€‚æœ€å¾Œã«CalcWorldTRSã‚’å®Ÿè¡Œã—ãŸã¨ãã®çµæœãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã€‚
+	Vector3			m_scale;				//ã“ã®ãƒœãƒ¼ãƒ³ã®æ‹¡å¤§ç‡ã€‚æœ€å¾Œã«CalcWorldTRSã‚’å®Ÿè¡Œã—ãŸã¨ãã®çµæœãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã€‚
+	Quaternion		m_rotation;				//ã“ã®ãƒœãƒ¼ãƒ³ã®å›è»¢ã€‚æœ€å¾Œã«CalcWorldTRSã‚’å®Ÿè¡Œã—ãŸã¨ãã®çµæœãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã€‚
+	std::list<Bone*>	m_children;			//å­ä¾›ã®ãƒªã‚¹ãƒˆã€‚
 };
 
 /// <summary>
-/// ƒXƒPƒ‹ƒgƒ“ƒNƒ‰ƒXB
+/// ã‚¹ã‚±ãƒ«ãƒˆãƒ³ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Skeleton  {
 public:
@@ -149,10 +149,10 @@ public:
 	~Skeleton();
 		
 	/// <summary>
-	/// ƒ{[ƒ“‚Ìƒ[ƒJƒ‹s—ñ‚ğİ’èB
+	/// ãƒœãƒ¼ãƒ³ã®ãƒ­ãƒ¼ã‚«ãƒ«è¡Œåˆ—ã‚’è¨­å®šã€‚
 	/// </summary>
-	/// <param name="boneNo">ƒ{[ƒ“”Ô†</param>
-	/// <param name="m">s—ñ</param>
+	/// <param name="boneNo">ãƒœãƒ¼ãƒ³ç•ªå·</param>
+	/// <param name="m">è¡Œåˆ—</param>
 	void SetBoneLocalMatrix(int boneNo, const Matrix& m)
 	{
 		if (boneNo > (int)m_bones.size() - 1) {
@@ -163,7 +163,7 @@ public:
 	}
 
 	/// <summary>
-	/// ƒ{[ƒ“‚Ì”‚ğæ“¾B
+	/// ãƒœãƒ¼ãƒ³ã®æ•°ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetNumBones() const
@@ -171,14 +171,14 @@ public:
 		return static_cast<int>(m_bones.size());
 	}
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
-	/// <param name="tksFilePath">tksƒtƒ@ƒCƒ‹‚Ìƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <returns>true‚ª•Ô‚Á‚Ä‚«‚½‚çƒ[ƒh¬Œ÷B</returns>
+	/// <param name="tksFilePath">tksãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <returns>trueãŒè¿”ã£ã¦ããŸã‚‰ãƒ­ãƒ¼ãƒ‰æˆåŠŸã€‚</returns>
 	bool Init(const char* tksFilePath);
 
 	/// <summary>
-	/// ‰Šú‰»Ï‚İ‚©”»’èB
+	/// åˆæœŸåŒ–æ¸ˆã¿ã‹åˆ¤å®šã€‚
 	/// </summary>
 	/// <returns></returns>
 	bool IsInited() const
@@ -186,15 +186,15 @@ public:
 		return m_isInited;
 	}
 	/// <summary>
-	/// ƒ{[ƒ“s—ñ‚Ì\’zB
-	/// “Ç‚İ‚İ‚ªŠ®—¹‚µ‚½Œã‚ÅŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢B
+	/// ãƒœãƒ¼ãƒ³è¡Œåˆ—ã®æ§‹ç¯‰ã€‚
+	/// èª­ã¿è¾¼ã¿ãŒå®Œäº†ã—ãŸå¾Œã§å‘¼ã³å‡ºã—ã¦ãã ã•ã„ã€‚
 	/// </summary>
 	void BuildBoneMatrices();
 	/// <summary>
-	/// ƒ{[ƒ“‚Ì–¼‘O‚©‚çƒ{[ƒ“”Ô†‚ğŒŸõB
+	/// ãƒœãƒ¼ãƒ³ã®åå‰ã‹ã‚‰ãƒœãƒ¼ãƒ³ç•ªå·ã‚’æ¤œç´¢ã€‚
 	/// </summary>
-	/// <param name="boneName">ƒ{[ƒ“‚Ì–¼‘O</param>
-	/// <returns>ƒ{[ƒ“”Ô†BŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚Í-1‚ª•Ô‚Á‚Ä‚«‚Ü‚·B</returns>
+	/// <param name="boneName">ãƒœãƒ¼ãƒ³ã®åå‰</param>
+	/// <returns>ãƒœãƒ¼ãƒ³ç•ªå·ã€‚è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã¯-1ãŒè¿”ã£ã¦ãã¾ã™ã€‚</returns>
 	int FindBoneID(const wchar_t* boneName) const
 	{
 		for (int i = 0; i < (int)m_bones.size(); i++) {
@@ -202,20 +202,20 @@ public:
 				return i;
 			}
 		}
-		//Œ©‚Â‚©‚ç‚È‚©‚Á‚½B
+		//è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã€‚
 		return -1;
 	}
 	/// <summary>
-	/// ƒ{[ƒ“”Ô†‚©‚çƒ{[ƒ“‚ğæ“¾B
+	/// ãƒœãƒ¼ãƒ³ç•ªå·ã‹ã‚‰ãƒœãƒ¼ãƒ³ã‚’å–å¾—ã€‚
 	/// </summary>
-	/// <param name="boneNo">ƒ{[ƒ“”Ô†</param>
-	/// <returns>ƒ{[ƒ“</returns>
+	/// <param name="boneNo">ãƒœãƒ¼ãƒ³ç•ªå·</param>
+	/// <returns>ãƒœãƒ¼ãƒ³</returns>
 	Bone* GetBone(int boneNo) const
 	{
 		return m_bones[boneNo].get();
 	}
 	/// <summary>
-	/// ƒ{[ƒ“s—ñ‚Ìæ“ªƒAƒhƒŒƒX‚ğæ“¾B
+	/// ãƒœãƒ¼ãƒ³è¡Œåˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	Matrix* GetBoneMatricesTopAddress() const
@@ -223,7 +223,7 @@ public:
 		return m_boneMatrixs.get();
 	}
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“‚ªÄ¶‚³‚ê‚Ä‚¢‚éƒ}[ƒN‚ğ•t‚¯‚éB
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒå†ç”Ÿã•ã‚Œã¦ã„ã‚‹ãƒãƒ¼ã‚¯ã‚’ä»˜ã‘ã‚‹ã€‚
 	/// </summary>
 	void SetMarkPlayAnimation()
 	{
@@ -233,27 +233,27 @@ public:
 		
 
 	/// <summary>
-	/// XVB
+	/// æ›´æ–°ã€‚
 	/// </summary>
 	/// <param name="mWorld"></param>
 	void Update(const Matrix& mWorld);
 	
 	/// <summary>
-	/// ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhs—ñ‚ÌXVŠÖ”B
+	/// ãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®æ›´æ–°é–¢æ•°ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ’Êí‚Íƒ†[ƒU[‚ª‚±‚ÌŠÖ”‚ğŒÄ‚Ño‚·•K—v‚Í‚ ‚è‚Ü‚¹‚ñB
+	/// é€šå¸¸ã¯ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒã“ã®é–¢æ•°ã‚’å‘¼ã³å‡ºã™å¿…è¦ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
 	/// </remarks>
-	/// <param name="bone">XV‚·‚éƒ{[ƒ“B</param>
-	/// <param name="parentMatrix">e‚Ìƒ{[ƒ“‚Ìƒ[ƒ‹ƒhs—ñB</param>
+	/// <param name="bone">æ›´æ–°ã™ã‚‹ãƒœãƒ¼ãƒ³ã€‚</param>
+	/// <param name="parentMatrix">è¦ªã®ãƒœãƒ¼ãƒ³ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã€‚</param>
 	static 	void UpdateBoneWorldMatrix(Bone& bone, const Matrix& parentMatrix);
 
 private:
-	TksFile m_tksFile;										//TKSƒtƒ@ƒCƒ‹B
-	static const int BONE_MAX = 512;				//ƒ{[ƒ“‚ÌÅ‘å”B
+	TksFile m_tksFile;										//TKSãƒ•ã‚¡ã‚¤ãƒ«ã€‚
+	static const int BONE_MAX = 512;				//ãƒœãƒ¼ãƒ³ã®æœ€å¤§æ•°ã€‚
 	using BonePtr = std::unique_ptr<Bone>;
-	std::vector<BonePtr>	m_bones;				//ƒ{[ƒ“‚Ì”z—ñB
-	std::unique_ptr<Matrix[]>	m_boneMatrixs;	//ƒ{[ƒ“s—ñB
-	bool m_isInited = false;								//‰Šú‰»Ï‚İH
-	bool m_isPlayAnimation = false;					//ƒAƒjƒ[ƒVƒ‡ƒ“‚ª—¬‚µ‚Ü‚ê‚Ä‚¢‚éH
+	std::vector<BonePtr>	m_bones;				//ãƒœãƒ¼ãƒ³ã®é…åˆ—ã€‚
+	std::unique_ptr<Matrix[]>	m_boneMatrixs;	//ãƒœãƒ¼ãƒ³è¡Œåˆ—ã€‚
+	bool m_isInited = false;								//åˆæœŸåŒ–æ¸ˆã¿ï¼Ÿ
+	bool m_isPlayAnimation = false;					//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒæµã—è¾¼ã¾ã‚Œã¦ã„ã‚‹ï¼Ÿ
 };

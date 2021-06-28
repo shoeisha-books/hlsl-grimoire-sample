@@ -1,46 +1,46 @@
-/// <summary>
-/// tkaƒtƒ@ƒCƒ‹
+ï»¿/// <summary>
+/// tkaãƒ•ã‚¡ã‚¤ãƒ«
 /// </summary>
 /// <remarks>
-/// tkaƒtƒ@ƒCƒ‹‚ÍƒL[ƒtƒŒ[ƒ€ƒAƒjƒ[ƒVƒ‡ƒ“ƒf[ƒ^‚ÌƒtƒH[ƒ}ƒbƒg‚Å‚·B
-/// –{ƒNƒ‰ƒX‚ğ—˜—p‚·‚é‚Æ‚±‚Å‚Ítkaƒtƒ@ƒCƒ‹‚ğˆµ‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+/// tkaãƒ•ã‚¡ã‚¤ãƒ«ã¯ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‡ãƒ¼ã‚¿ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§ã™ã€‚
+/// æœ¬ã‚¯ãƒ©ã‚¹ã‚’åˆ©ç”¨ã™ã‚‹ã¨ã“ã§ã¯tkaãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ‰±ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
 /// </remarks>
 #pragma once
 
 class TkaFile {
 public:
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒv‚Ìƒwƒbƒ_[B
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã€‚
 	/// </summary>
 	struct AnimClipHeader {
-		std::uint32_t numKey;				//ƒL[ƒtƒŒ[ƒ€‚Ì”B
-		std::uint32_t numAnimationEvent;	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì”B
+		std::uint32_t numKey;				//ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ•°ã€‚
+		std::uint32_t numAnimationEvent;	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®æ•°ã€‚
 	};
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgB
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã€‚
 	/// </summary>
 	struct AnimationEvent {
-		float	invokeTime;					//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ª”­¶‚·‚éŠÔ(’PˆÊ:•b)
+		float	invokeTime;					//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿã™ã‚‹æ™‚é–“(å˜ä½:ç§’)
 		std::string eventName;
 	};
 
 	/// <summary>
-	/// ƒL[ƒtƒŒ[ƒ€B
+	/// ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã€‚
 	/// </summary>
 	struct KeyFrame {
-		std::uint32_t boneIndex;	//ƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒXB
-		float time;					//ŠÔB
-		Vector3 transform[4];		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€B
+		std::uint32_t boneIndex;	//ãƒœãƒ¼ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚
+		float time;					//æ™‚é–“ã€‚
+		Vector3 transform[4];		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã€‚
 	};
 	/// <summary>
-	/// “Ç‚İ‚İˆ—B
+	/// èª­ã¿è¾¼ã¿å‡¦ç†ã€‚
 	/// </summary>
 	/// <param name="filePath"></param>
 	void Load(const char* filePath) ;
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ÉƒNƒGƒŠ‚ğs‚¤B
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã«ã‚¯ã‚¨ãƒªã‚’è¡Œã†ã€‚
 	/// </summary>
-	/// <param name="query">ƒNƒGƒŠŠÖ”</param>
+	/// <param name="query">ã‚¯ã‚¨ãƒªé–¢æ•°</param>
 	void QueryAnimationEvents(std::function<void(const AnimationEvent& animEvent) > query)
 	{
 		for (auto& animEvent : m_animationEvents) {
@@ -48,9 +48,9 @@ public:
 		}
 	}
 	/// <summary>
-	/// ƒL[ƒtƒŒ[ƒ€‚ÉƒNƒGƒŠ‚ğs‚¤B
+	/// ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã«ã‚¯ã‚¨ãƒªã‚’è¡Œã†ã€‚
 	/// </summary>
-	/// <param name="query">ƒNƒGƒŠŠÖ”B</param>
+	/// <param name="query">ã‚¯ã‚¨ãƒªé–¢æ•°ã€‚</param>
 	void QueryKeyFrames(std::function<void(const KeyFrame& keyFrame)> query)
 	{
 		for (auto& keyFrame : m_keyFrames) {
@@ -58,7 +58,7 @@ public:
 		}
 	}
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì”‚ğæ“¾B
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®æ•°ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetNumAnimationEvent() const
@@ -66,7 +66,7 @@ public:
 		return static_cast<int>( m_animationEvents.size() );
 	}
 	/// <summary>
-	/// ƒL[ƒtƒŒ[ƒ€‚Ì”‚ğæ“¾B
+	/// ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ•°ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetNumKeyFrame() const
@@ -74,7 +74,7 @@ public:
 		return static_cast<int>(m_keyFrames.size());
 	}
 private:
-	std::vector< AnimationEvent> m_animationEvents;	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgB
-	std::vector< KeyFrame> m_keyFrames;				//ƒL[ƒtƒŒ[ƒ€B
+	std::vector< AnimationEvent> m_animationEvents;	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã€‚
+	std::vector< KeyFrame> m_keyFrames;				//ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã€‚
 };
 

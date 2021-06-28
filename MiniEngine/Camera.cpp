@@ -1,5 +1,5 @@
-/*!
-* @brief	ƒJƒƒ‰
+ï»¿/*!
+* @brief	ã‚«ãƒ¡ãƒ©
 */
 #include "stdafx.h"
 #include "Camera.h"
@@ -8,11 +8,11 @@
 
 void Camera::Update()
 {
-	//ƒAƒXƒyƒNƒg”ä‚ğŒvZ‚·‚éB
+	//ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 	m_aspect = (float)g_graphicsEngine->GetFrameBufferWidth() / (float)g_graphicsEngine->GetFrameBufferHeight();
 	if(m_isNeedUpdateProjectionMatrix){
 		if (m_updateProjMatrixFunc == enUpdateProjMatrixFunc_Perspective) {
-			//“§‹•ÏŠ·s—ñ‚ğŒvZB
+			//é€è¦–å¤‰æ›è¡Œåˆ—ã‚’è¨ˆç®—ã€‚
 			m_projectionMatrix.MakeProjectionMatrix(
 				m_viewAngle,
 				m_aspect,
@@ -21,20 +21,20 @@ void Camera::Update()
 			);
 		}
 		else {
-			//•½s“Š‰es—ñ‚ğŒvZB
+			//å¹³è¡ŒæŠ•å½±è¡Œåˆ—ã‚’è¨ˆç®—ã€‚
 			m_projectionMatrix.MakeOrthoProjectionMatrix(m_width, m_height, m_near, m_far);
 		}
 	}
-	//ƒrƒ…[s—ñ‚ÌZo
+	//ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®ç®—å‡º
 	m_viewMatrix.MakeLookAt( m_position, m_target, m_up );
-	//ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚Ìì¬B
+	//ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã®ä½œæˆã€‚
 	m_viewProjectionMatrix = m_viewMatrix * m_projectionMatrix;
-	//ƒrƒ…[s—ñ‚Ì‹ts—ñ‚ğŒvZB
+	//ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®é€†è¡Œåˆ—ã‚’è¨ˆç®—ã€‚
 	m_viewMatrixInv.Inverse( m_viewMatrix );
 
 	m_forward.Set(m_viewMatrixInv.m[2][0], m_viewMatrixInv.m[2][1], m_viewMatrixInv.m[2][2]);
 	m_right.Set(m_viewMatrixInv.m[0][0], m_viewMatrixInv.m[0][1], m_viewMatrixInv.m[0][2]);
-	//ƒJƒƒ‰‚Ì‰ñ“]s—ñ‚ğæ“¾B
+	//ã‚«ãƒ¡ãƒ©ã®å›è»¢è¡Œåˆ—ã‚’å–å¾—ã€‚
 	m_cameraRotation = m_viewMatrixInv;
 	m_cameraRotation.m[3][0] = 0.0f;
 	m_cameraRotation.m[3][1] = 0.0f;

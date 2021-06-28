@@ -1,22 +1,22 @@
-#pragma once
+ï»¿#pragma once
 
 const int NUM_DIRECTIONAL_LIGHT = 4;
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã€‚
 /// </summary>
 struct DirectionalLight {
-    Vector3 direction;	//ƒ‰ƒCƒg‚Ì•ûŒüB
-    float pad0;			//ƒpƒfƒBƒ“ƒOB
-    Vector4 color;		//ƒ‰ƒCƒg‚ÌƒJƒ‰[B
+    Vector3 direction;	//ãƒ©ã‚¤ãƒˆã®æ–¹å‘ã€‚
+    float pad0;			//ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ã€‚
+    Vector4 color;		//ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã€‚
 };
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘ÌB
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“ã€‚
 /// </summary>
 struct Light {
-    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];	//ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
-    Vector3 eyePos;					//ƒJƒƒ‰‚ÌˆÊ’uB
-    float specPow;					//ƒXƒyƒLƒ…ƒ‰‚Ìi‚èB
-    Vector3 ambinetLight;			//ŠÂ‹«ŒõB
+    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];	//ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã€‚
+    Vector3 eyePos;					//ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã€‚
+    float specPow;					//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Šã€‚
+    Vector3 ambinetLight;			//ç’°å¢ƒå…‰ã€‚
 };
 
 void InitMainDepthRenderTarget(RenderTarget& mainRenderTarget, RenderTarget& depthRenderTarget);

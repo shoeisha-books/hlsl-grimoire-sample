@@ -1,89 +1,89 @@
-#pragma once
+ï»¿#pragma once
 
 #include <stdint.h>
 
 #pragma pack(2)
 /// <summary>
-/// Bitmapƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_[\‘¢‘ÌB
+/// Bitmapãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ãƒ¼æ§‹é€ ä½“ã€‚
 /// </summary>
 /*struct BITMAPFILEHEADER {
-	uint16_t bfType;		//ƒtƒ@ƒCƒ‹ƒ^ƒCƒvB’Êí‚ÍBMB
-	uint32_t bfSize;		//ƒtƒ@ƒCƒ‹ƒTƒCƒY(byte)
-	uint16_t bfReserved1;	//—\–ñ—ÌˆæBí‚É‚OB
-	uint16_t bfReserved2;	//—\–ñ—ÌˆæBí‚É‚OB
-	uint32_t bfOffBits;		//ƒtƒ@ƒCƒ‹‚Ìæ“ª‚©‚ç‰æ‘œƒf[ƒ^‚Ü‚Å‚ÌƒIƒtƒZƒbƒg(byte)
+	uint16_t bfType;		//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—ã€‚é€šå¸¸ã¯BMã€‚
+	uint32_t bfSize;		//ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º(byte)
+	uint16_t bfReserved1;	//äºˆç´„é ˜åŸŸã€‚å¸¸ã«ï¼ã€‚
+	uint16_t bfReserved2;	//äºˆç´„é ˜åŸŸã€‚å¸¸ã«ï¼ã€‚
+	uint32_t bfOffBits;		//ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­ã‹ã‚‰ç”»åƒãƒ‡ãƒ¼ã‚¿ã¾ã§ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ(byte)
 };
 /// <summary>
-/// BITMAPî•ñƒwƒbƒ_B
+/// BITMAPæƒ…å ±ãƒ˜ãƒƒãƒ€ã€‚
 /// </summary>
 struct BITMAPINFOHEADER {
-	uint32_t biSize;			//î•ñƒwƒbƒ_ƒTƒCƒYB
-	uint32_t biWidth;			//‰æ‘œ‚Ì•B
-	uint32_t biHeight;			//‰æ‘œ‚Ì‚‚³B
-	uint16_t biPlanes;			//ƒvƒŒ[ƒ“”B
-	uint16_t biBitCount;		//Fƒrƒbƒg”B1,4,8,(16),24,32B
-	uint32_t biCompression;		//ˆ³kŒ`®B0,1,2,3
-	uint32_t biSizeImage;		//‰æ‘œƒf[ƒ^ƒTƒCƒYB
-	uint32_t biXPixPerMeter;	//…•½‰ğ‘œ“xB[dot/m]
-	uint32_t biYPixPerMeter;	//‚’¼‰ğ‘œ“xB[dot/m]
-	uint32_t biClrUsed;			//Ši”[ƒpƒŒƒbƒg”B‚O‚Ìê‡‚à‚ ‚éB
-	uint32_t biCirImportant;	//d—vF”B‚O‚Ìê‡‚à‚ ‚éB
+	uint32_t biSize;			//æƒ…å ±ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚ºã€‚
+	uint32_t biWidth;			//ç”»åƒã®å¹…ã€‚
+	uint32_t biHeight;			//ç”»åƒã®é«˜ã•ã€‚
+	uint16_t biPlanes;			//ãƒ—ãƒ¬ãƒ¼ãƒ³æ•°ã€‚
+	uint16_t biBitCount;		//è‰²ãƒ“ãƒƒãƒˆæ•°ã€‚1,4,8,(16),24,32ã€‚
+	uint32_t biCompression;		//åœ§ç¸®å½¢å¼ã€‚0,1,2,3
+	uint32_t biSizeImage;		//ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã€‚
+	uint32_t biXPixPerMeter;	//æ°´å¹³è§£åƒåº¦ã€‚[dot/m]
+	uint32_t biYPixPerMeter;	//å‚ç›´è§£åƒåº¦ã€‚[dot/m]
+	uint32_t biClrUsed;			//æ ¼ç´ãƒ‘ãƒ¬ãƒƒãƒˆæ•°ã€‚ï¼ã®å ´åˆã‚‚ã‚ã‚‹ã€‚
+	uint32_t biCirImportant;	//é‡è¦è‰²æ•°ã€‚ï¼ã®å ´åˆã‚‚ã‚ã‚‹ã€‚
 };
 */
 #pragma pack()
 /// <summary>
-/// BitmapƒNƒ‰ƒXB
+/// Bitmapã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Bitmap
 {
 public:
 	struct SRgbRow {
-		unsigned char r;	//R¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
-		unsigned char g;	//G¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
-		unsigned char b;	//b¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
+		unsigned char r;	//Ræˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
+		unsigned char g;	//Gæˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
+		unsigned char b;	//bæˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
 	};
 	/// <summary>
-	/// 1ƒhƒbƒg‚Ì‰æ‘f‚ğ•\‚·\‘¢‘ÌB
+	/// 1ãƒ‰ãƒƒãƒˆã®ç”»ç´ ã‚’è¡¨ã™æ§‹é€ ä½“ã€‚
 	/// </summary>
 	struct SRgba {
-		unsigned char r;	//R¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
-		unsigned char g;	//G¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
-		unsigned char b;	//b¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
-		unsigned char a;	//a¬•ªBunsigned‚Í•„†‚È‚µ‚ğ•\‚·CüqB
+		unsigned char r;	//Ræˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
+		unsigned char g;	//Gæˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
+		unsigned char b;	//bæˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
+		unsigned char a;	//aæˆåˆ†ã€‚unsignedã¯ç¬¦å·ãªã—ã‚’è¡¨ã™ä¿®é£¾å­ã€‚
 	};
 
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	Bitmap();
 
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^B
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	~Bitmap();
 
 	/// <summary>
-	/// Bitmap‚ğƒ[ƒhB
-	/// Bitmap‚Ì‰ğ‘œ“x‚Í512~512‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
+	/// Bitmapã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
+	/// Bitmapã®è§£åƒåº¦ã¯512Ã—512ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 	/// </summary>
-	/// <param name="filePath">“Ç‚İ‚Şƒtƒ@ƒCƒ‹ƒpƒXB</param>
+	/// <param name="filePath">èª­ã¿è¾¼ã‚€ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
 	/// <returns>
-	/// “Ç‚İ‚İ‚É¬Œ÷‚µ‚½‚çtrueA
-	/// ¸”s‚µ‚½‚çfalse‚ğ•Ô‚µ‚Ü‚·B
+	/// èª­ã¿è¾¼ã¿ã«æˆåŠŸã—ãŸã‚‰trueã€
+	/// å¤±æ•—ã—ãŸã‚‰falseã‚’è¿”ã—ã¾ã™ã€‚
 	/// </returns>
 	bool Load(const char* filePath);
 
 	/// <summary>
-	/// Bitmap‚Ì•Û‘¶B
+	/// Bitmapã®ä¿å­˜ã€‚
 	/// </summary>
-	/// <param name="filePath">•Û‘¶‚·‚éƒtƒ@ƒCƒ‹ƒpƒXB</param>
+	/// <param name="filePath">ä¿å­˜ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
 	/// <returns>
-	/// •Û‘¶‚É¬Œ÷‚µ‚½‚çtrueA
-	/// ¸”s‚µ‚½‚çfalse‚ğ•Ô‚·B
+	/// ä¿å­˜ã«æˆåŠŸã—ãŸã‚‰trueã€
+	/// å¤±æ•—ã—ãŸã‚‰falseã‚’è¿”ã™ã€‚
 	/// </returns>
 	bool Save(const char* filePath);
 	/// <summary>
-	/// ƒCƒ[ƒW‚ÌƒTƒCƒY‚ğæ“¾
+	/// ã‚¤ãƒ¡ãƒ¼ã‚¸ã®ã‚µã‚¤ã‚ºã‚’å–å¾—
 	/// </summary>
 	/// <returns></returns>
 	int GetImageSizeInBytes() const
@@ -91,7 +91,7 @@ public:
 		return m_imageSizeInBytes;
 	}
 	/// <summary>
-	/// 1ƒsƒNƒZƒ‹‚ÌƒTƒCƒYB
+	/// 1ãƒ”ã‚¯ã‚»ãƒ«ã®ã‚µã‚¤ã‚ºã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetPixelSizeInBytes() const
@@ -99,7 +99,7 @@ public:
 		return 4;
 	}
 	/// <summary>
-	/// ƒsƒNƒZƒ‹‚Ì”‚ğæ“¾B
+	/// ãƒ”ã‚¯ã‚»ãƒ«ã®æ•°ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	int GetNumPixel() const
@@ -107,7 +107,7 @@ public:
 		return m_numPixel;
 	}
 	/// <summary>
-	/// ‰æ‘œƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX‚ğæ“¾B
+	/// ç”»åƒãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	SRgba* GetImageAddress() const
@@ -119,7 +119,7 @@ public:
 		memcpy(m_image.get(), image, m_numPixel*4);
 	}
 	/// <summary>
-	/// ‰¡•‚ğæ“¾B
+	/// æ¨ªå¹…ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	LONG GetWidth() const
@@ -127,7 +127,7 @@ public:
 		return m_bitmapInfoHeader.biWidth;
 	}
 	/// <summary>
-	/// ‚‚³‚ğæ“¾B
+	/// é«˜ã•ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	LONG GetHeight() const
@@ -136,13 +136,13 @@ public:
 	}
 private:
 	
-	BITMAPFILEHEADER m_bitmapHeader;		//ƒrƒbƒgƒ}ƒbƒvƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_[B
-											//LoadŠÖ”‚ğÀs‚·‚é‚ÆA“Ç‚İ‚ñ‚¾ƒrƒbƒgƒ}ƒbƒv‰æ‘œ‚Ìƒwƒbƒ_[‚ªƒRƒs[‚³‚ê‚Ü‚·B
-	BITMAPINFOHEADER m_bitmapInfoHeader;	//ƒrƒbƒgƒ}ƒbƒvƒtƒ@ƒCƒ‹‚Ìî•ñƒwƒbƒ_[B
-											//LoadŠÖ”‚ğÀs‚·‚é‚ÆA“Ç‚İ‚ñ‚¾ƒrƒbƒgƒ}ƒbƒv‚Ìî•ñƒwƒbƒ_[‚ªƒRƒs[‚³‚ê‚Ü‚·B
-	std::unique_ptr<SRgba[]> m_image;		//‰æ‘œ‚ÌƒCƒ[ƒWB
-	int m_imageSizeInBytes = 0;				//‰æ‘œ‚ÌƒTƒCƒYB
-	int m_numPixel = 0;						//ƒsƒNƒZƒ‹”B
+	BITMAPFILEHEADER m_bitmapHeader;		//ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã€‚
+											//Loadé–¢æ•°ã‚’å®Ÿè¡Œã™ã‚‹ã¨ã€èª­ã¿è¾¼ã‚“ã ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ç”»åƒã®ãƒ˜ãƒƒãƒ€ãƒ¼ãŒã‚³ãƒ”ãƒ¼ã•ã‚Œã¾ã™ã€‚
+	BITMAPINFOHEADER m_bitmapInfoHeader;	//ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®æƒ…å ±ãƒ˜ãƒƒãƒ€ãƒ¼ã€‚
+											//Loadé–¢æ•°ã‚’å®Ÿè¡Œã™ã‚‹ã¨ã€èª­ã¿è¾¼ã‚“ã ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã®æƒ…å ±ãƒ˜ãƒƒãƒ€ãƒ¼ãŒã‚³ãƒ”ãƒ¼ã•ã‚Œã¾ã™ã€‚
+	std::unique_ptr<SRgba[]> m_image;		//ç”»åƒã®ã‚¤ãƒ¡ãƒ¼ã‚¸ã€‚
+	int m_imageSizeInBytes = 0;				//ç”»åƒã®ã‚µã‚¤ã‚ºã€‚
+	int m_numPixel = 0;						//ãƒ”ã‚¯ã‚»ãƒ«æ•°ã€‚
 	std::unique_ptr< SRgbRow[]> m_imageRow;
 private:
 };

@@ -1,35 +1,35 @@
-/*!
-* @brief	ƒJƒƒ‰
+ï»¿/*!
+* @brief	ã‚«ãƒ¡ãƒ©
 */
 
 #pragma once
 
 /// <summary>
-/// ƒJƒƒ‰ƒNƒ‰ƒXB
+/// ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹ã€‚
 /// </summary>
 class Camera  {
 public:
 	/// <summary>
-	/// Ë‰es—ñ‚ÌXV•û–@B
+	/// å°„å½±è¡Œåˆ—ã®æ›´æ–°æ–¹æ³•ã€‚
 	/// </summary>
 	enum EnUpdateProjMatrixFunc {
-		enUpdateProjMatrixFunc_Perspective,		//“§‹Ë‰es—ñB‰“‹ß–@‚ªŒø‚¢‚½ŠG‚ğì‚è‚½‚¢‚È‚ç‚±‚Á‚¿B
-		enUpdateProjMatrixFunc_Ortho,			//•½s“Š‰eB‚Q‚c“I‚È•\Œ»‚ª‚µ‚½‚¢‚È‚ç‚±‚Á‚¿B
+		enUpdateProjMatrixFunc_Perspective,		//é€è¦–å°„å½±è¡Œåˆ—ã€‚é è¿‘æ³•ãŒåŠ¹ã„ãŸçµµã‚’ä½œã‚ŠãŸã„ãªã‚‰ã“ã£ã¡ã€‚
+		enUpdateProjMatrixFunc_Ortho,			//å¹³è¡ŒæŠ•å½±ã€‚ï¼’ï¼¤çš„ãªè¡¨ç¾ãŒã—ãŸã„ãªã‚‰ã“ã£ã¡ã€‚
 	};
 	/// <summary>
-	/// ƒrƒ…[s—ñAƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğXV‚·‚éB
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’æ›´æ–°ã™ã‚‹ã€‚
 	/// </summary>
 	void Update();
 	/// <summary>
-	/// ’‹“_‚ğŒ´“_‚Æ‚µ‚ÄƒJƒƒ‰‚ğ‰ñ“]‚³‚¹‚éB
+	/// æ³¨è¦–ç‚¹ã‚’åŸç‚¹ã¨ã—ã¦ã‚«ãƒ¡ãƒ©ã‚’å›è»¢ã•ã›ã‚‹ã€‚
 	/// </summary>
-	/// <param name="qRot">‰ñ“]‚³‚¹‚éƒNƒH[ƒ^ƒjƒIƒ“</param>
+	/// <param name="qRot">å›è»¢ã•ã›ã‚‹ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³</param>
 	void RotateOriginTarget( const Quaternion& qRot);
 	
 	/// <summary>
-	/// ƒJƒƒ‰‚ğ“®‚©‚·B
+	/// ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™ã€‚
 	/// </summary>
-	/// <param name="move">“®‚©‚·—Ê</param>
+	/// <param name="move">å‹•ã‹ã™é‡</param>
 	void Move(const Vector3& move)
 	{
 		m_position += move;
@@ -37,16 +37,16 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ’‹“_‚ğ“®‚©‚·B
+	/// æ³¨è¦–ç‚¹ã‚’å‹•ã‹ã™ã€‚
 	/// </summary>
-	/// <param name="move">ˆÚ“®—Ê</param>
+	/// <param name="move">ç§»å‹•é‡</param>
 	void MoveTarget(const Vector3& move)
 	{
 		m_target += move;
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ‹“_‚ğ“®‚©‚·B
+	/// è¦–ç‚¹ã‚’å‹•ã‹ã™ã€‚
 	/// </summary>
 	/// <param name="move"></param>
 	void MovePosition(const Vector3& move)
@@ -55,7 +55,7 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ì‘O•û•ûŒü‚ÉˆÚ“®B
+	/// ã‚«ãƒ¡ãƒ©ã®å‰æ–¹æ–¹å‘ã«ç§»å‹•ã€‚
 	/// </summary>
 	/// <param name="moveForward"></param>
 	void MoveForward(float moveForward)
@@ -63,7 +63,7 @@ public:
 		Move(m_forward * moveForward);
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ì‰E•ûŒü‚ÉˆÚ“®B
+	/// ã‚«ãƒ¡ãƒ©ã®å³æ–¹å‘ã«ç§»å‹•ã€‚
 	/// </summary>
 	/// <param name="moveRight"></param>
 	void MoveRight(float moveRight)
@@ -71,7 +71,7 @@ public:
 		Move(m_right * moveRight);
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ìã•ûŒü‚ÉˆÚ“®B
+	/// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘ã«ç§»å‹•ã€‚
 	/// </summary>
 	/// <param name="moveUp"></param>
 	void MoveUp(float moveUp)
@@ -79,7 +79,7 @@ public:
 		Move(m_up * moveUp);
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚ÌÀ•W‚ğİ’è‚·‚éB
+	/// ã‚«ãƒ¡ãƒ©ã®åº§æ¨™ã‚’è¨­å®šã™ã‚‹ã€‚
 	/// </summary>
 	void SetPosition( const Vector3& pos ) 
 	{
@@ -91,14 +91,14 @@ public:
 		SetPosition({ x, y, z });
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚ÌÀ•W‚ğæ“¾B
+	/// ã‚«ãƒ¡ãƒ©ã®åº§æ¨™ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Vector3& GetPosition() const
 	{
 		return m_position;
 	}
 	/// <summary>
-	/// ’‹“_‚ğİ’èB
+	/// æ³¨è¦–ç‚¹ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetTarget(float x, float y, float z)
 	{
@@ -110,14 +110,14 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ’‹“_‚ğæ“¾B
+	/// æ³¨è¦–ç‚¹ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Vector3& GetTarget() const
 	{
 		return m_target;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ìã•ûŒü‚ğİ’èB
+	/// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetUp( const Vector3& up )
 	{
@@ -129,7 +129,7 @@ public:
 		SetUp({ x, y, z });
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ìã•ûŒü‚ğæ“¾B
+	/// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Vector3& GetUp() const
 	{
@@ -137,62 +137,62 @@ public:
 	}
 
 	/// <summary>
-	/// ƒrƒ…[s—ñ‚Ì‹ts—ñ‚ğæ“¾B
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®é€†è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetViewMatrixInv() 
 	{
 		if (m_isDirty) {
-			//XV‚·‚é•K—v‚ª‚ ‚éB
+			//æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 			Update();
 		}
 		return m_viewMatrixInv;
 	}
 	/// <summary>
-	/// ƒrƒ…[s—ñ‚ğæ“¾B
+	/// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetViewMatrix() 
 	{
 		if (m_isDirty) {
-			//XV‚·‚é•K—v‚ª‚ ‚éB
+			//æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 			Update();
 		}
 		return m_viewMatrix;
 	}
 	/// <summary>
-	/// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾B
+	/// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetProjectionMatrix() 
 	{
 		if (m_isDirty) {
-			//XV‚·‚é•K—v‚ª‚ ‚éB
+			//æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 			Update();
 		}
 		return m_projectionMatrix;
 	}
 	/// <summary>
-	/// ƒrƒ…[~ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾B
+	/// ãƒ“ãƒ¥ãƒ¼Ã—ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetViewProjectionMatrix() 
 	{
 		if (m_isDirty) {
-			//XV‚·‚é•K—v‚ª‚ ‚éB
+			//æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 			Update();
 		}
 		return m_viewProjectionMatrix;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ì‰ñ“]s—ñ‚ğæ“¾B
+	/// ã‚«ãƒ¡ãƒ©ã®å›è»¢è¡Œåˆ—ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Matrix& GetCameraRotation() 
 	{
 		if (m_isDirty) {
-			//XV‚·‚é•K—v‚ª‚ ‚éB
+			//æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 			Update();
 		}
 		return m_cameraRotation;
 	}
 	/// <summary>
-	/// ‰“•½–Ê‚Ü‚Å‚Ì‹——£‚ğİ’èB
+	/// é å¹³é¢ã¾ã§ã®è·é›¢ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetFar( float fFar )
 	{
@@ -200,7 +200,7 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ‹ß•½–Ê‚Ü‚Å‚Ì‹——£‚ğİ’èB
+	/// è¿‘å¹³é¢ã¾ã§ã®è·é›¢ã‚’è¨­å®šã€‚
 	/// </summary>
 	void SetNear( float fNear )
 	{
@@ -208,24 +208,24 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ‰“•½–Ê‚Ü‚Å‚Ì‹——£‚ğæ“¾B
+	/// é å¹³é¢ã¾ã§ã®è·é›¢ã‚’å–å¾—ã€‚
 	/// </summary>
 	float GetFar() const
 	{
 		return m_far;
 	}
 	/// <summary>
-	/// ‹ß•½–Ê‚Ü‚Å‚Ì‹——£‚ğæ“¾B
+	/// è¿‘å¹³é¢ã¾ã§ã®è·é›¢ã‚’å–å¾—ã€‚
 	/// </summary>
 	float GetNear() const
 	{
 		return m_near;
 	}
 	/// <summary>
-	/// •½s“Š‰e‚Ì•‚ğİ’èB
+	/// å¹³è¡ŒæŠ•å½±ã®å¹…ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// SetUpdateProjMatrixFunc‚ÅenUpdateProjMatrixFunc_Ortho‚ªİ’è‚³‚ê‚Ä‚¢‚é‚Æ‚«‚Ég—p‚³‚ê‚éB
+	/// SetUpdateProjMatrixFuncã§enUpdateProjMatrixFunc_OrthoãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹ã€‚
 	/// </remarks>
 	void SetWidth(float w)
 	{
@@ -233,10 +233,10 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// •½s“Š‰e‚Ì‚‚³‚ğİ’èB
+	/// å¹³è¡ŒæŠ•å½±ã®é«˜ã•ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// SetUpdateProjMatrixFunc‚ÅenUpdateProjMatrixFunc_Ortho‚ªİ’è‚³‚ê‚Ä‚¢‚é‚Æ‚«‚Ég—p‚³‚ê‚éB
+	/// SetUpdateProjMatrixFuncã§enUpdateProjMatrixFunc_OrthoãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹ã€‚
 	/// </remarks>
 	void SetHeight(float h)
 	{
@@ -244,24 +244,24 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// •½s“Š‰e‚Ì•‚ğæ“¾B
+	/// å¹³è¡ŒæŠ•å½±ã®å¹…ã‚’å–å¾—ã€‚
 	/// </summary>
 	float GetWidth() const
 	{
 		return m_width;
 	}
 	/// <summary>
-	/// •½s“Š‰e‚Ì‚‚³‚ğæ“¾B
+	/// å¹³è¡ŒæŠ•å½±ã®é«˜ã•ã‚’å–å¾—ã€‚
 	/// </summary>
 	float GetHeight() const
 	{
 		return m_height;
 	}
 	/// <summary>
-	/// •½s“Š‰e‚Ì‚‚³‚ğİ’èB
+	/// å¹³è¡ŒæŠ•å½±ã®é«˜ã•ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// SetUpdateProjMatrixFunc‚ÅenUpdateProjMatrixFunc_Ortho‚ªİ’è‚³‚ê‚Ä‚¢‚é‚Æ‚«‚Ég—p‚³‚ê‚éB
+	/// SetUpdateProjMatrixFuncã§enUpdateProjMatrixFunc_OrthoãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹ã€‚
 	/// </remarks>
 	void SetUpdateProjMatrixFunc(EnUpdateProjMatrixFunc func)
 	{
@@ -269,27 +269,27 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ‰æŠp‚ğİ’èB
+	/// ç”»è§’ã‚’è¨­å®šã€‚
 	/// </summary>
 	/// <remarks>
-	/// SetUpdateProjMatrixFunc‚ÅenUpdateProjMatrixFunc_Perspective‚ªİ’è‚³‚ê‚Ä‚¢‚é‚Æ‚«‚Ég—p‚³‚ê‚éB
+	/// SetUpdateProjMatrixFuncã§enUpdateProjMatrixFunc_PerspectiveãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹ã€‚
 	/// </remarks>
-	/// <param name="viewAngle">‰æŠpB’PˆÊƒ‰ƒWƒAƒ“</param>
+	/// <param name="viewAngle">ç”»è§’ã€‚å˜ä½ãƒ©ã‚¸ã‚¢ãƒ³</param>
 	void SetViewAngle(float viewAngle)
 	{
 		m_viewAngle = viewAngle;
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ‰æŠp‚ğæ“¾B
+	/// ç”»è§’ã‚’å–å¾—ã€‚
 	/// </summary>
-	/// <returns>‰æŠpB’PˆÊƒ‰ƒWƒAƒ“</returns>
+	/// <returns>ç”»è§’ã€‚å˜ä½ãƒ©ã‚¸ã‚¢ãƒ³</returns>
 	float GetViewAngle() const
 	{
 		return m_viewAngle;
 	}
 	/// <summary>
-	/// ’‹“_‚Æ‹“_‚Ì‹——£‚ğæ“¾B
+	/// æ³¨è¦–ç‚¹ã¨è¦–ç‚¹ã®è·é›¢ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	float GetTargetToPositionLength() const
@@ -297,14 +297,14 @@ public:
 		return m_targetToPositionLen;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ì‘O•ûŒü‚ğæ“¾B
+	/// ã‚«ãƒ¡ãƒ©ã®å‰æ–¹å‘ã‚’å–å¾—ã€‚
 	/// </summary>
 	const Vector3& GetForward() const
 	{
 		return m_forward;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚Ì‰E•ûŒü‚ğæ“¾B
+	/// ã‚«ãƒ¡ãƒ©ã®å³æ–¹å‘ã‚’å–å¾—ã€‚
 	/// </summary>
 
 	const Vector3& GetRight() const
@@ -312,14 +312,14 @@ public:
 		return m_right;
 	}
 	/// <summary>
-	/// ƒAƒXƒyƒNƒg”ä‚ğæ“¾B
+	/// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã‚’å–å¾—ã€‚
 	/// </summary>
 	float GetAspect() const
 	{
 		return m_aspect;
 	}
 	/// <summary>
-	/// ƒJƒƒ‰‚ÌƒRƒs[‚ğì¬B
+	/// ã‚«ãƒ¡ãƒ©ã®ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆã€‚
 	/// </summary>
 	/// <param name="dst"></param>
 	void CopyTo(Camera& dst) 
@@ -328,35 +328,35 @@ public:
 		m_isDirty = true;
 	}
 	/// <summary>
-	/// ƒ[ƒ‹ƒhÀ•W‚©‚çƒXƒNƒŠ[ƒ“À•W‚ğŒvZ‚·‚éB
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‹ã‚‰ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ŒvZ‚³‚ê‚éƒXƒNƒŠ[ƒ“À•W‚Í‰æ–Ê‚Ì’†S‚ğ{0,0}A¶ã‚ğ{‰æ–Ê‚Ì•*-0.5,‰æ–Ê‚Ì‚‚³*-0.5}
-	/// ‰E‰º‚ğ{ ‰æ–Ê‚Ì• * 0.5,‰æ–Ê‚Ì‚‚³ * 0.5 }‚Æ‚·‚éÀ•WŒn‚Å‚·B
+	/// è¨ˆç®—ã•ã‚Œã‚‹ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã¯ç”»é¢ã®ä¸­å¿ƒã‚’{0,0}ã€å·¦ä¸Šã‚’{ç”»é¢ã®å¹…*-0.5,ç”»é¢ã®é«˜ã•*-0.5}
+	/// å³ä¸‹ã‚’{ ç”»é¢ã®å¹… * 0.5,ç”»é¢ã®é«˜ã• * 0.5 }ã¨ã™ã‚‹åº§æ¨™ç³»ã§ã™ã€‚
 	/// </remarks>
-	/// <param name="screenPos">ƒXƒNƒŠ[ƒ“À•W‚ÌŠi”[æ</param>
-	/// <param name="worldPos">ƒ[ƒ‹ƒhÀ•W</param>
+	/// <param name="screenPos">ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã®æ ¼ç´å…ˆ</param>
+	/// <param name="worldPos">ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™</param>
 	void CalcScreenPositionFromWorldPosition(Vector2& screenPos, const Vector3& worldPos) const;
 
 protected:
-	float		m_targetToPositionLen = 1.0f;			//’‹“_‚Æ‹“_‚Ü‚Å‹——£B
-	Vector3		m_position = {0.0f, 0.0f, 1.0f};		//ƒJƒƒ‰ˆÊ’uB
-	Vector3		m_up = g_vec3Up;						//ƒJƒƒ‰‚Ìã•ûŒüB
-	Vector3		m_target;								//ƒJƒƒ‰‚Ì’†~“_B
-	Matrix		m_viewMatrix;							//ƒrƒ…[s—ñB
-	Matrix		m_projectionMatrix;						//ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñB
-	Matrix		m_viewProjectionMatrix;					//ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñB
-	Matrix		m_viewMatrixInv;						//ƒrƒ…[s—ñ‚Ì‹ts—ñB
-	Matrix		m_cameraRotation;						//ƒJƒƒ‰‚Ì‰ñ“]s—ñB
-	Vector3		m_forward = g_vec3Front;				//ƒJƒƒ‰‚Ì‘O•ûB
-	Vector3		m_right = g_vec3Right;					//ƒJƒƒ‰‚Ì‰EB
-	float		m_near = 1.0f;							//‹ß•½–ÊB
-	float		m_far = 5000.0f;						//‰“•½–ÊB
-	float		m_viewAngle = Math::DegToRad(60.0f);	//‰æŠp(ƒ‰ƒWƒAƒ“)B
-	float		m_aspect = 1.0f;						//ƒAƒXƒyƒNƒg”äB
-	float		m_width = 1280.0f;						//•½s“Š‰es—ñ‚ğì¬‚·‚é‚Æ‚«‚Ég—p‚³‚ê‚é•B
-	float		m_height = 720.0f;						//•½s“Š‰es—ñ‚ğì¬‚·‚é‚Æ‚«‚Ég—p‚³‚ê‚é‚‚³B
-	EnUpdateProjMatrixFunc m_updateProjMatrixFunc = enUpdateProjMatrixFunc_Perspective;	//ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ÌXV‚Ìd•ûB
+	float		m_targetToPositionLen = 1.0f;			//æ³¨è¦–ç‚¹ã¨è¦–ç‚¹ã¾ã§è·é›¢ã€‚
+	Vector3		m_position = {0.0f, 0.0f, 1.0f};		//ã‚«ãƒ¡ãƒ©ä½ç½®ã€‚
+	Vector3		m_up = g_vec3Up;						//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘ã€‚
+	Vector3		m_target;								//ã‚«ãƒ¡ãƒ©ã®ä¸­æ­¢ç‚¹ã€‚
+	Matrix		m_viewMatrix;							//ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã€‚
+	Matrix		m_projectionMatrix;						//ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã€‚
+	Matrix		m_viewProjectionMatrix;					//ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã€‚
+	Matrix		m_viewMatrixInv;						//ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®é€†è¡Œåˆ—ã€‚
+	Matrix		m_cameraRotation;						//ã‚«ãƒ¡ãƒ©ã®å›è»¢è¡Œåˆ—ã€‚
+	Vector3		m_forward = g_vec3Front;				//ã‚«ãƒ¡ãƒ©ã®å‰æ–¹ã€‚
+	Vector3		m_right = g_vec3Right;					//ã‚«ãƒ¡ãƒ©ã®å³ã€‚
+	float		m_near = 1.0f;							//è¿‘å¹³é¢ã€‚
+	float		m_far = 5000.0f;						//é å¹³é¢ã€‚
+	float		m_viewAngle = Math::DegToRad(60.0f);	//ç”»è§’(ãƒ©ã‚¸ã‚¢ãƒ³)ã€‚
+	float		m_aspect = 1.0f;						//ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã€‚
+	float		m_width = 1280.0f;						//å¹³è¡ŒæŠ•å½±è¡Œåˆ—ã‚’ä½œæˆã™ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹å¹…ã€‚
+	float		m_height = 720.0f;						//å¹³è¡ŒæŠ•å½±è¡Œåˆ—ã‚’ä½œæˆã™ã‚‹ã¨ãã«ä½¿ç”¨ã•ã‚Œã‚‹é«˜ã•ã€‚
+	EnUpdateProjMatrixFunc m_updateProjMatrixFunc = enUpdateProjMatrixFunc_Perspective;	//ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã®æ›´æ–°ã®ä»•æ–¹ã€‚
 	bool		m_isNeedUpdateProjectionMatrix = true;
-	bool		m_isDirty = false;						//ƒ_[ƒeƒBƒtƒ‰ƒOB
+	bool		m_isDirty = false;						//ãƒ€ãƒ¼ãƒ†ã‚£ãƒ•ãƒ©ã‚°ã€‚
 };

@@ -1,43 +1,43 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-// ’¸“_\‘¢‘Ì
+// é ‚ç‚¹æ§‹é€ ä½“
 struct SimpleVertex
 {
-    float x, y, z; // ’¸“_À•W
+    float x, y, z; // é ‚ç‚¹åº§æ¨™
 };
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // 1. ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // 1. ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    // 2. ƒVƒF[ƒ_[‚ğƒ[ƒh
+    // 2. ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰
     Shader vs, ps;
     vs.LoadVS("Assets/shader/sample.fx", "VSMain");
     ps.LoadPS("Assets/shader/sample.fx", "PSMain");
 
-    // 3. ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // 3. ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     PipelineState pipelineState;
     InitPipelineState(pipelineState, rootSignature, vs, ps);
 
-    // 4. OŠpŒ`‚Ì’¸“_ƒoƒbƒtƒ@‚ğì¬
-    // ’¸“_”z—ñ‚ğ’è‹`
+    // 4. ä¸‰è§’å½¢ã®é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
+    // é ‚ç‚¹é…åˆ—ã‚’å®šç¾©
     SimpleVertex vertices[] = {
         { -0.5f, -0.5f, 0.0f },
         { 0.0f, 0.5f, 0.0f },
@@ -48,8 +48,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     triangleVB.Init(sizeof(vertices), sizeof(vertices[0]));
     triangleVB.Copy(vertices);
 
-    // 5. OŠpŒ`‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬
-    // ƒCƒ“ƒfƒbƒNƒX”z—ñ
+    // 5. ä¸‰è§’å½¢ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
     uint16_t indices[] = {
         0,1,2
     };
@@ -58,48 +58,48 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     triangleIB.Copy(indices);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // 1. ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğİ’è
+        // 1. ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’è¨­å®š
         renderContext.SetRootSignature(rootSignature);
 
-        // 2. ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğİ’è
+        // 2. ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®š
         renderContext.SetPipelineState(pipelineState);
 
-        // 3. ƒvƒŠƒ~ƒeƒBƒu‚Ìƒgƒ|ƒƒW[‚ğİ’è
+        // 3. ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ã®ãƒˆãƒãƒ­ã‚¸ãƒ¼ã‚’è¨­å®š
         renderContext.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-        // 4. ’¸“_ƒoƒbƒtƒ@‚ğİ’è
+        // 4. é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®š
         renderContext.SetVertexBuffer(triangleVB);
 
-        // 5. ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğİ’è
+        // 5. ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®š
         renderContext.SetIndexBuffer(triangleIB);
 
-        // 6. ƒhƒ[ƒR[ƒ‹
+        // 6. ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«
         renderContext.DrawIndexed(3);
 
         /////////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -107,17 +107,17 @@ void InitRootSignature( RootSignature& rs )
             D3D12_TEXTURE_ADDRESS_MODE_WRAP,
             D3D12_TEXTURE_ADDRESS_MODE_WRAP);
 }
-// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ì‰Šú‰»
+// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®åˆæœŸåŒ–
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps)
 {
 
-    // ’¸“_ƒŒƒCƒAƒEƒg‚ğ’è‹`‚·‚é
+    // é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹
     D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
     {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
     };
 
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
     psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
     psoDesc.pRootSignature = rs.Get();

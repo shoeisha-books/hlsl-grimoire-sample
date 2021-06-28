@@ -1,88 +1,88 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-// ’¸“_\‘¢‘Ì
+// é ‚ç‚¹æ§‹é€ ä½“
 struct SimpleVertex
 {
-    Vector4 pos;    // ’¸“_À•W
-    Vector2 uv;     // UVÀ•W
+    Vector4 pos;    // é ‚ç‚¹åº§æ¨™
+    Vector2 uv;     // UVåº§æ¨™
 };
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // Sprite‚Ì‰Šú‰»
-    // ‚Ü‚¸‚ÍSpriteƒNƒ‰ƒX‚Ì‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğì¬‚·‚é
+    // Spriteã®åˆæœŸåŒ–
+    // ã¾ãšã¯Spriteã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹
     SpriteInitData spriteInitData;
 
-    // ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹ƒpƒX‚ğw’è
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’æŒ‡å®š
     spriteInitData.m_ddsFilePath[0] = "Assets/image/test.dds";
 
-    // ƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğw’è
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’æŒ‡å®š
     spriteInitData.m_fxFilePath = "Assets/shader/sample.fx";
 
-    // ƒXƒvƒ‰ƒCƒg‚Ì•‚Æ‚‚³‚ğw’è
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å¹…ã¨é«˜ã•ã‚’æŒ‡å®š
     spriteInitData.m_width = FRAME_BUFFER_W;
     spriteInitData.m_height = FRAME_BUFFER_H;
 
-    // ƒƒCƒvƒTƒCƒY
+    // ãƒ¯ã‚¤ãƒ—ã‚µã‚¤ã‚º
     float monochromeRate = 0.0f;
     spriteInitData.m_expandConstantBuffer = &monochromeRate;
     spriteInitData.m_expandConstantBufferSize = sizeof(monochromeRate);
 
-    // SpriteƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg‚ğ’è‹`‚µ‚Ä‰Šú‰»‚·‚é
+    // Spriteã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å®šç¾©ã—ã¦åˆæœŸåŒ–ã™ã‚‹
     Sprite test2D;
 
-    // Init()‚É‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğ“n‚µ‚Ä‰Šú‰»‚·‚é
+    // Init()ã«åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¸¡ã—ã¦åˆæœŸåŒ–ã™ã‚‹
     test2D.Init(spriteInitData);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
-        // ƒƒCƒvƒTƒCƒY‚ğ‘‚â‚µ‚Ä­‚µ‚¸‚ÂƒƒCƒv‚³‚¹‚é
+        // ãƒ¯ã‚¤ãƒ—ã‚µã‚¤ã‚ºã‚’å¢—ã‚„ã—ã¦å°‘ã—ãšã¤ãƒ¯ã‚¤ãƒ—ã•ã›ã‚‹
         monochromeRate += 0.01f;
         if (monochromeRate > 1.0f)
         {
             monochromeRate = 1.0f;
         }
 
-        // ƒXƒvƒ‰ƒCƒg‚Ìƒhƒ[ƒR[ƒ‹‚ğÀs‚·‚é
+        // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«ã‚’å®Ÿè¡Œã™ã‚‹
         test2D.Draw(renderContext);
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -91,17 +91,17 @@ void InitRootSignature(RootSignature& rs)
             D3D12_TEXTURE_ADDRESS_MODE_WRAP);
 }
 
-// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ì‰Šú‰»
+// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®åˆæœŸåŒ–
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps)
 {
-    // ’¸“_ƒŒƒCƒAƒEƒg‚ğ’è‹`‚·‚é
+    // é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹
     D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
     {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
         { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 16, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
     };
 
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
     psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
     psoDesc.pRootSignature = rs.Get();

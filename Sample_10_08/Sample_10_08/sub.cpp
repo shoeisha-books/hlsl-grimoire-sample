@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "sub.h"
 
 void InitMainDepthRenderTarget(RenderTarget& mainRenderTarget, RenderTarget& depthRenderTarget)
 {
-    //ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ[“xƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬B
-   //ƒV[ƒ“‚ÌƒJƒ‰[‚ğ•`‚«‚±‚ŞƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬B
+    //ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨æ·±åº¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã€‚
+   //ã‚·ãƒ¼ãƒ³ã®ã‚«ãƒ©ãƒ¼ã‚’æãã“ã‚€ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã€‚
     mainRenderTarget.Create(
         1280,
         720,
@@ -13,7 +13,7 @@ void InitMainDepthRenderTarget(RenderTarget& mainRenderTarget, RenderTarget& dep
         DXGI_FORMAT_R32G32B32A32_FLOAT,
         DXGI_FORMAT_D32_FLOAT
     );
-    //ƒV[ƒ“‚ÌƒJƒƒ‰‹óŠÔ‚Å‚ÌZ’l‚ğ‘‚«‚±‚ŞƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬B
+    //ã‚·ãƒ¼ãƒ³ã®ã‚«ãƒ¡ãƒ©ç©ºé–“ã§ã®Zå€¤ã‚’æ›¸ãã“ã‚€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã€‚
     float clearColor[4] = { 10000.0f, 10000.0f, 10000.0f, 1.0f };
     depthRenderTarget.Create(
         1280,
@@ -28,36 +28,36 @@ void InitMainDepthRenderTarget(RenderTarget& mainRenderTarget, RenderTarget& dep
 void InitCombimeBokeImageToSprite(Sprite& combineBokeImageSprite, Texture& bokeTexture, Texture& depthTexture)
 {
     SpriteInitData combineBokeImageSpriteInitData;
-    //g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Í‚Q–‡B
+    //ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯ï¼’æšã€‚
     combineBokeImageSpriteInitData.m_textures[0] = &bokeTexture;
     combineBokeImageSpriteInitData.m_textures[1] = &depthTexture;
     combineBokeImageSpriteInitData.m_width = 1280;
     combineBokeImageSpriteInitData.m_height = 720;
     combineBokeImageSpriteInitData.m_fxFilePath = "Assets/shader/preset/samplePostEffect.fx";
     combineBokeImageSpriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    // ‹——£‚ğ—˜—p‚µ‚Äƒ{ƒP‰æ‘œ‚ğƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒfƒBƒ“ƒO‚·‚é‚Ì‚ÅA”¼“§–¾‡¬ƒ‚[ƒh‚É‚·‚éB
+    // è·é›¢ã‚’åˆ©ç”¨ã—ã¦ãƒœã‚±ç”»åƒã‚’ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã™ã‚‹ã®ã§ã€åŠé€æ˜åˆæˆãƒ¢ãƒ¼ãƒ‰ã«ã™ã‚‹ã€‚
     combineBokeImageSpriteInitData.m_alphaBlendMode = AlphaBlendMode_Trans;
-    // ‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğ—˜—p‚µ‚ÄƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚éB
+    // åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’åˆ©ç”¨ã—ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚
    
     combineBokeImageSprite.Init(combineBokeImageSpriteInitData);
 }
 void InitCopyToFrameBufferTargetSprite(Sprite& copyToFrameBufferSprite, Texture& srcTexture)
 {
     SpriteInitData spriteInitData;
-    // ƒeƒNƒXƒ`ƒƒ‚ÍyBlurRenderTarget‚ÌƒJƒ‰[ƒoƒbƒtƒ@[
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯yBlurRenderTargetã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼
     spriteInitData.m_textures[0] = &srcTexture;
-    // ƒŒƒ“ƒ_ƒŠƒ“ƒOæ‚ªƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚È‚Ì‚ÅA‰ğ‘œ“x‚ÍƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚Æ“¯‚¶
+    // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å…ˆãŒãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ãªã®ã§ã€è§£åƒåº¦ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã¨åŒã˜
     spriteInitData.m_width = 1280;
     spriteInitData.m_height = 720;
-    // ƒ{ƒP‰æ‘œ‚ğ‚»‚Ì‚Ü‚Ü“\‚è•t‚¯‚é‚¾‚¯‚È‚Ì‚ÅA’Êí‚Ì2D•`‰æ‚ÌƒVƒF[ƒ_[‚ğw’è‚·‚é
+    // ãƒœã‚±ç”»åƒã‚’ãã®ã¾ã¾è²¼ã‚Šä»˜ã‘ã‚‹ã ã‘ãªã®ã§ã€é€šå¸¸ã®2Dæç”»ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
     spriteInitData.m_fxFilePath = "Assets/shader/preset/sample2D.fx";
     spriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-    // ‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğg‚Á‚ÄAƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½¿ã£ã¦ã€ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
     copyToFrameBufferSprite.Init(spriteInitData);
 }
 void InitBGModel(Model& model, Light& light)
 {
-    //Œõ‚ğ‹­‚ß‚Éİ’è‚·‚éB
+    //å…‰ã‚’å¼·ã‚ã«è¨­å®šã™ã‚‹ã€‚
     light.directionalLight[0].color.x = 2.0f;
     light.directionalLight[0].color.y = 2.0f;
     light.directionalLight[0].color.z = 2.0f;

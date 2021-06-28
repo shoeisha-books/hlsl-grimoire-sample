@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CascadeShadowMapMatrix.h"
 
 namespace myRenderer
@@ -7,17 +7,17 @@ namespace myRenderer
     {
         void CascadeShadowMapMatrix::CalcLightViewProjectionCropMatrix(Vector3 lightDirection)
         {
-            // ƒ‰ƒCƒgƒJƒƒ‰‚ğŒvZ‚·‚é
+            // ãƒ©ã‚¤ãƒˆã‚«ãƒ¡ãƒ©ã‚’è¨ˆç®—ã™ã‚‹
             Camera lightCamera;
             Vector3 lightPos;
             float distLig = g_camera3D->GetFar() * 0.1f;
-            lightPos = lightDirection * -distLig;    // ƒ‰ƒCƒg‚Ü‚Å‚Ì‹——£‚ÍŠO‚©‚çw’è‚Å‚«‚é‚æ‚¤‚É‚·‚é
+            lightPos = lightDirection * -distLig;    // ãƒ©ã‚¤ãƒˆã¾ã§ã®è·é›¢ã¯å¤–ã‹ã‚‰æŒ‡å®šã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
             lightCamera.SetPosition(lightPos);
             lightCamera.SetTarget(0.0f, 0.0f, 0.0f);
-            // ã•ûŒü‚ğİ’è
+            // ä¸Šæ–¹å‘ã‚’è¨­å®š
             if (fabsf(lightDirection.y) > 0.9999f)
             {
-                // ‚Ù‚Ú^ãA^‰º‚ğŒü‚¢‚Ä‚¢‚é
+                // ã»ã¼çœŸä¸Šã€çœŸä¸‹ã‚’å‘ã„ã¦ã„ã‚‹
                 lightCamera.SetUp(g_vec3AxisX);
             }
             else
@@ -33,75 +33,75 @@ namespace myRenderer
 
             const auto& lvpMatrix = lightCamera.GetViewProjectionMatrix();
 
-            // ƒJƒƒ‰‚Ìƒtƒ@[ƒNƒŠƒbƒv‚©‚çŒvZ‚·‚é‚æ‚¤‚É‚·‚é
-            // •ªŠ„ƒGƒŠƒA‚ÌÅ‘å[“x’l‚ğ’è‹`‚·‚é
+            // ã‚«ãƒ¡ãƒ©ã®ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—ã‹ã‚‰è¨ˆç®—ã™ã‚‹ã‚ˆã†ã«ã™ã‚‹
+            // åˆ†å‰²ã‚¨ãƒªã‚¢ã®æœ€å¤§æ·±åº¦å€¤ã‚’å®šç¾©ã™ã‚‹
             float cascadeAreaTbl[NUM_SHADOW_MAP] = {
-                g_camera3D->GetFar() * 0.05f,    // ‹ß‰e‚ğ‰f‚·Å‘å[“x’l
-                g_camera3D->GetFar() * 0.3f,     // ’†‰e‚ğ‰f‚·Å‘å[“x’l
-                g_camera3D->GetFar(),            // ‰“‰e‚ğ‰f‚·Å‘å[“x’lB3–‡–Ú‚ÌÅ‘å[“x‚ÍƒJƒƒ‰‚ÌFarƒNƒŠƒbƒv
+                g_camera3D->GetFar() * 0.05f,    // è¿‘å½±ã‚’æ˜ ã™æœ€å¤§æ·±åº¦å€¤
+                g_camera3D->GetFar() * 0.3f,     // ä¸­å½±ã‚’æ˜ ã™æœ€å¤§æ·±åº¦å€¤
+                g_camera3D->GetFar(),            // é å½±ã‚’æ˜ ã™æœ€å¤§æ·±åº¦å€¤ã€‚3æšç›®ã®æœ€å¤§æ·±åº¦ã¯ã‚«ãƒ¡ãƒ©ã®Farã‚¯ãƒªãƒƒãƒ—
             };
 
-            // ƒJƒƒ‰‚Ì‘O•ûŒüA‰E•ûŒüAã•ûŒü‚ğ‹‚ß‚é
-            // ‘O•ûŒü‚Æ‰E•ûŒü‚Í‚·‚Å‚ÉŒvZÏ‚İ‚È‚Ì‚ÅA‚»‚ê‚ğˆø‚Á’£‚Á‚Ä‚­‚é
+            // ã‚«ãƒ¡ãƒ©ã®å‰æ–¹å‘ã€å³æ–¹å‘ã€ä¸Šæ–¹å‘ã‚’æ±‚ã‚ã‚‹
+            // å‰æ–¹å‘ã¨å³æ–¹å‘ã¯ã™ã§ã«è¨ˆç®—æ¸ˆã¿ãªã®ã§ã€ãã‚Œã‚’å¼•ã£å¼µã£ã¦ãã‚‹
             const auto& cameraForward = g_camera3D->GetForward();
             const auto& cameraRight = g_camera3D->GetRight();
 
-            // ƒJƒƒ‰‚Ìã•ûŒü‚Í‘O•ûŒü‚Æ‰E•ûŒü‚ÌŠOÏ‚Å‹‚ß‚é
+            // ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘ã¯å‰æ–¹å‘ã¨å³æ–¹å‘ã®å¤–ç©ã§æ±‚ã‚ã‚‹
             Vector3 cameraUp;
             cameraUp.Cross(cameraForward, cameraRight);
 
-            // nearDepth‚ÍƒGƒŠƒA‚ÌÅ¬[“x’l‚ğ•\‚·
-            // ˆê”Ô‹ß‚¢ƒGƒŠƒA‚ÌÅ¬[“x’l‚ÍƒJƒƒ‰‚ÌƒjƒAƒNƒŠƒbƒv
+            // nearDepthã¯ã‚¨ãƒªã‚¢ã®æœ€å°æ·±åº¦å€¤ã‚’è¡¨ã™
+            // ä¸€ç•ªè¿‘ã„ã‚¨ãƒªã‚¢ã®æœ€å°æ·±åº¦å€¤ã¯ã‚«ãƒ¡ãƒ©ã®ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—
             float nearDepth = g_camera3D->GetNear();
             for (int areaNo = 0; areaNo < NUM_SHADOW_MAP; areaNo++)
             {
-                // ƒGƒŠƒA‚ğ“à•ï‚·‚é‹‘ä‚Ì8’¸“_‚ğ‹‚ß‚é
-                // ƒGƒŠƒA‚Ì‹ß•½–Ê‚Ì’†S‚©‚ç‚Ìã–ÊA‰º–Ê‚Ü‚Å‚Ì‹——£‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã‚’å†…åŒ…ã™ã‚‹è¦–éŒå°ã®8é ‚ç‚¹ã‚’æ±‚ã‚ã‚‹
+                // ã‚¨ãƒªã‚¢ã®è¿‘å¹³é¢ã®ä¸­å¿ƒã‹ã‚‰ã®ä¸Šé¢ã€ä¸‹é¢ã¾ã§ã®è·é›¢ã‚’æ±‚ã‚ã‚‹
                 float nearY = tanf(g_camera3D->GetViewAngle() * 0.5f) * nearDepth;
 
-                // ƒGƒŠƒA‚Ì‹ß•½–Ê‚Ì’†S‚©‚ç‚Ì‰E–ÊA¶–Ê‚Ü‚Å‚Ì‹——£‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã®è¿‘å¹³é¢ã®ä¸­å¿ƒã‹ã‚‰ã®å³é¢ã€å·¦é¢ã¾ã§ã®è·é›¢ã‚’æ±‚ã‚ã‚‹
                 float nearX = nearY * g_camera3D->GetAspect();
 
-                // ƒGƒŠƒA‚Ì‰“•½–Ê‚Ì’†S‚©‚ç‚Ìã–ÊA‰º–Ê‚Ü‚Å‚Ì‹——£‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã®é å¹³é¢ã®ä¸­å¿ƒã‹ã‚‰ã®ä¸Šé¢ã€ä¸‹é¢ã¾ã§ã®è·é›¢ã‚’æ±‚ã‚ã‚‹
                 float farY = tanf(g_camera3D->GetViewAngle() * 0.5f) * cascadeAreaTbl[areaNo];
 
-                // ƒGƒŠƒA‚Ì‰“•½–Ê‚Ì’†S‚©‚ç‚Ì‰E–ÊA¶–Ê‚Ü‚Å‚Ì‹——£‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã®é å¹³é¢ã®ä¸­å¿ƒã‹ã‚‰ã®å³é¢ã€å·¦é¢ã¾ã§ã®è·é›¢ã‚’æ±‚ã‚ã‚‹
                 float farX = farY * g_camera3D->GetAspect();
 
-                // ƒGƒŠƒA‚Ì‹ß•½–Ê‚Ì’†SÀ•W‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã®è¿‘å¹³é¢ã®ä¸­å¿ƒåº§æ¨™ã‚’æ±‚ã‚ã‚‹
                 Vector3 nearPos = g_camera3D->GetPosition() + cameraForward * nearDepth;
 
-                // ƒGƒŠƒA‚Ì‰“•½–Ê‚Ì’†SÀ•W‚ğ‹‚ß‚é
+                // ã‚¨ãƒªã‚¢ã®é å¹³é¢ã®ä¸­å¿ƒåº§æ¨™ã‚’æ±‚ã‚ã‚‹
                 Vector3 farPos = g_camera3D->GetPosition() + cameraForward * cascadeAreaTbl[areaNo];
 
-                // 8’¸“_‚ğ‹‚ß‚é
+                // 8é ‚ç‚¹ã‚’æ±‚ã‚ã‚‹
                 Vector3 vertex[8];
 
-                // ‹ß•½–Ê‚Ì‰Eã‚Ì’¸“_
+                // è¿‘å¹³é¢ã®å³ä¸Šã®é ‚ç‚¹
                 vertex[0] += nearPos + cameraUp * nearY + cameraRight * nearX;
 
-                // ‹ß•½–Ê‚Ì¶ã‚Ì’¸“_
+                // è¿‘å¹³é¢ã®å·¦ä¸Šã®é ‚ç‚¹
                 vertex[1] += nearPos + cameraUp * nearY + cameraRight * -nearX;
 
-                // ‹ß•½–Ê‚Ì‰E‰º‚Ì’¸“_
+                // è¿‘å¹³é¢ã®å³ä¸‹ã®é ‚ç‚¹
                 vertex[2] += nearPos + cameraUp * -nearY + cameraRight * nearX;
 
-                // ‹ß•½–Ê‚Ì¶‰º‚Ì’¸“_
+                // è¿‘å¹³é¢ã®å·¦ä¸‹ã®é ‚ç‚¹
                 vertex[3] += nearPos + cameraUp * -nearY + cameraRight * -nearX;
 
-                // ‰“•½–Ê‚Ì‰Eã‚Ì’¸“_
+                // é å¹³é¢ã®å³ä¸Šã®é ‚ç‚¹
                 vertex[4] += farPos + cameraUp * farY + cameraRight * farX;
 
-                // ‰“•½–Ê‚Ì¶ã‚Ì’¸“_
+                // é å¹³é¢ã®å·¦ä¸Šã®é ‚ç‚¹
                 vertex[5] += farPos + cameraUp * farY + cameraRight * -farX;
 
-                // ‰“•½–Ê‚Ì‰E‰º‚Ì’¸“_
+                // é å¹³é¢ã®å³ä¸‹ã®é ‚ç‚¹
                 vertex[6] += farPos + cameraUp * -farY + cameraRight * farX;
 
-                // ‰“•½–Ê‚Ì¶‰º‚Ì’¸“_
+                // é å¹³é¢ã®å·¦ä¸‹ã®é ‚ç‚¹
                 vertex[7] += farPos + cameraUp * -farY + cameraRight * -farX;
 
-                // 8’¸“_‚ğƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“‹óŠÔ‚É•ÏŠ·‚µ‚ÄA8’¸“_‚ÌÅ‘å’lAÅ¬’l‚ğ‹‚ß‚é
+                // 8é ‚ç‚¹ã‚’ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ç©ºé–“ã«å¤‰æ›ã—ã¦ã€8é ‚ç‚¹ã®æœ€å¤§å€¤ã€æœ€å°å€¤ã‚’æ±‚ã‚ã‚‹
                 Vector3 vMax, vMin;
                 vMax = { -FLT_MAX, -FLT_MAX, -FLT_MAX };
                 vMin = { FLT_MAX,  FLT_MAX,  FLT_MAX };
@@ -112,7 +112,7 @@ namespace myRenderer
                     vMin.Min(v);
                 }
 
-                // ƒNƒƒbƒvs—ñ‚ğ‹‚ß‚é
+                // ã‚¯ãƒ­ãƒƒãƒ—è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
                 float xScale = 2.0f / (vMax.x - vMin.x);
                 float yScale = 2.0f / (vMax.y - vMin.y);
                 float xOffset = (vMax.x + vMin.x) * -0.5f * xScale;
@@ -123,10 +123,10 @@ namespace myRenderer
                 clopMatrix.m[3][0] = xOffset;
                 clopMatrix.m[3][1] = yOffset;
 
-                // ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ÉƒNƒƒbƒvs—ñ‚ğæZ‚·‚é
+                // ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã«ã‚¯ãƒ­ãƒƒãƒ—è¡Œåˆ—ã‚’ä¹—ç®—ã™ã‚‹
                 m_lvpcMatrix[areaNo] = lvpMatrix * clopMatrix;
 
-                // Ÿ‚ÌƒGƒŠƒA‚Ì‹ß•½–Ê‚Ü‚Å‚Ì‹——£‚ğ‘ã“ü‚·‚é
+                // æ¬¡ã®ã‚¨ãƒªã‚¢ã®è¿‘å¹³é¢ã¾ã§ã®è·é›¢ã‚’ä»£å…¥ã™ã‚‹
                 nearDepth = cascadeAreaTbl[areaNo];
             }
         }

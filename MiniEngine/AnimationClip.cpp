@@ -1,5 +1,5 @@
-/*!
-*@brief	ƒAƒjƒ[ƒVƒ‡ƒ“ƒNƒŠƒbƒvB
+ï»¿/*!
+*@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒªãƒƒãƒ—ã€‚
 */
 
 #include "stdafx.h"
@@ -19,7 +19,7 @@ void AnimationClip::Load(const char* filePath)
 
 void AnimationClip::BuildKeyFramesAndAnimationEvents()
 {
-	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ì\’zB
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®æ§‹ç¯‰ã€‚
 	auto numAnimEvent = m_tkaFile.GetNumAnimationEvent();
 	if (numAnimEvent > 0) {
 		m_animationEvent = std::make_unique<AnimationEvent[]>(numAnimEvent);
@@ -34,7 +34,7 @@ void AnimationClip::BuildKeyFramesAndAnimationEvents()
 			});
 
 	}
-	//ƒL[ƒtƒŒ[ƒ€î•ñ‚Ì\’zB
+	//ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ æƒ…å ±ã®æ§‹ç¯‰ã€‚
 	m_keyframes.reserve(m_tkaFile.GetNumKeyFrame());
 	m_tkaFile.QueryKeyFrames([&](const TkaFile::KeyFrame & tkaKeyFrame) {
 		auto keyframe = std::make_unique<KeyFrame>();
@@ -48,7 +48,7 @@ void AnimationClip::BuildKeyFramesAndAnimationEvents()
 		}
 		m_keyframes.push_back(std::move(keyframe));
 		});
-	//ƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒX‚²‚Æ‚ÌƒL[ƒtƒŒ[ƒ€‚Ì˜AŒ‹ƒŠƒXƒg‚ğì¬‚·‚éB
+	//ãƒœãƒ¼ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã”ã¨ã®ã‚­ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã®é€£çµãƒªã‚¹ãƒˆã‚’ä½œæˆã™ã‚‹ã€‚
 	m_keyFramePtrListArray.resize(MAX_BONE);
 	for (auto& keyframe : m_keyframes) {
 		m_keyFramePtrListArray[keyframe->boneIndex].push_back(keyframe.get());

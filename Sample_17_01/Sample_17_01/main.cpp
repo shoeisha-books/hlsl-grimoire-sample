@@ -1,13 +1,13 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include <time.h>
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     srand(time(nullptr) );
@@ -18,24 +18,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // step-1 ƒ‚ƒfƒ‹‚ðƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚É’Ç‰Á‚·‚é
+    // step-1 ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«è¿½åŠ ã™ã‚‹
 
-    // step-2 “o˜^‚³‚ê‚½ƒ‚ƒfƒ‹‚ðŽg‚Á‚ÄƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚ð\’z
+    // step-2 ç™»éŒ²ã•ã‚ŒãŸãƒ¢ãƒ‡ãƒ«ã‚’ä½¿ã£ã¦ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã‚’æ§‹ç¯‰
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJŽn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒJƒƒ‰‚ð“®‚©‚·
+        // ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™
         if (g_pad[0]->IsPress(enButtonLB1))
         {
             g_camera3D->MoveUp(g_pad[0]->GetLStickYF());
@@ -52,15 +52,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_camera3D->RotateOriginTarget(qRotY);
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ð•`‚­ƒR[ƒh‚ð‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-3 ƒŒƒC‚ðƒfƒBƒXƒpƒbƒ`
+        // step-3 ãƒ¬ã‚¤ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
 
         //////////////////////////////////////
-        // ŠG‚ð•`‚­ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;

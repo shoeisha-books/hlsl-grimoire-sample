@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace raytracing {
 	using ID3D12ResourcePtr = CComPtr<ID3D12Resource>;
@@ -6,16 +6,16 @@ namespace raytracing {
 	class World;
 	class PSO;
 	/// <summary>
-	/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«
 	/// </summary>
 	/// <remark>
-	/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÍƒŒƒC‚ÌƒfƒBƒXƒpƒbƒ`‚Åg—p‚³‚ê‚éA
-	/// ƒVƒF[ƒ_[‚âƒŠƒ\[ƒX‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ÌƒAƒhƒŒƒX‚È‚Ç‚ª“o˜^‚³‚ê‚Ä‚¢‚éƒe[ƒuƒ‹‚Å‚·B
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã¯ãƒ¬ã‚¤ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã§ä½¿ç”¨ã•ã‚Œã‚‹ã€
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚„ãƒªã‚½ãƒ¼ã‚¹ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ãªã©ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«ã§ã™ã€‚
 	/// </remark>
 	class ShaderTable {
 	public:
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ğ‰Šú‰»B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’åˆæœŸåŒ–ã€‚
 		/// </summary>
 		void Init(
 			const World& world,
@@ -24,7 +24,7 @@ namespace raytracing {
 		);
 	
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÌGPUã‚Ì‰¼‘zƒAƒhƒŒƒX‚ğæ“¾B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®GPUä¸Šã®ä»®æƒ³ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <returns></returns>
 		D3D12_GPU_VIRTUAL_ADDRESS GetGPUVirtualAddress() const
@@ -32,7 +32,7 @@ namespace raytracing {
 			return m_shaderTable->GetGPUVirtualAddress();
 		}
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚É‹L‰¯‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚Ì‚P—v‘f‚ÌƒTƒCƒY‚ğæ“¾B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¨˜æ†¶ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã®ï¼‘è¦ç´ ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <returns></returns>
 		uint32_t GetShaderTableEntrySize() const
@@ -40,7 +40,7 @@ namespace raytracing {
 			return m_shaderTableEntrySize;
 		}
 		/// <summary>
-		/// ƒŒƒCƒWƒFƒlƒŒ[ƒVƒ‡ƒ“ƒVƒF[ƒ_[‚Ì”‚ğæ“¾B
+		/// ãƒ¬ã‚¤ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <returns></returns>
 		int GetNumRayGenShader() const
@@ -48,7 +48,7 @@ namespace raytracing {
 			return m_numRayGenShader;
 		}
 		/// <summary>
-		/// ƒ~ƒXƒVƒF[ƒ_[‚Ì”‚ğæ“¾B
+		/// ãƒŸã‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <returns></returns>
 		int GetNumMissShader() const
@@ -56,10 +56,10 @@ namespace raytracing {
 			return m_numMissShader;
 		}
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚É“o˜^‚³‚ê‚Ä‚¢‚éƒqƒbƒgƒVƒF[ƒ_[‚Ì”‚ğæ“¾B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <remark>
-		/// ƒqƒbƒgƒVƒF[ƒ_[‚Ì”‚ÍƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”‚Æ“¯‚¶‚É‚È‚è‚Ü‚·B
+		/// ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ•°ã¨åŒã˜ã«ãªã‚Šã¾ã™ã€‚
 		/// </remark>
 		/// <returns></returns>
 		int GetNumHitShader() const
@@ -68,15 +68,15 @@ namespace raytracing {
 		}
 	private:
 		/// <summary>
-		/// ƒŒƒCƒWƒFƒlƒŒ[ƒVƒ‡ƒ“ƒVƒF[ƒ_[Aƒ~ƒXƒVƒF[ƒ_[AƒqƒbƒgƒVƒF[ƒ_[‚Ì”‚ğƒJƒEƒ“ƒg‚·‚éB
+		/// ãƒ¬ã‚¤ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€ãƒŸã‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã€‚
 		/// </summary>
 		void CountupNumGeyGenAndMissAndHitShader();
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚Ì1—v‘f‚ÌƒTƒCƒY‚ğŒvZ‚·‚éB
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®1è¦ç´ ã®ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã™ã‚‹ã€‚
 		/// </summary>
 		void CalcShaderTableEntrySize();
 	private:
-		ID3D12ResourcePtr m_shaderTable;			//ƒVƒF[ƒ_[ƒe[ƒuƒ‹B
+		ID3D12ResourcePtr m_shaderTable;			//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã€‚
 		uint32_t m_shaderTableEntrySize = 0;
 		int m_numRayGenShader = 0;
 		int m_numMissShader = 0;

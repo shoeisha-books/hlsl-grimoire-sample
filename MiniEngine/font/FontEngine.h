@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
 /// <summary>
-/// ƒtƒHƒ“ƒgƒGƒ“ƒWƒ“B
+/// ãƒ•ã‚©ãƒ³ãƒˆã‚¨ãƒ³ã‚¸ãƒ³ã€‚
 /// </summary>
 /// <remarks>
-/// DirectXTK‚ÌƒtƒHƒ“ƒg•\¦ˆ—‚Ì‰Šú‰»`‰ğ•ú‚ğs‚¤ƒNƒ‰ƒXB
-/// BeginDraw‚ÅƒtƒHƒ“ƒg‚Ì•`‰æŠJnADraw‚Å•`‰æƒŠƒNƒGƒXƒgAEnd‚ÅƒŠƒNƒGƒXƒg‚ğˆêŠ‡ˆ—B
-/// ƒtƒHƒ“ƒg‚Ì•`‰æ‚Í‚Ü‚Æ‚ß‚Äs‚¤‚Ù‚Ç‚‘¬‚É‚È‚è‚Ü‚·B
+/// DirectXTKã®ãƒ•ã‚©ãƒ³ãƒˆè¡¨ç¤ºå‡¦ç†ã®åˆæœŸåŒ–ï½è§£æ”¾ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹ã€‚
+/// BeginDrawã§ãƒ•ã‚©ãƒ³ãƒˆã®æç”»é–‹å§‹ã€Drawã§æç”»ãƒªã‚¯ã‚¨ã‚¹ãƒˆã€Endã§ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ä¸€æ‹¬å‡¦ç†ã€‚
+/// ãƒ•ã‚©ãƒ³ãƒˆã®æç”»ã¯ã¾ã¨ã‚ã¦è¡Œã†ã»ã©é«˜é€Ÿã«ãªã‚Šã¾ã™ã€‚
 /// </remarks>
 /// <example>
 /// Font font;
@@ -18,25 +18,25 @@ class FontEngine {
 	
 public:
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^B
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	~FontEngine();
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// •`‰æŠJnB
+	/// æç”»é–‹å§‹ã€‚
 	/// </summary>
 	void BeginDraw(RenderContext& rc);
 	/// <summary>
-	/// •¶š—ñ‚ğ•`‰æB
+	/// æ–‡å­—åˆ—ã‚’æç”»ã€‚
 	/// </summary>
-	/// <param name="position">À•W</param>
-	/// <param name="color">ƒJƒ‰[</param>
-	/// <param name="rotation">‰ñ“]</param>
-	/// <param name="scale">Šg‘å</param>
-	/// <param name="pivot">ƒsƒ{ƒbƒg</param>
+	/// <param name="position">åº§æ¨™</param>
+	/// <param name="color">ã‚«ãƒ©ãƒ¼</param>
+	/// <param name="rotation">å›è»¢</param>
+	/// <param name="scale">æ‹¡å¤§</param>
+	/// <param name="pivot">ãƒ”ãƒœãƒƒãƒˆ</param>
 	void Draw(
 		const wchar_t* text,
 		const Vector2& position,
@@ -46,11 +46,11 @@ public:
 		Vector2 pivot
 	);
 	/// <summary>
-	/// •`‰æI—¹B
+	/// æç”»çµ‚äº†ã€‚
 	/// </summary>
 	void EndDraw(RenderContext& rc);
 private:
-	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;	//ƒXƒvƒ‰ƒCƒgƒoƒbƒ`B
-	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;	//ƒXƒvƒ‰ƒCƒgƒtƒHƒ“ƒgB
-	ID3D12DescriptorHeap* m_srvDescriptorHeap = nullptr;	//SRV‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒvB
+	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒã€‚
+	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ã‚©ãƒ³ãƒˆã€‚
+	ID3D12DescriptorHeap* m_srvDescriptorHeap = nullptr;	//SRVã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã€‚
 };

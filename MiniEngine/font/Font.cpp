@@ -1,5 +1,5 @@
-/*!
-* @brief	ƒtƒHƒ“ƒgB
+ï»¿/*!
+* @brief	ãƒ•ã‚©ãƒ³ãƒˆã€‚
 */
 #include "stdafx.h"
 #include "FontEngine.h"
@@ -28,7 +28,7 @@ void Font::Draw(
 	}
 	pivot.y = 1.0f - pivot.y;
 	DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
-	//À•WŒn‚ğƒXƒvƒ‰ƒCƒg‚Æ‡‚í‚¹‚éB
+	//åº§æ¨™ç³»ã‚’ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã¨åˆã‚ã›ã‚‹ã€‚
 	Vector2 pos = position;
 	float frameBufferHalfWidth = g_graphicsEngine->GetFrameBufferWidth() * 0.5f;
 	float frameBufferHalfHeight = g_graphicsEngine->GetFrameBufferHeight() * 0.5f;
@@ -38,7 +38,7 @@ void Font::Draw(
 	auto& fontEngine = g_graphicsEngine->GetFontEngine();
 
 	if (m_isDrawShadow) {
-		//‰e‚ğ‘‚­B
+		//å½±ã‚’æ›¸ãã€‚
 		Vector2 offsetTbl[] = {
 			{ m_shadowOffset , 0.0f},
 			{ -m_shadowOffset , 0.0f },

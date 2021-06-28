@@ -1,28 +1,28 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "TrianglePolygon.h"
 
 void TrianglePolygon::Init(RootSignature& rs)
 {
-	//ƒVƒF[ƒ_[‚ğƒ[ƒhB
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	LoadShaders();
-	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬B
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã€‚
 	InitPipelineState(rs);
-	//’¸“_ƒoƒbƒtƒ@‚ğì¬B
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 	InitVertexBuffer();
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬B
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 	InitIndexBuffer();
 }
 void TrianglePolygon::Draw(RenderContext& rc)
 {
-	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğİ’èB
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®šã€‚
 	rc.SetPipelineState(m_pipelineState);
-	//ƒvƒŠƒ~ƒeƒBƒu‚Ìƒgƒ|ƒƒW[‚ğİ’èB
+	//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ã®ãƒˆãƒãƒ­ã‚¸ãƒ¼ã‚’è¨­å®šã€‚
 	rc.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//’¸“_ƒoƒbƒtƒ@‚ğİ’èB
+	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®šã€‚
 	rc.SetVertexBuffer(m_vertexBuffer);
-	//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğİ’èB
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®šã€‚
 	rc.SetIndexBuffer(m_indexBuffer);
-	//ƒhƒ[ƒR[ƒ‹
+	//ãƒ‰ãƒ­ãƒ¼ã‚³ãƒ¼ãƒ«
 	rc.DrawIndexed(3);
 }
 void TrianglePolygon::LoadShaders()
@@ -32,14 +32,14 @@ void TrianglePolygon::LoadShaders()
 }
 void TrianglePolygon::InitPipelineState(RootSignature& rs)
 {
-	// ’¸“_ƒŒƒCƒAƒEƒg‚ğ’è‹`‚·‚éB
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹ã€‚
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 	};
 
-	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬B
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã€‚
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
 	psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
 	psoDesc.pRootSignature = rs.Get();

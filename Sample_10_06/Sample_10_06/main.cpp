@@ -1,74 +1,74 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-const int NUM_DIRECTIONAL_LIGHT = 4; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+const int NUM_DIRECTIONAL_LIGHT = 4; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
 /// </summary>
 struct DirectionalLight
 {
-    Vector3 direction;  // ƒ‰ƒCƒg‚Ì•ûŒü
-    float pad0;         // ƒpƒfƒBƒ“ƒO
-    Vector4 color;      // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 direction;  // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+    float pad0;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+    Vector4 color;      // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
 };
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    Vector3 eyePos;         // ƒJƒƒ‰‚ÌˆÊ’u
-    float specPow;          // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-    Vector3 ambinetLight;   // ŠÂ‹«Œõ
+    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    Vector3 eyePos;         // ã‚«ãƒ¡ãƒ©ã®ä½ç½®
+    float specPow;          // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Š
+    Vector3 ambinetLight;   // ç’°å¢ƒå…‰
 };
 
 const int NUM_WEIGHTS = 8;
 
 /// <summary>
-/// ƒuƒ‰[—p‚Ìƒpƒ‰ƒ[ƒ^
+/// ãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 /// </summary>
 struct SBlurParam
 {
     float weights[NUM_WEIGHTS];
 };
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void InitModel(Model& plModel);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
     RootSignature rs;
     InitRootSignature(rs);
 
-    // 32ƒrƒbƒg‚Ì•‚“®¬”“_‚ÌƒJƒ‰[ƒoƒbƒtƒ@[‚ğ•Û‚µ‚½ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬‚·‚é
+    // 32ãƒ“ãƒƒãƒˆã®æµ®å‹•å°æ•°ç‚¹ã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä¿æŒã—ãŸãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã™ã‚‹
     RenderTarget mainRenderTarget;
     mainRenderTarget.Create(
         1280,
         720,
         1,
         1,
-        // y’–ÚzƒJƒ‰[ƒoƒbƒtƒ@[‚ÌƒtƒH[ƒ}ƒbƒg‚ğ32bit•‚“®¬”“_‚É‚µ‚Ä‚¢‚é
+        // ã€æ³¨ç›®ã€‘ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’32bitæµ®å‹•å°æ•°ç‚¹ã«ã—ã¦ã„ã‚‹
         DXGI_FORMAT_R32G32B32A32_FLOAT,
         DXGI_FORMAT_D32_FLOAT
     );
 
-    // ‹­‚¢Œõ‚Ìƒ‰ƒCƒg‚ğ—pˆÓ‚·‚é
+    // å¼·ã„å…‰ã®ãƒ©ã‚¤ãƒˆã‚’ç”¨æ„ã™ã‚‹
     Light light;
 
-    // Œõ‚ğ‹­‚ß‚Éİ’è‚·‚é
+    // å…‰ã‚’å¼·ã‚ã«è¨­å®šã™ã‚‹
     light.directionalLight[0].color.x = 10.8f;
     light.directionalLight[0].color.y = 10.8f;
     light.directionalLight[0].color.z = 10.8f;
@@ -83,160 +83,160 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     light.ambinetLight.z = 0.5f;
     light.eyePos = g_camera3D->GetPosition();
 
-    // ƒ‚ƒfƒ‹‚Ì‰Šú‰»î•ñ‚ğİ’è‚·‚é
+    // ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–æƒ…å ±ã‚’è¨­å®šã™ã‚‹
     ModelInitData plModelInitData;
 
-    // tkmƒtƒ@ƒCƒ‹‚ğw’è‚·‚é
+    // tkmãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
 
-    // ƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹‚ğw’è‚·‚é
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
 
-    // ƒ†[ƒU[Šg’£‚Ì’è”ƒoƒbƒtƒ@[‚É‘—‚éƒf[ƒ^‚ğw’è‚·‚é
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼æ‹¡å¼µã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«é€ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_expandConstantBuffer = &light;
 
-    // ƒ†[ƒU[Šg’£‚Ì’è”ƒoƒbƒtƒ@[‚É‘—‚éƒf[ƒ^‚ÌƒTƒCƒY‚ğw’è‚·‚é
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼æ‹¡å¼µã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«é€ã‚‹ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_expandConstantBufferSize = sizeof(light);
 
-    // ƒŒƒ“ƒ_ƒŠƒ“ƒO‚·‚éƒJƒ‰[ƒoƒbƒtƒ@[‚ÌƒtƒH[ƒ}ƒbƒg‚ğw’è‚·‚é
+    // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã™ã‚‹ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
-    // İ’è‚µ‚½‰Šú‰»î•ñ‚ğ‚à‚Æ‚Éƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // è¨­å®šã—ãŸåˆæœŸåŒ–æƒ…å ±ã‚’ã‚‚ã¨ã«ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     Model plModel;
     plModel.Init(plModelInitData);
 
-    // ‹P“x’Šo—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬
+    // è¼åº¦æŠ½å‡ºç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
     RenderTarget luminnceRenderTarget;
 
-    // ‰ğ‘œ“xAƒ~ƒbƒvƒ}ƒbƒvƒŒƒxƒ‹
+    // è§£åƒåº¦ã€ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ãƒ¬ãƒ™ãƒ«
     luminnceRenderTarget.Create(
-        1280,       // ‰ğ‘œ“x‚ÍƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ“¯‚¶
-        720,        // ‰ğ‘œ“x‚ÍƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ“¯‚¶
+        1280,       // è§£åƒåº¦ã¯ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨åŒã˜
+        720,        // è§£åƒåº¦ã¯ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨åŒã˜
         1,
         1,
-        // y’–ÚzƒJƒ‰[ƒoƒbƒtƒ@[‚ÌƒtƒH[ƒ}ƒbƒg‚ğ32bit•‚“®¬”“_‚É‚µ‚Ä‚¢‚é
+        // ã€æ³¨ç›®ã€‘ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’32bitæµ®å‹•å°æ•°ç‚¹ã«ã—ã¦ã„ã‚‹
         DXGI_FORMAT_R32G32B32A32_FLOAT,
         DXGI_FORMAT_D32_FLOAT
     );
 
-    // ‹P“x’Šo—p‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
-    // ‰Šú‰»î•ñ‚ğì¬‚·‚é
+    // è¼åº¦æŠ½å‡ºç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
+    // åˆæœŸåŒ–æƒ…å ±ã‚’ä½œæˆã™ã‚‹
     SpriteInitData luminanceSpriteInitData;
 
-    // ‹P“x’Šo—p‚ÌƒVƒF[ƒ_[‚Ìƒtƒ@ƒCƒ‹ƒpƒX‚ğw’è‚·‚é
+    // è¼åº¦æŠ½å‡ºç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’æŒ‡å®šã™ã‚‹
     luminanceSpriteInitData.m_fxFilePath = "Assets/shader/samplePostEffect.fx";
 
-    // ’¸“_ƒVƒF[ƒ_[‚ÌƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚ğw’è‚·‚é
+    // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã‚’æŒ‡å®šã™ã‚‹
     luminanceSpriteInitData.m_vsEntryPointFunc = "VSMain";
 
-    // ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ÌƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚ğw’è‚·‚é
+    // ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã‚’æŒ‡å®šã™ã‚‹
     luminanceSpriteInitData.m_psEntryPoinFunc = "PSSamplingLuminance";
 
-    // ƒXƒvƒ‰ƒCƒg‚Ì•‚Æ‚‚³‚ÍluminnceRenderTarget‚Æ“¯‚¶
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å¹…ã¨é«˜ã•ã¯luminnceRenderTargetã¨åŒã˜
     luminanceSpriteInitData.m_width = 1280;
     luminanceSpriteInitData.m_height = 720;
 
-    // ƒeƒNƒXƒ`ƒƒ‚ÍƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒJƒ‰[ƒoƒbƒtƒ@[
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼
     luminanceSpriteInitData.m_textures[0] = &mainRenderTarget.GetRenderTargetTexture();
 
-    // •`‚«‚ŞƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒtƒH[ƒ}ƒbƒg‚ğw’è‚·‚é
+    // æãè¾¼ã‚€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®šã™ã‚‹
     luminanceSpriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
-    // ì¬‚µ‚½‰Šú‰»î•ñ‚ğ‚à‚Æ‚ÉƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+    // ä½œæˆã—ãŸåˆæœŸåŒ–æƒ…å ±ã‚’ã‚‚ã¨ã«ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
     Sprite luminanceSprite;
     luminanceSprite.Init( luminanceSpriteInitData );
 
-    // step-1 ƒKƒEƒVƒAƒ“ƒuƒ‰[‚ğ‰Šú‰»
+    // step-1 ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ–ãƒ©ãƒ¼ã‚’åˆæœŸåŒ–
 
-    // step-2 ƒ{ƒP‰æ‘œ‚ğ‡¬‚µ‚Ä‘‚«‚Ş‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
+    // step-2 ãƒœã‚±ç”»åƒã‚’åˆæˆã—ã¦æ›¸ãè¾¼ã‚€ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
 
-    // mainRenderTarget‚ÌƒeƒNƒXƒ`ƒƒ‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚É“\‚è•t‚¯‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
-    // ƒXƒvƒ‰ƒCƒg‚Ì‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğì¬‚·‚é
+    // mainRenderTargetã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«è²¼ã‚Šä»˜ã‘ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹
     SpriteInitData spriteInitData;
 
-    // ƒeƒNƒXƒ`ƒƒ‚ÍmainRenderTarget‚ÌƒJƒ‰[ƒoƒbƒtƒ@[
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯mainRenderTargetã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼
     spriteInitData.m_textures[0] = &mainRenderTarget.GetRenderTargetTexture();
     spriteInitData.m_width = 1280;
     spriteInitData.m_height = 720;
 
-    // ƒ‚ƒmƒNƒ—p‚ÌƒVƒF[ƒ_[‚ğw’è‚·‚é
+    // ãƒ¢ãƒã‚¯ãƒ­ç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
     spriteInitData.m_fxFilePath = "Assets/shader/sample2D.fx";
 
-    // ‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğg‚Á‚ÄAƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½¿ã£ã¦ã€ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
     Sprite copyToFrameBufferSprite;
     copyToFrameBufferSprite.Init(spriteInitData);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğmainRenderTarget‚É•ÏX‚·‚é
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Ä—˜—p‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’mainRenderTargetã«å¤‰æ›´ã™ã‚‹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦åˆ©ç”¨ã§ãã‚‹ã¾ã§å¾…ã¤
         renderContext.WaitUntilToPossibleSetRenderTarget(mainRenderTarget);
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         renderContext.SetRenderTargetAndViewport(mainRenderTarget);
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         renderContext.ClearRenderTargetView(mainRenderTarget);
 
-        // mainRenderTarget‚ÉŠeíƒ‚ƒfƒ‹‚ğ•`‰æ‚·‚é
+        // mainRenderTargetã«å„ç¨®ãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã™ã‚‹
         plModel.Draw(renderContext);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTarget(mainRenderTarget);
 
-        // ‹P“x’Šo
-        // ‹P“x’Šo—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚É•ÏX
+        // è¼åº¦æŠ½å‡º
+        // è¼åº¦æŠ½å‡ºç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å¤‰æ›´
         renderContext.WaitUntilToPossibleSetRenderTarget(luminnceRenderTarget);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         renderContext.SetRenderTargetAndViewport(luminnceRenderTarget);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         renderContext.ClearRenderTargetView(luminnceRenderTarget);
 
-        // ‹P“x’Šo‚ğs‚¤
+        // è¼åº¦æŠ½å‡ºã‚’è¡Œã†
         luminanceSprite.Draw(renderContext);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTarget(luminnceRenderTarget);
 
-        // step-3 ƒKƒEƒVƒAƒ“ƒuƒ‰[‚ğ4‰ñÀs‚·‚é
+        // step-3 ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ–ãƒ©ãƒ¼ã‚’4å›å®Ÿè¡Œã™ã‚‹
 
-        // step-4 ƒ{ƒP‰æ‘œ‚ğ‡¬‚µ‚ÄƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚É‰ÁZ‡¬
+        // step-4 ãƒœã‚±ç”»åƒã‚’åˆæˆã—ã¦ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«åŠ ç®—åˆæˆ
 
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌŠG‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@[‚ÉƒRƒs[
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®çµµã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ãƒ¼ã«ã‚³ãƒ”ãƒ¼
         renderContext.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
         copyToFrameBufferSprite.Draw(renderContext);
 
-        // ƒ‰ƒCƒg‚Ì‹­‚³‚ğ•ÏX‚·‚é
+        // ãƒ©ã‚¤ãƒˆã®å¼·ã•ã‚’å¤‰æ›´ã™ã‚‹
         light.directionalLight[0].color.x += g_pad[0]->GetLStickXF() * 0.5f;
         light.directionalLight[0].color.y += g_pad[0]->GetLStickXF() * 0.5f;
         light.directionalLight[0].color.z += g_pad[0]->GetLStickXF() * 0.5f;
         //////////////////////////////////////
-        //ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
 
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,

@@ -1,4 +1,4 @@
-//--------------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // File: pch.h
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -37,7 +37,7 @@
 // XBox One XDK related Off by default warnings
 #pragma warning(disable : 4471 4643 4917 4986 5029 5043)
 // C4471 forward declaration of an unscoped enumeration must have an underlying type
-// C4643 Forward declaring in namespace std is not permitted by the C++ Standard
+// C4643 Forward declaring in namespace std is not permitted by the C Standard
 // C4917 a GUID can only be associated with a class, interface or namespace
 // C4986 exception specification does not match previous declaration
 // C5029 nonstandard extension used
@@ -51,9 +51,9 @@
 #endif
 
 #ifdef __clang__
-#pragma clang diagnostic ignored "-Wc++98-compat"
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#pragma clang diagnostic ignored "-Wc++98-compat-local-type-template-args"
+#pragma clang diagnostic ignored "-Wcﯟcompat"
+#pragma clang diagnostic ignored "-Wcﯟcompat-pedantic"
+#pragma clang diagnostic ignored "-Wcﯟcompat-local-type-template-args"
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
 #pragma clang diagnostic ignored "-Wfloat-equal"

@@ -1,41 +1,41 @@
-#pragma once
+ï»¿#pragma once
 
 
 /// <summary>
-/// ’¸“_ƒoƒbƒtƒ@
+/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 /// </summary>
 class VertexBuffer {
 		
 public:
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^B
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	~VertexBuffer();
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
-	/// <param name="size">’¸“_ƒoƒbƒtƒ@‚ÌƒTƒCƒY</param>
-	/// <param name="stride">’¸“_ƒoƒbƒtƒ@‚ÌƒXƒgƒ‰ƒCƒhBˆêŒÂ‚Ì’¸“_‚ÌƒTƒCƒY</param>
+	/// <param name="size">é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚º</param>
+	/// <param name="stride">é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰ã€‚ä¸€å€‹ã®é ‚ç‚¹ã®ã‚µã‚¤ã‚º</param>
 	void Init(int size, int stride);
 	/// <summary>
-	/// ’¸“_ƒf[ƒ^‚ğ’¸“_ƒoƒbƒtƒ@‚ÉƒRƒs[B
+	/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã€‚
 	/// </summary>
-	/// <param name="srcVertices">ƒRƒs[Œ³‚Ì’¸“_ƒf[ƒ^B</param>
+	/// <param name="srcVertices">ã‚³ãƒ”ãƒ¼å…ƒã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã€‚</param>
 	void Copy(void* srcVertices) ;
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚ğæ“¾B
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—ã€‚
 	/// </summary>
-	/// <returns>ƒrƒ…[</returns>
+	/// <returns>ãƒ“ãƒ¥ãƒ¼</returns>
 	const D3D12_VERTEX_BUFFER_VIEW& GetView() const
 	{
 		return m_vertexBufferView;
 	}
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@‚ÌƒXƒgƒ‰ƒCƒh(’PˆÊFƒoƒCƒg)‚ğæ“¾B
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰(å˜ä½ï¼šãƒã‚¤ãƒˆ)ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <remarks>
-	/// ƒXƒgƒ‰ƒCƒh‚Æ‚¢‚¤‚Ì‚ÍA‚P—v‘f‚ÌƒTƒCƒY‚Ì‚±‚ÆB
-	/// ‚±‚±‚Å‚ÍAˆê‚Â‚Ì’¸“_‚ÌƒTƒCƒY‚ğæ“¾‚·‚é‚±‚Æ‚É‚È‚éB
+	/// ã‚¹ãƒˆãƒ©ã‚¤ãƒ‰ã¨ã„ã†ã®ã¯ã€ï¼‘è¦ç´ ã®ã‚µã‚¤ã‚ºã®ã“ã¨ã€‚
+	/// ã“ã“ã§ã¯ã€ä¸€ã¤ã®é ‚ç‚¹ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹ã“ã¨ã«ãªã‚‹ã€‚
 	/// </remarks>
 	/// <returns></returns>
 	UINT GetStrideInBytes() const
@@ -43,7 +43,7 @@ public:
 		return m_vertexBufferView.StrideInBytes;
 	}
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@‚ÌƒTƒCƒY(’PˆÊFƒoƒCƒg)‚ğæ“¾B
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚º(å˜ä½ï¼šãƒã‚¤ãƒˆ)ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	UINT GetSizeInBytes() const
@@ -51,7 +51,7 @@ public:
 		return m_vertexBufferView.SizeInBytes;
 	}
 	/// <summary>
-	/// ID3D12Resource‚ÌƒAƒhƒŒƒX‚ğæ“¾‚µ‚Ü‚·B
+	/// ID3D12Resourceã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã—ã¾ã™ã€‚
 	/// </summary>
 	/// <returns></returns>
 	ID3D12Resource* GetID3DResourceAddress() const
@@ -59,6 +59,6 @@ public:
 		return m_vertexBuffer;
 	}
 private:
-	ID3D12Resource* m_vertexBuffer = nullptr;		//’¸“_ƒoƒbƒtƒ@B
-	D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;	//’¸“_ƒoƒbƒtƒ@ƒrƒ…[B
+	ID3D12Resource* m_vertexBuffer = nullptr;		//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+	D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã€‚
 };

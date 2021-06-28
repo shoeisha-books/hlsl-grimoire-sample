@@ -1,4 +1,4 @@
-
+ï»¿
 #include "stdafx.h"
 #include "RaytracingWorld.h"
 #include "Material.h"
@@ -38,9 +38,9 @@ namespace raytracing {
 
 	void World::CommitRegistGeometry(RenderContext& rc)
 	{
-		//BLAS‚ğ\’zB
+		//BLASã‚’æ§‹ç¯‰ã€‚
 		m_blasBuffer.Init(rc, m_instances);
-		//TLAS‚ğ\’zB
+		//TLASã‚’æ§‹ç¯‰ã€‚
 		m_topLevelASBuffers.Init(rc, m_instances, m_blasBuffer.Get());
 	}
 }//namespace raytracing

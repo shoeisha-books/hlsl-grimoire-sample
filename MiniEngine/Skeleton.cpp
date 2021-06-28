@@ -1,5 +1,5 @@
-/*!
-*@brief	ƒXƒPƒ‹ƒgƒ“
+ï»¿/*!
+*@brief	ã‚¹ã‚±ãƒ«ãƒˆãƒ³
 */
 #include "stdafx.h"
 #include "Skeleton.h"
@@ -9,15 +9,15 @@
 void Bone::CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale)
 {
 	Matrix mWorld = m_worldMatrix;
-	//s—ñ‚©‚çŠg‘å—¦‚ğæ“¾‚·‚éB
+	//è¡Œåˆ—ã‹ã‚‰æ‹¡å¤§ç‡ã‚’å–å¾—ã™ã‚‹ã€‚
 	scale.x = mWorld.v[0].Length();
 	scale.y = mWorld.v[1].Length();
 	scale.z = mWorld.v[2].Length();
 	m_scale = scale;
-	//s—ñ‚©‚ç•½sˆÚ“®—Ê‚ğæ“¾‚·‚éB
+	//è¡Œåˆ—ã‹ã‚‰å¹³è¡Œç§»å‹•é‡ã‚’å–å¾—ã™ã‚‹ã€‚
 	trans.Set(mWorld.v[3]);
 	m_positoin = trans;
-	//s—ñ‚©‚çŠg‘å—¦‚Æ•½sˆÚ“®—Ê‚ğœ‹‚µ‚Ä‰ñ“]—Ê‚ğæ“¾‚·‚éB
+	//è¡Œåˆ—ã‹ã‚‰æ‹¡å¤§ç‡ã¨å¹³è¡Œç§»å‹•é‡ã‚’é™¤å»ã—ã¦å›è»¢é‡ã‚’å–å¾—ã™ã‚‹ã€‚
 	mWorld.v[0].Normalize();
 	mWorld.v[1].Normalize();
 	mWorld.v[2].Normalize();
@@ -27,7 +27,7 @@ void Bone::CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale)
 }
 Skeleton::Skeleton()
 {
-	//ƒŠƒU[ƒuB
+	//ãƒªã‚¶ãƒ¼ãƒ–ã€‚
 	m_bones.reserve(BONE_MAX);
 }
 Skeleton::~Skeleton()
@@ -46,9 +46,9 @@ void Skeleton::UpdateBoneWorldMatrix(Bone& bone, const Matrix& parentMatrix)
 }
 bool Skeleton::Init(const char* tksFilePath)
 {
-	//tksƒtƒ@ƒCƒ‹‚ğƒ[ƒh‚·‚éB
+	//tksãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã€‚
 	if (m_tksFile.Load(tksFilePath)) {
-		//ƒ{[ƒ“s—ñ‚ğ\’z‚·‚éB
+		//ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 		BuildBoneMatrices();
 		return true;
 	}
@@ -57,7 +57,7 @@ bool Skeleton::Init(const char* tksFilePath)
 void Skeleton::BuildBoneMatrices()
 {
 	m_tksFile.QueryBone([&](TksFile::SBone & tksBone) {
-		//ƒoƒCƒ“ƒhƒ|[ƒYB
+		//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã€‚
 		Matrix bindPoseMatrix;
 		memcpy(bindPoseMatrix.m[0], &tksBone.bindPose[0], sizeof(tksBone.bindPose[0]));
 		memcpy(bindPoseMatrix.m[1], &tksBone.bindPose[1], sizeof(tksBone.bindPose[1]));
@@ -68,7 +68,7 @@ void Skeleton::BuildBoneMatrices()
 		bindPoseMatrix.m[2][3] = 0.0f;
 		bindPoseMatrix.m[3][3] = 1.0f;
 
-		//ƒoƒCƒ“ƒhƒ|[ƒY‚Ì‹ts—ñB
+		//ãƒã‚¤ãƒ³ãƒ‰ãƒãƒ¼ã‚ºã®é€†è¡Œåˆ—ã€‚
 		Matrix invBindPoseMatrix;
 		memcpy(invBindPoseMatrix.m[0], &tksBone.invBindPose[0], sizeof(tksBone.invBindPose[0]));
 		memcpy(invBindPoseMatrix.m[1], &tksBone.invBindPose[1], sizeof(tksBone.invBindPose[1]));
@@ -89,14 +89,14 @@ void Skeleton::BuildBoneMatrices()
 			tksBone.no
 			);
 #if BUILD_LEVEL != BUILD_LEVEL_MASTER
-		//ƒ{[ƒ“‚ÌƒoƒŠƒf[ƒVƒ‡ƒ“ƒ`ƒFƒbƒNB
-		//maxScript‚Å‚â‚è‚½‚¢‚Æ‚±‚ë‚Å‚Í‚ ‚é‚ªA‚Æ‚è‚ ‚¦‚¸‚±‚Á‚¿B
+		//ãƒœãƒ¼ãƒ³ã®ãƒãƒªãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ãƒã‚§ãƒƒã‚¯ã€‚
+		//maxScriptã§ã‚„ã‚ŠãŸã„ã¨ã“ã‚ã§ã¯ã‚ã‚‹ãŒã€ã¨ã‚Šã‚ãˆãšã“ã£ã¡ã€‚
 		auto it = std::find_if(m_bones.begin(), m_bones.end(), [&](auto & bone) {return wcscmp(boneName, bone->GetName()) == 0;  });
 		if (it != m_bones.end()) {
-			//“¯–¼‚Ìƒ{[ƒ“‚ªŒ©‚Â‚©‚Á‚½B
+			//åŒåã®ãƒœãƒ¼ãƒ³ãŒè¦‹ã¤ã‹ã£ãŸã€‚
 			_bstr_t b(boneName);
 			const char* c = b;
-			TK_WARNING("“¯–¼‚Ìƒ{[ƒ“‚ªŒ©‚Â‚©‚è‚Ü‚µ‚½B–¢’è‚Ì“®ì‚Å‚·Bƒf[ƒ^‚ğC³‚µ‚Ä‚­‚¾‚³‚¢B%s", c);
+			TK_WARNING("åŒåã®ãƒœãƒ¼ãƒ³ãŒè¦‹ã¤ã‹ã‚Šã¾ã—ãŸã€‚æœªå®šã®å‹•ä½œã§ã™ã€‚ãƒ‡ãƒ¼ã‚¿ã‚’ä¿®æ­£ã—ã¦ãã ã•ã„ã€‚%s", c);
 		}
 #endif
 		m_bones.push_back(std::move(bone));
@@ -104,7 +104,7 @@ void Skeleton::BuildBoneMatrices()
 	for (auto& bone : m_bones) {
 		if (bone->GetParentBoneNo() != -1) {
 			m_bones.at(bone->GetParentBoneNo())->AddChild(bone.get());
-			//ƒ[ƒJƒ‹ƒ}ƒgƒŠƒNƒX‚ğŒvZB
+			//ãƒ­ãƒ¼ã‚«ãƒ«ãƒãƒˆãƒªã‚¯ã‚¹ã‚’è¨ˆç®—ã€‚
 			const Matrix& parentMatrix = m_bones.at(bone->GetParentBoneNo())->GetInvBindPoseMatrix();
 			Matrix localMatrix;
 			localMatrix = bone->GetBindPoseMatrix() * parentMatrix;
@@ -116,7 +116,7 @@ void Skeleton::BuildBoneMatrices()
 	}
 
 
-	//ƒ{[ƒ“s—ñ‚ğŠm•Û
+	//ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’ç¢ºä¿
 	m_boneMatrixs = std::make_unique<Matrix[]>(m_bones.size());
 	m_isInited = true;
 
@@ -125,29 +125,29 @@ void Skeleton::BuildBoneMatrices()
 void Skeleton::Update(const Matrix& mWorld)
 {
 	if (m_isPlayAnimation) {
-		//ƒ{[ƒ“s—ñ‚ğƒ‹[ƒgƒ{[ƒ“‚Ì‹óŠÔ‚©‚çƒ[ƒ‹ƒh‹óŠÔ‚ğ\’z‚µ‚Ä‚¢‚­B
+		//ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’ãƒ«ãƒ¼ãƒˆãƒœãƒ¼ãƒ³ã®ç©ºé–“ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’æ§‹ç¯‰ã—ã¦ã„ãã€‚
 		for (auto& bone : m_bones) {
 			Matrix mBoneWorld;
 			Matrix localMatrix = bone->GetLocalMatrix();
-			//e‚Ìs—ñ‚Æƒ[ƒJƒ‹s—ñ‚ğæZ‚µ‚ÄAƒ[ƒ‹ƒhs—ñ‚ğŒvZ‚·‚éB
+			//è¦ªã®è¡Œåˆ—ã¨ãƒ­ãƒ¼ã‚«ãƒ«è¡Œåˆ—ã‚’ä¹—ç®—ã—ã¦ã€ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 			mBoneWorld = localMatrix * mWorld;
 			bone->SetWorldMatrix(mBoneWorld);
 		}
 	}
 	else {
-		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ª—¬‚µ‚Ü‚ê‚Ä‚¢‚é‚ÆAƒ{[ƒ“s—ñ‚ªƒ‹[ƒgƒ{[ƒ“‹óŠÔ‚É
-		//•ÏŠ·‚³‚ê‚Ä‚¢‚é‚ªA—¬‚³‚ê‚Ä‚¢‚È‚¢‚Æe‚Ìœ‚ÌÀ•WŒn‚Ì‚Ü‚Ü‚È‚Ì‚ÅA
-		//ƒ‹[ƒgƒ{[ƒ“‹óŠÔ¨ƒ[ƒ‹ƒh‹óŠÔ‚Ö‚Ì•ÏŠ·‚ğs‚¤B
+		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒæµã—è¾¼ã¾ã‚Œã¦ã„ã‚‹ã¨ã€ãƒœãƒ¼ãƒ³è¡Œåˆ—ãŒãƒ«ãƒ¼ãƒˆãƒœãƒ¼ãƒ³ç©ºé–“ã«
+		//å¤‰æ›ã•ã‚Œã¦ã„ã‚‹ãŒã€æµã•ã‚Œã¦ã„ãªã„ã¨è¦ªã®éª¨ã®åº§æ¨™ç³»ã®ã¾ã¾ãªã®ã§ã€
+		//ãƒ«ãƒ¼ãƒˆãƒœãƒ¼ãƒ³ç©ºé–“â†’ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã¸ã®å¤‰æ›ã‚’è¡Œã†ã€‚
 		for (auto& bone : m_bones) {
 			if (bone->GetParentBoneNo() != -1) {
 				continue;
 			}
-			//ƒ‹[ƒgB
+			//ãƒ«ãƒ¼ãƒˆã€‚
 			UpdateBoneWorldMatrix(*bone, mWorld);
 		}
 	}
 
-	//ƒ{[ƒ“s—ñ‚ğŒvZB
+	//ãƒœãƒ¼ãƒ³è¡Œåˆ—ã‚’è¨ˆç®—ã€‚
 	int boneNo = 0;
 	for (auto& bonePtr : m_bones) {
 		Matrix mBone;

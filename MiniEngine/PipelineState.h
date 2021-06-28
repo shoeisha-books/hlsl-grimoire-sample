@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 
 /// <summary>
-/// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgB
+/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã€‚
 /// </summary>
 class PipelineState {
 public:
 	/// <summary>
-	/// ƒfƒXƒgƒ‰ƒNƒ^B
+	/// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	/// </summary>
 	~PipelineState()
 	{
@@ -16,7 +16,7 @@ public:
 		}
 	}
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
 	/// <param name="desc"></param>
 	void Init(D3D12_GRAPHICS_PIPELINE_STATE_DESC desc);
@@ -26,5 +26,5 @@ public:
 		return m_pipelineState;
 	}
 private:
-	ID3D12PipelineState* m_pipelineState = nullptr;	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgB
+	ID3D12PipelineState* m_pipelineState = nullptr;	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã€‚
 };

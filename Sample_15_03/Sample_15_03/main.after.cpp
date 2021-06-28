@@ -1,42 +1,42 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "Bitmap.h"
 #include "sub.h"
 
-// \‘¢‘Ì’è‹`
-// ƒeƒNƒXƒ`ƒƒî•ñ—p‚Ì’è”ƒoƒbƒtƒ@[
+// æ§‹é€ ä½“å®šç¾©
+// ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼
 struct TexInfo
 {
-    int originalTexSize[2]; // ƒIƒŠƒWƒiƒ‹ƒeƒNƒXƒ`ƒƒ‚ÌƒTƒCƒY
-    int xBlurTexSize[2];    // Xƒuƒ‰[‚Ìo—Íæ‚ÌƒeƒNƒXƒ`ƒƒ‚ÌƒTƒCƒY
-    int yBlurTexSize[2];    // Yƒuƒ‰[‚Ìo—Íæ‚ÌƒeƒNƒXƒ`ƒƒ‚ÌƒTƒCƒY
+    int originalTexSize[2]; // ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚µã‚¤ã‚º
+    int xBlurTexSize[2];    // Xãƒ–ãƒ©ãƒ¼ã®å‡ºåŠ›å…ˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚µã‚¤ã‚º
+    int yBlurTexSize[2];    // Yãƒ–ãƒ©ãƒ¼ã®å‡ºåŠ›å…ˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚µã‚¤ã‚º
 };
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
     RootSignature rs;
     InitRootSignature(rs);
 
-    // step-1 ‰æ‘œƒf[ƒ^‚ğƒƒCƒ“ƒƒ‚ƒŠã‚Éƒ[ƒh‚·‚é
+    // step-1 ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ¢ãƒªä¸Šã«ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     Bitmap imagebmp;
     imagebmp.Load("Assets/image/original.bmp");
 
-    // step-2 ƒuƒŒƒ“ƒfƒBƒ“ƒOŒW”‚ğ‘—‚é‚½‚ß‚Ì’è”ƒoƒbƒtƒ@[‚ğì¬‚·‚é
+    // step-2 ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ä¿‚æ•°ã‚’é€ã‚‹ãŸã‚ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆã™ã‚‹
     ConstantBuffer weightsCB;
     weightsCB.Init(sizeof(float) * 8, nullptr);
 
-    // step-3 ƒeƒNƒXƒ`ƒƒî•ñ‚ğ‘—‚é‚½‚ß‚Ì’è”ƒoƒbƒtƒ@[‚ğì¬‚·‚é
+    // step-3 ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ã‚’é€ã‚‹ãŸã‚ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆã™ã‚‹
     TexInfo texInfo;
     texInfo.originalTexSize[0] = imagebmp.GetWidth();
     texInfo.originalTexSize[1] = imagebmp.GetHeight();
@@ -47,39 +47,39 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     ConstantBuffer texInfoCB;
     texInfoCB.Init(sizeof(texInfo), &texInfo);
 
-    // step-4 ŠeíƒXƒgƒ‰ƒNƒ`ƒƒ[ƒhƒoƒbƒtƒ@[‚ğì¬‚·‚é
+    // step-4 å„ç¨®ã‚¹ãƒˆãƒ©ã‚¯ãƒãƒ£ãƒ¼ãƒ‰ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆã™ã‚‹
     StructuredBuffer inputImageBmpSB;
     inputImageBmpSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æ1ˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
-        imagebmp.GetNumPixel(),         // ƒsƒNƒZƒ‹‚Ì”‚ğæ“¾
-        imagebmp.GetImageAddress()      // ‰æ‘œƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬1å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
+        imagebmp.GetNumPixel(),         // ãƒ”ã‚¯ã‚»ãƒ«ã®æ•°ã‚’å–å¾—
+        imagebmp.GetImageAddress()      // ç”»åƒãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
     );
 
-    // Xƒuƒ‰[‚ğ‚©‚¯‚½‰æ‘œ‚ğo—Í‚·‚é‚½‚ß‚Ì“Ç‚İ‘‚«‰Â”\\‘¢‰»ƒoƒbƒtƒ@[‚ğì¬
+    // Xãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ãŸç”»åƒã‚’å‡ºåŠ›ã™ã‚‹ãŸã‚ã®èª­ã¿æ›¸ãå¯èƒ½æ§‹é€ åŒ–ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆ
     RWStructuredBuffer outputXBlurImageRWSB;
     outputXBlurImageRWSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æ1ˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
-        imagebmp.GetNumPixel()/2,       // ‰¡•ûŒü‚É1/2‚Ì‰ğ‘œ“x‚Öƒ_ƒEƒ“ƒTƒ“ƒvƒŠƒ“ƒO‚ğs‚¤‚Ì‚ÅƒsƒNƒZƒ‹”‚ğ”¼•ª‚É‚·‚é
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬1å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
+        imagebmp.GetNumPixel()/2,       // æ¨ªæ–¹å‘ã«1/2ã®è§£åƒåº¦ã¸ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã‚’è¡Œã†ã®ã§ãƒ”ã‚¯ã‚»ãƒ«æ•°ã‚’åŠåˆ†ã«ã™ã‚‹
         nullptr
     );
 
-    // Yƒuƒ‰[‚ğ‚©‚¯‚½‰æ‘œ‚ğo—Í‚·‚é‚½‚ß‚Ì“Ç‚İ‘‚«‰Â”\\‘¢‰»ƒoƒbƒtƒ@[‚ğì¬
+    // Yãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ãŸç”»åƒã‚’å‡ºåŠ›ã™ã‚‹ãŸã‚ã®èª­ã¿æ›¸ãå¯èƒ½æ§‹é€ åŒ–ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆ
     RWStructuredBuffer outputYBlurImageRWSB;
     outputYBlurImageRWSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æ1ˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
-        imagebmp.GetNumPixel()/4,       // cA‰¡•ûŒü‚É1/2‚Ì‰ğ‘œ“x‚Öƒ_ƒEƒ“ƒTƒ“ƒvƒŠƒ“ƒO‚ğs‚¤‚Ì‚ÅƒsƒNƒZƒ‹”‚ğ1/4‚É‚·‚é
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬1å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
+        imagebmp.GetNumPixel()/4,       // ç¸¦ã€æ¨ªæ–¹å‘ã«1/2ã®è§£åƒåº¦ã¸ãƒ€ã‚¦ãƒ³ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã‚’è¡Œã†ã®ã§ãƒ”ã‚¯ã‚»ãƒ«æ•°ã‚’1/4ã«ã™ã‚‹
         nullptr
     );
-    // ÅIŒ‹‰Ê‚ğo—Í‚·‚é‚½‚ß‚Ì“Ç‚İ‘‚«‰Â”\\‘¢‰»ƒoƒbƒtƒ@[‚ğì¬
+    // æœ€çµ‚çµæœã‚’å‡ºåŠ›ã™ã‚‹ãŸã‚ã®èª­ã¿æ›¸ãå¯èƒ½æ§‹é€ åŒ–ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆ
     RWStructuredBuffer finalImageRWSB;
     finalImageRWSB.Init(
-        imagebmp.GetPixelSizeInBytes(), // ‘æ1ˆø”‚Í1‰æ‘f‚ÌƒTƒCƒY
+        imagebmp.GetPixelSizeInBytes(), // ç¬¬1å¼•æ•°ã¯1ç”»ç´ ã®ã‚µã‚¤ã‚º
         imagebmp.GetNumPixel(),
         nullptr
     );
 
-    // step-5 ŠeíƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬‚·‚é
-    // Xƒuƒ‰[—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬
+    // step-5 å„ç¨®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆã™ã‚‹
+    // Xãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
     DescriptorHeap xBlurDS;
     xBlurDS.RegistShaderResource(0, inputImageBmpSB);
     xBlurDS.RegistConstantBuffer(0, weightsCB);
@@ -87,7 +87,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     xBlurDS.RegistUnorderAccessResource(0, outputXBlurImageRWSB);
     xBlurDS.Commit();
 
-    // Yƒuƒ‰[—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬
+    // Yãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
     DescriptorHeap yBlurDS;
     yBlurDS.RegistShaderResource(0, outputXBlurImageRWSB);
     yBlurDS.RegistConstantBuffer(0, weightsCB);
@@ -95,7 +95,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     yBlurDS.RegistUnorderAccessResource(0, outputYBlurImageRWSB);
     yBlurDS.Commit();
 
-    // ÅIŒ‹‰Êo—Í—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬
+    // æœ€çµ‚çµæœå‡ºåŠ›ç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
     DescriptorHeap finalDS;
     finalDS.RegistShaderResource(0, outputYBlurImageRWSB);
     finalDS.RegistConstantBuffer(0, weightsCB);
@@ -103,44 +103,44 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     finalDS.RegistUnorderAccessResource(0, finalImageRWSB);
     finalDS.Commit();
 
-    // step-6 ŠeíƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬‚·‚é
+    // step-6 å„ç¨®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
 
-    // Xƒuƒ‰[—p‚ÌƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
-    // Xƒuƒ‰[—p‚ÌƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚ğƒ[ƒh‚·‚é
+    // Xãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
+    // Xãƒ–ãƒ©ãƒ¼ç”¨ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     Shader xblurCS;
     xblurCS.LoadCS("Assets/shader/sample.fx", "XBlur");
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬‚·‚é
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
     PipelineState xBlurPipelineState;
     InitPipelineState(rs, xBlurPipelineState, xblurCS);
 
-    // Yƒuƒ‰[—p‚ÌƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
-    // Yƒuƒ‰[—p‚ÌƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚Ìƒ[ƒh
+    // Yãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
+    // Yãƒ–ãƒ©ãƒ¼ç”¨ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã®ãƒ­ãƒ¼ãƒ‰
     Shader yblurCS;
     yblurCS.LoadCS("Assets/shader/sample.fx", "YBlur");
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     PipelineState yBlurPipelineState;
     InitPipelineState(rs, yBlurPipelineState, yblurCS);
 
-    // ÅIo—Í—p‚ÌƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
-    // ÅIo—Í—p‚ÌƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìƒ[ƒh
+    // æœ€çµ‚å‡ºåŠ›ç”¨ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
+    // æœ€çµ‚å‡ºåŠ›ç”¨ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ­ãƒ¼ãƒ‰
     Shader finalCS;
     finalCS.LoadCS("Assets/shader/sample.fx", "Final");
-    // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+    // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     PipelineState finalPipelineState;
     InitPipelineState(rs, finalPipelineState, finalCS);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒtƒŒ[ƒ€ŠJn
+        // ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒJƒEƒXŠÖ”‚ğg‚Á‚Äd‚İ‚ğŒvZ‚µ‚ÄƒOƒ‰ƒtƒBƒbƒNƒXƒƒ‚ƒŠ‚É“]‘—
+        // ã‚«ã‚¦ã‚¹é–¢æ•°ã‚’ä½¿ã£ã¦é‡ã¿ã‚’è¨ˆç®—ã—ã¦ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ¡ãƒ¢ãƒªã«è»¢é€
         float total = 0;
         float weights[8];
         for (int i = 0; i < 8; i++)
@@ -156,46 +156,46 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             }
         }
 
-        // ‹KŠi‰»
+        // è¦æ ¼åŒ–
         for (int i = 0; i < 8; i++)
         {
             weights[i] /= total;
         }
 
-        // step-7 d‚İƒe[ƒuƒ‹‚ğVRAM‚É“]‘—
+        // step-7 é‡ã¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’VRAMã«è»¢é€
         weightsCB.CopyToVRAM(weights);
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çDirectCompute‚Ö‚ÌƒfƒBƒXƒpƒbƒ`–½—ß
+        // ã“ã“ã‹ã‚‰DirectComputeã¸ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‘½ä»¤
         //////////////////////////////////////
         renderContext.SetComputeRootSignature(rs);
 
-        // step-8 ŠeíƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚ğƒfƒBƒXƒpƒbƒ`
-        // Xƒuƒ‰[‚ğƒfƒBƒXƒpƒbƒ`
+        // step-8 å„ç¨®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
+        // Xãƒ–ãƒ©ãƒ¼ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         renderContext.SetPipelineState(xBlurPipelineState);
         renderContext.SetComputeDescriptorHeap(xBlurDS);
         renderContext.Dispatch(texInfo.xBlurTexSize[0] / 4, texInfo.xBlurTexSize[1] / 4, 1);
 
-        // Yƒuƒ‰[‚ğƒfƒBƒXƒpƒbƒ`
+        // Yãƒ–ãƒ©ãƒ¼ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         renderContext.SetPipelineState(yBlurPipelineState);
         renderContext.SetComputeDescriptorHeap(yBlurDS);
         renderContext.Dispatch(texInfo.yBlurTexSize[0] / 4, texInfo.yBlurTexSize[1] / 4, 1);
 
-        // ÅI‡¬‚ğƒfƒBƒXƒpƒbƒ`
+        // æœ€çµ‚åˆæˆã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         renderContext.SetPipelineState(finalPipelineState);
         renderContext.SetComputeDescriptorHeap(finalDS);
         renderContext.Dispatch(texInfo.originalTexSize[0] / 4, texInfo.originalTexSize[1] / 4, 1);
 
-        // ƒtƒŒ[ƒ€I—¹
+        // ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
 
-        // step-9 ‰æ‘œ‚ğæ“¾‚µA•Û‘¶‚·‚é
+        // step-9 ç”»åƒã‚’å–å¾—ã—ã€ä¿å­˜ã™ã‚‹
         imagebmp.Copy(finalImageRWSB.GetResourceOnCPU());
         imagebmp.Save("Assets/image/blur.bmp");
 
-        MessageBox(nullptr, L"Š®¬", L"’Ê’m", MB_OK);
+        MessageBox(nullptr, L"å®Œæˆ", L"é€šçŸ¥", MB_OK);
 
-        // ƒfƒXƒgƒƒC
+        // ãƒ‡ã‚¹ãƒˆãƒ­ã‚¤
         DestroyWindow(g_hWnd);
     }
     return 0;

@@ -1,32 +1,32 @@
-#pragma once
+ï»¿#pragma once
 
 
 class Shader {
 public:
 	/// <summary>
-	/// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ðƒ[ƒhB
+	/// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒXB</param>
-	/// <param name="entryFuncName">ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚ÌŠÖ”–¼B</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
+	/// <param name="entryFuncName">ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã®é–¢æ•°åã€‚</param>
 	void LoadPS(const char* filePath, const char* entryFuncName);
 	/// <summary>
-	/// ’¸“_ƒVƒF[ƒ_[‚ðƒ[ƒhB
+	/// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <param name="entryFuncName">ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚ÌŠÖ”–¼B</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <param name="entryFuncName">ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã®é–¢æ•°åã€‚</param>
 	void LoadVS(const char* filePath, const char* entryFuncName);
 	/// <summary>
-	/// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚ðƒ[ƒhB
+	/// ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <param name="entryFuncName"></param>
 	void LoadCS(const char* filePath, const char* entryFuncName);
 	/// <summary>
-	/// ƒŒƒCƒgƒŒ[ƒVƒ“ƒO—p‚ÌƒVƒF[ƒ_[‚ðƒ[ƒhB
+	/// ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¼ã‚·ãƒ³ã‚°ç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
 	void LoadRaytracing(const wchar_t* filePath);
 	/// <summary>
-	/// ƒRƒ“ƒpƒCƒ‹Ï‚ÝƒVƒF[ƒ_[ƒf[ƒ^‚ðŽæ“¾B
+	/// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã€‚
 	/// </summary>
 	/// <returns></returns>
 	ID3DBlob* GetCompiledBlob() const
@@ -38,7 +38,7 @@ public:
 		return m_dxcBlob;
 	}
 	/// <summary>
-	/// ‰Šú‰»Ï‚ÝH
+	/// åˆæœŸåŒ–æ¸ˆã¿ï¼Ÿ
 	/// </summary>
 	/// <returns></returns>
 	bool IsInited() const
@@ -47,15 +47,15 @@ public:
 	}
 private:
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚ðƒ[ƒhB
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
-	/// <param name="filePath">ƒtƒ@ƒCƒ‹ƒpƒX</param>
-	/// <param name="entryFuncName">ƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚ÌŠÖ”–¼B</param>
-	/// <param name="shaderModel">ƒVƒF[ƒ_[ƒ‚ƒfƒ‹</param>
+	/// <param name="filePath">ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
+	/// <param name="entryFuncName">ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã®é–¢æ•°åã€‚</param>
+	/// <param name="shaderModel">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ‡ãƒ«</param>
 	void Load(const char* filePath, const char* entryFuncName, const char* shaderModel);
 private:
-	ID3DBlob*	m_blob = nullptr;	//ƒRƒ“ƒpƒCƒ‹Ï‚Ý‚ÌƒVƒF[ƒ_[ƒf[ƒ^B
-	IDxcBlob* m_dxcBlob = nullptr;	//DXCƒRƒ“ƒpƒCƒ‰‚ðŽg—p‚µ‚½‚Æ‚«‚ÌƒVƒF[ƒ_[ƒf[ƒ^B
-	bool m_isInited = false;		//‰Šú‰»Ï‚ÝH
+	ID3DBlob*	m_blob = nullptr;	//ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã€‚
+	IDxcBlob* m_dxcBlob = nullptr;	//DXCã‚³ãƒ³ãƒ‘ã‚¤ãƒ©ã‚’ä½¿ç”¨ã—ãŸã¨ãã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã€‚
+	bool m_isInited = false;		//åˆæœŸåŒ–æ¸ˆã¿ï¼Ÿ
 };
 

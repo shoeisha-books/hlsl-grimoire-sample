@@ -1,39 +1,39 @@
-/*!
-* @brief	ƒtƒHƒ“ƒg
+ï»¿/*!
+* @brief	ãƒ•ã‚©ãƒ³ãƒˆ
 */
 
 #pragma once
 
 /// <summary>
-/// ƒtƒHƒ“ƒg
+/// ãƒ•ã‚©ãƒ³ãƒˆ
 /// </summary>
 class Font{
 public:
 	/// <summary>
-	/// •`‰æŠJn
+	/// æç”»é–‹å§‹
 	/// </summary>
-	/// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒgB</param>
+	/// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã€‚</param>
 	void Begin(RenderContext& rc);
 	/*!
-		* @brief	•`‰æI—¹B
+		* @brief	æç”»çµ‚äº†ã€‚
 		*/
 	/// <summary>
-	/// •`‰æI—¹
+	/// æç”»çµ‚äº†
 	/// </summary>
-	/// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+	/// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
 	void End(RenderContext& rc);
 	/*!
-		* @brief	•`‰æB
-		*@param[in]	text		•\¦‚µ‚½‚¢ƒeƒLƒXƒgB
-		*@param[in]	trans		•½sˆÚ“®B
-		*@param[in]	color		ƒJƒ‰[B
-		*@param[in]	rot			‰ñ“]B
-		*@param[in]	scale		Šg‘åB
-		*@param[in]	pivot		Šî“_B
-		*						0.5, 0.5‚Å‰æ‘œ‚Ì’†S‚ªŠî“_B
-		*						0.0, 0.0‚Å‰æ‘œ‚Ì¶‰ºB
-		*						1.0, 1.0‚Å‰æ‘œ‚Ì‰EãB
-		*						Unity‚ÌuGUI‚É€‹’B
+		* @brief	æç”»ã€‚
+		*@param[in]	text		è¡¨ç¤ºã—ãŸã„ãƒ†ã‚­ã‚¹ãƒˆã€‚
+		*@param[in]	trans		å¹³è¡Œç§»å‹•ã€‚
+		*@param[in]	color		ã‚«ãƒ©ãƒ¼ã€‚
+		*@param[in]	rot			å›è»¢ã€‚
+		*@param[in]	scale		æ‹¡å¤§ã€‚
+		*@param[in]	pivot		åŸºç‚¹ã€‚
+		*						0.5, 0.5ã§ç”»åƒã®ä¸­å¿ƒãŒåŸºç‚¹ã€‚
+		*						0.0, 0.0ã§ç”»åƒã®å·¦ä¸‹ã€‚
+		*						1.0, 1.0ã§ç”»åƒã®å³ä¸Šã€‚
+		*						Unityã®uGUIã«æº–æ‹ ã€‚
 		*/
 	void Draw(
 		wchar_t const* text,
@@ -44,10 +44,10 @@ public:
 		Vector2 pivot
 	);
 	/*!
-		*@brief	‰e‚Ìƒpƒ‰ƒ[ƒ^‚ğİ’èB
-		*@param[in]	isDrawShadow		‰e‚ğ•`‚­H
-		*@param[in]	shadowOffset		‰e‚ğ•`‚­‚Æ‚«‚ÌƒsƒNƒZƒ‹‚ÌƒIƒtƒZƒbƒg—ÊB
-		*@param[in]	shadowColor			‰e‚ÌFB
+		*@brief	å½±ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®šã€‚
+		*@param[in]	isDrawShadow		å½±ã‚’æãï¼Ÿ
+		*@param[in]	shadowOffset		å½±ã‚’æãã¨ãã®ãƒ”ã‚¯ã‚»ãƒ«ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆé‡ã€‚
+		*@param[in]	shadowColor			å½±ã®è‰²ã€‚
 		*/
 	void SetShadowParam(bool isDrawShadow, float shadowOffset, const Vector4& shadowColor)
 	{
@@ -56,10 +56,10 @@ public:
 		m_shadowColor = shadowColor;
 	}
 private:
-	DirectX::SpriteBatch*	m_spriteBatch = nullptr;	//ƒXƒvƒ‰ƒCƒgƒoƒbƒ`B
-	DirectX::SpriteFont*	m_spriteFont = nullptr;		//ƒXƒvƒ‰ƒCƒgƒtƒHƒ“ƒgB
-	bool m_isDrawShadow = false;						//‰e‚ğ‘‚­H
-	float m_shadowOffset = 0.0f;						//‰e‚ğ‘‚­‚Æ‚«‚ÌƒsƒNƒZƒ‹‚ÌƒIƒtƒZƒbƒg—ÊB
-	Vector4 m_shadowColor;								//‰e‚ÌFB
+	DirectX::SpriteBatch*	m_spriteBatch = nullptr;	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒã€‚
+	DirectX::SpriteFont*	m_spriteFont = nullptr;		//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ã‚©ãƒ³ãƒˆã€‚
+	bool m_isDrawShadow = false;						//å½±ã‚’æ›¸ãï¼Ÿ
+	float m_shadowOffset = 0.0f;						//å½±ã‚’æ›¸ãã¨ãã®ãƒ”ã‚¯ã‚»ãƒ«ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆé‡ã€‚
+	Vector4 m_shadowColor;								//å½±ã®è‰²ã€‚
 	Matrix m_scaleMat;
 };

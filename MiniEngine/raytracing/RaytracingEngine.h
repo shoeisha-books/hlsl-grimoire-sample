@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "DescriptorHeap.h"
 #include "RaytracingInstance.h"
@@ -17,51 +17,51 @@ namespace raytracing {
 	{
 	public:
 		/// <summary>
-		/// ƒŒƒCƒgƒŒ[ƒVƒ“ƒO‚ğƒfƒBƒXƒpƒbƒ`B
+		/// ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¼ã‚·ãƒ³ã‚°ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã€‚
 		/// </summary>
-		/// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+		/// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
 		void Dispatch(RenderContext& rc);
 		/// <summary>
-		/// ƒWƒIƒƒgƒŠ‚ğ“o˜^B
+		/// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚’ç™»éŒ²ã€‚
 		/// </summary>
-		/// <param name="model">ƒ‚ƒfƒ‹</param>
+		/// <param name="model">ãƒ¢ãƒ‡ãƒ«</param>
 		void RegistGeometry(Model& model)
 		{
-			//ƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚ÉƒWƒIƒƒgƒŠ‚ğ“o˜^B
+			//ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚’ç™»éŒ²ã€‚
 			m_world.RegistGeometry(model);
 		}
 		/// <summary>
-		/// ƒWƒIƒƒgƒŠ‚Ì“o˜^‚ğŠm’èB
+		/// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã®ç™»éŒ²ã‚’ç¢ºå®šã€‚
 		/// </summary>
 		void CommitRegistGeometry(RenderContext& rc);
 	private:
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ğì¬B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆã€‚
 		/// </summary>
 		/// <param name="rc"></param>
 		void CreateShaderTable(RenderContext& rc);
 		
 		/// <summary>
-		/// ƒVƒF[ƒ_[ƒŠƒ\[ƒX‚ğì¬B
+		/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ã‚’ä½œæˆã€‚
 		/// </summary>
 		void CreateShaderResources();
 
 	private:
 		/// <summary>
-		/// ƒJƒƒ‰
+		/// ã‚«ãƒ¡ãƒ©
 		/// </summary>
 		struct Camera {
-			Matrix mRot;	//‰ñ“]s—ñ
-			Vector3 pos;	//‹“_B
-			float aspect;	//ƒAƒXƒyƒNƒg”äB
-			float fFar;		//‰“•½–ÊB
-			float fNear;	//‹ß•½–ÊB
+			Matrix mRot;	//å›è»¢è¡Œåˆ—
+			Vector3 pos;	//è¦–ç‚¹ã€‚
+			float aspect;	//ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã€‚
+			float fFar;		//é å¹³é¢ã€‚
+			float fNear;	//è¿‘å¹³é¢ã€‚
 		};
-		ConstantBuffer m_rayGenerationCB;			//ƒŒƒCƒWƒFƒlƒŒ[ƒVƒ‡ƒ“‚Ì’è”ƒoƒbƒtƒ@B
-		World m_world;								//ƒŒƒCƒgƒŒƒ[ƒ‹ƒhB
-		PSO m_pipelineStateObject;					//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg
-		ShaderTable m_shaderTable;					//ƒVƒF[ƒ_[ƒe[ƒuƒ‹B
-		DescriptorHeaps m_descriptorHeaps;			//ƒŒƒCƒgƒŒ‚Åg—p‚·‚éƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ÌŠÇ—ÒB
-		GPUBuffer m_outputResource;					//ƒŒƒCƒgƒŒ[ƒX‚ÌŒ‹‰Ê‚Ìo—ÍæB
+		ConstantBuffer m_rayGenerationCB;			//ãƒ¬ã‚¤ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã€‚
+		World m_world;								//ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã€‚
+		PSO m_pipelineStateObject;					//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+		ShaderTable m_shaderTable;					//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã€‚
+		DescriptorHeaps m_descriptorHeaps;			//ãƒ¬ã‚¤ãƒˆãƒ¬ã§ä½¿ç”¨ã™ã‚‹ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ç®¡ç†è€…ã€‚
+		GPUBuffer m_outputResource;					//ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¼ã‚¹ã®çµæœã®å‡ºåŠ›å…ˆã€‚
 	};
 }//namespace raytracing

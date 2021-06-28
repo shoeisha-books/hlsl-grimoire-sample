@@ -1,75 +1,75 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include <random>
 #include "util/stopwatch.h"
 
 /////////////////////////////////////////////////////////////////
-// ’è”
+// å®šæ•°
 /////////////////////////////////////////////////////////////////
-const int TILE_WIDTH = 16;      // ƒ^ƒCƒ‹‚Ì•
-const int TILE_HEIGHT = 16;     // ƒ^ƒCƒ‹‚Ì‚‚³
-const int NUM_TILE = (FRAME_BUFFER_W / TILE_WIDTH) * (FRAME_BUFFER_H / TILE_HEIGHT); // ƒ^ƒCƒ‹‚Ì”
+const int TILE_WIDTH = 16;      // ã‚¿ã‚¤ãƒ«ã®å¹…
+const int TILE_HEIGHT = 16;     // ã‚¿ã‚¤ãƒ«ã®é«˜ã•
+const int NUM_TILE = (FRAME_BUFFER_W / TILE_WIDTH) * (FRAME_BUFFER_H / TILE_HEIGHT); // ã‚¿ã‚¤ãƒ«ã®æ•°
 
 /////////////////////////////////////////////////////////////////
-// \‘¢‘Ì
+// æ§‹é€ ä½“
 /////////////////////////////////////////////////////////////////
-// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg\‘¢‘Ì
+// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 struct alignas(16) DirectionalLight
 {
-    Vector3  color;     // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3  color;     // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
     float pad0;
-    Vector3  direction; // ƒ‰ƒCƒg‚Ì•ûŒü
+    Vector3  direction; // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
 };
 
-// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg\‘¢‘Ì
+// ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 struct alignas(16) PointLight
 {
-    Vector3 position;       // À•W
+    Vector3 position;       // åº§æ¨™
     float pad0;
-    Vector3 positionInView; // ƒJƒƒ‰‹óŠÔ‚Å‚ÌÀ•W
+    Vector3 positionInView; // ã‚«ãƒ¡ãƒ©ç©ºé–“ã§ã®åº§æ¨™
     float pad1;
-    Vector3 color;          // ƒ‰ƒCƒg‚ÌƒJƒ‰[
-    float range;            // ƒ‰ƒCƒg‚Ì‰e‹¿‚ğ—^‚¦‚é”ÍˆÍ
+    Vector3 color;          // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
+    float range;            // ãƒ©ã‚¤ãƒˆã®å½±éŸ¿ã‚’ä¸ãˆã‚‹ç¯„å›²
 };
 
-const int MAX_POINT_LIGHT = 1000;   // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌÅ‘å”
-const int NUM_DIRECTION_LIGHT = 4;  // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+const int MAX_POINT_LIGHT = 1000;   // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æœ€å¤§æ•°
+const int NUM_DIRECTION_LIGHT = 4;  // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
 
-// ƒ‰ƒCƒg\‘¢‘Ì
+// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 struct Light
 {
-    DirectionalLight directionLights[ NUM_DIRECTION_LIGHT]; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    PointLight pointLights[MAX_POINT_LIGHT];                // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg
-    Matrix mViewProjInv;                                    // ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚Ì‹ts—ñ
-    Vector4 screenParam;                                    // ƒXƒNƒŠ[ƒ“î•ñ
-    Vector3 eyePos;                                         // ‹“_
-    float specPow;                                          // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-    int numPointLight;                                      // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”
+    DirectionalLight directionLights[ NUM_DIRECTION_LIGHT]; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    PointLight pointLights[MAX_POINT_LIGHT];                // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆ
+    Matrix mViewProjInv;                                    // ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã®é€†è¡Œåˆ—
+    Vector4 screenParam;                                    // ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æƒ…å ±
+    Vector3 eyePos;                                         // è¦–ç‚¹
+    float specPow;                                          // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Š
+    int numPointLight;                                      // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æ•°
 };
 
 /////////////////////////////////////////////////////////////////
-/// ƒNƒ‰ƒX
+/// ã‚¯ãƒ©ã‚¹
 /////////////////////////////////////////////////////////////////
-// ƒ‰ƒCƒgƒJƒŠƒ“ƒOƒNƒ‰ƒX
+// ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã‚¯ãƒ©ã‚¹
 class LightCulling
 {
 private:
-    // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚Åg—p‚·‚éƒJƒƒ‰î•ñ
+    // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã§ä½¿ç”¨ã™ã‚‹ã‚«ãƒ¡ãƒ©æƒ…å ±
     struct alignas(16) LightCullingCameraData
     {
-        Matrix mProj;           // ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
-        Matrix mProjInv;        // ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚Ì‹ts—ñ
-        Matrix mCameraRot;      // ƒJƒƒ‰‚Ì‰ñ“]s—ñ
+        Matrix mProj;           // ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
+        Matrix mProjInv;        // ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã®é€†è¡Œåˆ—
+        Matrix mCameraRot;      // ã‚«ãƒ¡ãƒ©ã®å›è»¢è¡Œåˆ—
     };
 
-    RootSignature* m_rootSignature = nullptr;   // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ
-    Shader m_cs;                                // ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[
-    PipelineState m_pipelineState;              // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg
-    RWStructuredBuffer m_pointLightNoListInTileUAV; // ƒ^ƒCƒ‹‚²‚Æ‚Ìƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”Ô†‚ÌƒŠƒXƒg‚ğo—Í‚·‚éUAV‚ğ‰Šú‰»
-    LightCullingCameraData m_cameraDataCPU;     // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚Ì‚½‚ß‚ÌƒJƒƒ‰î•ñ‚ğ‘—‚é’è”ƒoƒbƒtƒ@
-    ConstantBuffer m_cameraDataGPU;             // ƒ‰ƒCƒgƒJƒŠƒ“ƒO—p‚ÌƒJƒƒ‰ƒf[ƒ^
+    RootSignature* m_rootSignature = nullptr;   // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£
+    Shader m_cs;                                // ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+    PipelineState m_pipelineState;              // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
+    RWStructuredBuffer m_pointLightNoListInTileUAV; // ã‚¿ã‚¤ãƒ«ã”ã¨ã®ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ç•ªå·ã®ãƒªã‚¹ãƒˆã‚’å‡ºåŠ›ã™ã‚‹UAVã‚’åˆæœŸåŒ–
+    LightCullingCameraData m_cameraDataCPU;     // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã®ãŸã‚ã®ã‚«ãƒ¡ãƒ©æƒ…å ±ã‚’é€ã‚‹å®šæ•°ãƒãƒƒãƒ•ã‚¡
+    ConstantBuffer m_cameraDataGPU;             // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ç”¨ã®ã‚«ãƒ¡ãƒ©ãƒ‡ãƒ¼ã‚¿
     ConstantBuffer m_lightGPU;                  //
-    DescriptorHeap m_descriptorHeap;            // ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv
+    DescriptorHeap m_descriptorHeap;            // ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—
     Light* m_light = nullptr;
 
 public:
@@ -79,16 +79,16 @@ public:
     }
 
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     void Init(RootSignature& rs, Light& light, RenderTarget& depthRT)
     {
         m_light = &light;
         m_rootSignature = &rs;
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO—p‚ÌƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚ğƒ[ƒh
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ç”¨ã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰
         m_cs.LoadCS("Assets/shader/lightCulling.fx", "CSMain");
 
-        // ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬
+        // ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
         D3D12_COMPUTE_PIPELINE_STATE_DESC  psoDesc = { 0 };
         psoDesc.pRootSignature = rs.Get();
         psoDesc.CS = CD3DX12_SHADER_BYTECODE(m_cs.GetCompiledBlob());
@@ -97,25 +97,25 @@ public:
 
         m_pipelineState.Init(psoDesc);
 
-        // ƒ^ƒCƒ‹‚²‚Æ‚Ìƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”Ô†‚ÌƒŠƒXƒg‚ğo—Í‚·‚éUAV‚ğ‰Šú‰»
+        // ã‚¿ã‚¤ãƒ«ã”ã¨ã®ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ç•ªå·ã®ãƒªã‚¹ãƒˆã‚’å‡ºåŠ›ã™ã‚‹UAVã‚’åˆæœŸåŒ–
         m_pointLightNoListInTileUAV.Init(
             sizeof(int),
             MAX_POINT_LIGHT * NUM_TILE,
             nullptr
         );
 
-        // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ìî•ñ‚ğ‘—‚é‚½‚ß‚Ì’è”ƒoƒbƒtƒ@‚ğì¬
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚ÌƒJƒƒ‰—p‚Ì’è”ƒoƒbƒtƒ@‚ğì¬
+        // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æƒ…å ±ã‚’é€ã‚‹ãŸã‚ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã®ã‚«ãƒ¡ãƒ©ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
         m_cameraDataCPU.mProj = g_camera3D->GetProjectionMatrix();
         m_cameraDataCPU.mProjInv.Inverse(g_camera3D->GetProjectionMatrix());
         m_cameraDataCPU.mCameraRot = g_camera3D->GetCameraRotation();
 
         m_cameraDataGPU.Init(sizeof(m_cameraDataCPU), &m_cameraDataCPU);
 
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚Ìƒ‰ƒCƒg—p‚Ì’è”ƒoƒbƒtƒ@‚ğì¬
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã®ãƒ©ã‚¤ãƒˆç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
         m_lightGPU.Init(sizeof(light), &light);
 
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆ
         m_descriptorHeap.RegistShaderResource(0, depthRT.GetRenderTargetTexture());
         m_descriptorHeap.RegistUnorderAccessResource(0, m_pointLightNoListInTileUAV);
         m_descriptorHeap.RegistConstantBuffer(0, m_cameraDataGPU);
@@ -124,18 +124,18 @@ public:
     }
 
     /// <summary>
-    /// ƒfƒBƒXƒpƒbƒ`
+    /// ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
     /// </summary>
     /// <param name="renderContext"></param>
     void Dispatch(RenderContext& renderContext)
     {
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚ğƒfƒBƒXƒpƒbƒ`
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         renderContext.SetComputeRootSignature(*m_rootSignature);
         m_lightGPU.CopyToVRAM(*m_light);
         renderContext.SetComputeDescriptorHeap(m_descriptorHeap);
         renderContext.SetPipelineState(m_pipelineState);
 
-        // ƒOƒ‹[ƒv‚Ì”‚Íƒ^ƒCƒ‹‚Ì”
+        // ã‚°ãƒ«ãƒ¼ãƒ—ã®æ•°ã¯ã‚¿ã‚¤ãƒ«ã®æ•°
         renderContext.Dispatch(
             FRAME_BUFFER_W / TILE_WIDTH,
             FRAME_BUFFER_H / TILE_HEIGHT,
@@ -144,13 +144,13 @@ public:
     }
 };
 
-// step-1 ZPrepassƒNƒ‰ƒX‚ğì¬
+// step-1 ZPrepassã‚¯ãƒ©ã‚¹ã‚’ä½œæˆ
 class ZPrepass
 {
 private:
-    RenderTarget m_depthRT; // [“x’l‚ğ‘‚«‚ŞƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-    Model m_teapotModel;    // ƒeƒB[ƒ|ƒbƒg‚Ìƒ‚ƒfƒ‹
-    Model m_bgModel;        // ”wŒiƒ‚ƒfƒ‹
+    RenderTarget m_depthRT; // æ·±åº¦å€¤ã‚’æ›¸ãè¾¼ã‚€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+    Model m_teapotModel;    // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆã®ãƒ¢ãƒ‡ãƒ«
+    Model m_bgModel;        // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«
 
 public:
     RenderTarget& GetDepthRenderTarget()
@@ -160,7 +160,7 @@ public:
 
     void Init()
     {
-        // [“x’l‚ğ‘‚«‚ŞƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬
+        // æ·±åº¦å€¤ã‚’æ›¸ãè¾¼ã‚€ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
         m_depthRT.Create(
             FRAME_BUFFER_W,
             FRAME_BUFFER_H,
@@ -170,116 +170,116 @@ public:
             DXGI_FORMAT_D32_FLOAT
         );
 
-        // ƒ‚ƒfƒ‹‚ğ‰Šú‰»
+        // ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
         ModelInitData teapotModelInitData;
         teapotModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
 
-        // ƒVƒF[ƒ_[‚ğZPrepass—p‚É‚·‚é
+        // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ZPrepassç”¨ã«ã™ã‚‹
         teapotModelInitData.m_fxFilePath = "Assets/shader/zprepass.fx";
-        // o—Íæ‚ÌƒJƒ‰[ƒoƒbƒtƒ@‚ÌƒtƒH[ƒ}ƒbƒg‚ğw’è‚·‚éB
+        // å‡ºåŠ›å…ˆã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®šã™ã‚‹ã€‚
         teapotModelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32_FLOAT;
         m_teapotModel.Init(teapotModelInitData);
 
-        // ”wŒi‚Ìƒ‚ƒfƒ‹‚ğ‰Šú‰»
+        // èƒŒæ™¯ã®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
         ModelInitData bgModelInitData;
 
-        // ƒ†[ƒU[Šg’£ƒf[ƒ^‚Æ‚µ‚Äƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌƒŠƒXƒg‚ğ“n‚·
+        // ãƒ¦ãƒ¼ã‚¶ãƒ¼æ‹¡å¼µãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ãƒªã‚¹ãƒˆã‚’æ¸¡ã™
         bgModelInitData.m_tkmFilePath = "Assets/modelData/bg.tkm";
 
-        // ƒVƒF[ƒ_[‚ğZPrepass—p‚É‚·‚é
+        // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ZPrepassç”¨ã«ã™ã‚‹
         bgModelInitData.m_fxFilePath = "Assets/shader/zprepass.fx";
-        // o—Íæ‚ÌƒJƒ‰[ƒoƒbƒtƒ@‚ÌƒtƒH[ƒ}ƒbƒg‚ğw’è‚·‚éB
+        // å‡ºåŠ›å…ˆã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®šã™ã‚‹ã€‚
         bgModelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32_FLOAT;
         m_bgModel.Init(bgModelInitData);
     }
 
     void Draw(RenderContext& renderContext)
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğØ‚è‘Ö‚¦‚Äƒhƒ[
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã¦ãƒ‰ãƒ­ãƒ¼
         RenderTarget* rts[] = {
             &m_depthRT
         };
         renderContext.WaitUntilToPossibleSetRenderTargets(1, rts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         renderContext.SetRenderTargets(1, rts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         renderContext.ClearRenderTargetViews(1, rts);
 
         m_teapotModel.Draw(renderContext);
         m_bgModel.Draw(renderContext);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İ‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTargets(1, rts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOæ‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚É–ß‚·
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°å…ˆã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«æˆ»ã™
         g_graphicsEngine->ChangeRenderTargetToFrameBuffer(renderContext);
     }
 };
 
 /////////////////////////////////////////////////////////////////
-//ŠÖ”éŒ¾
+//é–¢æ•°å®£è¨€
 /////////////////////////////////////////////////////////////////
 void InitRootSignature(RootSignature& rs);
-void InitStandard‚h‚nConsole();
+void InitStandardï¼©ï¼¯Console();
 void InitLight(Light& light);
 void InitModel(Model& teapotModel, Model& bgModel, Light& light, IShaderResource& pointLightNoListInTileUAV);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
-    // •W€“üo—ÍƒRƒ“ƒ\[ƒ‹‚Ì‰Šú‰»
-    InitStandard‚h‚nConsole();
+    // æ¨™æº–å…¥å‡ºåŠ›ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®åˆæœŸåŒ–
+    InitStandardï¼©ï¼¯Console();
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
     g_camera3D->SetPosition({ 0.0f, 200.0, 400.0f });
     g_camera3D->Update();
 
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    // ƒ‰ƒCƒg‚ğ‰Šú‰»
+    // ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
     Light light;
     InitLight(light);
 
-    // step-2 ZPrepassƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg‚ğì¬‚µ‚Ä‰Šú‰»‚·‚é
+    // step-2 ZPrepassã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¦åˆæœŸåŒ–ã™ã‚‹
     ZPrepass zprepass;
     zprepass.Init();
 
-    // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚Ì‰Šú‰»
+    // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã®åˆæœŸåŒ–
     LightCulling lightCulling;
     lightCulling.Init(rootSignature, light, zprepass.GetDepthRenderTarget());
 
-    // ƒeƒB[ƒ|ƒbƒg‚Ìƒ‚ƒfƒ‹‚Æ”wŒiƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆã®ãƒ¢ãƒ‡ãƒ«ã¨èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     Model teapotModel, bgModel;
     InitModel(teapotModel, bgModel, light, lightCulling.GetPointLightNoListInTileUAV());
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
     Stopwatch sw;
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
         sw.Start();
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // ƒ‰ƒCƒg‚ğ‰ñ‚·
+        // ãƒ©ã‚¤ãƒˆã‚’å›ã™
         Quaternion qRot;
         qRot.SetRotationDegY(1.0f);
         Matrix mView = g_camera3D->GetViewMatrix();
@@ -291,21 +291,21 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             mView.Apply(pt.positionInView);
         }
 
-        // step-3 ZPrepassËƒ‰ƒCƒgƒJƒŠƒ“ƒOËƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚ÌÀs
-        // ZPrepassÀs
+        // step-3 ZPrepassâ‡’ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°â‡’ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®å®Ÿè¡Œ
+        // ZPrepasså®Ÿè¡Œ
         zprepass.Draw(renderContext);
 
-        // ƒ‰ƒCƒgƒJƒŠƒ“ƒO‚ğƒfƒBƒXƒpƒbƒ`
+        // ãƒ©ã‚¤ãƒˆã‚«ãƒªãƒ³ã‚°ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         lightCulling.Dispatch(renderContext);
 
-        // ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO
+        // ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
         teapotModel.Draw(renderContext);
         bgModel.Draw(renderContext);
 
         /////////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
         sw.Stop();
         printf("fps = %0.2f\n", 1.0f / sw.GetElapsed() );
@@ -314,7 +314,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -324,12 +324,12 @@ void InitRootSignature(RootSignature& rs)
 }
 
 /// <summary>
-/// •W€“üo—ÍƒRƒ“ƒ\[ƒ‹‚ğ‰Šú‰»
+/// æ¨™æº–å…¥å‡ºåŠ›ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’åˆæœŸåŒ–
 /// </summary>
-void InitStandard‚h‚nConsole()
+void InitStandardï¼©ï¼¯Console()
 {
-    ::AllocConsole();               // ƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚ª•\¦‚³‚ê‚é
-    freopen("CON", "w", stdout);    // •W€o—Í‚ÌŠ„‚è“–‚Ä
+    ::AllocConsole();               // ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆãŒè¡¨ç¤ºã•ã‚Œã‚‹
+    freopen("CON", "w", stdout);    // æ¨™æº–å‡ºåŠ›ã®å‰²ã‚Šå½“ã¦
 
     auto fhandle = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT rc;
@@ -342,7 +342,7 @@ void InitStandard‚h‚nConsole()
 }
 
 /// <summary>
-/// ƒ‰ƒCƒg‚ğ‰Šú‰»
+/// ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
 /// </summary>
 /// <param name="light"></param>
 void InitLight(Light& light)
@@ -354,7 +354,7 @@ void InitLight(Light& light)
     light.specPow = 5.0f;
     light.mViewProjInv.Inverse(g_camera3D->GetViewProjectionMatrix());
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚ğ‰Šú‰»
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
     light.directionLights[0].direction.Set(1.0f, 0.0f, 0.0f);
     light.directionLights[0].color.Set(0.5f, 0.5f, 0.5f);
 
@@ -367,19 +367,19 @@ void InitLight(Light& light)
     light.directionLights[3].direction.Set(0.0f, -1.0f, 0.0f);
     light.directionLights[3].color.Set(0.0f, 0.0f, 0.5f);
 
-    // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ğ‰Šú‰»
+    // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
     light.numPointLight = 1000;
     Matrix mView = g_camera3D->GetViewMatrix();
     for (int i = 0; i < light.numPointLight; i++)
     {
         auto& pt = light.pointLights[i];
         pt.position.x = static_cast<float>(random() % 1000) - 500.0f;
-        pt.position.y = 20.0f; // ‚‚³‚Í20ŒÅ’è
+        pt.position.y = 20.0f; // é«˜ã•ã¯20å›ºå®š
         pt.position.z = static_cast<float>(random() % 1000) - 500.0f;
         pt.positionInView = pt.position;
         mView.Apply(pt.positionInView);
 
-        pt.range = 50.0f;       // ‰e‹¿”ÍˆÍ‚à50‚ÅŒÅ’è‚µ‚Ä‚¨‚­
+        pt.range = 50.0f;       // å½±éŸ¿ç¯„å›²ã‚‚50ã§å›ºå®šã—ã¦ãŠã
         pt.color.x = static_cast<float>(random() % 255) / 255.0f;
         pt.color.y = static_cast<float>(random() % 255) / 255.0f;
         pt.color.z = static_cast<float>(random() % 255) / 255.0f;
@@ -391,13 +391,13 @@ void InitLight(Light& light)
 }
 
 /// <summary>
-/// ƒ‚ƒfƒ‹‚Ì‰Šú‰»
+/// ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–
 /// </summary>
 /// <param name="teapotModel"></param>
 /// <param name="bgModel"></param>
 void InitModel(Model& teapotModel, Model& bgModel, Light& light, IShaderResource& pointLightNoListInTileUAV)
 {
-    // ƒeƒB[ƒ|ƒbƒg‚Ìƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆã®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelInitData teapotModelInitData;
     teapotModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
     teapotModelInitData.m_fxFilePath = "Assets/shader/model.fx";
@@ -406,10 +406,10 @@ void InitModel(Model& teapotModel, Model& bgModel, Light& light, IShaderResource
     teapotModelInitData.m_expandShaderResoruceView[0] = &pointLightNoListInTileUAV;
     teapotModel.Init(teapotModelInitData);
 
-    // ”wŒi‚Ìƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // èƒŒæ™¯ã®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelInitData bgModelInitData;
 
-    // ƒ†[ƒU[Šg’£ƒf[ƒ^‚Æ‚µ‚Äƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌƒŠƒXƒg‚ğ“n‚·
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼æ‹¡å¼µãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ãƒªã‚¹ãƒˆã‚’æ¸¡ã™
     bgModelInitData.m_tkmFilePath = "Assets/modelData/bg.tkm";
     bgModelInitData.m_fxFilePath = "Assets/shader/model.fx";
     bgModelInitData.m_expandConstantBuffer = &light;

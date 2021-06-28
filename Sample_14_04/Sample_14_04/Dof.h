@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace myRenderer
 {
@@ -6,29 +6,29 @@ namespace myRenderer
     {
     public:
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
-        /// <param name="mainRenderTarget">ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg</param>
+        /// <param name="mainRenderTarget">ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
         /// <param name="zprepassRenderTarget">ZPrepass</param>
         void Init(RenderTarget& mainRenderTarget, RenderTarget& zprepassRenderTarget);
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
-        /// <param name="mainRenderTarget">ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
+        /// <param name="mainRenderTarget">ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
         void Render(RenderContext& rc, RenderTarget& mainRenderTarget);
 
     private:
         void InitCombimeBokeImageToSprite(Sprite& combineBokeImageSprite, Texture& bokeTexture, Texture& depthTexture);
 
     private:
-        RenderTarget m_rtVerticalBlur;      // ‚’¼ƒuƒ‰[‚ğ‚©‚¯‚é‚½‚ß‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        RenderTarget m_rtDiagonalBlur;      // ‘ÎŠpüƒuƒ‰[‚ğ‚©‚¯‚é‚½‚ß‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        RenderTarget m_rtPhomboidBlur;      // ˜ZŠpŒ`ƒuƒ‰[‚ğ‚©‚¯‚é‚½‚ß‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        Sprite m_vertDIagonalBlurSprite;    // ‚’¼A‘ÎŠpüƒuƒ‰[—p‚ÌƒXƒvƒ‰ƒCƒg
-        Sprite m_phomboidBlurSprite;        // ˜ZŠpŒ`ƒuƒ‰—p‚ÌƒXƒvƒ‰ƒCƒg
-        Sprite m_combineBokeImageSprite;    // ƒ{ƒP‰æ‘œ‚ğƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚É‡¬‚·‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg
+        RenderTarget m_rtVerticalBlur;      // å‚ç›´ãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ãŸã‚ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        RenderTarget m_rtDiagonalBlur;      // å¯¾è§’ç·šãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ãŸã‚ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        RenderTarget m_rtPhomboidBlur;      // å…­è§’å½¢ãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ãŸã‚ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        Sprite m_vertDIagonalBlurSprite;    // å‚ç›´ã€å¯¾è§’ç·šãƒ–ãƒ©ãƒ¼ç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+        Sprite m_phomboidBlurSprite;        // å…­è§’å½¢ãƒ–ãƒ©ç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+        Sprite m_combineBokeImageSprite;    // ãƒœã‚±ç”»åƒã‚’ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«åˆæˆã™ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
 
     };
 }

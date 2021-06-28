@@ -1,38 +1,38 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "RenderingEngine.h"
 #include "ModelRender.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
     
-    // ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğì¬
+    // ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½œæˆ
     RootSignature rootSignature;
     InitRootSignature(rootSignature);
 
-    //ƒŒƒ“ƒ_ƒŠƒ“ƒOƒpƒCƒvƒ‰ƒCƒ“‚ğ‰Šú‰»
+    //ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’åˆæœŸåŒ–
     
     myRenderer::RenderingEngine renderingEngine;
     renderingEngine.Init();
 
-    // ”wŒiƒ‚ƒfƒ‹‚ÌƒŒƒ“ƒ_ƒ‰[‚ğ‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã®ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’åˆæœŸåŒ–
     myRenderer::ModelRender bgModelRender;
     bgModelRender.InitDeferredRendering(renderingEngine, "Assets/modelData/bg/bg.tkm", true);
     
-    // ƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ÌƒŒƒ“ƒ_ƒ‰[‚ğ‰Šú‰»
+    // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã®ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’åˆæœŸåŒ–
     myRenderer::ModelInitDataFR modelInitData;
     modelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
     modelInitData.m_fxFilePath = "Assets/shader/sample.fx";
@@ -46,40 +46,40 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
         g_camera3D->MoveForward(g_pad[0]->GetLStickYF());
         g_camera3D->MoveRight(g_pad[0]->GetLStickXF());
         g_camera3D->MoveUp(g_pad[0]->GetRStickYF());
         
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
         bgModelRender.Draw();
         teapotModelRender.Draw();
-        //ƒŒƒ“ƒ_ƒŠƒ“ƒOƒpƒCƒvƒ‰ƒCƒ“‚ğÀs
+        //ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’å®Ÿè¡Œ
         renderingEngine.Execute(renderContext);
         
 
         /////////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
 
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature(RootSignature& rs)
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,

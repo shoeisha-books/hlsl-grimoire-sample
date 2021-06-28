@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Bloom.h"
 #include "Dof.h"
@@ -13,7 +13,7 @@ namespace myRenderer
         void Render( RenderContext& rc, RenderTarget& mainRenderTarget );
 
     private:
-        Bloom m_bloom;  //ƒuƒ‹[ƒ€
-        Dof m_dof;      //”íÊŠE[“x
+        Bloom m_bloom;  //ãƒ–ãƒ«ãƒ¼ãƒ 
+        Dof m_dof;      //è¢«å†™ç•Œæ·±åº¦
     };
 }

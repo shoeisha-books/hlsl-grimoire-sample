@@ -1,5 +1,5 @@
-/*!
- *@brief	ƒAƒT[ƒg
+ï»¿/*!
+ *@brief	ã‚¢ã‚µãƒ¼ãƒˆ
  */
 
 #pragma once
@@ -8,8 +8,8 @@
 
 
 /*!
-	*@brief	ƒAƒT[ƒg
-	*@param[in]	flag	‹U‚Ì‚Æ‚«ƒAƒT[ƒg‚ª”­¶‚µ‚Ü‚·B
+	*@brief	ã‚¢ã‚µãƒ¼ãƒˆ
+	*@param[in]	flag	å½ã®ã¨ãã‚¢ã‚µãƒ¼ãƒˆãŒç™ºç”Ÿã—ã¾ã™ã€‚
 	*/
 static inline void MyAssert( bool flag, const char* format, const char* file, long line, ... )
 {
@@ -18,11 +18,11 @@ static inline void MyAssert( bool flag, const char* format, const char* file, lo
 		va_start( va, flag );
 		vprintf( format, va );
 		char fileLineInfo[256];
-		sprintf_s(fileLineInfo, "%s, %ds–Ú", file, line );
+		sprintf_s(fileLineInfo, "%s, %dè¡Œç›®", file, line );
 		char assertMessage[256];
 		vsprintf_s(assertMessage, format, va);
 		strcat_s(assertMessage, fileLineInfo);
-		MessageBoxA(nullptr, assertMessage, "ƒAƒT[ƒg", MB_OK);
+		MessageBoxA(nullptr, assertMessage, "ã‚¢ã‚µãƒ¼ãƒˆ", MB_OK);
 		va_end( va );
 		std::abort();
 	}

@@ -1,5 +1,5 @@
-/*!
- * @brief	”ŠwŠÖŒWFXB
+ï»¿/*!
+ * @brief	æ•°å­¦é–¢ä¿‚è‰²ã€…ã€‚
  */
 #include "tkEngine/tkEnginePreCompile.h"
 #include "tkEngine/math/tkMath.h"

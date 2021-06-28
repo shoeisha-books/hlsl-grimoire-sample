@@ -1,9 +1,9 @@
-
+﻿
 class IUnorderAccessResrouce : public IShaderResource {
 public:
 	virtual ~IUnorderAccessResrouce() {};
 	/// <summary>
-	/// UAV�ɓo�^�B
+	/// UAVに登録。
 	/// </summary>
 	/// <param name=""></param>
 	/// <param name="bufferNo"></param>

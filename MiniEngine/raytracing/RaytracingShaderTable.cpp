@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RaytracingShaderTable.h"
 #include "RaytracingPSO.h"
 
@@ -8,7 +8,7 @@ namespace raytracing {
 
 	void ShaderTable::CountupNumGeyGenAndMissAndHitShader()
 	{
-		//ŠeƒVƒF[ƒ_[‚Ì”‚ğ’²¸B
+		//å„ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’èª¿æŸ»ã€‚
 		m_numRayGenShader = 0;
 		m_numMissShader = 0;
 		m_numHitShader = 0;
@@ -21,12 +21,12 @@ namespace raytracing {
 
 	void ShaderTable::CalcShaderTableEntrySize()
 	{
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚É“o˜^‚³‚ê‚éƒf[ƒ^‚Ì‚P—v‘f•ª‚ÌƒTƒCƒY‚ğŒvZB
-		//ƒVƒF[ƒ_[¯•ÊqB
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç™»éŒ²ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ï¼‘è¦ç´ åˆ†ã®ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã€‚
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è­˜åˆ¥å­ã€‚
 		m_shaderTableEntrySize = D3D12_SHADER_IDENTIFIER_SIZE_IN_BYTES;
-		//ƒfƒBƒXƒNƒŠƒvƒ^ƒe[ƒuƒ‹‚ÌƒAƒhƒŒƒXB
+		//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã€‚
 		m_shaderTableEntrySize += sizeof(D3D12_GPU_DESCRIPTOR_HANDLE) * eHitShaderDescriptorTable_Num; // The hit shader
-		//ƒAƒ‰ƒCƒƒ“ƒg‚ğ‚»‚ë‚¦‚éB
+		//ã‚¢ãƒ©ã‚¤ãƒ¡ãƒ³ãƒˆã‚’ãã‚ãˆã‚‹ã€‚
 		m_shaderTableEntrySize = align_to(D3D12_RAYTRACING_SHADER_RECORD_BYTE_ALIGNMENT, m_shaderTableEntrySize);
 	}
 	void ShaderTable::Init(
@@ -36,20 +36,20 @@ namespace raytracing {
 	)
 	{
 		
-		//ŠeƒVƒF[ƒ_[‚Ì”‚ğƒJƒEƒ“ƒg‚·‚éB
+		//å„ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã€‚
 		CountupNumGeyGenAndMissAndHitShader();
 		
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚É“o˜^‚³‚ê‚éƒf[ƒ^‚Ì‚P—v‘f•ª‚ÌƒTƒCƒY‚ğŒvZB
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç™»éŒ²ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ï¼‘è¦ç´ åˆ†ã®ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã€‚
 		CalcShaderTableEntrySize();
 
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÌƒTƒCƒY‚ğŒvZB
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®ã‚µã‚¤ã‚ºã‚’è¨ˆç®—ã€‚
 		int shaderTableSize = m_shaderTableEntrySize * (m_numRayGenShader + m_numMissShader + (m_numHitShader * world.GetNumInstance()));
 
 		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹—p‚Ìƒoƒbƒtƒ@‚ğì¬B
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ç”¨ã®ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 		m_shaderTable = CreateBuffer(d3dDevice, shaderTableSize, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_GENERIC_READ, kUploadHeapProps);
 
-		//ƒoƒbƒtƒ@‚ğƒVƒXƒeƒ€ƒƒ‚ƒŠ‚Éƒ}ƒbƒv‚·‚éB
+		//ãƒãƒƒãƒ•ã‚¡ã‚’ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ¢ãƒªã«ãƒãƒƒãƒ—ã™ã‚‹ã€‚
 		uint8_t* pData;
 		m_shaderTable->Map(0, nullptr, (void**)&pData);
 
@@ -66,10 +66,10 @@ namespace raytracing {
 		const auto& samplerDescriptorHeap = descriptorHeaps.GetSamplerDescriptorHeap();
 
 		uint64_t hitGroup_pbrCameraRaySrvHeapStart = srvUavCbvDescriptorHeap.Get()->GetGPUDescriptorHandleForHeapStart().ptr + ds_size_cbv_srv_uav;
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÉƒVƒF[ƒ_[‚ğ“o˜^‚·‚éŠÖ”B
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹é–¢æ•°ã€‚
 		auto RegistShaderTblFunc = [&](const ShaderData& shaderData, EShaderCategory registCategory, Instance* instance) {
 			if (shaderData.category == registCategory) {
-				//‚Ü‚¸ƒVƒF[ƒ_[ID‚ğİ’è‚·‚éB
+				//ã¾ãšã‚·ã‚§ãƒ¼ãƒ€ãƒ¼IDã‚’è¨­å®šã™ã‚‹ã€‚
 				void* pShaderId = nullptr;
 				if (registCategory == eShaderCategory_ClosestHit) {
 					pShaderId = pRtsoProps->GetShaderIdentifier(hitGroups[shaderData.hitgroup].name);
@@ -80,34 +80,34 @@ namespace raytracing {
 				memcpy(pCurret, pShaderId, D3D12_SHADER_IDENTIFIER_SIZE_IN_BYTES);
 				uint8_t* pDst = pCurret + D3D12_SHADER_IDENTIFIER_SIZE_IN_BYTES;
 				if (shaderData.useLocalRootSignature == eLocalRootSignature_Raygen) {
-					//ƒfƒtƒHƒ‹ƒg‚Ìƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğg—p‚·‚éê‡AƒVƒF[ƒ_[ID‚ÌŒã‚ë‚ÉƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ö‚ÌƒAƒhƒŒƒX‚ğİ’è‚·‚éB
+					//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã€ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼IDã®å¾Œã‚ã«ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã¸ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨­å®šã™ã‚‹ã€‚
 					*(uint64_t*)(pDst) = srvUavCbvDescriptorHeap.Get()->GetGPUDescriptorHandleForHeapStart().ptr;
 				}
 				if (shaderData.useLocalRootSignature == eLocalRootSignature_PBRMaterialHit) {
-					//SRV_CBV‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv				
+					//SRV_CBVã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—				
 					*(uint64_t*)(pDst) = hitGroup_pbrCameraRaySrvHeapStart;
 					pDst += sizeof(D3D12_GPU_DESCRIPTOR_HANDLE);
 					*(uint64_t*)(pDst) = samplerDescriptorHeap.GetSamplerResourceGpuDescritorStartHandle().ptr;
 
 				}
-				//ŸB
+				//æ¬¡ã€‚
 				pCurret += m_shaderTableEntrySize;
 			}
 		};
-		// ƒŒƒCƒWƒFƒlƒŒ[ƒVƒ‡ƒ“ƒVƒF[ƒ_[‚ğƒe[ƒuƒ‹‚É“o˜^‚µ‚Ä‚¢‚­B
+		// ãƒ¬ã‚¤ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç™»éŒ²ã—ã¦ã„ãã€‚
 		for (auto& shader : shaderDatas) {
 			RegistShaderTblFunc(shader, eShaderCategory_RayGenerator, nullptr);
 		}
-		// ‘±‚¢‚Äƒ~ƒXƒVƒF[ƒ_[B
+		// ç¶šã„ã¦ãƒŸã‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€‚
 		for (auto& shader : shaderDatas) {
 			RegistShaderTblFunc(shader, eShaderCategory_Miss, nullptr);
 		}
-		//ÅŒã‚ÉƒqƒbƒgƒVƒF[ƒ_[BƒqƒbƒgƒVƒF[ƒ_[‚ÍƒqƒbƒgƒVƒF[ƒ_[‚Ì”@~@ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”‚¾‚¯“o˜^‚·‚éB
+		//æœ€å¾Œã«ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€‚ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¯ãƒ’ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®æ•°ã€€Ã—ã€€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ•°ã ã‘ç™»éŒ²ã™ã‚‹ã€‚
 		world.QueryInstances([&](Instance& instance) {
 			for (auto& shader : shaderDatas) {
 				RegistShaderTblFunc(shader, eShaderCategory_ClosestHit, &instance);
 			};
-			hitGroup_pbrCameraRaySrvHeapStart += hitGroup_pbrCameraRaySrvHeapStride;	//Ÿ
+			hitGroup_pbrCameraRaySrvHeapStart += hitGroup_pbrCameraRaySrvHeapStride;	//æ¬¡
 		});
 
 		//Unmap

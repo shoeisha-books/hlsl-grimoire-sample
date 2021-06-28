@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 class Shader;
 class RootSignature {
@@ -10,15 +10,15 @@ public:
 		}
 	}
 	/// <summary>
-	/// ������
+	/// 初期化
 	/// </summary>
-	/// <param name="samplerFilter">�T���v���t�B���^</param>
-	/// <param name="textureAdressModeU">�e�N�X�`���̃A�h���b�V���O���[�h(U����)</param>
-	/// <param name="textureAdressModeV">�e�N�X�`���̃A�h���b�V���O���[�h(V����)</param>
-	/// <param name="textureAdressModeW">�e�N�X�`���̃A�h���b�V���O���[�h(W����)</param>
-	/// <param name="maxCbvDescriptor">�萔�o�b�t�@�p�̃f�B�X�N���v�^�̍ő吔</param>
-	/// <param name="maxSrvDescriptor">�V�F�[�_�[���\�[�X�p�̃f�B�X�N���v�^�̍ő吔</param>
-	/// <param name="maxUavDescritor">UAV�p�̃f�B�X�N���v�^�̍ő吔</param>
+	/// <param name="samplerFilter">サンプラフィルタ</param>
+	/// <param name="textureAdressModeU">テクスチャのアドレッシングモード(U方向)</param>
+	/// <param name="textureAdressModeV">テクスチャのアドレッシングモード(V方向)</param>
+	/// <param name="textureAdressModeW">テクスチャのアドレッシングモード(W方向)</param>
+	/// <param name="maxCbvDescriptor">定数バッファ用のディスクリプタの最大数</param>
+	/// <param name="maxSrvDescriptor">シェーダーリソース用のディスクリプタの最大数</param>
+	/// <param name="maxUavDescritor">UAV用のディスクリプタの最大数</param>
 	bool Init(
 		D3D12_FILTER samplerFilter,
 		D3D12_TEXTURE_ADDRESS_MODE textureAdressModeU,
@@ -29,13 +29,13 @@ public:
 		UINT maxUavDescritor = 8
 	);
 	/// <summary>
-	/// ������
+	/// 初期化
 	/// </summary>
 	/// <param name="samplerDescArray"></param>
-	/// <param name="numSampler">�T���v���̐�</param>
-	/// <param name="maxCbvDescriptor">�萔�o�b�t�@�p�̃f�B�X�N���v�^�̍ő吔</param>
-	/// <param name="maxSrvDescriptor">�V�F�[�_�[���\�[�X�p�̃f�B�X�N���v�^�̍ő吔</param>
-	/// <param name="maxUavDescritor">UAV�p�̃f�B�X�N���v�^�̍ő吔</param>
+	/// <param name="numSampler">サンプラの数</param>
+	/// <param name="maxCbvDescriptor">定数バッファ用のディスクリプタの最大数</param>
+	/// <param name="maxSrvDescriptor">シェーダーリソース用のディスクリプタの最大数</param>
+	/// <param name="maxUavDescritor">UAV用のディスクリプタの最大数</param>
 	/// <returns></returns>
 	bool Init(
 		D3D12_STATIC_SAMPLER_DESC* samplerDescArray,
@@ -53,5 +53,5 @@ public:
 		return m_rootSignature;
 	}
 private:
-	ID3D12RootSignature* m_rootSignature = nullptr;	//���[�g�V�O�l�`���B
+	ID3D12RootSignature* m_rootSignature = nullptr;	//ルートシグネチャ。
 };

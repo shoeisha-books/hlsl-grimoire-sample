@@ -1,87 +1,87 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct DirectionLight
 {
-    Vector3 direction;  //ƒ‰ƒCƒg‚Ì•ûŒü
+    Vector3 direction;  //ãƒ©ã‚¤ãƒˆã®æ–¹å‘
     float pad0;
-    Vector3 color;      //ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 color;      //ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
     float pad1;
 };
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    DirectionLight directionLight;  // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    Vector3 eyePos;                 // ‹“_‚ÌˆÊ’u
+    DirectionLight directionLight;  // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    Vector3 eyePos;                 // è¦–ç‚¹ã®ä½ç½®
 };
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
     g_camera3D->SetPosition({ 0.0f, 0.0f, 100.0f });
     g_camera3D->SetTarget({ 0.0f, 0.0f, 0.0f });
 
-    // ƒ‰ƒCƒg‚Ìƒf[ƒ^‚ğì¬‚·‚é
+    // ãƒ©ã‚¤ãƒˆã®ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
     Light light;
 
-    // ƒ‰ƒCƒg‚Í‰E‘¤‚©‚ç“–‚½‚Á‚Ä‚¢‚é
+    // ãƒ©ã‚¤ãƒˆã¯å³å´ã‹ã‚‰å½“ãŸã£ã¦ã„ã‚‹
     light.directionLight.direction.x = 1.0f;
     light.directionLight.direction.y = -1.0f;
     light.directionLight.direction.z = -1.0f;
     light.directionLight.direction.Normalize();
 
-    // ƒ‰ƒCƒg‚ÌƒJƒ‰[‚Í”’
+    // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã¯ç™½
     light.directionLight.color.x = 0.5f;
     light.directionLight.color.y = 0.5f;
     light.directionLight.color.z = 0.5f;
 
-    // ‹“_‚ÌˆÊ’u‚ğİ’è‚·‚é
+    // è¦–ç‚¹ã®ä½ç½®ã‚’è¨­å®šã™ã‚‹
     light.eyePos = g_camera3D->GetPosition();
 
-    // ƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
-    // ƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é‚½‚ß‚Ìî•ñ‚ğ\’z‚·‚é
+    // ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
+    // ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹ãŸã‚ã®æƒ…å ±ã‚’æ§‹ç¯‰ã™ã‚‹
     ModelInitData modelInitData;
     modelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
 
-    // g—p‚·‚éƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹ƒpƒX‚ğİ’è‚·‚é
+    // ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’è¨­å®šã™ã‚‹
     modelInitData.m_fxFilePath = "Assets/shader/sample.fx";
 
-    // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ìî•ñ‚ğ’è”ƒoƒbƒtƒ@‚Æ‚µ‚ÄƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚é‚½‚ß‚É
-    // ƒ‚ƒfƒ‹‚Ì‰Šú‰»î•ñ‚Æ‚µ‚Ä“n‚·
+    // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æƒ…å ±ã‚’å®šæ•°ãƒãƒƒãƒ•ã‚¡ã¨ã—ã¦ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹ãŸã‚ã«
+    // ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–æƒ…å ±ã¨ã—ã¦æ¸¡ã™
     modelInitData.m_expandConstantBuffer = &light;
     modelInitData.m_expandConstantBufferSize = sizeof(light);
 
-    // ‰Šú‰»î•ñ‚ğg‚Á‚Äƒ‚ƒfƒ‹‚ğ‰Šú‰»‚·‚é
+    // åˆæœŸåŒ–æƒ…å ±ã‚’ä½¿ã£ã¦ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     Model model;
     model.Init(modelInitData);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
         Quaternion qRot;
         qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
@@ -89,13 +89,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         qRot.SetRotationDegX(g_pad[0]->GetLStickYF());
         qRot.Apply(light.directionLight.direction);
 
-        // ƒeƒB[ƒ|ƒbƒg‚ğƒhƒ[
+        // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆã‚’ãƒ‰ãƒ­ãƒ¼
         model.Draw(renderContext);
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;

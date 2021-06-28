@@ -1,28 +1,28 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include <time.h>
 
-const int NUM_DIRECTIONAL_LIGHT = 4; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+const int NUM_DIRECTIONAL_LIGHT = 4; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
 /// </summary>
 struct DirectionalLight
 {
-    Vector3 direction;  // ƒ‰ƒCƒg‚Ì•ûŒü
-    float pad0;         // ƒpƒfƒBƒ“ƒO
-    Vector4 color;      // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 direction;  // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+    float pad0;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+    Vector4 color;      // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
 };
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    Vector3 eyePos;             // ƒJƒƒ‰‚ÌˆÊ’u
-    float specPow;              // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-    Vector3 ambinetLight;       // ŠÂ‹«Œõ
+    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    Vector3 eyePos;             // ã‚«ãƒ¡ãƒ©ã®ä½ç½®
+    float specPow;              // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Š
+    Vector3 ambinetLight;       // ç’°å¢ƒå…‰
 };
 
 #define USE_UNITY_CHAN 0
@@ -32,19 +32,19 @@ struct Light
 #define USE_MODEL 2
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     srand(time(nullptr) );
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // 3Dƒ‚ƒfƒ‹‚ğì¬
+    // 3Dãƒ¢ãƒ‡ãƒ«ã‚’ä½œæˆ
     Model model, bgModel;
     ModelInitData initData;
 
@@ -57,7 +57,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     bgModel.Init(initData);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
@@ -68,10 +68,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     g_graphicsEngine->RegistModelToRaytracingWorld(bgModel);
     g_graphicsEngine->BuildRaytracingWorld(renderContext);
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
         if (g_pad[0]->IsPress(enButtonLB1))
@@ -90,14 +90,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_camera3D->RotateOriginTarget(qRotY);
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
         g_graphicsEngine->DispatchRaytracing(renderContext);
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;

@@ -1,27 +1,27 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-const int NUM_DIRECTIONAL_LIGHT = 4; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+const int NUM_DIRECTIONAL_LIGHT = 4; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
 /// </summary>
 struct DirectionalLight
 {
-    Vector3 direction;  // ƒ‰ƒCƒg‚Ì•ûŒü
-    float pad0;         // ƒpƒfƒBƒ“ƒO
-    Vector4 color;      // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 direction;  // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+    float pad0;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+    Vector4 color;      // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
 };
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    Vector3 eyePos;         // ƒJƒƒ‰‚ÌˆÊ’u
-    float specPow;          // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-    Vector3 ambinetLight;   // ŠÂ‹«Œõ
+    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT]; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    Vector3 eyePos;         // ã‚«ãƒ¡ãƒ©ã®ä½ç½®
+    float specPow;          // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Š
+    Vector3 ambinetLight;   // ç’°å¢ƒå…‰
 };
 
 struct DispSetting
@@ -41,21 +41,21 @@ enum
 DispSetting dispSettings[Num];
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒ‰ƒCƒg‚ğ—pˆÓ‚·‚é
+    // ãƒ©ã‚¤ãƒˆã‚’ç”¨æ„ã™ã‚‹
     Light light;
 
-    // ‘¾—zŒõ
+    // å¤ªé™½å…‰
     light.directionalLight[0].color.x = 3.0f;
     light.directionalLight[0].color.y = 3.0f;
     light.directionalLight[0].color.z = 3.0f;
@@ -65,7 +65,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     light.directionalLight[0].direction.z = 3.0f;
     light.directionalLight[0].direction.Normalize();
 
-    // ’n–Ê‚©‚ç‚ÌÆ‚è•Ô‚µ
+    // åœ°é¢ã‹ã‚‰ã®ç…§ã‚Šè¿”ã—
     light.directionalLight[1].color.x = 1.5f;
     light.directionalLight[1].color.y = 1.5f;
     light.directionalLight[1].color.z = 1.5f;
@@ -82,7 +82,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     light.eyePos = g_camera3D->GetPosition();
     light.specPow = 5.0f;
 
-    // 3Dƒ‚ƒfƒ‹‚ğì¬
+    // 3Dãƒ¢ãƒ‡ãƒ«ã‚’ä½œæˆ
     Model models[Num];
     ModelInitData initData;
 
@@ -110,7 +110,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     dispSettings[Lantern].cameraTarget = { 0.0f, 50.0f, 0.0f };
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
@@ -119,14 +119,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     g_camera3D->SetPosition(dispSettings[dispModelNo].cameraPos);
     g_camera3D->SetTarget(dispSettings[dispModelNo].cameraTarget);
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
         Quaternion qRot;
@@ -144,7 +144,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             qRot.Apply(lig.direction);
         }
 
-        // ƒJƒƒ‰‚à‰ñ‚·
+        // ã‚«ãƒ¡ãƒ©ã‚‚å›ã™
         qRot.SetRotationDegY(g_pad[0]->GetLStickXF());
         auto camPos = g_camera3D->GetPosition();
         qRot.Apply(camPos);
@@ -170,9 +170,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;

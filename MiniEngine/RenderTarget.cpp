@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "RenderTarget.h"
 #include "GraphicsEngine.h"
 
@@ -30,25 +30,25 @@ bool RenderTarget::Create(
 	auto d3dDevice = g_graphicsEngine->GetD3DDevice();
 	m_width = w;
 	m_height = h;
-	//ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚ðì¬‚·‚éB
+	//ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã™ã‚‹ã€‚
 	if (!CreateRenderTargetTexture(*g_graphicsEngine, d3dDevice, w, h, mipLevel, arraySize, colorFormat, clearColor)) {
-	//	TK_ASSERT(false, "ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½B");
-		MessageBoxA(nullptr, "ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½B", "ƒGƒ‰[", MB_OK);
+	//	TK_ASSERT(false, "ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
+		MessageBoxA(nullptr, "ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
-	//[“xƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚ðì¬‚·‚éB
+	//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã™ã‚‹ã€‚
 	if (depthStencilFormat != DXGI_FORMAT_UNKNOWN) {
 		if (!CreateDepthStencilTexture(*g_graphicsEngine, d3dDevice, w, h, depthStencilFormat)) {
-			MessageBoxA(nullptr, "ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½B", "ƒGƒ‰[", MB_OK);
+			MessageBoxA(nullptr, "ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 			return false;
 		}
 	}
 	if (!CreateDescriptorHeap(*g_graphicsEngine, d3dDevice)) {
-		//ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìì¬‚ÉŽ¸”s‚µ‚½B
-		MessageBoxA(nullptr, "ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚È‚éƒeƒNƒXƒ`ƒƒ‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½B", "ƒGƒ‰[", MB_OK);
+		//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ä½œæˆã«å¤±æ•—ã—ãŸã€‚
+		MessageBoxA(nullptr, "ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
-	//ƒfƒBƒXƒNƒŠƒvƒ^‚ðì¬‚·‚éB
+	//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’ä½œæˆã™ã‚‹ã€‚
 	CreateDescriptor(d3dDevice);
 	if (clearColor) {
 		memcpy(m_rtvClearColor, clearColor, sizeof(m_rtvClearColor));
@@ -58,29 +58,29 @@ bool RenderTarget::Create(
 bool RenderTarget::CreateDescriptorHeap(GraphicsEngine& ge, ID3D12Device5*& d3dDevice)
 {
 		
-	//RTV—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ðì¬‚·‚éB
+	//RTVç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆã™ã‚‹ã€‚
 	D3D12_DESCRIPTOR_HEAP_DESC desc = {};
 	desc.NumDescriptors = GraphicsEngine::FRAME_BUFFER_COUNT;
 	desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	d3dDevice->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&m_rtvHeap));
 	if (m_rtvHeap == nullptr) {
-		//RTV—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìì¬‚ÉŽ¸”s‚µ‚½B
+		//RTVç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ä½œæˆã«å¤±æ•—ã—ãŸã€‚
 		return false;
 	}
-	//ƒfƒBƒXƒNƒŠƒvƒ^‚ÌƒTƒCƒY‚ðŽæ“¾B
+	//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 	m_rtvDescriptorSize = d3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	if (m_depthStencilTexture) {
-		//DSV—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ðì¬‚·‚éB
+		//DSVç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆã™ã‚‹ã€‚
 		desc.NumDescriptors = 1;
 		desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
 		d3dDevice->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&m_dsvHeap));
 		if (m_dsvHeap == nullptr) {
-			//DSV—p‚ÌƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚Ìì¬‚ÉŽ¸”s‚µ‚½B
+			//DSVç”¨ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®ä½œæˆã«å¤±æ•—ã—ãŸã€‚
 			return false;
 		}
-		//ƒfƒBƒXƒNƒŠƒvƒ^‚ÌƒTƒCƒY‚ðŽæ“¾B
+		//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã®ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 		m_dsvDescriptorSize = d3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	}
 	return true;
@@ -124,7 +124,7 @@ bool RenderTarget::CreateRenderTargetTexture(
 		clearValue.Color[2] = 0.0f;
 		clearValue.Color[3] = 1.0f;
 	}
-	//ƒŠƒ\[ƒX‚ðì¬B
+	//ãƒªã‚½ãƒ¼ã‚¹ã‚’ä½œæˆã€‚
 	auto prop = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 	auto hr = d3dDevice->CreateCommittedResource(
 		&prop,
@@ -136,7 +136,7 @@ bool RenderTarget::CreateRenderTargetTexture(
 	);
 
 	if (FAILED(hr)) {
-		//ì¬‚ÉŽ¸”sB
+		//ä½œæˆã«å¤±æ•—ã€‚
 		return false;
 	}
 	m_renderTargetTexture.InitFromD3DResource(m_renderTargetTextureDx12);
@@ -177,18 +177,18 @@ bool RenderTarget::CreateDepthStencilTexture(
 		IID_PPV_ARGS(&m_depthStencilTexture)
 	);
 	if (FAILED(hr)) {
-		//[“xƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ìì¬‚ÉŽ¸”sB
+		//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆã«å¤±æ•—ã€‚
 		return false;
 	}
 	return true;
 }
 void RenderTarget::CreateDescriptor(ID3D12Device5*& d3dDevice)
 {
-	//ƒJƒ‰[ƒeƒNƒXƒ`ƒƒ‚ÌƒfƒBƒXƒNƒŠƒvƒ^‚ðì¬B
+	//ã‚«ãƒ©ãƒ¼ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’ä½œæˆã€‚
 	auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	d3dDevice->CreateRenderTargetView(m_renderTargetTexture.Get(), nullptr, rtvHandle);
 	if (m_depthStencilTexture) {
-		//[“xƒeƒNƒXƒ`ƒƒ‚ÌƒfƒBƒXƒNƒŠƒvƒ^‚ðì¬
+		//æ·±åº¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ã‚’ä½œæˆ
 		auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
 		d3dDevice->CreateDepthStencilView(m_depthStencilTexture, nullptr, dsvHandle);
 	}

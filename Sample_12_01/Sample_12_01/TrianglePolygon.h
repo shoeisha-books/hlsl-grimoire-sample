@@ -1,53 +1,53 @@
-#pragma once
+ï»¿#pragma once
 
 class RenderContext;
 
-//’¸“_\‘¢‘Ì
+//é ‚ç‚¹æ§‹é€ ä½“
 struct SimpleVertex {
-	float pos[3];		//’¸“_À•WB
-	float color[3];		//’¸“_ƒJƒ‰[B
-	float uv[2];		//UVÀ•WB
+	float pos[3];		//é ‚ç‚¹åº§æ¨™ã€‚
+	float color[3];		//é ‚ç‚¹ã‚«ãƒ©ãƒ¼ã€‚
+	float uv[2];		//UVåº§æ¨™ã€‚
 };
 
 /// <summary>
-/// OŠpŒ`ƒ|ƒŠƒSƒ“B
+/// ä¸‰è§’å½¢ãƒãƒªã‚´ãƒ³ã€‚
 /// </summary>
 class TrianglePolygon
 {
 public:
 	/// <summary>
-	/// ‰Šú‰»B
+	/// åˆæœŸåŒ–ã€‚
 	/// </summary>
-	/// /// <param name="rs">ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ</param>
+	/// /// <param name="rs">ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£</param>
 	void Init( RootSignature& rs );
 	/// <summary>
-	/// •`‰æB
+	/// æç”»ã€‚
 	/// </summary>
-	/// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+	/// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
 	void Draw(RenderContext& rc);
 private:
 	/// <summary>
-	/// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğ‰Šú‰»B
+	/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’åˆæœŸåŒ–ã€‚
 	/// </summary>
-	/// <param name="rs">ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ</param>
+	/// <param name="rs">ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£</param>
 	void InitPipelineState(RootSignature& rs);
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚ğƒ[ƒhB
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	/// </summary>
 	void LoadShaders();
 	/// <summary>
-	/// ’¸“_ƒoƒbƒtƒ@‚ğì¬B
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 	/// </summary>
 	void InitVertexBuffer();
 	/// <summary>
-	/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬B
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 	/// </summary>
 	void InitIndexBuffer();
 private:
-	VertexBuffer m_vertexBuffer;		//’¸“_ƒoƒbƒtƒ@B
-	IndexBuffer m_indexBuffer;		//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@B
-	Shader m_vertexShader;			//’¸“_ƒVƒF[ƒ_[B
-	Shader m_pixelShader;				//ƒsƒNƒZƒ‹ƒVƒF[ƒ_[B
-	PipelineState m_pipelineState;	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgB
+	VertexBuffer m_vertexBuffer;		//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+	IndexBuffer m_indexBuffer;		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+	Shader m_vertexShader;			//é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€‚
+	Shader m_pixelShader;				//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã€‚
+	PipelineState m_pipelineState;	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã€‚
 };
 

@@ -1,4 +1,4 @@
-//--------------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // File: XboxDDSTextureLoader.cpp
 //
 // Functions for loading a DDS texture using the XBOX extended header and creating a

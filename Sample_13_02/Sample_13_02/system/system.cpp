@@ -1,22 +1,22 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system.h"
 #include "GraphicsEngine.h"
 
-HWND			g_hWnd = NULL;				//ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹B
+HWND			g_hWnd = NULL;				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã€‚
 
 ///////////////////////////////////////////////////////////////////
-//ƒƒbƒZ[ƒWƒvƒƒV[ƒWƒƒB
-//hWnd‚ªƒƒbƒZ[ƒW‚ğ‘—‚Á‚Ä‚«‚½ƒEƒBƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹B
-//msg‚ªƒƒbƒZ[ƒW‚Ìí—ŞB
-//wParam‚ÆlParam‚Íˆø”B¡‚Í‹C‚É‚µ‚È‚­‚Ä‚æ‚¢B
+//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã€‚
+//hWndãŒãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã£ã¦ããŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«ã€‚
+//msgãŒãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ç¨®é¡ã€‚
+//wParamã¨lParamã¯å¼•æ•°ã€‚ä»Šã¯æ°—ã«ã—ãªãã¦ã‚ˆã„ã€‚
 ///////////////////////////////////////////////////////////////////
 LRESULT CALLBACK MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	//‘—‚ç‚ê‚Ä‚«‚½ƒƒbƒZ[ƒW‚Åˆ—‚ğ•ªŠò‚³‚¹‚éB
+	//é€ã‚‰ã‚Œã¦ããŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§å‡¦ç†ã‚’åˆ†å²ã•ã›ã‚‹ã€‚
 	switch (msg)
 	{
 	case WM_DESTROY:
-		//ƒXƒGƒ“ƒWƒ“‚Ì”jŠüB
+		//ã‚¹ã‚¨ãƒ³ã‚¸ãƒ³ã®ç ´æ£„ã€‚
 		delete g_engine;
 		PostQuitMessage(0);
 		break;	
@@ -28,44 +28,44 @@ LRESULT CALLBACK MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒE‚Ì‰Šú‰»B
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆæœŸåŒ–ã€‚
 ///////////////////////////////////////////////////////////////////
 void InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName)
 {
-	//ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ìƒpƒ‰ƒ[ƒ^‚ğİ’è(’P‚È‚é\‘¢‘Ì‚Ì•Ï”‚Ì‰Šú‰»‚Å‚·B)
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®š(å˜ãªã‚‹æ§‹é€ ä½“ã®å¤‰æ•°ã®åˆæœŸåŒ–ã§ã™ã€‚)
 	WNDCLASSEX wc =
 	{
-		sizeof(WNDCLASSEX),		//\‘¢‘Ì‚ÌƒTƒCƒYB
-		CS_CLASSDC,				//ƒEƒBƒ“ƒhƒE‚ÌƒXƒ^ƒCƒ‹B
-								//‚±‚±‚Ìw’è‚ÅƒXƒNƒ[ƒ‹ƒo[‚ğ‚Â‚¯‚½‚è‚Å‚«‚é‚ªAƒQ[ƒ€‚Å‚Í•s—v‚È‚Ì‚ÅCS_CLASSDC‚Å‚æ‚¢B
-		MsgProc,				//ƒƒbƒZ[ƒWƒvƒƒV[ƒWƒƒ(Œãq)
-		0,						//0‚Å‚¢‚¢B
-		0,						//0‚Å‚¢‚¢B
-		GetModuleHandle(NULL),	//‚±‚ÌƒNƒ‰ƒX‚Ì‚½‚ß‚ÌƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚ª‚ ‚éƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹B
-								//‰½‚à‹C‚É‚µ‚È‚­‚Ä‚æ‚¢B
-		NULL,					//ƒAƒCƒRƒ“‚Ìƒnƒ“ƒhƒ‹BƒAƒCƒRƒ“‚ğ•Ï‚¦‚½‚¢ê‡‚±‚±‚ğ•ÏX‚·‚éB‚Æ‚è‚ ‚¦‚¸‚±‚ê‚Å‚¢‚¢B
-		NULL,					//ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ìƒnƒ“ƒhƒ‹BNULL‚Ìê‡‚ÍƒfƒtƒHƒ‹ƒgB
-		NULL,					//ƒEƒBƒ“ƒhƒE‚Ì”wŒiFBNULL‚Ìê‡‚ÍƒfƒtƒHƒ‹ƒgB
-		NULL,					//ƒƒjƒ…[–¼BNULL‚Å‚¢‚¢B
-		appName,				//ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚É•t‚¯‚é–¼‘OB
-		NULL					//NULL‚Å‚¢‚¢B
+		sizeof(WNDCLASSEX),		//æ§‹é€ ä½“ã®ã‚µã‚¤ã‚ºã€‚
+		CS_CLASSDC,				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¹ã‚¿ã‚¤ãƒ«ã€‚
+								//ã“ã“ã®æŒ‡å®šã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã‚’ã¤ã‘ãŸã‚Šã§ãã‚‹ãŒã€ã‚²ãƒ¼ãƒ ã§ã¯ä¸è¦ãªã®ã§CS_CLASSDCã§ã‚ˆã„ã€‚
+		MsgProc,				//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£(å¾Œè¿°)
+		0,						//0ã§ã„ã„ã€‚
+		0,						//0ã§ã„ã„ã€‚
+		GetModuleHandle(NULL),	//ã“ã®ã‚¯ãƒ©ã‚¹ã®ãŸã‚ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ãŒã‚ã‚‹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«ã€‚
+								//ä½•ã‚‚æ°—ã«ã—ãªãã¦ã‚ˆã„ã€‚
+		NULL,					//ã‚¢ã‚¤ã‚³ãƒ³ã®ãƒãƒ³ãƒ‰ãƒ«ã€‚ã‚¢ã‚¤ã‚³ãƒ³ã‚’å¤‰ãˆãŸã„å ´åˆã“ã“ã‚’å¤‰æ›´ã™ã‚‹ã€‚ã¨ã‚Šã‚ãˆãšã“ã‚Œã§ã„ã„ã€‚
+		NULL,					//ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®ãƒãƒ³ãƒ‰ãƒ«ã€‚NULLã®å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã€‚
+		NULL,					//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®èƒŒæ™¯è‰²ã€‚NULLã®å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã€‚
+		NULL,					//ãƒ¡ãƒ‹ãƒ¥ãƒ¼åã€‚NULLã§ã„ã„ã€‚
+		appName,				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã«ä»˜ã‘ã‚‹åå‰ã€‚
+		NULL					//NULLã§ã„ã„ã€‚
 	};
-	//ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^B
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²ã€‚
 	RegisterClassEx(&wc);
 
-	// ƒEƒBƒ“ƒhƒE‚Ìì¬B
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆã€‚
 	g_hWnd = CreateWindow(
-		appName,				//g—p‚·‚éƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘OB
-								//æ‚Ù‚Çì¬‚µ‚½ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Æ“¯‚¶–¼‘O‚É‚·‚éB
-		appName,				//ƒEƒBƒ“ƒhƒE‚Ì–¼‘OBƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O‚Æ•Ê–¼‚Å‚à‚æ‚¢B
-		WS_OVERLAPPEDWINDOW,	//ƒEƒBƒ“ƒhƒEƒXƒ^ƒCƒ‹BƒQ[ƒ€‚Å‚ÍŠî–{“I‚ÉWS_OVERLAPPEDWINDOW‚Å‚¢‚¢A
-		0,						//ƒEƒBƒ“ƒhƒE‚Ì‰ŠúXÀ•WB
-		0,						//ƒEƒBƒ“ƒhƒE‚Ì‰ŠúYÀ•WB
-		FRAME_BUFFER_W,			//ƒEƒBƒ“ƒhƒE‚Ì•B
-		FRAME_BUFFER_H,			//ƒEƒBƒ“ƒhƒE‚Ì‚‚³B
-		NULL,					//eƒEƒBƒ“ƒhƒEBƒQ[ƒ€‚Å‚ÍŠî–{“I‚ÉNULL‚Å‚¢‚¢B
-		NULL,					//ƒƒjƒ…[B¡‚ÍNULL‚Å‚¢‚¢B
-		hInstance,				//ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXB
+		appName,				//ä½¿ç”¨ã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰ã€‚
+								//å…ˆã»ã©ä½œæˆã—ãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã¨åŒã˜åå‰ã«ã™ã‚‹ã€‚
+		appName,				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åå‰ã€‚ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰ã¨åˆ¥åã§ã‚‚ã‚ˆã„ã€‚
+		WS_OVERLAPPEDWINDOW,	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«ã€‚ã‚²ãƒ¼ãƒ ã§ã¯åŸºæœ¬çš„ã«WS_OVERLAPPEDWINDOWã§ã„ã„ã€
+		0,						//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆæœŸXåº§æ¨™ã€‚
+		0,						//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆæœŸYåº§æ¨™ã€‚
+		FRAME_BUFFER_W,			//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…ã€‚
+		FRAME_BUFFER_H,			//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•ã€‚
+		NULL,					//è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã€‚ã‚²ãƒ¼ãƒ ã§ã¯åŸºæœ¬çš„ã«NULLã§ã„ã„ã€‚
+		NULL,					//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã€‚ä»Šã¯NULLã§ã„ã„ã€‚
+		hInstance,				//ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã€‚
 		NULL
 	);
 
@@ -74,31 +74,31 @@ void InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, 
 }
 
 
-//ƒQ[ƒ€‚Ì‰Šú‰»B
+//ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–ã€‚
 void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName)
 {
-	//ƒEƒBƒ“ƒhƒE‚ğ‰Šú‰»B
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’åˆæœŸåŒ–ã€‚
 	InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, appName);
-	//TKƒGƒ“ƒWƒ“‚Ì‰Šú‰»B
+	//TKã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–ã€‚
 	g_engine = new TkEngine;
 	g_engine->Init(g_hWnd, FRAME_BUFFER_W, FRAME_BUFFER_H);
 	g_camera3D->SetPosition({ 0.0f, 160.0f, 100.0f });
 	g_camera3D->SetTarget({ 0.0f, 160.0f, 0.0f });
 	g_camera3D->Update();
 }
-//ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ğƒfƒBƒXƒpƒbƒ`Bfalse‚ª•Ô‚Á‚Ä‚«‚½‚çAƒQ[ƒ€I—¹B
+//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒã€‚falseãŒè¿”ã£ã¦ããŸã‚‰ã€ã‚²ãƒ¼ãƒ çµ‚äº†ã€‚
 bool DispatchWindowMessage()
 {
 	MSG msg = { 0 };
 	while (WM_QUIT != msg.message) {
-		//ƒEƒBƒ“ƒhƒE‚©‚ç‚ÌƒƒbƒZ[ƒW‚ğó‚¯æ‚éB
+		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‹ã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹ã€‚
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 		else {
-			//ƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒW‚ª‹ó‚É‚È‚Á‚½B
+			//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒç©ºã«ãªã£ãŸã€‚
 			break;
 		}
 	}

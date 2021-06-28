@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 namespace myRenderer
 {
     class Bloom
@@ -8,10 +8,10 @@ namespace myRenderer
         void Render(RenderContext& rc, RenderTarget& mainRenderTarget);
 
     private:
-        RenderTarget m_luminanceRenderTarget;   // ‹P“x’Šo—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        Sprite m_luminanceSprite;               // ‹P“x’Šo—p‚ÌƒXƒvƒ‰ƒCƒg
-        GaussianBlur m_gaussianBlur[4];         // ƒKƒEƒVƒAƒ“ƒuƒ‰[
-        Sprite m_finalSprite;                   // ÅI‡¬—p‚ÌƒXƒvƒ‰ƒCƒg
+        RenderTarget m_luminanceRenderTarget;   // è¼åº¦æŠ½å‡ºç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        Sprite m_luminanceSprite;               // è¼åº¦æŠ½å‡ºç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+        GaussianBlur m_gaussianBlur[4];         // ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ–ãƒ©ãƒ¼
+        Sprite m_finalSprite;                   // æœ€çµ‚åˆæˆç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
     };
 }
 

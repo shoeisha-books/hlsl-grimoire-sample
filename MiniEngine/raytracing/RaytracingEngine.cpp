@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #include "RaytracingEngine.h"
 #include "Material.h"
@@ -35,7 +35,7 @@ namespace raytracing {
 	{
 		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
 
-		// ƒŒƒCƒgƒŒ‚ÌŒ‹‰Ê‚Ìo—Íæ‚ÌƒeƒNƒXƒ`ƒƒ‚ğì¬B
+		// ãƒ¬ã‚¤ãƒˆãƒ¬ã®çµæœã®å‡ºåŠ›å…ˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆã€‚
 		D3D12_RESOURCE_DESC resDesc = {};
 		resDesc.DepthOrArraySize = 1;
 		resDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
@@ -48,7 +48,7 @@ namespace raytracing {
 		resDesc.Width = g_graphicsEngine->GetFrameBufferWidth();
 		m_outputResource.Init(resDesc);
 
-		//ƒŒƒCƒWƒFƒlƒŒ[ƒVƒ‡ƒ“—p‚Ì’è”ƒoƒbƒtƒ@B
+		//ãƒ¬ã‚¤ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã€‚
 		Camera cam;
 		cam.pos = g_camera3D->GetPosition();
 		cam.mRot = g_camera3D->GetCameraRotation();
@@ -61,7 +61,7 @@ namespace raytracing {
 
 	void Engine::Dispatch(RenderContext& rc)
 	{
-		//ƒJƒŠƒJƒŠ
+		//ã‚«ãƒªã‚«ãƒª
 		Camera cam;
 		cam.pos = g_camera3D->GetPosition();
 		cam.mRot = g_camera3D->GetCameraRotation();
@@ -89,27 +89,27 @@ namespace raytracing {
 		auto numMissShader = m_shaderTable.GetNumMissShader();
 		auto numHitShader = m_shaderTable.GetNumHitShader();
 
-		// ƒŒƒC¶¬ƒVƒF[ƒ_[‚ÌƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÌŠJnƒAƒhƒŒƒX‚ÆƒTƒCƒY‚ğİ’èB
+		// ãƒ¬ã‚¤ç”Ÿæˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ã‚µã‚¤ã‚ºã‚’è¨­å®šã€‚
 		raytraceDesc.RayGenerationShaderRecord.StartAddress = m_shaderTable.GetGPUVirtualAddress();
 		raytraceDesc.RayGenerationShaderRecord.SizeInBytes = shaderTableEntrySize;
 
-		// ƒ~ƒXƒVƒF[ƒ_[‚ÌƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ÌŠJnƒAƒhƒŒƒX‚ÆƒTƒCƒY‚ğİ’èB
+		// ãƒŸã‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã®é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ã‚µã‚¤ã‚ºã‚’è¨­å®šã€‚
 		size_t missOffset = numRayGenShader * shaderTableEntrySize;
 		raytraceDesc.MissShaderTable.StartAddress = m_shaderTable.GetGPUVirtualAddress() + missOffset;
 		raytraceDesc.MissShaderTable.StrideInBytes = shaderTableEntrySize;
 		raytraceDesc.MissShaderTable.SizeInBytes = shaderTableEntrySize * numMissShader;
 
-		// ƒqƒbƒgƒOƒ‹[ƒvƒVƒF[ƒ_[‚ÌŠJnƒAƒhƒŒƒX‚ÆƒTƒCƒY‚ğİ’èB
+		// ãƒ’ãƒƒãƒˆã‚°ãƒ«ãƒ¼ãƒ—ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ã‚µã‚¤ã‚ºã‚’è¨­å®šã€‚
 		size_t hitOffset = (numRayGenShader + numMissShader) * shaderTableEntrySize;
 		raytraceDesc.HitGroupTable.StartAddress = m_shaderTable.GetGPUVirtualAddress() + hitOffset;
 		raytraceDesc.HitGroupTable.StrideInBytes = shaderTableEntrySize;
 		raytraceDesc.HitGroupTable.SizeInBytes = shaderTableEntrySize * numHitShader * m_world.GetNumInstance();
 
-		// ƒOƒ[ƒoƒ‹ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğİ’èB
+		// ã‚°ãƒ­ãƒ¼ãƒãƒ«ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’è¨­å®šã€‚
 		rc.SetComputeRootSignature(m_pipelineStateObject.GetGlobalRootSignature());
 
 		// Dispatch
-		//ƒOƒ[ƒoƒ‹ƒ‹[ƒgƒVƒOƒlƒ`ƒ`ƒƒ‚É“o˜^‚³‚ê‚Ä‚¢‚éƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ“o˜^‚·‚éB
+		//ã‚°ãƒ­ãƒ¼ãƒãƒ«ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒãƒ£ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç™»éŒ²ã™ã‚‹ã€‚
 		const DescriptorHeap* descriptorHeaps[] = {
 			&m_descriptorHeaps.GetSrvUavCbvDescriptorHeap(),
 			&m_descriptorHeaps.GetSamplerDescriptorHeap()
@@ -126,7 +126,7 @@ namespace raytracing {
 		barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_COPY_SOURCE;
 		rc.ResourceBarrier(barrier);
 
-		//ƒŒƒCƒgƒŒ‚ÌŒ‹‰Ê‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚É‘‚«–ß‚·B
+		//ãƒ¬ã‚¤ãƒˆãƒ¬ã®çµæœã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãæˆ»ã™ã€‚
 		g_graphicsEngine->CopyToFrameBuffer(rc, m_outputResource.Get());
 
 	}
@@ -135,13 +135,13 @@ namespace raytracing {
 	{
 		g_graphicsEngine->BeginRender();
 		m_world.CommitRegistGeometry(rc);
-		//ƒVƒF[ƒ_[ƒŠƒ\[ƒX‚ğì¬B
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ã‚’ä½œæˆã€‚
 		CreateShaderResources();
-		//ŠeíƒŠƒ\[ƒX‚ğƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚éB
+		//å„ç¨®ãƒªã‚½ãƒ¼ã‚¹ã‚’ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹ã€‚
 		m_descriptorHeaps.Init(m_world, m_outputResource, m_rayGenerationCB);
-		//PSO‚ğì¬B
+		//PSOã‚’ä½œæˆã€‚
 		m_pipelineStateObject.Init(m_descriptorHeaps);
-		//ƒVƒF[ƒ_[ƒe[ƒuƒ‹‚ğì¬B
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆã€‚
 		m_shaderTable.Init(m_world, m_pipelineStateObject, m_descriptorHeaps);
 		
 		g_graphicsEngine->EndRender();

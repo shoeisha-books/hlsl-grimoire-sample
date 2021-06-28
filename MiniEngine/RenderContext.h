@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 class ConstantBuffer;
 class Texture;
@@ -9,29 +9,29 @@ namespace raytracing{
 	class PSO;
 }
 /// <summary>
-/// �����_�����O�R���e�L�X�g�B
+/// レンダリングコンテキスト。
 /// </summary>
 class RenderContext {
 public:
 	/// <summary>
-	/// �������B
+	/// 初期化。
 	/// </summary>
-	/// <param name="commandList">�R�}���h���X�g�B</param>
+	/// <param name="commandList">コマンドリスト。</param>
 	void Init(ID3D12GraphicsCommandList4* commandList)
 	{
 		m_commandList = commandList;
 	}
 
 	/// <summary>
-	/// ���_�o�b�t�@��ݒ�B
+	/// 頂点バッファを設定。
 	/// </summary>
-	/// <param name="vb">���_�o�b�t�@�B</param>
+	/// <param name="vb">頂点バッファ。</param>
 	void SetVertexBuffer(VertexBuffer& vb)
 	{
 		m_commandList->IASetVertexBuffers(0, 1, &vb.GetView());
 	}
 	/// <summary>
-	/// �C���f�b�N�X�o�b�t�@��ݒ�B
+	/// インデックスバッファを設定。
 	/// </summary>
 	/// <param name="ib"></param>
 	void SetIndexBuffer(IndexBuffer& ib)
@@ -39,31 +39,31 @@ public:
 		m_commandList->IASetIndexBuffer(&ib.GetView());
 	}
 	/// <summary>
-	/// �v���~�e�B�u�̃g�|���W�[��ݒ�B
+	/// プリミティブのトポロジーを設定。
 	/// </summary>
 	/// <remarks>
-	/// ID3D12GraphicsCommandList::��IASetPrimitiveTopology�̃��b�p�[�֐��B
-	/// �ڍׂ�Microsoft�̃w���v���Q�ƁB
+	/// ID3D12GraphicsCommandList::のIASetPrimitiveTopologyのラッパー関数。
+	/// 詳細はMicrosoftのヘルプを参照。
 	/// </remarks>
 	void SetPrimitiveTopology(D3D12_PRIMITIVE_TOPOLOGY topology)
 	{
 		m_commandList->IASetPrimitiveTopology(topology);
 	}
 	/// <summary>
-	/// �R�}���h���X�g��ݒ�B
+	/// コマンドリストを設定。
 	/// </summary>
-	/// <param name="commandList">�R�}���h���X�g�B</param>
+	/// <param name="commandList">コマンドリスト。</param>
 	void SetCommandList(ID3D12GraphicsCommandList4* commandList)
 	{
 		m_commandList = commandList;
 	}
 	/// <summary>
-	/// �r���[�|�[�g�ƃV�U�����O��`���Z�b�g�Őݒ�
+	/// ビューポートとシザリング矩形をセットで設定
 	/// </summary>
-	/// <param name="viewport">�r���[�|�[�g</param>
+	/// <param name="viewport">ビューポート</param>
 	void SetViewportAndScissor(D3D12_VIEWPORT& viewport)
 	{
-		//�V�U�����O��`���ݒ肷��B
+		//シザリング矩形も設定する。
 		D3D12_RECT scissorRect;
 		scissorRect.bottom = static_cast<LONG>(viewport.Height);
 		scissorRect.top = 0;
@@ -75,7 +75,7 @@ public:
 		m_currentViewport = viewport;
 	}
 	/// <summary>
-	/// �r���[�|�[�g���擾�B
+	/// ビューポートを取得。
 	/// </summary>
 	/// <returns></returns>
 	D3D12_VIEWPORT GetViewport() const
@@ -83,7 +83,7 @@ public:
 		return m_currentViewport;
 	}
 	/// <summary>
-	/// �V�U�����O��`��ݒ�
+	/// シザリング矩形を設定
 	/// </summary>
 	/// <param name="rect"></param>
 	void SetScissorRect(D3D12_RECT& rect)
@@ -92,7 +92,7 @@ public:
 	}
 
 	/// <summary>
-	/// ���[�g�V�O�l�`����ݒ�B
+	/// ルートシグネチャを設定。
 	/// </summary>
 	void SetRootSignature(ID3D12RootSignature* rootSignature)
 	{
@@ -111,7 +111,7 @@ public:
 		m_commandList->SetComputeRootSignature(rootSignature.Get());
 	}
 	/// <summary>
-	/// �p�C�v���C���X�e�[�g��ݒ�B
+	/// パイプラインステートを設定。
 	/// </summary>
 	void SetPipelineState(ID3D12PipelineState* pipelineState)
 	{
@@ -122,13 +122,13 @@ public:
 		m_commandList->SetPipelineState(pipelineState.Get());
 	}
 	/// <summary>
-	/// ���C�g���p�̃p�C�v���C���X�e�[�g�I�u�W�F�N�g��ݒ�B
+	/// レイトレ用のパイプラインステートオブジェクトを設定。
 	/// </summary>
 	/// <param name="pso"></param>
 	void SetPipelineState(raytracing::PSO& pso);
 
 	/// <summary>
-	/// �f�B�X�N���v�^�q�[�v��ݒ�B
+	/// ディスクリプタヒープを設定。
 	/// </summary>
 	void SetDescriptorHeap(ID3D12DescriptorHeap* descHeap)
 	{
@@ -139,10 +139,10 @@ public:
 	void SetDescriptorHeap(DescriptorHeap& descHeap);
 	void SetComputeDescriptorHeap(DescriptorHeap& descHeap);
 	/// <summary>
-	/// �����̃f�B�X�N���v�^�q�[�v��o�^�B
+	/// 複数のディスクリプタヒープを登録。
 	/// </summary>
-	/// <param name="numDescriptorHeap">�f�B�X�N���v�^�q�[�v�̐��B</param>
-	/// <param name="descHeaps">�f�B�X�N���v�^�q�[�v�̔z��</param>
+	/// <param name="numDescriptorHeap">ディスクリプタヒープの数。</param>
+	/// <param name="descHeaps">ディスクリプタヒープの配列</param>
 	void SetDescriptorHeaps(int numDescriptorHeap, const DescriptorHeap* descHeaps[])
 	{
 		for (int i = 0; i < numDescriptorHeap; i++) {
@@ -151,46 +151,46 @@ public:
 		m_commandList->SetDescriptorHeaps(numDescriptorHeap, m_descriptorHeaps);
 	}
 	/// <summary>
-	/// �萔�o�b�t�@��ݒ�B
+	/// 定数バッファを設定。
 	/// </summary>
-	/// <param name="registerNo">�ݒ肷�郌�W�X�^�̔ԍ��B</param>
-	/// <param name="cb">�萔�o�b�t�@�B</param>
+	/// <param name="registerNo">設定するレジスタの番号。</param>
+	/// <param name="cb">定数バッファ。</param>
 	void SetConstantBuffer(int registerNo, ConstantBuffer& cb)
 	{
 		if (registerNo < MAX_CONSTANT_BUFFER) {
 			m_constantBuffers[registerNo] = &cb;
 		}
 		else {
-			//�͈͊O�A�N�Z�X�B
+			//範囲外アクセス。
 			std::abort();
 		}
 	}
 	/// <summary>
-	/// �V�F�[�_�[���\�[�X��ݒ�B
+	/// シェーダーリソースを設定。
 	/// </summary>
-	/// <param name="registerNo">�ݒ肷�郌�W�X�^�̔ԍ��B</param>
-	/// <param name="texture">�e�N�X�`���B</param>
+	/// <param name="registerNo">設定するレジスタの番号。</param>
+	/// <param name="texture">テクスチャ。</param>
 	void SetShaderResource(int registerNo, Texture& texture)
 	{
 		if (registerNo < MAX_SHADER_RESOURCE) {
 			m_shaderResources[registerNo] = &texture;
 		}
 		else {
-			//�͈͊O�A�N�Z�X�B
+			//範囲外アクセス。
 			std::abort();
 		}
 	}
 	/// <summary>
-	/// �������̃����_�����O�^�[�Q�b�g��ݒ肷��B
+	/// 複数枚のレンダリングターゲットを設定する。
 	/// </summary>
 	/// <remarks>
-	/// MRT�𗘗p���������_�����O���s�������ꍇ�ɗ��p���Ă��������B
+	/// MRTを利用したレンダリングを行いたい場合に利用してください。
 	/// </remarks>
-	/// <param name="numRT">�����_�����O�^�[�Q�b�g�̐�</param>
-	/// <param name="renderTarget">�����_�����O�^�[�Q�b�g�̔z��B</param>
+	/// <param name="numRT">レンダリングターゲットの数</param>
+	/// <param name="renderTarget">レンダリングターゲットの配列。</param>
 	void SetRenderTargets(UINT numRT, RenderTarget* renderTargets[]);
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g��ݒ肷��B
+	/// レンダリングターゲットを設定する。
 	/// </summary>
 	/// <param name="renderTarget"></param>
 	void SetRenderTarget(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle, D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle)
@@ -198,13 +198,13 @@ public:
 		m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, &dsvHandle);
 	}
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g���X���b�g0�ɐݒ肷��B
+	/// レンダリングターゲットをスロット0に設定する。
 	/// </summary>
 	/// <remarks>
-	/// �{�֐��̓r���[�|�[�g�̐ݒ���s���܂���B
-	/// ���[�U�[���œK�؂ȃr���[�|�[�g���w�肷��K�v������܂��B
+	/// 本関数はビューポートの設定を行いません。
+	/// ユーザー側で適切なビューポートを指定する必要があります。
 	/// </remarks>
-	/// <param name="renderTarget">�����_�����O�^�[�Q�b�g</param>
+	/// <param name="renderTarget">レンダリングターゲット</param>
 	void SetRenderTarget(RenderTarget& renderTarget) 
 	{
 		RenderTarget* rtArray[] = { &renderTarget };
@@ -212,45 +212,45 @@ public:
 	}
 
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g�ƃr���[�|�[�g�𓯎��ɐݒ肷��B
+	/// レンダリングターゲットとビューポートを同時に設定する。
 	/// </summary>
 	/// <remarks>
-	/// ���̊֐��𗘗p����ƃ����_�����O�^�[�Q�b�g�Ɠ������ƍ����̃r���[�|�[�g���ݒ肳��܂��B
+	/// この関数を利用するとレンダリングターゲットと同じ幅と高さのビューポートが設定されます。
 	/// </remarks>
-	/// <param name="renderTarget">�����_�����O�^�[�Q�b�g</param>
+	/// <param name="renderTarget">レンダリングターゲット</param>
 	void SetRenderTargetAndViewport(RenderTarget& renderTarget);
 	/// <summary>
-	/// �������̃����_�����O�^�[�Q�b�g�ƃr���[�|�[�g�𓯎��ɐݒ肷��B
+	/// 複数枚のレンダリングターゲットとビューポートを同時に設定する。
 	/// </summary>
 	/// /// <remarks>
-	/// ���̊֐��𗘗p����ƃ����_�����O�^�[�Q�b�g�Ɠ������ƍ����̃r���[�|�[�g���ݒ肳��܂��B
+	/// この関数を利用するとレンダリングターゲットと同じ幅と高さのビューポートが設定されます。
 	/// </remarks>
-	/// <param name="numRT">�ݒ肷�郌���_�����O�^�[�Q�b�g�̖���</param>
-	/// <param name="renderTargets">�����_�����O�^�[�Q�b�g�̔z��B</param>
+	/// <param name="numRT">設定するレンダリングターゲットの枚数</param>
+	/// <param name="renderTargets">レンダリングターゲットの配列。</param>
 	void SetRenderTargetsAndViewport(UINT numRT, RenderTarget* renderTargets[]);
 	/// <summary>
-	/// �������̃����_�����O�^�[�Q�b�g���N���A�B
+	/// 複数枚のレンダリングターゲットをクリア。
 	/// </summary>
 	/// <remarks>
-	/// �N���A�J���[�̓����_�����O�^�[�Q�b�g�̏��������Ɏw�肵���J���[�ł��B
+	/// クリアカラーはレンダリングターゲットの初期化時に指定したカラーです。
 	/// </remarks>
-	/// <param name="numRt">�����_�����O�^�[�Q�b�g�̐�</param>
-	/// <param name="renderTargets">�����_�����O�^�[�Q�b�g�̐�</param>
+	/// <param name="numRt">レンダリングターゲットの数</param>
+	/// <param name="renderTargets">レンダリングターゲットの数</param>
 	void ClearRenderTargetViews(
 		int numRt, 
 		RenderTarget* renderTargets[]
 	);
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g�̃N���A�B
+	/// レンダリングターゲットのクリア。
 	/// </summary>
-	/// <param name="rtvHandle">CPU�̃����_�����O�^�[�Q�b�g�r���[�̃f�B�X�N���v�^�n���h��</param>
-	/// <param name="clearColor">�N���A�J���[</param>
+	/// <param name="rtvHandle">CPUのレンダリングターゲットビューのディスクリプタハンドル</param>
+	/// <param name="clearColor">クリアカラー</param>
 	void ClearRenderTargetView(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle, const float* clearColor)
 	{
 		m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 	}
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g�̃N���A�B
+	/// レンダリングターゲットのクリア。
 	/// </summary>
 	/// <param name="renderTarget"></param>
 	void ClearRenderTargetView(RenderTarget& renderTarget)
@@ -259,10 +259,10 @@ public:
 		ClearRenderTargetViews(1, rtArray);
 	}
 	/// <summary>
-	/// �f�v�X�X�e���V���r���[���N���A
+	/// デプスステンシルビューをクリア
 	/// </summary>
-	/// <param name="renderTarget">�����_�����O�^�[�Q�b�g</param>
-	/// <param name="clearValue">�N���A�l</param>
+	/// <param name="renderTarget">レンダリングターゲット</param>
+	/// <param name="clearValue">クリア値</param>
 	void ClearDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle, float clearValue)
 	{
 		m_commandList->ClearDepthStencilView(
@@ -274,13 +274,13 @@ public:
 			nullptr);
 	}
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g�ւ̕`�����ݑ҂��B
+	/// レンダリングターゲットへの描き込み待ち。
 	/// </summary>
 	/// <remarks>
-	/// �����_�����O�^�[�Q�b�g�Ƃ��Ďg���Ă���e�N�X�`�����V�F�[�_�[���\�[�X�r���[�Ƃ���
-	/// �g�p�������ꍇ�́A���̊֐����g���ĕ`�����݊����҂����s���K�v������܂��B
+	/// レンダリングターゲットとして使われているテクスチャをシェーダーリソースビューとして
+	/// 使用したい場合は、この関数を使って描き込み完了待ちを行う必要があります。
 	/// </remarks>
-	/// <param name="renderTarget">�����_�����O�^�[�Q�b�g</param>
+	/// <param name="renderTarget">レンダリングターゲット</param>
 	void WaitUntilFinishDrawingToRenderTargets(int numRt, RenderTarget* renderTargets[]);
 	void WaitUntilFinishDrawingToRenderTarget(RenderTarget& renderTarget);
 	void WaitUntilFinishDrawingToRenderTarget( ID3D12Resource* renderTarget )
@@ -292,11 +292,11 @@ public:
 		m_commandList->ResourceBarrier(1,&barrier);
 	}
 	/// <summary>
-	/// �����_�����O�^�[�Q�b�g�Ƃ��Ďg�p�\�ɂȂ�܂ő҂B
+	/// レンダリングターゲットとして使用可能になるまで待つ。
 	/// </summary>
 	/// <remarks>
-	/// �����_�����O�^�[�Q�b�g�Ƃ��Đݒ肵�����ꍇ�́A
-	/// �{�֐����g���Ďg�p�\�ɂȂ�܂őҋ@����K�v������܂��B
+	/// レンダリングターゲットとして設定したい場合は、
+	/// 本関数を使って使用可能になるまで待機する必要があります。
 	/// </remarks>
 	void WaitUntilToPossibleSetRenderTargets(int numRt, RenderTarget* renderTargets[]);
 	void WaitUntilToPossibleSetRenderTarget(RenderTarget& renderTarget);
@@ -306,7 +306,7 @@ public:
 		m_commandList->ResourceBarrier(1,&barrier);
 	}
 	/// <summary>
-	/// ���\�[�X�o���A�B
+	/// リソースバリア。
 	/// </summary>
 	/// <param name="barrier"></param>
 	void ResourceBarrier(D3D12_RESOURCE_BARRIER& barrier)
@@ -314,7 +314,7 @@ public:
 		m_commandList->ResourceBarrier(1, &barrier);
 	}
 	/// <summary>
-	/// ���\�[�X�X�e�[�g��J�ڂ���B
+	/// リソースステートを遷移する。
 	/// </summary>
 	/// <param name="resrouce"></param>
 	/// <param name="beforeState"></param>
@@ -325,33 +325,33 @@ public:
 		m_commandList->ResourceBarrier(1,&barrier);
 	}
 	/// <summary>
-	/// �R�}���h���X�g�����
+	/// コマンドリストを閉じる
 	/// </summary>
 	void Close()
 	{
 		m_commandList->Close();
 	}
 	/// <summary>
-	/// �R�}���h���X�g�����Z�b�g�B
+	/// コマンドリストをリセット。
 	/// </summary>
 	/// <param name="commandAllocator"></param>
 	/// <param name="pipelineState"></param>
 	void Reset( ID3D12CommandAllocator* commandAllocator, ID3D12PipelineState* pipelineState)
 	{
 		m_commandList->Reset(commandAllocator, pipelineState);
-		//�X�N���b�`���\�[�X���N���A�B
+		//スクラッチリソースをクリア。
 		m_scratchResourceList.clear();
 	}
 	/// <summary>
-	/// �C���f�b�N�X���v���~�e�B�u��`��B
+	/// インデックスつきプリミティブを描画。
 	/// </summary>
-	/// <param name="indexCount">�C���f�b�N�X�̐��B</param>
+	/// <param name="indexCount">インデックスの数。</param>
 	void DrawIndexed(UINT indexCount)
 	{
 		m_commandList->DrawIndexedInstanced(indexCount, 1, 0, 0, 0);
 	}
 	/// <summary>
-	/// �R���s���[�g�V�F�[�_�[���f�B�X�p�b�`�B
+	/// コンピュートシェーダーをディスパッチ。
 	/// </summary>
 	/// <param name="ThreadGroupCountX"></param>
 	/// <param name="ThreadGroupCountY"></param>
@@ -364,14 +364,14 @@ public:
 		m_commandList->Dispatch(ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ);
 	}
 	/// <summary>
-	/// GPU�Ń��C�g���[�V���O�A�N�Z�����[�V�����\���̃r���h���s���܂��B
+	/// GPUでレイトレーシングアクセラレーション構造のビルドを行います。
 	/// </summary>
 	void BuildRaytracingAccelerationStructure(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC desc)
 	{
 		m_commandList->BuildRaytracingAccelerationStructure(&desc, 0, nullptr);
 	}
 	/// <summary>
-	/// ���C���f�B�X�p�b�`
+	/// レイをディスパッチ
 	/// </summary>
 	/// <param name="rayDesc"></param>
 	void DispatchRays(D3D12_DISPATCH_RAYS_DESC& rayDesc)
@@ -379,10 +379,10 @@ public:
 		m_commandList->DispatchRays(&rayDesc);
 	}
 	/// <summary>
-	/// ���\�[�X���R�s�[�B
+	/// リソースをコピー。
 	/// </summary>
-	/// <param name="pDst">�R�s�[��̃��\�[�X</param>
-	/// <param name="pSrc">�R�s�[���̃��\�[�X</param>
+	/// <param name="pDst">コピー先のリソース</param>
+	/// <param name="pSrc">コピー元のリソース</param>
 	void CopyResource(ID3D12Resource* pDst, ID3D12Resource* pSrc)
 	{
 		m_commandList->CopyResource(pDst, pSrc);
@@ -392,7 +392,7 @@ public:
 private:
 
 	/// <summary>
-	/// �f�B�X�N���v�^�e�[�u����ݒ�B
+	/// ディスクリプタテーブルを設定。
 	/// </summary>
 	/// <param name="RootParameterIndex"></param>
 	/// <param name="BaseDescriptor"></param>
@@ -406,7 +406,7 @@ private:
 		);
 	}
 	/// <summary>
-	/// �f�B�X�N���v�^�e�[�u����ݒ�B
+	/// ディスクリプタテーブルを設定。
 	/// </summary>
 	/// <param name="RootParameterIndex"></param>
 	/// <param name="BaseDescriptor"></param>
@@ -420,15 +420,15 @@ private:
 		);
 	}
 private:
-	enum { MAX_DESCRIPTOR_HEAP = 4 };	//�f�B�X�N���v�^�q�[�v�̍ő吔�B
-	enum { MAX_CONSTANT_BUFFER = 8 };	//�萔�o�b�t�@�̍ő吔�B����Ȃ��Ȃ����瑝�₵�ĂˁB
-	enum { MAX_SHADER_RESOURCE = 16 };	//�V�F�[�_�[���\�[�X�̍ő吔�B����Ȃ��Ȃ����瑝�₵�ĂˁB
+	enum { MAX_DESCRIPTOR_HEAP = 4 };	//ディスクリプタヒープの最大数。
+	enum { MAX_CONSTANT_BUFFER = 8 };	//定数バッファの最大数。足りなくなったら増やしてね。
+	enum { MAX_SHADER_RESOURCE = 16 };	//シェーダーリソースの最大数。足りなくなったら増やしてね。
 
-	D3D12_VIEWPORT m_currentViewport;				//���݂̃r���[�|�[�g�B
-	ID3D12GraphicsCommandList4* m_commandList;	//�R�}���h���X�g�B
-	ID3D12DescriptorHeap* m_descriptorHeaps[MAX_DESCRIPTOR_HEAP];			//�f�B�X�N���v�^�q�[�v�̔z��B
-	ConstantBuffer* m_constantBuffers[MAX_CONSTANT_BUFFER] = { nullptr };	//�萔�o�b�t�@�̔z��B
-	Texture* m_shaderResources[MAX_SHADER_RESOURCE] = { nullptr };			//�V�F�[�_�[���\�[�X�̔z��B
-	std::vector< ComPtr<ID3D12Resource> > m_scratchResourceList;				//�X�N���b�`���\�[�X�̃��X�g�B
+	D3D12_VIEWPORT m_currentViewport;				//現在のビューポート。
+	ID3D12GraphicsCommandList4* m_commandList;	//コマンドリスト。
+	ID3D12DescriptorHeap* m_descriptorHeaps[MAX_DESCRIPTOR_HEAP];			//ディスクリプタヒープの配列。
+	ConstantBuffer* m_constantBuffers[MAX_CONSTANT_BUFFER] = { nullptr };	//定数バッファの配列。
+	Texture* m_shaderResources[MAX_SHADER_RESOURCE] = { nullptr };			//シェーダーリソースの配列。
+	std::vector< ComPtr<ID3D12Resource> > m_scratchResourceList;				//スクラッチリソースのリスト。
 };
 

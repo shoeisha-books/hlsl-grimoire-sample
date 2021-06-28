@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "TLASBuffer.h"
 
 namespace raytracing {
@@ -34,10 +34,10 @@ namespace raytracing {
 		d3dDevice->GetRaytracingAccelerationStructurePrebuildInfo(&inputs, &info);
 
 		/*if (update) {
-			//XVH
+			//æ›´æ–°ï¼Ÿ
 		}
 		else*/ {
-		//V‹KH
+		//æ–°è¦ï¼Ÿ
 			m_topLevelASBuffers.pScratch = CreateBuffer(d3dDevice, info.ScratchDataSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, kDefaultHeapProps);
 			m_topLevelASBuffers.pResult = CreateBuffer(d3dDevice, info.ResultDataMaxSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE, kDefaultHeapProps);
 			m_topLevelASBuffers.pInstanceDesc = CreateBuffer(
@@ -69,7 +69,7 @@ namespace raytracing {
 
 		m_topLevelASBuffers.pInstanceDesc->Unmap(0, nullptr);
 
-		//TopLevelAS‚ğì¬B
+		//TopLevelASã‚’ä½œæˆã€‚
 		D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC asDesc = {};
 		asDesc.Inputs = inputs;
 		asDesc.Inputs.InstanceDescs = m_topLevelASBuffers.pInstanceDesc->GetGPUVirtualAddress();
@@ -83,20 +83,20 @@ namespace raytracing {
 		}*/
 		rc.BuildRaytracingAccelerationStructure(asDesc);
 
-		//ƒŒƒCƒgƒŒ[ƒVƒ“ƒOƒAƒNƒZƒ‰ƒŒ[ƒVƒ‡ƒ“\‘¢‚Ìƒrƒ‹ƒhŠ®—¹‘Ò‚¿‚ÌƒoƒŠƒA‚ğ“ü‚ê‚éB
+		//ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¼ã‚·ãƒ³ã‚°ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³æ§‹é€ ã®ãƒ“ãƒ«ãƒ‰å®Œäº†å¾…ã¡ã®ãƒãƒªã‚¢ã‚’å…¥ã‚Œã‚‹ã€‚
 		D3D12_RESOURCE_BARRIER uavBarrier = {};
 		uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
 		uavBarrier.UAV.pResource = m_topLevelASBuffers.pResult;
 		rc.ResourceBarrier(uavBarrier);
 	}
 	/// <summary>
-	/// SRV‚É“o˜^B
+	/// SRVã«ç™»éŒ²ã€‚
 	/// </summary>
 	/// <param name="descriptorHandle"></param>
 	void TLASBuffer::RegistShaderResourceView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo)
 	{
 		auto d3dDevice = g_graphicsEngine->GetD3DDevice();
-		//TLAS‚ğƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^B
+		//TLASã‚’ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã€‚
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 		memset(&srvDesc, 0, sizeof(srvDesc));
 		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_RAYTRACING_ACCELERATION_STRUCTURE;

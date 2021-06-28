@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "FontEngine.h"
 
 using namespace std;
@@ -14,7 +14,7 @@ void FontEngine::Init()
 {
 	auto d3dDevice = g_graphicsEngine->GetD3DDevice();
 
-	//ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğì¬B
+	//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ä½œæˆã€‚
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 
 	srvHeapDesc.NumDescriptors = 1;
@@ -24,7 +24,7 @@ void FontEngine::Init()
 	
 	ResourceUploadBatch re(d3dDevice);
 	re.Begin();
-	//SpriteBatch‚ÌƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬‚·‚éB
+	//SpriteBatchã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹ã€‚
 	RenderTargetState renderTargetState;
 	renderTargetState.rtvFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	renderTargetState.numRenderTargets = 1;
@@ -39,13 +39,13 @@ void FontEngine::Init()
 	viewport.TopLeftY = 0.0f;
 	viewport.Width = static_cast<FLOAT>(g_graphicsEngine->GetFrameBufferWidth());
 	viewport.Height = static_cast<FLOAT>(g_graphicsEngine->GetFrameBufferHeight());
-	//Spriteƒoƒbƒ`‚ğì¬B
+	//Spriteãƒãƒƒãƒã‚’ä½œæˆã€‚
 	m_spriteBatch = make_unique<SpriteBatch>(
 		d3dDevice, 
 		re,
 		sprBatchDesc,
 		&viewport);
-	//SpriteFont‚ğì¬B
+	//SpriteFontã‚’ä½œæˆã€‚
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle = m_srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart();
 	m_spriteFont = make_unique<SpriteFont>(

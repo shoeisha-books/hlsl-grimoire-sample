@@ -1,16 +1,16 @@
-#pragma once
+﻿#pragma once
 
 /// <summary>
-/// GPU�o�b�t�@�N���X
+/// GPUバッファクラス
 /// </summary>
 /// <remarks>
-/// �ėp�I��GPU�o�b�t�@�N���X�ł��B
-/// �e�N�X�`���A�X�g���N�`���[�h�o�b�t�@�A���_�o�b�t�@���ׂẴo�b�t�@���쐬���邱�Ƃ��ł��܂��B
+/// 汎用的なGPUバッファクラスです。
+/// テクスチャ、ストラクチャードバッファ、頂点バッファすべてのバッファを作成することができます。
 /// </remarks>
 class GPUBuffer : public IUnorderAccessResrouce {
 public:
 	/// <summary>
-	/// �f�X�g���N�^�B
+	/// デストラクタ。
 	/// </summary>
 	~GPUBuffer()
 	{
@@ -19,21 +19,21 @@ public:
 		}
 	}
 	/// <summary>
-	/// �������B
+	/// 初期化。
 	/// </summary>
 	/// <param name="desc"></param>
 	void Init(D3D12_RESOURCE_DESC desc);
 	/// <summary>
-	/// UAV�Ƃ��ăf�B�X�N���v�^�q�[�v�ɓo�^
+	/// UAVとしてディスクリプタヒープに登録
 	/// </summary>
-	/// <param name="cpuHandle">�o�^����f�B�X�N���v�^�q�[�v��CPU�n���h��</param>
-	/// <param name="bufferNo">�o�b�t�@�ԍ�</param>
+	/// <param name="cpuHandle">登録するディスクリプタヒープのCPUハンドル</param>
+	/// <param name="bufferNo">バッファ番号</param>
 	void RegistUnorderAccessView(D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle, int bufferNo) override;
 	/// <summary>
-	/// SRV�Ƃ��ăf�B�X�N���v�^�q�[�v�ɓo�^�B
+	/// SRVとしてディスクリプタヒープに登録。
 	/// </summary>
-	/// <param name="descriptorHandle">�o�^����f�B�X�N���v�^�q�[�v��CPU�n���h��</param>
-	/// <param name="bufferNo">�o�b�t�@�ԍ�</param>
+	/// <param name="descriptorHandle">登録するディスクリプタヒープのCPUハンドル</param>
+	/// <param name="bufferNo">バッファ番号</param>
 	void RegistShaderResourceView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo) override;
 	
 	ID3D12Resource* Get()

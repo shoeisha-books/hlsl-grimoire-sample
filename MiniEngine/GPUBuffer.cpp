@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "GPUBuffer.h"
 
 void GPUBuffer::Init(D3D12_RESOURCE_DESC desc)
 {
 	m_desc = desc;
-	//todo ‚Ü‚Æ‚ß‚½•û‚ª‚¦‚¦‚ÈB
+	//todo ã¾ã¨ã‚ãŸæ–¹ãŒãˆãˆãªã€‚
 	const D3D12_HEAP_PROPERTIES kDefaultHeapProps =
 	{
 		D3D12_HEAP_TYPE_DEFAULT,
@@ -31,7 +31,7 @@ void GPUBuffer::RegistUnorderAccessView(D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle, i
 		uavDesc.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
 	}
 	else {
-		//–¢‘Î‰žB
+		//æœªå¯¾å¿œã€‚
 		std::abort();
 	}
 	auto d3dDevice = g_graphicsEngine->GetD3DDevice();

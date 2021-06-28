@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "RaytracingInstance.h"
 class RenderContext;
 
@@ -7,16 +7,16 @@ namespace raytracing {
 	/// TLASBuffer
 	/// </summary>
 	/// <remark>
-	/// TLAS( Top level acceleration structures )‚Æ‚Í
-	/// ƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚É“o˜^‚³‚ê‚Ä‚¢‚éƒCƒ“ƒXƒ^ƒ“ƒX‚Ìƒf[ƒ^\‘¢‚Å‚·B
-	/// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìg—p‚·‚éƒWƒIƒƒgƒŠAƒVƒF[ƒ_[IDAƒ[ƒ‹ƒhs—ñ‚È‚Ç‚Ì
-	/// ƒf[ƒ^‚ğ•Û‚µ‚Ü‚·B
+	/// TLAS( Top level acceleration structures )ã¨ã¯
+	/// ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ãƒ‡ãƒ¼ã‚¿æ§‹é€ ã§ã™ã€‚
+	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ä½¿ç”¨ã™ã‚‹ã‚¸ã‚ªãƒ¡ãƒˆãƒªã€ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼IDã€ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ãªã©ã®
+	/// ãƒ‡ãƒ¼ã‚¿ã‚’ä¿æŒã—ã¾ã™ã€‚
 	/// </remark>
 	class TLASBuffer : public IShaderResource
 	{
 	public:
 		/// <summary>
-		/// TLAS‚ğ\’zB
+		/// TLASã‚’æ§‹ç¯‰ã€‚
 		/// </summary>
 		/// <param name="rc"></param>
 		/// <param name="instances"></param>
@@ -26,12 +26,12 @@ namespace raytracing {
 			const std::vector< AccelerationStructureBuffers>& bottomLevelASBuffers
 		);
 		/// <summary>
-		/// SRV‚É“o˜^B
+		/// SRVã«ç™»éŒ²ã€‚
 		/// </summary>
 		/// <param name="descriptorHandle"></param>
 		void RegistShaderResourceView(D3D12_CPU_DESCRIPTOR_HANDLE descriptorHandle, int bufferNo) override;
 		/// <summary>
-		/// VRAMã‚Ì‰¼‘zƒAƒhƒŒƒX‚ğæ“¾B
+		/// VRAMä¸Šã®ä»®æƒ³ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—ã€‚
 		/// </summary>
 		/// <returns></returns>
 		D3D12_GPU_VIRTUAL_ADDRESS GetGPUVirtualAddress() const

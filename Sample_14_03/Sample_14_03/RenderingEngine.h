@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "MyRenderer.h"
 #include "ShadowMapRender.h"
@@ -6,55 +6,55 @@
 
 namespace myRenderer
 {
-    // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒGƒ“ƒWƒ“
+    // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¨ãƒ³ã‚¸ãƒ³
     class RenderingEngine
     {
     public:
-        // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+        // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
         struct DirectionalLight
         {
-            Vector3 direction;  // ƒ‰ƒCƒg‚Ì•ûŒü
-            int castShadow;     // ‰e‚ğƒLƒƒƒXƒg‚·‚éH
-            Vector4 color;      // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+            Vector3 direction;  // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+            int castShadow;     // å½±ã‚’ã‚­ãƒ£ã‚¹ãƒˆã™ã‚‹ï¼Ÿ
+            Vector4 color;      // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
         };
 
-        // ƒ‰ƒCƒg\‘¢‘Ì
+        // ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
         struct Light
         {
-            std::array<DirectionalLight, NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT> directionalLight; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-            Vector3 eyePos;         // ƒJƒƒ‰‚ÌˆÊ’u
-            float specPow;          // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-            Vector3 ambinetLight;   // ŠÂ‹«Œõ
+            std::array<DirectionalLight, NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT> directionalLight; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+            Vector3 eyePos;         // ã‚«ãƒ¡ãƒ©ã®ä½ç½®
+            float specPow;          // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Š
+            Vector3 ambinetLight;   // ç’°å¢ƒå…‰
         };
 
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆ
         enum class EnMainRTSnapshot
         {
-            enDrawnOpacity,     // •s“§–¾ƒIƒuƒWƒFƒNƒg‚Ì•`‰æŠ®—¹“_
-            enNum,              // ƒXƒiƒbƒvƒVƒ‡ƒbƒg‚Ì”
+            enDrawnOpacity,     // ä¸é€æ˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»å®Œäº†æ™‚ç‚¹
+            enNum,              // ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã®æ•°
         };
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒpƒX
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ‘ã‚¹
         enum class EnRenderingPass
         {
-            enRenderToShadowMap,    // ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æƒpƒX
+            enRenderToShadowMap,    // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»ãƒ‘ã‚¹
             enZPrepass,             // ZPrepass
-            enRenderToGBuffer,      // G-Buffer‚Ö‚Ì•`‰æƒpƒX
-            enForwardRender,        // ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX
+            enRenderToGBuffer,      // G-Bufferã¸ã®æç”»ãƒ‘ã‚¹
+            enForwardRender,        // ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹
         };
 
         /// <summary>
-        /// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒpƒCƒvƒ‰ƒCƒ“‚ğ‰Šú‰»
+        /// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’åˆæœŸåŒ–
         /// </summary>
         void Init();
 
         /// <summary>
-        /// ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æƒpƒX‚Éƒ‚ƒfƒ‹‚ğ’Ç‰Á
+        /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»ãƒ‘ã‚¹ã«ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
         /// </summary>
-        /// <param name="ligNo">ƒVƒƒƒhƒEƒ}ƒbƒv‚ğ¶¬‚·‚éƒ‰ƒCƒg‚Ì”Ô†</param>
-        /// <param name="model0">‹ßŒi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
-        /// <param name="model1">’†Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv1‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
-        /// <param name="model2">‰“Œi—p‚ÌƒVƒƒƒhƒEƒ}ƒbƒv2‚É•`‰æ‚·‚éƒ‚ƒfƒ‹</param>
+        /// <param name="ligNo">ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’ç”Ÿæˆã™ã‚‹ãƒ©ã‚¤ãƒˆã®ç•ªå·</param>
+        /// <param name="model0">è¿‘æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
+        /// <param name="model1">ä¸­æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—1ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
+        /// <param name="model2">é æ™¯ç”¨ã®ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—2ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«</param>
         void Add3DModelToRenderToShadowMap(
             int ligNo,
             Model& model0,
@@ -66,7 +66,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// ZPrepass‚Ì•`‰æƒpƒX‚Éƒ‚ƒfƒ‹‚ğ’Ç‰Á
+        /// ZPrepassã®æç”»ãƒ‘ã‚¹ã«ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
         /// </summary>
         /// <param name="model"></param>
         void Add3DModelToZPrepass(Model& model)
@@ -75,7 +75,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// GBuffer‚Ì•`‰æƒpƒX‚Éƒ‚ƒfƒ‹‚ğ’Ç‰Á
+        /// GBufferã®æç”»ãƒ‘ã‚¹ã«ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
         /// </summary>
         /// <param name="model"></param>
         void Add3DModelToRenderGBufferPass(Model& model)
@@ -84,7 +84,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX‚Éƒ‚ƒfƒ‹‚ğ’Ç‰Á
+        /// ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹ã«ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
         /// </summary>
         /// <param name="model"></param>
         void Add3DModelToForwardRenderPass(Model& model)
@@ -93,7 +93,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// ZPrepass‚Åì¬‚³‚ê‚½[“xƒeƒNƒXƒ`ƒƒ‚ğæ“¾
+        /// ZPrepassã§ä½œæˆã•ã‚ŒãŸæ·±åº¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—
         /// </summary>
         /// <returns></returns>
         Texture& GetZPrepassDepthTexture()
@@ -102,7 +102,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// GBuffer‚ÌƒAƒ‹ƒxƒhƒeƒNƒXƒ`ƒƒ‚ğæ“¾
+        /// GBufferã®ã‚¢ãƒ«ãƒ™ãƒ‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—
         /// </summary>
         /// <returns></returns>
         Texture& GetGBufferAlbedoTexture()
@@ -111,7 +111,7 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// •s“§–¾ƒIƒuƒWƒFƒNƒg‚Ì•`‰æŠ®—¹‚ÌƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ğæ“¾
+        /// ä¸é€æ˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»å®Œäº†æ™‚ã®ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã‚’å–å¾—
         /// </summary>
         /// <returns></returns>
         Texture& GetMainRenderTargetSnapshotDrawnOpacity()
@@ -120,13 +120,13 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒpƒCƒvƒ‰ƒCƒ“‚ğÀs
+        /// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’å®Ÿè¡Œ
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒgB</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã€‚</param>
         void Execute(RenderContext& rc);
 
         /// <summary>
-        /// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ìƒpƒ‰ƒ[ƒ^‚ğİ’è
+        /// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®š
         /// </summary>
         /// <param name="lightNo"></param>
         /// <param name="direction"></param>
@@ -139,113 +139,113 @@ namespace myRenderer
 
     private:
         /// <summary>
-        /// G-Buffer‚ğ‰Šú‰»
+        /// G-Bufferã‚’åˆæœŸåŒ–
         /// </summary>
         void InitGBuffer();
 
         /// <summary>
-        /// ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚Ì‰Šú‰»
+        /// ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã®åˆæœŸåŒ–
         /// </summary>
         void InitDeferredLighting();
 
         /// <summary>
-        /// ƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ
+        /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
         void RenderToShadowMap(RenderContext& rc);
 
         /// <summary>
         /// ZPrepass
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
         void ZPrepass(RenderContext& rc);
 
         /// <summary>
-        /// G-Buffer‚Ö‚Ì•`‰æ
+        /// G-Bufferã¸ã®æç”»
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒgB</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã€‚</param>
         void RenderToGBuffer(RenderContext& rc);
 
         /// <summary>
-        /// ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO
+        /// ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
         void DeferredLighting(RenderContext& rc);
 
         /// <summary>
-        /// ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ì“à—e‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚ÉƒRƒs[‚·‚é
+        /// ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å†…å®¹ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
         void CopyMainRenderTargetToFrameBuffer(RenderContext& rc);
 
         /// <summary>
-        /// ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO
+        /// ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
         /// </summary>
-        /// <param name="rc">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg</param>
+        /// <param name="rc">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ</param>
         void ForwardRendering(RenderContext& rc);
 
         /// <summary>
-        /// ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»
+        /// ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–
         /// </summary>
         void InitMainRenderTarget();
 
         /// <summary>
-        /// ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ì‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ğæ‚é‚½‚ß‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»
+        /// ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã‚’å–ã‚‹ãŸã‚ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–
         /// </summary>
         void InitMainRTSnapshotRenderTarget();
 
         /// <summary>
-        /// ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒJƒ‰[ƒoƒbƒtƒ@‚Ì“à—e‚ğ
-        /// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚ÉƒRƒs[‚·‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+        /// ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã®å†…å®¹ã‚’
+        /// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         /// </summary>
         void InitCopyMainRenderTargetToFrameBufferSprite();
 
         /// <summary>
-        /// ZPrepass—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğ‰Šú‰»
+        /// ZPrepassç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’åˆæœŸåŒ–
         /// </summary>
         void InitZPrepassRenderTarget();
 
         /// <summary>
-        /// ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ğB‰e
+        /// ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã‚’æ’®å½±
         /// </summary>
         void SnapshotMainRenderTarget(RenderContext& rc, EnMainRTSnapshot enSnapshot);
 
         /// <summary>
-        /// ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æˆ—‚ğ‰Šú‰»
+        /// ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»å‡¦ç†ã‚’åˆæœŸåŒ–
         /// </summary>
         void InitShadowMapRender();
 
     private:
-        //GBuffer‚Ì’è‹`
+        //GBufferã®å®šç¾©
         enum EnGBuffer
         {
-            enGBufferAlbedo,        // ƒAƒ‹ƒxƒh
-            enGBufferNormal,        // –@ü
-            enGBufferWorldPos,      // ƒ[ƒ‹ƒhÀ•W
-            enGBufferMetalSmooth,   // ‹à‘®“x‚ÆŠŠ‚ç‚©‚³Bx‚É‹à‘®“xAw‚ÉŠŠ‚ç‚©‚³‚ª‹L˜^‚³‚ê‚Ä‚¢‚éB
-            enGBUfferShadowParam,   // ‰eƒpƒ‰ƒ[ƒ^
-            enGBufferNum,           // G-Buffer‚Ì”
+            enGBufferAlbedo,        // ã‚¢ãƒ«ãƒ™ãƒ‰
+            enGBufferNormal,        // æ³•ç·š
+            enGBufferWorldPos,      // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
+            enGBufferMetalSmooth,   // é‡‘å±åº¦ã¨æ»‘ã‚‰ã‹ã•ã€‚xã«é‡‘å±åº¦ã€wã«æ»‘ã‚‰ã‹ã•ãŒè¨˜éŒ²ã•ã‚Œã¦ã„ã‚‹ã€‚
+            enGBUfferShadowParam,   // å½±ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+            enGBufferNum,           // G-Bufferã®æ•°
         };
 
-        // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO—p‚Ì’è”ƒoƒbƒtƒ@
+        // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡
         struct SDeferredLightingCB
         {
-            Light m_light;      // ƒ‰ƒCƒg
-            float pad;          // ƒpƒfƒBƒ“ƒO
+            Light m_light;      // ãƒ©ã‚¤ãƒˆ
+            float pad;          // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
             Matrix mlvp[NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT][NUM_SHADOW_MAP];
         };
 
-        shadow::ShadowMapRender m_shadowMapRenders[NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT];	//ƒVƒƒƒhƒEƒ}ƒbƒv‚Ö‚Ì•`‰æˆ—
-        SDeferredLightingCB m_deferredLightingCB;   // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO—p‚Ì’è”ƒoƒbƒtƒ@
-        Sprite m_copyMainRtToFrameBufferSprite;     // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚ÉƒRƒs[‚·‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg
-        Sprite m_diferredLightingSprite;            // ƒfƒBƒtƒ@[ƒhƒ‰ƒCƒeƒBƒ“ƒO‚ğs‚¤‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg
-        RenderTarget m_zprepassRenderTarget;        // ZPrepass•`‰æ—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        RenderTarget m_mainRenderTarget;            // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg
-        RenderTarget m_mainRTSnapshots[(int)EnMainRTSnapshot::enNum];   // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg
+        shadow::ShadowMapRender m_shadowMapRenders[NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT];	//ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã¸ã®æç”»å‡¦ç†
+        SDeferredLightingCB m_deferredLightingCB;   // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡
+        Sprite m_copyMainRtToFrameBufferSprite;     // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+        Sprite m_diferredLightingSprite;            // ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’è¡Œã†ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+        RenderTarget m_zprepassRenderTarget;        // ZPrepassæç”»ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        RenderTarget m_mainRenderTarget;            // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+        RenderTarget m_mainRTSnapshots[(int)EnMainRTSnapshot::enNum];   // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆ
         RenderTarget m_gBuffer[enGBufferNum];                           // G-Buffer
-        PostEffect m_postEffect;                                        // ƒ|ƒXƒgƒGƒtƒFƒNƒg
-        std::vector< Model* > m_zprepassModels;                         // ZPrepass‚Ì•`‰æƒpƒX‚Å•`‰æ‚³‚ê‚éƒ‚ƒfƒ‹‚ÌƒŠƒXƒg
-        std::vector< Model* > m_renderToGBufferModels;                  // Gƒoƒbƒtƒ@‚Ö‚Ì•`‰æƒpƒX‚Å•`‰æ‚·‚éƒ‚ƒfƒ‹‚ÌƒŠƒXƒg
-        std::vector< Model* > m_forwardRenderModels;                    // ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX‚Å•`‰æ‚³‚ê‚éƒ‚ƒfƒ‹‚ÌƒŠƒXƒg
+        PostEffect m_postEffect;                                        // ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+        std::vector< Model* > m_zprepassModels;                         // ZPrepassã®æç”»ãƒ‘ã‚¹ã§æç”»ã•ã‚Œã‚‹ãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚¹ãƒˆ
+        std::vector< Model* > m_renderToGBufferModels;                  // Gãƒãƒƒãƒ•ã‚¡ã¸ã®æç”»ãƒ‘ã‚¹ã§æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚¹ãƒˆ
+        std::vector< Model* > m_forwardRenderModels;                    // ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹ã§æç”»ã•ã‚Œã‚‹ãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚¹ãƒˆ
     };
 }

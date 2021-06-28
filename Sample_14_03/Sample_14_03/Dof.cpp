@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Dof.h"
 
 namespace myRenderer
@@ -6,7 +6,7 @@ namespace myRenderer
     void Dof::InitCombimeBokeImageToSprite(Sprite& combineBokeImageSprite, Texture& bokeTexture, Texture& depthTexture)
     {
         SpriteInitData combineBokeImageSpriteInitData;
-        //g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Í2–‡
+        //ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯2æš
         combineBokeImageSpriteInitData.m_textures[0] = &bokeTexture;
         combineBokeImageSpriteInitData.m_textures[1] = &depthTexture;
         combineBokeImageSpriteInitData.m_width = 1280;
@@ -14,10 +14,10 @@ namespace myRenderer
         combineBokeImageSpriteInitData.m_fxFilePath = "Assets/shader/preset/dof.fx";
         combineBokeImageSpriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
-        // ‹——£‚ğ—˜—p‚µ‚Äƒ{ƒP‰æ‘œ‚ğƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒfƒBƒ“ƒO‚·‚é‚Ì‚ÅA”¼“§–¾‡¬ƒ‚[ƒh‚É‚·‚é
+        // è·é›¢ã‚’åˆ©ç”¨ã—ã¦ãƒœã‚±ç”»åƒã‚’ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã™ã‚‹ã®ã§ã€åŠé€æ˜åˆæˆãƒ¢ãƒ¼ãƒ‰ã«ã™ã‚‹
         combineBokeImageSpriteInitData.m_alphaBlendMode = AlphaBlendMode_Trans;
 
-        // ‰Šú‰»ƒIƒuƒWƒFƒNƒg‚ğ—˜—p‚µ‚ÄƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»‚·‚é
+        // åˆæœŸåŒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’åˆ©ç”¨ã—ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
         combineBokeImageSprite.Init(combineBokeImageSpriteInitData);
     }
 
@@ -48,21 +48,21 @@ namespace myRenderer
             DXGI_FORMAT_UNKNOWN
         );
 
-        // ‚’¼A‘ÎŠpüƒuƒ‰[‚ğ‚©‚¯‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
+        // å‚ç›´ã€å¯¾è§’ç·šãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
         SpriteInitData vertDiagonalBlurSpriteInitData;
         vertDiagonalBlurSpriteInitData.m_textures[0] = &mainRenderTarget.GetRenderTargetTexture();
         vertDiagonalBlurSpriteInitData.m_width = mainRenderTarget.GetWidth();
         vertDiagonalBlurSpriteInitData.m_height = mainRenderTarget.GetHeight();
         vertDiagonalBlurSpriteInitData.m_fxFilePath = "Assets/shader/preset/hexaBlur.fx";
 
-        // ‚’¼A‘ÎŠpüƒuƒ‰[—p‚ÌƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğw’è‚·‚é
+        // å‚ç›´ã€å¯¾è§’ç·šãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
         vertDiagonalBlurSpriteInitData.m_psEntryPoinFunc = "PSVerticalDiagonalBlur";
         vertDiagonalBlurSpriteInitData.m_colorBufferFormat[0] = mainRenderTarget.GetColorBufferFormat();
         vertDiagonalBlurSpriteInitData.m_colorBufferFormat[1] = mainRenderTarget.GetColorBufferFormat();
 
         m_vertDIagonalBlurSprite.Init(vertDiagonalBlurSpriteInitData);
 
-        // ˜ZŠpŒ`ƒuƒ‰[‚ğ‚©‚¯‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰»
+        // å…­è§’å½¢ãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
         SpriteInitData phomboidBlurSpriteInitData;
         phomboidBlurSpriteInitData.m_textures[0] = &m_rtVerticalBlur.GetRenderTargetTexture();
         phomboidBlurSpriteInitData.m_textures[1] = &m_rtDiagonalBlur.GetRenderTargetTexture();
@@ -70,60 +70,60 @@ namespace myRenderer
         phomboidBlurSpriteInitData.m_height = mainRenderTarget.GetHeight();
         phomboidBlurSpriteInitData.m_fxFilePath = "Assets/shader/preset/hexaBlur.fx";
 
-        // ˜ZŠpŒ`ƒuƒ‰[—p‚ÌƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğw’è‚·‚é
+        // å…­è§’å½¢ãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
         phomboidBlurSpriteInitData.m_psEntryPoinFunc = "PSRhomboidBlur";
         phomboidBlurSpriteInitData.m_colorBufferFormat[0] = mainRenderTarget.GetColorBufferFormat();
 
         m_phomboidBlurSprite.Init(phomboidBlurSpriteInitData);
 
         InitCombimeBokeImageToSprite(
-            m_combineBokeImageSprite,                     // ‰Šú‰»‚³‚ê‚éƒXƒvƒ‰ƒCƒg
-            m_rtPhomboidBlur.GetRenderTargetTexture(),    // ƒ{ƒPƒeƒNƒXƒ`ƒƒ
-            zprepassRenderTarget.GetRenderTargetTexture()  // [“xƒeƒNƒXƒ`ƒƒ
+            m_combineBokeImageSprite,                     // åˆæœŸåŒ–ã•ã‚Œã‚‹ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+            m_rtPhomboidBlur.GetRenderTargetTexture(),    // ãƒœã‚±ãƒ†ã‚¯ã‚¹ãƒãƒ£
+            zprepassRenderTarget.GetRenderTargetTexture()  // æ·±åº¦ãƒ†ã‚¯ã‚¹ãƒãƒ£
         );
     }
 
     void Dof::Render(RenderContext& rc, RenderTarget& mainRenderTarget)
     {
-        // ‚’¼A‘ÎŠpüƒuƒ‰[‚ğ‚©‚¯‚é
+        // å‚ç›´ã€å¯¾è§’ç·šãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹
         RenderTarget* blurRts[] = {
             &m_rtVerticalBlur,
             &m_rtDiagonalBlur
         };
 
-        //ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Æ‚µ‚Ä—˜—p‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+        //ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦åˆ©ç”¨ã§ãã‚‹ã¾ã§å¾…ã¤
         rc.WaitUntilToPossibleSetRenderTargets(2, blurRts);
 
-        //ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        //ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         rc.SetRenderTargetsAndViewport(2, blurRts);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢
         rc.ClearRenderTargetViews(2, blurRts);
 
         //
         m_vertDIagonalBlurSprite.Draw(rc);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTargets(2, blurRts);
 
-        // ˜ZŠpŒ`ƒuƒ‰[‚ğ‚©‚¯‚é
+        // å…­è§’å½¢ãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹
         rc.WaitUntilToPossibleSetRenderTarget(m_rtPhomboidBlur);
         rc.SetRenderTargetAndViewport(m_rtPhomboidBlur);
 
         m_phomboidBlurSprite.Draw(rc);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTarget(m_rtPhomboidBlur);
 
-        // ƒ{ƒP‰æ‘œ‚Æ[“xƒeƒNƒXƒ`ƒƒ‚ğ—˜—p‚µ‚ÄAƒ{ƒP‰æ‘œ‚ğ•`‚«‚±‚ñ‚Å‚¢‚­
-        // ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğİ’è
+        // ãƒœã‚±ç”»åƒã¨æ·±åº¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’åˆ©ç”¨ã—ã¦ã€ãƒœã‚±ç”»åƒã‚’æãã“ã‚“ã§ã„ã
+        // ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®š
         rc.WaitUntilToPossibleSetRenderTarget(mainRenderTarget);
         rc.SetRenderTargetAndViewport(mainRenderTarget);
 
-        // ƒXƒvƒ‰ƒCƒg‚ğ•`‰æ&
+        // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’æç”»&
         m_combineBokeImageSprite.Draw(rc);
 
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ö‚Ì‘‚«‚İI—¹‘Ò‚¿
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¸ã®æ›¸ãè¾¼ã¿çµ‚äº†å¾…ã¡
         rc.WaitUntilFinishDrawingToRenderTarget(mainRenderTarget);
     }
 }

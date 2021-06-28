@@ -1,8 +1,8 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "tkFile/TkmFile.h"
 
 
-//–@üƒXƒ€[ƒWƒ“ƒOB
+//æ³•ç·šã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°ã€‚
 class NormalSmoothing {
 private:
 	struct SSmoothVertex {
@@ -18,7 +18,7 @@ public:
 	void Execute(TkmFile::SMesh& mesh, const IndexBuffer& indexBuffer)
 	{
 
-		//ƒXƒeƒbƒv‚P–Ê–@ü‚ğŒvZ‚µ‚Ä‚¢‚­B
+		//ã‚¹ãƒ†ãƒƒãƒ—ï¼‘é¢æ³•ç·šã‚’è¨ˆç®—ã—ã¦ã„ãã€‚
 		auto numPolygon = indexBuffer.indices.size() / 3;
 		std::vector< SFace> faces;
 		faces.reserve(numPolygon);
@@ -33,7 +33,7 @@ public:
 			auto& vert_1 = mesh.vertexBuffer[vertNo_1];
 			auto& vert_2 = mesh.vertexBuffer[vertNo_2];
 
-			//–@ü‚ğŒvZ‚·‚éB
+			//æ³•ç·šã‚’è¨ˆç®—ã™ã‚‹ã€‚
 			Vector3 v0tov1 = vert_1.pos - vert_0.pos;
 			Vector3 v0tov2 = vert_2.pos - vert_0.pos;
 			Vector3 normal = Cross(v0tov1, v0tov2);
@@ -46,7 +46,7 @@ public:
 			faces.push_back(face);
 		}
 		
-		//ƒXƒeƒbƒv‚Q@–@ü‚Ì•½‹Ï‰»
+		//ã‚¹ãƒ†ãƒƒãƒ—ï¼’ã€€æ³•ç·šã®å¹³å‡åŒ–
 		for (auto& face : faces) {
 			for (auto vertNo : face.vertexNos) {
 				auto& vert = mesh.vertexBuffer[vertNo];
@@ -56,10 +56,10 @@ public:
 		for (auto& vert : mesh.vertexBuffer) {
 			vert.normal.Normalize();
 		}
-		//ƒXƒeƒbƒv‚Q@À•W‚ÆŒü‚«‚ª“¯‚¶’¸“_‚Ì–@ü‚ğ•½‹Ï‰»‚µ‚Ä‚¢‚­B
+		//ã‚¹ãƒ†ãƒƒãƒ—ï¼’ã€€åº§æ¨™ã¨å‘ããŒåŒã˜é ‚ç‚¹ã®æ³•ç·šã‚’å¹³å‡åŒ–ã—ã¦ã„ãã€‚
 		if(mesh.isFlatShading == 0)
 		{
-			//d•¡‚µ‚Ä‚¢‚é’¸“_‚Ì–@ü‚ğ•½‹Ï‰»
+			//é‡è¤‡ã—ã¦ã„ã‚‹é ‚ç‚¹ã®æ³•ç·šã‚’å¹³å‡åŒ–
 			std::vector<SSmoothVertex> smoothVertex;
 			smoothVertex.reserve(mesh.vertexBuffer.size());
 			for (auto& v : mesh.vertexBuffer) {
@@ -73,9 +73,9 @@ public:
 						&& va.vertex->pos.y == vb.vertex->pos.y
 						&& va.vertex->pos.z == vb.vertex->pos.z
 						) {
-						//“¯‚¶À•WB
+						//åŒã˜åº§æ¨™ã€‚
 						if (va.vertex->normal.Dot(vb.vertex->normal) > 0.0f) {
-							//“¯‚¶Œü‚«B
+							//åŒã˜å‘ãã€‚
 							va.newNormal += vb.vertex->normal;
 						}
 					}
@@ -89,49 +89,49 @@ public:
 	}
 };
 /// <summary>
-/// TKMƒtƒ@ƒCƒ‹ƒtƒH[ƒ}ƒbƒgB
+/// TKMãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã€‚
 /// </summary>
 /// <remarks>
-/// ˆ—Œn‚É‚æ‚Á‚Ä‚Í1ƒoƒCƒg‚ª8bit‚Å‚È‚¢‚±‚Æ‚ª‚ ‚èA
-/// intŒ^‚âshortŒ^‚ª•K‚¸‚µ‚àA4ƒoƒCƒgA2ƒoƒCƒg‚Å‚ ‚é‚Æ‚ÍŒÀ‚ç‚È‚¢B
-/// ‚»‚Ì‚½‚ßAstd::uint16_t‚âstd::uint32_t‚ğ—˜—p‚µ‚Ä‚¢‚éB
-/// ‚±‚ê‚ç‚Í’è‹`‚³‚ê‚Ä‚¢‚éˆ—Œn‚Å‚ ‚ê‚ÎAƒTƒCƒY‚Í•K‚¸“¯‚¶‚Å‚ ‚éB
+/// å‡¦ç†ç³»ã«ã‚ˆã£ã¦ã¯1ãƒã‚¤ãƒˆãŒ8bitã§ãªã„ã“ã¨ãŒã‚ã‚Šã€
+/// intå‹ã‚„shortå‹ãŒå¿…ãšã—ã‚‚ã€4ãƒã‚¤ãƒˆã€2ãƒã‚¤ãƒˆã§ã‚ã‚‹ã¨ã¯é™ã‚‰ãªã„ã€‚
+/// ãã®ãŸã‚ã€std::uint16_tã‚„std::uint32_tã‚’åˆ©ç”¨ã—ã¦ã„ã‚‹ã€‚
+/// ã“ã‚Œã‚‰ã¯å®šç¾©ã•ã‚Œã¦ã„ã‚‹å‡¦ç†ç³»ã§ã‚ã‚Œã°ã€ã‚µã‚¤ã‚ºã¯å¿…ãšåŒã˜ã§ã‚ã‚‹ã€‚
 /// </remarks>
 namespace tkmFileFormat {
-	//Œ»İ‚ÌTKMƒtƒ@ƒCƒ‹‚Ìƒo[ƒWƒ‡ƒ“B
+	//ç¾åœ¨ã®TKMãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã€‚
 	std::uint16_t VERSION = 100;
 	/// <summary>
-	/// ƒwƒbƒ_[ƒtƒ@ƒCƒ‹B
+	/// ãƒ˜ãƒƒãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã€‚
 	/// </summary>
 	struct SHeader {
-		std::uint8_t	version;		//ƒo[ƒWƒ‡ƒ“B
-		std::uint8_t	isFlatShading;	//ƒtƒ‰ƒbƒgƒVƒF[ƒfƒBƒ“ƒOH
-		std::uint16_t	numMeshParts;	//ƒƒbƒVƒ…ƒp[ƒc‚Ì”B
+		std::uint8_t	version;		//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã€‚
+		std::uint8_t	isFlatShading;	//ãƒ•ãƒ©ãƒƒãƒˆã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ï¼Ÿ
+		std::uint16_t	numMeshParts;	//ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‘ãƒ¼ãƒ„ã®æ•°ã€‚
 	};
 	/// <summary>
-	/// ƒƒbƒVƒ…ƒp[ƒcƒwƒbƒ_[B
+	/// ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‘ãƒ¼ãƒ„ãƒ˜ãƒƒãƒ€ãƒ¼ã€‚
 	/// </summary>
 	struct SMeshePartsHeader {
-		std::uint32_t numMaterial;		//ƒ}ƒeƒŠƒAƒ‹‚Ì”B
-		std::uint32_t numVertex;		//’¸“_”B
-		std::uint8_t indexSize;			//ƒCƒ“ƒfƒbƒNƒX‚ÌƒTƒCƒYB2‚©4B
-		std::uint8_t pad[3];			//ƒpƒfƒBƒ“ƒOB
+		std::uint32_t numMaterial;		//ãƒãƒ†ãƒªã‚¢ãƒ«ã®æ•°ã€‚
+		std::uint32_t numVertex;		//é ‚ç‚¹æ•°ã€‚
+		std::uint8_t indexSize;			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ã‚µã‚¤ã‚ºã€‚2ã‹4ã€‚
+		std::uint8_t pad[3];			//ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ã€‚
 	};
 	/// <summary>
-	/// ’¸“_
+	/// é ‚ç‚¹
 	/// </summary>
 	struct SVertex {
-		float pos[3];					//’¸“_À•WB
-		float normal[3];				//–@üB
-		float uv[2];					//UVÀ•WB
-		float weights[4];				//ƒXƒLƒ“ƒEƒFƒCƒgB
-		std::int16_t indices[4];		//ƒXƒLƒ“ƒCƒ“ƒfƒbƒNƒXB
+		float pos[3];					//é ‚ç‚¹åº§æ¨™ã€‚
+		float normal[3];				//æ³•ç·šã€‚
+		float uv[2];					//UVåº§æ¨™ã€‚
+		float weights[4];				//ã‚¹ã‚­ãƒ³ã‚¦ã‚§ã‚¤ãƒˆã€‚
+		std::int16_t indices[4];		//ã‚¹ã‚­ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚
 	};
 };
 template< class IndexBuffer>
 void BuildTangentAndBiNormalImp(TkmFile::SMesh& mesh, const IndexBuffer& indexBuffer)
 {
-	//’¸“_ƒXƒ€[ƒX‚Í‹C‚É‚µ‚È‚¢B
+	//é ‚ç‚¹ã‚¹ãƒ ãƒ¼ã‚¹ã¯æ°—ã«ã—ãªã„ã€‚
 	auto numPolygon = indexBuffer.indices.size()/3;
 	for (auto polyNo = 0; polyNo < numPolygon; polyNo++) {
 		auto no = polyNo * 3;
@@ -161,7 +161,7 @@ void BuildTangentAndBiNormalImp(TkmFile::SMesh& mesh, const IndexBuffer& indexBu
 			{ vert_2.pos.z, vert_2.uv.x, vert_2.uv.y}
 		};
 
-		// •½–Êƒpƒ‰ƒ[ƒ^‚©‚çUV²À•WZo‚·‚éB
+		// å¹³é¢ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‹ã‚‰UVè»¸åº§æ¨™ç®—å‡ºã™ã‚‹ã€‚
 		Vector3 tangent, binormal;
 		for (int i = 0; i < 3; ++i) {
 			auto V1 = cp1[i] - cp0[i];
@@ -189,7 +189,7 @@ void BuildTangentAndBiNormalImp(TkmFile::SMesh& mesh, const IndexBuffer& indexBu
 		vert_1.binormal += binormal;
 		vert_2.binormal += binormal;
 	}
-	//–@üAÚƒxƒNƒgƒ‹A]ƒxƒNƒgƒ‹‚ğ•½‹Ï‰»‚·‚éB
+	//æ³•ç·šã€æ¥ãƒ™ã‚¯ãƒˆãƒ«ã€å¾“ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¹³å‡åŒ–ã™ã‚‹ã€‚
 	for (auto& vert : mesh.vertexBuffer) {
 		vert.tangent.Normalize();
 		vert.binormal.Normalize();
@@ -204,7 +204,7 @@ std::string TkmFile::LoadTextureFileName(FILE* fp)
 		
 	if (fileNameLen > 0) {
 		char* localFileName = reinterpret_cast<char*>(malloc(fileNameLen + 1));
-		//ƒkƒ‹•¶š•ª‚à“Ç‚İ‚Ş‚Ì‚Å{‚P
+		//ãƒŒãƒ«æ–‡å­—åˆ†ã‚‚èª­ã¿è¾¼ã‚€ã®ã§ï¼‹ï¼‘
 		fread(localFileName, fileNameLen + 1, 1, fp);
 		fileName = localFileName;
 		free(localFileName);
@@ -219,22 +219,22 @@ void TkmFile::LoadIndexBuffer(std::vector<T>& indices, int numIndex, FILE* fp)
 	for (int indexNo = 0; indexNo < numIndex; indexNo++) {
 		T index;
 		fread(&index, sizeof(index), 1, fp);
-		indices[indexNo] = index - 1;	//todo max‚ÌƒCƒ“ƒfƒbƒNƒX‚Í1‚©‚çŠJn‚µ‚Ä‚¢‚é‚Ì‚ÅA-1‚·‚éB
-									//todo ƒGƒNƒXƒ|[ƒ^[‚ÅŒ¸‚ç‚·‚æ‚¤‚É‚µ‚Ü‚µ‚å‚¤B
+		indices[indexNo] = index - 1;	//todo maxã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã¯1ã‹ã‚‰é–‹å§‹ã—ã¦ã„ã‚‹ã®ã§ã€-1ã™ã‚‹ã€‚
+									//todo ã‚¨ã‚¯ã‚¹ãƒãƒ¼ã‚¿ãƒ¼ã§æ¸›ã‚‰ã™ã‚ˆã†ã«ã—ã¾ã—ã‚‡ã†ã€‚
 	}
 }
 
 void TkmFile::BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath)
 {
-	//ƒAƒ‹ƒxƒh‚Ìƒtƒ@ƒCƒ‹–¼‚ğƒ[ƒhB
+	//ã‚¢ãƒ«ãƒ™ãƒ‰ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	tkmMat.albedoMapFileName = LoadTextureFileName(fp);
-	//–@üƒ}ƒbƒv‚Ìƒtƒ@ƒCƒ‹–¼‚ğƒ[ƒhB
+	//æ³•ç·šãƒãƒƒãƒ—ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	tkmMat.normalMapFileName = LoadTextureFileName(fp);
-	//ƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒv‚Ìƒtƒ@ƒCƒ‹–¼‚ğƒ[ƒhB
+	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	tkmMat.specularMapFileName = LoadTextureFileName(fp);
-	//ƒŠƒtƒŒƒNƒVƒ‡ƒ“ƒ}ƒbƒv‚Ìƒtƒ@ƒCƒ‹–¼‚ğƒ[ƒhB
+	//ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	tkmMat.reflectionMapFileName = LoadTextureFileName(fp);
-	//‹üÜƒ}ƒbƒv‚Ìƒtƒ@ƒCƒ‹–¼‚ğƒ[ƒhB
+	//å±ˆæŠ˜ãƒãƒƒãƒ—ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	tkmMat.refractionMapFileName = LoadTextureFileName(fp);
 
 	std::string texFilePath = filePath;
@@ -246,7 +246,7 @@ void TkmFile::BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath)
 	) {
 		int filePathLength = static_cast<int>(texFilePath.length());
 		if (texFileName.length() > 0) {
-			//ƒ‚ƒfƒ‹‚Ìƒtƒ@ƒCƒ‹ƒpƒX‚©‚çƒ‰ƒXƒg‚ÌƒtƒHƒ‹ƒ_‹æØ‚è‚ğ’T‚·B
+			//ãƒ¢ãƒ‡ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‹ã‚‰ãƒ©ã‚¹ãƒˆã®ãƒ•ã‚©ãƒ«ãƒ€åŒºåˆ‡ã‚Šã‚’æ¢ã™ã€‚
 			auto replaseStartPos = texFilePath.find_last_of('/');
 			if (replaseStartPos == std::string::npos) {
 				replaseStartPos = texFilePath.find_last_of('\\');
@@ -254,17 +254,17 @@ void TkmFile::BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath)
 			replaseStartPos += 1;
 			auto replaceLen = filePathLength - replaseStartPos;
 			texFilePath.replace(replaseStartPos, replaceLen, texFileName);
-			//Šg’£q‚ğdds‚É•ÏX‚·‚éB
+			//æ‹¡å¼µå­ã‚’ddsã«å¤‰æ›´ã™ã‚‹ã€‚
 			replaseStartPos = texFilePath.find_last_of('.') + 1;
 			replaceLen = texFilePath.length() - replaseStartPos;
 			texFilePath.replace(replaseStartPos, replaceLen, "dds");
-			//ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹ƒpƒX‚ğ‹L‰¯‚µ‚Ä‚¨‚­B
+			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’è¨˜æ†¶ã—ã¦ãŠãã€‚
 			texFilePathDst = texFilePath;
 
-			//ƒeƒNƒXƒ`ƒƒ‚ğƒ[ƒhB
+			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 			FILE* texFileFp = fopen(texFilePath.c_str(), "rb");
 			if (texFileFp != nullptr) {
-				//ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğæ“¾B
+				//ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—ã€‚
 				fseek(texFileFp, 0L, SEEK_END);		
 				fileSize = ftell(texFileFp);
 				fseek(texFileFp, 0L, SEEK_SET);
@@ -275,12 +275,12 @@ void TkmFile::BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath)
 			}
 			else {
 
-				MessageBoxA(nullptr, "ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½B", "ƒGƒ‰[", MB_OK);
+				MessageBoxA(nullptr, "ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 				std::abort();
 			}
 		}
 	};
-	//ƒeƒNƒXƒ`ƒƒ‚ğƒ[ƒhB
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	loadTexture( 
 		tkmMat.albedoMapFileName, 
 		tkmMat.albedoMap, 
@@ -330,17 +330,17 @@ void TkmFile::Load(const char* filePath)
 {
 	FILE* fp = fopen(filePath, "rb");
 	if (fp == nullptr) {
-		MessageBoxA(nullptr, "tkmƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñB", "ƒGƒ‰[", MB_OK);
+		MessageBoxA(nullptr, "tkmãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“ã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return ;
 	}
-	//tkmƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_[‚ğ“Ç‚İ‚İB
+	//tkmãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’èª­ã¿è¾¼ã¿ã€‚
 	tkmFileFormat::SHeader header;
 	fread(&header, sizeof(header), 1, fp);
 	if (header.version != tkmFileFormat::VERSION) {
-		//tkmƒtƒ@ƒCƒ‹‚Ìƒo[ƒWƒ‡ƒ“‚ªˆá‚¤B
-		MessageBoxA(nullptr, "tkmƒtƒ@ƒCƒ‹‚Ìƒo[ƒWƒ‡ƒ“‚ªˆÙ‚È‚Á‚Ä‚¢‚Ü‚·B", "ƒGƒ‰[", MB_OK);
+		//tkmãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒé•ã†ã€‚
+		MessageBoxA(nullptr, "tkmãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒç•°ãªã£ã¦ã„ã¾ã™ã€‚", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 	}
-	//ƒƒbƒVƒ…î•ñ‚ğƒ[ƒh‚µ‚Ä‚¢‚­B
+	//ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦ã„ãã€‚
 	m_meshParts.resize(header.numMeshParts);
 	for (int meshPartsNo = 0; meshPartsNo < header.numMeshParts; meshPartsNo++) {
 			
@@ -348,15 +348,15 @@ void TkmFile::Load(const char* filePath)
 		meshParts.isFlatShading = header.isFlatShading;
 		tkmFileFormat::SMeshePartsHeader meshPartsHeader;
 		fread(&meshPartsHeader, sizeof(meshPartsHeader), 1, fp);
-		//ƒ}ƒeƒŠƒAƒ‹î•ñ‚ğ‹L˜^‚Å‚«‚é—Ìˆæ‚ğŠm•ÛB
+		//ãƒãƒ†ãƒªã‚¢ãƒ«æƒ…å ±ã‚’è¨˜éŒ²ã§ãã‚‹é ˜åŸŸã‚’ç¢ºä¿ã€‚
 		meshParts.materials.resize(meshPartsHeader.numMaterial);
-		//ƒ}ƒeƒŠƒAƒ‹î•ñ‚ğ\’z‚µ‚Ä‚¢‚­B
+		//ãƒãƒ†ãƒªã‚¢ãƒ«æƒ…å ±ã‚’æ§‹ç¯‰ã—ã¦ã„ãã€‚
 		for (unsigned int materialNo = 0; materialNo < meshPartsHeader.numMaterial; materialNo++) {
 			auto& material = meshParts.materials[materialNo];
 			BuildMaterial(material, fp, filePath);
 		}
 			
-		//‘±‚¢‚Ä’¸“_ƒoƒbƒtƒ@B
+		//ç¶šã„ã¦é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
 		meshParts.vertexBuffer.resize(meshPartsHeader.numVertex);
 		for (unsigned int vertNo = 0; vertNo < meshPartsHeader.numVertex; vertNo++) {
 			tkmFileFormat::SVertex vertexTmp;
@@ -375,22 +375,22 @@ void TkmFile::Load(const char* filePath)
 			vertex.indices[3] = vertexTmp.indices[3] != -1 ? vertexTmp.indices[3] : 0;
 		}
 		
-		//‘±‚¢‚ÄƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@B
-		//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Íƒ}ƒeƒŠƒAƒ‹‚Ì”•ª‚¾‚¯‘¶İ‚·‚é‚ñ‚¶‚á‚æB
+		//ç¶šã„ã¦ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¯ãƒãƒ†ãƒªã‚¢ãƒ«ã®æ•°åˆ†ã ã‘å­˜åœ¨ã™ã‚‹ã‚“ã˜ã‚ƒã‚ˆã€‚
 		if (meshPartsHeader.indexSize == 2) {
-			//16bit‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@B
+			//16bitã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
 			meshParts.indexBuffer16Array.resize(meshPartsHeader.numMaterial);
 		}
 		else {
-			//32bit‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@B
+			//32bitã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
 			meshParts.indexBuffer32Array.resize(meshPartsHeader.numMaterial);
 		}
 			
 		for (unsigned int materialNo = 0; materialNo < meshPartsHeader.numMaterial; materialNo++) {
-			//ƒ|ƒŠƒSƒ“”‚ğƒ[ƒhB
+			//ãƒãƒªã‚´ãƒ³æ•°ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 			int numPolygon;
 			fread(&numPolygon, sizeof(numPolygon), 1, fp);
-			//ƒgƒ|ƒƒW[‚Íƒgƒ‰ƒCƒAƒ“ƒOƒ‹ƒŠƒXƒgƒIƒ“ƒŠ[‚È‚Ì‚ÅA3‚ğæZ‚·‚é‚ÆƒCƒ“ƒfƒbƒNƒX‚Ì”‚É‚È‚éB
+			//ãƒˆãƒãƒ­ã‚¸ãƒ¼ã¯ãƒˆãƒ©ã‚¤ã‚¢ãƒ³ã‚°ãƒ«ãƒªã‚¹ãƒˆã‚ªãƒ³ãƒªãƒ¼ãªã®ã§ã€3ã‚’ä¹—ç®—ã™ã‚‹ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ•°ã«ãªã‚‹ã€‚
 			int numIndex = numPolygon * 3;
 			if (meshPartsHeader.indexSize == 2) {
 				LoadIndexBuffer(
@@ -409,7 +409,7 @@ void TkmFile::Load(const char* filePath)
 
 		}
 	}
-	//ÚƒxƒNƒgƒ‹‚Æ]ƒxƒNƒgƒ‹‚ğ\’z‚·‚éB
+	//æ¥ãƒ™ã‚¯ãƒˆãƒ«ã¨å¾“ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ§‹ç¯‰ã™ã‚‹ã€‚
 	BuildTangentAndBiNormal();
 
 	fclose(fp);

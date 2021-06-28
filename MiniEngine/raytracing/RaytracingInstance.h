@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Material;
 
@@ -6,12 +6,12 @@ namespace raytracing {
 	using ID3D12DescriptorHeapPtr = CComPtr<ID3D12DescriptorHeap>;
 
 	/// <summary>
-	/// ƒŒƒCƒgƒŒ‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒf[ƒ^B
+	/// ãƒ¬ã‚¤ãƒˆãƒ¬ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã€‚
 	/// </summary>
 	struct Instance {
-		D3D12_RAYTRACING_GEOMETRY_DESC geometoryDesc;	//ƒWƒIƒƒgƒŠî•ñB
-		RWStructuredBuffer m_vertexBufferRWSB;			//’¸“_ƒoƒbƒtƒ@B
-		RWStructuredBuffer m_indexBufferRWSB;			//ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@B
-		Material* m_material = nullptr;					//ƒ}ƒeƒŠƒAƒ‹B		
+		D3D12_RAYTRACING_GEOMETRY_DESC geometoryDesc;	//ã‚¸ã‚ªãƒ¡ãƒˆãƒªæƒ…å ±ã€‚
+		RWStructuredBuffer m_vertexBufferRWSB;			//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+		RWStructuredBuffer m_indexBufferRWSB;			//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã€‚
+		Material* m_material = nullptr;					//ãƒãƒ†ãƒªã‚¢ãƒ«ã€‚		
 	};
 }//namespace raytracing

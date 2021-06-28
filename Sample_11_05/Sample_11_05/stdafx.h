@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#define TK_ENABLE_HDR		//’è‹`‚ÅHDRƒŒƒ“ƒ_ƒŠƒ“ƒO‚ğ—LŒø‚É‚·‚éB
+#define TK_ENABLE_HDR		//å®šç¾©ã§HDRãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚
 
 #include "MiniEngine.h"

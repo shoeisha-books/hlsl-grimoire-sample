@@ -1,7 +1,7 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Material.h"
 
-//ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ÆƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgü‚è‚ÍƒJƒŠƒJƒŠƒJƒŠ
+//ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆå‘¨ã‚Šã¯ã‚«ãƒªã‚«ãƒªã‚«ãƒª
 enum {
 	enDescriptorHeap_CB,
 	enDescriptorHeap_SRV,
@@ -17,7 +17,7 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	char* map = nullptr;
 	unsigned int mapSize;
 
-	//ƒAƒ‹ƒxƒhƒ}ƒbƒvB
+	//ã‚¢ãƒ«ãƒ™ãƒ‰ãƒãƒƒãƒ—ã€‚
 	{
 		if (tkmMat.albedoMap != nullptr)
 		{
@@ -43,7 +43,7 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 	}
 
 
-	//–@üƒ}ƒbƒvB
+	//æ³•ç·šãƒãƒƒãƒ—ã€‚
 	{
 		if (tkmMat.normalMap != nullptr)
 		{
@@ -70,7 +70,7 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 
 
 
-	//ƒXƒyƒLƒ…ƒ‰ƒ}ƒbƒvB
+	//ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒãƒƒãƒ—ã€‚
 	{
 		if (tkmMat.specularMap != nullptr)
 		{
@@ -95,7 +95,7 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 		m_specularMap = specularMap;
 	}
 
-	//”½Ëƒ}ƒbƒvB
+	//åå°„ãƒãƒƒãƒ—ã€‚
 	{
 		if (tkmMat.reflectionMap != nullptr)
 		{
@@ -120,7 +120,7 @@ void Material::InitTexture(const TkmFile::SMaterial& tkmMat)
 		m_reflectionMap = reflectionMap;
 	}
 
-	//‹üÜƒ}ƒbƒvB
+	//å±ˆæŠ˜ãƒãƒƒãƒ—ã€‚
 	{
 		if (tkmMat.refractionMap != nullptr)
 		{
@@ -160,18 +160,18 @@ void Material::InitFromTkmMaterila(
 	UINT offsetInDescriptorsFromTableStartSRV
 )
 {
-	//ƒeƒNƒXƒ`ƒƒ‚ğƒ[ƒhB
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 	InitTexture(tkmMat);
 	
-	//’è”ƒoƒbƒtƒ@‚ğì¬B
+	//å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã€‚
 	SMaterialParam matParam;
 	matParam.hasNormalMap = m_normalMap->IsValid() ? 1 : 0;
 	matParam.hasSpecMap = m_specularMap->IsValid() ? 1 : 0;
 	m_constantBuffer.Init(sizeof(SMaterialParam), &matParam);
 
-	//ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚ğ‰Šú‰»B
+	//ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã‚’åˆæœŸåŒ–ã€‚
 	D3D12_STATIC_SAMPLER_DESC samplerDescArray[2];
-	//ƒfƒtƒHƒ‹ƒg‚ÌƒTƒ“ƒvƒ‰
+	//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚µãƒ³ãƒ—ãƒ©
 	samplerDescArray[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
 	samplerDescArray[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
 	samplerDescArray[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -185,9 +185,9 @@ void Material::InitFromTkmMaterila(
 	samplerDescArray[0].ShaderRegister = 0;
 	samplerDescArray[0].RegisterSpace = 0;
 	samplerDescArray[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	//ƒVƒƒƒhƒEƒ}ƒbƒv—p‚ÌƒTƒ“ƒvƒ‰B
+	//ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ç”¨ã®ã‚µãƒ³ãƒ—ãƒ©ã€‚
 	samplerDescArray[1] = samplerDescArray[0];
-	//”äŠr‘ÎÛ‚Ì’l‚ª¬‚³‚¯‚ê‚Î‚OA‘å‚«‚¯‚ê‚Î‚P‚ğ•Ô‚·”äŠrŠÖ”‚ğİ’è‚·‚éB
+	//æ¯”è¼ƒå¯¾è±¡ã®å€¤ãŒå°ã•ã‘ã‚Œã°ï¼ã€å¤§ãã‘ã‚Œã°ï¼‘ã‚’è¿”ã™æ¯”è¼ƒé–¢æ•°ã‚’è¨­å®šã™ã‚‹ã€‚
 	samplerDescArray[1].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	samplerDescArray[1].ComparisonFunc = D3D12_COMPARISON_FUNC_GREATER;
 	samplerDescArray[1].MaxAnisotropy = 1;
@@ -204,15 +204,15 @@ void Material::InitFromTkmMaterila(
 	);
 
 	if (fxFilePath != nullptr && strlen(fxFilePath) > 0) {
-		//ƒVƒF[ƒ_[‚ğ‰Šú‰»B
+		//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’åˆæœŸåŒ–ã€‚
 		InitShaders(fxFilePath, vsEntryPointFunc, vsSkinEntryPointFunc, psEntryPointFunc);
-		//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğ‰Šú‰»B
+		//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’åˆæœŸåŒ–ã€‚
 		InitPipelineState(colorBufferFormat);
 	}
 }
 void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat)
 {
-	// ’¸“_ƒŒƒCƒAƒEƒg‚ğ’è‹`‚·‚éB
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹ã€‚
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
@@ -224,7 +224,7 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 		{ "BLENDWEIGHT", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 72, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 	};
 
-	//ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğì¬B
+	//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã€‚
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
 	psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
 	psoDesc.pRootSignature = m_rootSignature.Get();
@@ -242,21 +242,21 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 	int numRenderTarget = 0;
 	for (auto& format : colorBufferFormat) {
 		if (format == DXGI_FORMAT_UNKNOWN) {
-			//ƒtƒH[ƒ}ƒbƒg‚ªw’è‚³‚ê‚Ä‚¢‚È‚¢êŠ‚ª—ˆ‚½‚çI‚í‚èB
+			//ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´æ‰€ãŒæ¥ãŸã‚‰çµ‚ã‚ã‚Šã€‚
 			break;
 		}
 		psoDesc.RTVFormats[numRenderTarget] = colorBufferFormat[numRenderTarget];
 		numRenderTarget++;
 	}
 	psoDesc.NumRenderTargets = numRenderTarget;
-#if 0 //ŒÃ‚¢À‘•B
-	psoDesc.RTVFormats[0] = colorBufferFormat;		//ƒAƒ‹ƒxƒhƒJƒ‰[o—Í—pB
+#if 0 //å¤ã„å®Ÿè£…ã€‚
+	psoDesc.RTVFormats[0] = colorBufferFormat;		//ã‚¢ãƒ«ãƒ™ãƒ‰ã‚«ãƒ©ãƒ¼å‡ºåŠ›ç”¨ã€‚
 #ifdef SAMPE_16_02
-	psoDesc.RTVFormats[1] = DXGI_FORMAT_R16G16B16A16_FLOAT;	//–@üo—Í—pB	
-	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32_FLOAT;						//Z’lB
+	psoDesc.RTVFormats[1] = DXGI_FORMAT_R16G16B16A16_FLOAT;	//æ³•ç·šå‡ºåŠ›ç”¨ã€‚	
+	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32_FLOAT;						//Zå€¤ã€‚
 #else
-	psoDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;			//–@üo—Í—pB	
-	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32G32B32A32_FLOAT;	//Z’lB
+	psoDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;			//æ³•ç·šå‡ºåŠ›ç”¨ã€‚	
+	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32G32B32A32_FLOAT;	//Zå€¤ã€‚
 #endif
 #endif
 	psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
@@ -264,11 +264,11 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 
 	m_skinModelPipelineState.Init(psoDesc);
 
-	//‘±‚¢‚ÄƒXƒLƒ“‚È‚µƒ‚ƒfƒ‹—p‚ğì¬B
+	//ç¶šã„ã¦ã‚¹ã‚­ãƒ³ãªã—ãƒ¢ãƒ‡ãƒ«ç”¨ã‚’ä½œæˆã€‚
 	psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsNonSkinModel->GetCompiledBlob());
 	m_nonSkinModelPipelineState.Init(psoDesc);
 
-	//‘±‚¢‚Ä”¼“§–¾ƒ}ƒeƒŠƒAƒ‹—pB
+	//ç¶šã„ã¦åŠé€æ˜ãƒãƒ†ãƒªã‚¢ãƒ«ç”¨ã€‚
 	psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel->GetCompiledBlob());
 	psoDesc.BlendState.IndependentBlendEnable = TRUE;
 	psoDesc.BlendState.RenderTarget[0].BlendEnable = TRUE;
@@ -290,14 +290,14 @@ void Material::InitShaders(
 	const char* psEntryPointFunc
 )
 {
-	//ƒXƒLƒ“‚È‚µƒ‚ƒfƒ‹—p‚ÌƒVƒF[ƒ_[‚ğƒ[ƒh‚·‚éB
+	//ã‚¹ã‚­ãƒ³ãªã—ãƒ¢ãƒ‡ãƒ«ç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã€‚
 	m_vsNonSkinModel = g_engine->GetShaderFromBank(fxFilePath, vsEntryPointFunc);
 	if (m_vsNonSkinModel == nullptr) {
 		m_vsNonSkinModel = new Shader;
 		m_vsNonSkinModel->LoadVS(fxFilePath, vsEntryPointFunc);
 		g_engine->RegistShaderToBank(fxFilePath, vsEntryPointFunc, m_vsNonSkinModel);
 	}
-	//ƒXƒLƒ“‚ ‚èƒ‚ƒfƒ‹—p‚ÌƒVƒF[ƒ_[‚ğƒ[ƒh‚·‚éB
+	//ã‚¹ã‚­ãƒ³ã‚ã‚Šãƒ¢ãƒ‡ãƒ«ç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã€‚
 	m_vsSkinModel = g_engine->GetShaderFromBank(fxFilePath, vsSkinEntriyPointFunc);
 	if (m_vsSkinModel == nullptr) {
 		m_vsSkinModel = new Shader;

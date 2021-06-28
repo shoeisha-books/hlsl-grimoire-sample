@@ -1,33 +1,33 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "ModelStandard.h"
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
     RootSignature rs;
     InitRootSignature(rs);
 
-    // step-1 ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğì¬‚·‚é
-    //ƒJƒ‰[ƒoƒbƒtƒ@[‚ÌƒNƒŠƒAƒJƒ‰[
-    // ¡‰ñ‚ÍƒJƒ‰[ƒoƒbƒtƒ@[‚Í^‚Á”’‚É‚·‚é
+    // step-1 ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆã™ã‚‹
+    //ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼
+    // ä»Šå›ã¯ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ãƒ¼ã¯çœŸã£ç™½ã«ã™ã‚‹
     float clearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
     RenderTarget shadowMap;
     shadowMap.Create(
-        1024,// y’–ÚzƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ì‰¡•
-        1024,// y’–ÚzƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚Ìc•
+        1024,// ã€æ³¨ç›®ã€‘ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ¨ªå¹…
+        1024,// ã€æ³¨ç›®ã€‘ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç¸¦å¹…
         1,
         1,
         DXGI_FORMAT_R8G8B8A8_UNORM,
@@ -35,27 +35,27 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         clearColor
     );
 
-    // step-2 ‰e•`‰æ—p‚Ìƒ‰ƒCƒgƒJƒƒ‰‚ğì¬‚·‚é
+    // step-2 å½±æç”»ç”¨ã®ãƒ©ã‚¤ãƒˆã‚«ãƒ¡ãƒ©ã‚’ä½œæˆã™ã‚‹
     Camera lightCamera;
 
-    // ƒJƒƒ‰‚ÌˆÊ’u‚ğİ’èB‚±‚ê‚Íƒ‰ƒCƒg‚ÌˆÊ’u
+    // ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’è¨­å®šã€‚ã“ã‚Œã¯ãƒ©ã‚¤ãƒˆã®ä½ç½®
     lightCamera.SetPosition(0, 600, 0);
 
-    // ƒJƒƒ‰‚Ì’‹“_‚ğİ’èB‚±‚ê‚ªƒ‰ƒCƒg‚ªÆ‚ç‚µ‚Ä‚¢‚éêŠ
+    // ã‚«ãƒ¡ãƒ©ã®æ³¨è¦–ç‚¹ã‚’è¨­å®šã€‚ã“ã‚ŒãŒãƒ©ã‚¤ãƒˆãŒç…§ã‚‰ã—ã¦ã„ã‚‹å ´æ‰€
     lightCamera.SetTarget(0, 0, 0);
 
-    // ã•ûŒü‚ğİ’èB¡‰ñ‚Íƒ‰ƒCƒg‚ª^‰º‚ğŒü‚¢‚Ä‚¢‚é‚Ì‚ÅAX•ûŒü‚ğã‚É‚µ‚Ä‚¢‚é
+    // ä¸Šæ–¹å‘ã‚’è¨­å®šã€‚ä»Šå›ã¯ãƒ©ã‚¤ãƒˆãŒçœŸä¸‹ã‚’å‘ã„ã¦ã„ã‚‹ã®ã§ã€Xæ–¹å‘ã‚’ä¸Šã«ã—ã¦ã„ã‚‹
     lightCamera.SetUp(1, 0, 0);
 
-    // ¡‰ñ‚ÌƒTƒ“ƒvƒ‹‚Å‚Í‰æŠp‚ğ‹·‚ß‚É‚µ‚Ä‚¨‚­
+    // ä»Šå›ã®ã‚µãƒ³ãƒ—ãƒ«ã§ã¯ç”»è§’ã‚’ç‹­ã‚ã«ã—ã¦ãŠã
     lightCamera.SetViewAngle(Math::DegToRad(20.0f));
-    // ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğŒvZ‚µ‚Ä‚¢‚é
+    // ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’è¨ˆç®—ã—ã¦ã„ã‚‹
     lightCamera.Update();
 
-    // step-3 ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ—p‚Ìƒ‚ƒfƒ‹‚ğ—pˆÓ‚·‚é
+    // step-3 ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ç”¨ã®ãƒ¢ãƒ‡ãƒ«ã‚’ç”¨æ„ã™ã‚‹
     ModelInitData teapotShadowModelInitData;
 
-    // ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ—p‚ÌƒVƒF[ƒ_[‚ğw’è‚·‚é
+    // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ç”¨ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æŒ‡å®šã™ã‚‹
     teapotShadowModelInitData.m_fxFilePath = "Assets/shader/sampleDrawShadowMap.fx";
     teapotShadowModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
     Model teapotShadowModel;
@@ -75,7 +75,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     Sprite sprite;
     sprite.Init(spriteInitData);
 
-    // ’Êí•`‰æ‚ÌƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // é€šå¸¸æç”»ã®ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelStandard teapotModel;
     teapotModel.Init("Assets/modelData/teapot.tkm");
     teapotModel.Update(
@@ -84,65 +84,65 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_vec3One
     );
 
-    // ”wŒiƒ‚ƒfƒ‹‚ğ‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelStandard bgModel;
     bgModel.Init("Assets/modelData/bg/bg.tkm");
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ğ•`‚­ƒR[ƒh‚ğ‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-4 ‰e‚ğ¶¬‚µ‚½‚¢ƒ‚ƒfƒ‹‚ğƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚é
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒVƒƒƒhƒEƒ}ƒbƒv‚É•ÏX‚·‚é
+        // step-4 å½±ã‚’ç”Ÿæˆã—ãŸã„ãƒ¢ãƒ‡ãƒ«ã‚’ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«å¤‰æ›´ã™ã‚‹
         renderContext.WaitUntilToPossibleSetRenderTarget(shadowMap);
         renderContext.SetRenderTargetAndViewport(shadowMap);
         renderContext.ClearRenderTargetView(shadowMap);
 
-        // ‰eƒ‚ƒfƒ‹‚ğ•`‰æ
+        // å½±ãƒ¢ãƒ‡ãƒ«ã‚’æç”»
         teapotShadowModel.Draw(renderContext, lightCamera);
 
-        // ‘‚«‚İŠ®—¹‘Ò‚¿
+        // æ›¸ãè¾¼ã¿å®Œäº†å¾…ã¡
         renderContext.WaitUntilFinishDrawingToRenderTarget(shadowMap);
 
-        // ’ÊíƒŒƒ“ƒ_ƒŠƒ“ƒO
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ğƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚É–ß‚·
+        // é€šå¸¸ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«æˆ»ã™
         renderContext.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
         renderContext.SetViewportAndScissor(g_graphicsEngine->GetFrameBufferViewport());
 
-        // ƒeƒB[ƒ|ƒbƒgƒ‚ƒfƒ‹‚ğ•`‰æ
+        // ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆãƒ¢ãƒ‡ãƒ«ã‚’æç”»
         teapotModel.Draw(renderContext);
 
-        // ”wŒi‚ğ•`‰æ
+        // èƒŒæ™¯ã‚’æç”»
         bgModel.Draw(renderContext);
 
         sprite.Update({ FRAME_BUFFER_W / -2.0f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });
         sprite.Draw(renderContext);
 
         //////////////////////////////////////
-        // ŠG‚ğ•`‚­ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
 
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,

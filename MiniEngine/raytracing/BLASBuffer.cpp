@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "BLASBuffer.h"
 
 namespace raytracing {
@@ -42,7 +42,7 @@ namespace raytracing {
 
 			rc.BuildRaytracingAccelerationStructure(asDesc);
 
-			//ƒŒƒCƒgƒŒ[ƒVƒ“ƒOƒAƒNƒZƒ‰ƒŒ[ƒVƒ‡ƒ“\‘¢‚Ìƒrƒ‹ƒhŠ®—¹‘Ò‚¿‚ÌƒoƒŠƒA‚ğ“ü‚ê‚éB
+			//ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¼ã‚·ãƒ³ã‚°ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³æ§‹é€ ã®ãƒ“ãƒ«ãƒ‰å®Œäº†å¾…ã¡ã®ãƒãƒªã‚¢ã‚’å…¥ã‚Œã‚‹ã€‚
 			D3D12_RESOURCE_BARRIER uavBarrier = {};
 			uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
 			uavBarrier.UAV.pResource = asbuffer.pResult;

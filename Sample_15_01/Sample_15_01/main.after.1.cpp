@@ -1,31 +1,31 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include "sub.h"
 
 
 struct OutputData
 {
-    float avarageScore; // •½‹Ï“_
-    float maxScore;     // Å‚“¾“_
-    float minScore;     // Å¬“¾“_
+    float avarageScore; // å¹³å‡ç‚¹
+    float maxScore;     // æœ€é«˜å¾—ç‚¹
+    float minScore;     // æœ€å°å¾—ç‚¹
 
-    // step-3 o—Í\‘¢‘Ì‚Éƒƒ“ƒo[‚ğ’Ç‰Á‚·‚é
-    int totalScore;     // ‡Œv“_
+    // step-3 å‡ºåŠ›æ§‹é€ ä½“ã«ãƒ¡ãƒ³ãƒãƒ¼ã‚’è¿½åŠ ã™ã‚‹
+    int totalScore;     // åˆè¨ˆç‚¹
 };
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_‚Ìƒ[ƒh
+    // ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ã®ãƒ­ãƒ¼ãƒ‰
     Shader cs;
     cs.LoadCS("Assets/shader/sample.fx", "CSMain");
 
@@ -35,7 +35,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     PipelineState pipelineState;
     InitPipelineState(rs, pipelineState, cs);
 
-    // “ü—Íƒf[ƒ^‚ğó‚¯æ‚éƒoƒbƒtƒ@[‚ğì¬
+    // å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’å—ã‘å–ã‚‹ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆ
     int inputData[] = {
         20, 30, 40
     };
@@ -43,27 +43,27 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     StructuredBuffer inputSB;
     inputSB.Init(sizeof(int), 3, inputData);
 
-    // o—Íƒf[ƒ^‚ğó‚¯æ‚éƒoƒbƒtƒ@[‚ğì¬
+    // å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã‚’å—ã‘å–ã‚‹ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œæˆ
     RWStructuredBuffer outputSb;
     outputSb.Init(sizeof(OutputData), 1, nullptr);
 
-    // “ü—Íƒf[ƒ^‚Æo—Íƒf[ƒ^‚ğƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚É“o˜^‚·‚é
+    // å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã¨å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã«ç™»éŒ²ã™ã‚‹
     DescriptorHeap ds;
     ds.RegistShaderResource(0, inputSB);
     ds.RegistUnorderAccessResource(0, outputSb);
     ds.Commit();
     //////////////////////////////////////
-    // ‰Šú‰»‚ğs‚¤ƒR[ƒh‚ğ‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒtƒŒ[ƒ€ŠJn
+        // ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹
         g_engine->BeginFrame();
         //////////////////////////////////////
-        // “ü—Í‚·‚é¬Ñƒf[ƒ^‚ğƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é
+        // å…¥åŠ›ã™ã‚‹æˆç¸¾ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹
         //////////////////////////////////////
         for (int i = 0; i < 3; i++)
         {
@@ -73,38 +73,38 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         inputSB.Update(inputData);
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çDirectCompute‚Ö‚ÌƒfƒBƒXƒpƒbƒ`–½—ß
+        // ã“ã“ã‹ã‚‰DirectComputeã¸ã®ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒå‘½ä»¤
         //////////////////////////////////////
         renderContext.SetComputeRootSignature(rs);
         renderContext.SetPipelineState(pipelineState);
         renderContext.SetComputeDescriptorHeap(ds);
         renderContext.Dispatch(1, 1, 1);
 
-        // ƒtƒŒ[ƒ€I—¹
+        // ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
 
-        // •½‹Ï“_AÅ‚“¾“_AÅ’á“¾“_‚ğ•\¦‚·‚é
+        // å¹³å‡ç‚¹ã€æœ€é«˜å¾—ç‚¹ã€æœ€ä½å¾—ç‚¹ã‚’è¡¨ç¤ºã™ã‚‹
         char text[256];
         OutputData* outputData = (OutputData*)outputSb.GetResourceOnCPU();
-        // step-4 ‡Œv“_‚ğ•\¦‚·‚é
+        // step-4 åˆè¨ˆç‚¹ã‚’è¡¨ç¤ºã™ã‚‹
         sprintf(
             text,
-            "‚Pl–Ú = %d\n" \
-            "‚Ql–Ú = %d\n" \
-            "‚Rl–Ú = %d\n" \
-            "•½‹Ï“_ = %0.2f\n" \
-            "Å‚“¾“_=%0.2f\n" \
-            "Å’á“¾“_=%0.2f\n" \
-            "‡Œv“_=%d\n", // ‚±‚ê‚ğ’Ç‰Á
+            "ï¼‘äººç›® = %d\n" \
+            "ï¼’äººç›® = %d\n" \
+            "ï¼“äººç›® = %d\n" \
+            "å¹³å‡ç‚¹ = %0.2f\n" \
+            "æœ€é«˜å¾—ç‚¹=%0.2f\n" \
+            "æœ€ä½å¾—ç‚¹=%0.2f\n" \
+            "åˆè¨ˆç‚¹=%d\n", // ã“ã‚Œã‚’è¿½åŠ 
             inputData[0],
             inputData[1],
             inputData[2],
             outputData->avarageScore,
             outputData->maxScore,
             outputData->minScore,
-            outputData->totalScore // ‚±‚ê‚à’Ç‰Á
+            outputData->totalScore // ã“ã‚Œã‚‚è¿½åŠ 
         );
-        MessageBoxA(nullptr, text, "¬Ñ”­•\", MB_OK);
+        MessageBoxA(nullptr, text, "æˆç¸¾ç™ºè¡¨", MB_OK);
     }
     return 0;
 }

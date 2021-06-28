@@ -1,119 +1,119 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 
-const int NUM_DIRECTIONAL_LIGHT = 4; // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”
+const int NUM_DIRECTIONAL_LIGHT = 4; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°
 
 /// <summary>
-/// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
 /// </summary>
 struct DirectionalLight
 {
-    Vector3 direction;  // ƒ‰ƒCƒg‚Ì•ûŒü
-    float pad0;         // ƒpƒfƒBƒ“ƒO
-    Vector4 color;      // ƒ‰ƒCƒg‚ÌƒJƒ‰[
+    Vector3 direction;  // ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+    float pad0;         // ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+    Vector4 color;      // ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼
 };
 
 /// <summary>
-/// ƒ‰ƒCƒg\‘¢‘Ì
+/// ãƒ©ã‚¤ãƒˆæ§‹é€ ä½“
 /// </summary>
 struct Light
 {
-    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];   // ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg
-    Vector3 eyePos;                 // ƒJƒƒ‰‚ÌˆÊ’u
-    float specPow;                  // ƒXƒyƒLƒ…ƒ‰‚Ìi‚è
-    Vector3 ambinetLight;           // ŠÂ‹«Œõ
+    DirectionalLight directionalLight[NUM_DIRECTIONAL_LIGHT];   // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆ
+    Vector3 eyePos;                 // ã‚«ãƒ¡ãƒ©ã®ä½ç½®
+    float specPow;                  // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµžã‚Š
+    Vector3 ambinetLight;           // ç’°å¢ƒå…‰
 };
 
-// ŠÖ”éŒ¾
+// é–¢æ•°å®£è¨€
 void InitRootSignature(RootSignature& rs);
 void CalcWeightsTableFromGaussian(float* weights, int numWeights, float sigma);
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
     RootSignature rs;
     InitRootSignature(rs);
 
-    // step-1 ƒQ[ƒ€ƒV[ƒ“‚ð•`‰æ‚·‚éƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðì¬
+    // step-1 ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã‚’æç”»ã™ã‚‹ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
 
-    // ”wŒiƒ‚ƒfƒ‹‚ð‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     ModelInitData bgModelInitData;
     bgModelInitData.m_tkmFilePath = "Assets/modelData/bg/bg.tkm";
     bgModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
 
-    // ”wŒiƒ‚ƒfƒ‹‚ð‰Šú‰»
+    // èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
     Model bgModel;
     bgModel.Init(bgModelInitData);
 
-    // ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ð‰Šú‰»
-    // ƒ‚ƒfƒ‹‚Ì‰Šú‰»î•ñ‚ðÝ’è‚·‚é
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
+    // ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–æƒ…å ±ã‚’è¨­å®šã™ã‚‹
     ModelInitData plModelInitData;
 
-    // tkmƒtƒ@ƒCƒ‹‚ðŽw’è‚·‚é
+    // tkmãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
 
-    // ƒVƒF[ƒ_[ƒtƒ@ƒCƒ‹‚ðŽw’è‚·‚é
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®šã™ã‚‹
     plModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
 
-    // Ý’è‚µ‚½‰Šú‰»î•ñ‚ð‚à‚Æ‚Éƒ‚ƒfƒ‹‚ð‰Šú‰»‚·‚é
+    // è¨­å®šã—ãŸåˆæœŸåŒ–æƒ…å ±ã‚’ã‚‚ã¨ã«ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã™ã‚‹
     Model plModel;
     plModel.Init(plModelInitData);
 
-    // step-2 ƒKƒEƒXƒuƒ‰[—p‚Ìd‚Ýƒe[ƒuƒ‹‚ðŒvŽZ‚·‚é
+    // step-2 ã‚¬ã‚¦ã‚¹ãƒ–ãƒ©ãƒ¼ç”¨ã®é‡ã¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’è¨ˆç®—ã™ã‚‹
 
-    // step-3 ‰¡ƒuƒ‰[—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðì¬
+    // step-3 æ¨ªãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
 
-    // step-4 ‰¡ƒuƒ‰[—p‚ÌƒXƒvƒ‰ƒCƒg‚ð‰Šú‰»
+    // step-4 æ¨ªãƒ–ãƒ©ãƒ¼ç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
 
-    // step-5 cƒuƒ‰[—p‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðì¬
+    // step-5 ç¸¦ãƒ–ãƒ©ãƒ¼ç”¨ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œæˆ
 
-    // step-6 cƒuƒ‰[—p‚ÌƒXƒvƒ‰ƒCƒg‚ð‰Šú‰»
+    // step-6 ç¸¦ãƒ–ãƒ©ãƒ¼ç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–
 
-    // step-7 ƒeƒNƒXƒ`ƒƒ‚ð“\‚è•t‚¯‚é‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚ð‰Šú‰»‚·‚é
+    // step-7 ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è²¼ã‚Šä»˜ã‘ã‚‹ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    //  ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // 1ƒtƒŒ[ƒ€‚ÌŠJŽn
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã®é–‹å§‹
         g_engine->BeginFrame();
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ð•`‚­ƒR[ƒh‚ð‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-8 ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ðmainRenderTarget‚É•ÏX‚·‚é
+        // step-8 ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’mainRenderTargetã«å¤‰æ›´ã™ã‚‹
 
-        // step-9 mainRenderTarget‚ÉŠeŽíƒ‚ƒfƒ‹‚ð•`‰æ‚·‚é
+        // step-9 mainRenderTargetã«å„ç¨®ãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã™ã‚‹
 
-        // step-10 mainRenderTarget‚É•`‰æ‚³‚ê‚½‰æ‘œ‚É‰¡ƒuƒ‰[‚ð‚©‚¯‚é
+        // step-10 mainRenderTargetã«æç”»ã•ã‚ŒãŸç”»åƒã«æ¨ªãƒ–ãƒ©ãƒ¼ã‚’ã‹ã‘ã‚‹
 
-        // step-11 cƒuƒ‰[‚às‚¤
+        // step-11 ç¸¦ãƒ–ãƒ©ãƒ¼ã‚‚è¡Œã†
 
-        // step-12 ƒƒCƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒOƒ^[ƒQƒbƒg‚ÌŠG‚ðƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚ÉƒRƒs[
+        // step-12 ãƒ¡ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®çµµã‚’ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼
 
         //////////////////////////////////////
-        // ŠG‚ð•`‚­ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        // çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // 1ƒtƒŒ[ƒ€I—¹
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;
 }
 
-// ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì‰Šú‰»
+// ãƒ«ãƒ¼ãƒˆã‚·ã‚°ãƒãƒãƒ£ã®åˆæœŸåŒ–
 void InitRootSignature( RootSignature& rs )
 {
     rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -123,25 +123,25 @@ void InitRootSignature( RootSignature& rs )
 }
 
 /// <summary>
-/// ƒKƒEƒVƒAƒ“ŠÖ”‚ð—˜—p‚µ‚Äd‚Ýƒe[ƒuƒ‹‚ðŒvŽZ‚·‚é
+/// ã‚¬ã‚¦ã‚·ã‚¢ãƒ³é–¢æ•°ã‚’åˆ©ç”¨ã—ã¦é‡ã¿ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’è¨ˆç®—ã™ã‚‹
 /// </summary>
-/// <param name="weightsTbl">d‚Ýƒe[ƒuƒ‹‚Ì‹L˜^æ</param>
-/// <param name="sizeOfWeightsTbl">d‚Ýƒe[ƒuƒ‹‚ÌƒTƒCƒY</param>
-/// <param name="sigma">•ªŽU‹ï‡B‚±‚Ì”’l‚ª‘å‚«‚­‚È‚é‚Æ•ªŽU‹ï‡‚ª‹­‚­‚È‚é</param>
+/// <param name="weightsTbl">é‡ã¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®è¨˜éŒ²å…ˆ</param>
+/// <param name="sizeOfWeightsTbl">é‡ã¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®ã‚µã‚¤ã‚º</param>
+/// <param name="sigma">åˆ†æ•£å…·åˆã€‚ã“ã®æ•°å€¤ãŒå¤§ãããªã‚‹ã¨åˆ†æ•£å…·åˆãŒå¼·ããªã‚‹</param>
 void CalcWeightsTableFromGaussian(float* weightsTbl, int sizeOfWeightsTbl, float sigma)
 {
-    // d‚Ý‚Ì‡Œv‚ð‹L˜^‚·‚é•Ï”‚ð’è‹`‚·‚é
+    // é‡ã¿ã®åˆè¨ˆã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°ã‚’å®šç¾©ã™ã‚‹
     float total = 0;
 
-    // ‚±‚±‚©‚çƒKƒEƒXŠÖ”‚ð—p‚¢‚Äd‚Ý‚ðŒvŽZ‚µ‚Ä‚¢‚é
-    // ƒ‹[ƒv•Ï”‚Ìx‚ªŠî€ƒeƒNƒZƒ‹‚©‚ç‚Ì‹——£
+    // ã“ã“ã‹ã‚‰ã‚¬ã‚¦ã‚¹é–¢æ•°ã‚’ç”¨ã„ã¦é‡ã¿ã‚’è¨ˆç®—ã—ã¦ã„ã‚‹
+    // ãƒ«ãƒ¼ãƒ—å¤‰æ•°ã®xãŒåŸºæº–ãƒ†ã‚¯ã‚»ãƒ«ã‹ã‚‰ã®è·é›¢
     for (int x = 0; x < sizeOfWeightsTbl; x++)
     {
         weightsTbl[x] = expf(-0.5f * (float)(x * x) / sigma);
         total += 2.0f * weightsTbl[x];
     }
 
-    // d‚Ý‚Ì‡Œv‚ÅœŽZ‚·‚é‚±‚Æ‚ÅAd‚Ý‚Ì‡Œv‚ð1‚É‚µ‚Ä‚¢‚é
+    // é‡ã¿ã®åˆè¨ˆã§é™¤ç®—ã™ã‚‹ã“ã¨ã§ã€é‡ã¿ã®åˆè¨ˆã‚’1ã«ã—ã¦ã„ã‚‹
     for (int i = 0; i < sizeOfWeightsTbl; i++)
     {
         weightsTbl[i] /= total;

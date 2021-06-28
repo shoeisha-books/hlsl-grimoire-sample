@@ -1,13 +1,13 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "system/system.h"
 #include <time.h>
 
 ///////////////////////////////////////////////////////////////////
-// ƒEƒBƒ“ƒhƒEƒvƒƒOƒ‰ƒ€‚ÌƒƒCƒ“ŠÖ”
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®ãƒ¡ã‚¤ãƒ³é–¢æ•°
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
-    // ƒQ[ƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     srand(time(nullptr) );
@@ -18,34 +18,34 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
     //////////////////////////////////////
-    // ‚±‚±‚©‚ç‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‹Lq‚·‚é
+    // ã“ã“ã‹ã‚‰åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
     //////////////////////////////////////
 
-    // lŒ^ƒ‚ƒfƒ‹‚ðƒ[ƒh‚·‚é
+    // äººåž‹ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     ModelInitData humanModelInitData;
     humanModelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
     Model humanModel;
     humanModel.Init(humanModelInitData);
 
-    // lŒ^ƒ‚ƒfƒ‹‚ðƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚É’Ç‰Á
+    // äººåž‹ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«è¿½åŠ 
     g_graphicsEngine->RegistModelToRaytracingWorld(humanModel);
 
-    // step-1 ”wŒiƒ‚ƒfƒ‹‚ðƒ[ƒh‚µ‚ÄƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚É’Ç‰Á‚·‚é
+    // step-1 èƒŒæ™¯ãƒ¢ãƒ‡ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«è¿½åŠ ã™ã‚‹
 
-    // ƒŒƒCƒgƒŒƒ[ƒ‹ƒh‚ð\’z
+    // ãƒ¬ã‚¤ãƒˆãƒ¬ãƒ¯ãƒ¼ãƒ«ãƒ‰ã‚’æ§‹ç¯‰
     g_graphicsEngine->BuildRaytracingWorld(renderContext);
 
     //////////////////////////////////////
-    // ‰Šú‰»‚ðs‚¤ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+    // åˆæœŸåŒ–ã‚’è¡Œã†ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
     //////////////////////////////////////
 
-    // ‚±‚±‚©‚çƒQ[ƒ€ƒ‹[ƒv
+    // ã“ã“ã‹ã‚‰ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
     while (DispatchWindowMessage())
     {
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOŠJŽn
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°é–‹å§‹
         g_engine->BeginFrame();
 
-        // ƒJƒƒ‰‚ð“®‚©‚·
+        // ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™
         if (g_pad[0]->IsPress(enButtonLB1))
         {
             g_camera3D->MoveUp(g_pad[0]->GetLStickYF());
@@ -62,16 +62,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_camera3D->RotateOriginTarget(qRotY);
 
         //////////////////////////////////////
-        // ‚±‚±‚©‚çŠG‚ð•`‚­ƒR[ƒh‚ð‹Lq‚·‚é
+        // ã“ã“ã‹ã‚‰çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹
         //////////////////////////////////////
 
-        // step-3 ƒŒƒC‚ðƒfƒBƒXƒpƒbƒ`
+        // step-3 ãƒ¬ã‚¤ã‚’ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
         g_graphicsEngine->DispatchRaytracing(renderContext);
 
         //////////////////////////////////////
-        //ŠG‚ð•`‚­ƒR[ƒh‚ð‘‚­‚Ì‚Í‚±‚±‚Ü‚ÅIII
+        //çµµã‚’æãã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãã®ã¯ã“ã“ã¾ã§ï¼ï¼ï¼
         //////////////////////////////////////
-        // ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
+        // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°çµ‚äº†
         g_engine->EndFrame();
     }
     return 0;

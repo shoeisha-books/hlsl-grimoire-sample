@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "MyRenderer.h"
 
@@ -7,21 +7,21 @@ namespace myRenderer
     namespace shadow
     {
         /// <summary>
-        /// ƒJƒXƒP[ƒhƒVƒƒƒhƒEƒ}ƒbƒv–@‚Åg—p‚³‚ê‚és—ñƒNƒ‰ƒX
+        /// ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æ³•ã§ä½¿ç”¨ã•ã‚Œã‚‹è¡Œåˆ—ã‚¯ãƒ©ã‚¹
         /// </summary>
         class CascadeShadowMapMatrix
         {
         public:
             /// <summary>
-            /// ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“ƒNƒƒbƒvs—ñ‚ğŒvZ‚·‚é
+            /// ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ­ãƒƒãƒ—è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹
             /// </summary>
-            /// <param name="lightDirection">ƒ‰ƒCƒg‚Ì•ûŒü</param>
+            /// <param name="lightDirection">ãƒ©ã‚¤ãƒˆã®æ–¹å‘</param>
             void CalcLightViewProjectionCropMatrix(Vector3 lightDirection);
 
             /// <summary>
-            /// ŒvZ‚³‚ê‚½ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“ƒNƒƒbƒvs—ñ‚ğæ“¾
+            /// è¨ˆç®—ã•ã‚ŒãŸãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ­ãƒƒãƒ—è¡Œåˆ—ã‚’å–å¾—
             /// </summary>
-            /// <param name="shadowMapNo">ƒVƒƒƒhƒEƒ}ƒbƒv‚Ì”Ô†</param>
+            /// <param name="shadowMapNo">ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã®ç•ªå·</param>
             /// <returns></returns>
             const Matrix& GetLightViewProjectionCropMatrix(int shadowMapNo) const
             {
@@ -29,7 +29,7 @@ namespace myRenderer
             }
 
         private:
-            std::array<Matrix, NUM_SHADOW_MAP> m_lvpcMatrix;		//ƒ‰ƒCƒgƒrƒ…[ƒNƒƒbƒvs—ñ
+            std::array<Matrix, NUM_SHADOW_MAP> m_lvpcMatrix;		//ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ã‚¯ãƒ­ãƒƒãƒ—è¡Œåˆ—
         };
     }
 }

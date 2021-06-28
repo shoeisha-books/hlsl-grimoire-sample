@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "tkEngine.h"
 #include "GraphicsEngine.h"
 
@@ -12,10 +12,10 @@ TkEngine::~TkEngine()
 }
 void TkEngine::Init(HWND hwnd, UINT frameBufferWidth, UINT frameBufferHeight)
 {
-	//ƒOƒ‰ƒtƒBƒbƒNƒGƒ“ƒWƒ“‚Ì‰Šú‰»B
+	//ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–ã€‚
 	m_graphicsEngine = new GraphicsEngine();
 	m_graphicsEngine->Init(hwnd, frameBufferWidth, frameBufferHeight);
-	//ƒQ[ƒ€ƒpƒbƒh‚Ì‰Šú‰»B
+	//ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®åˆæœŸåŒ–ã€‚
 	for (int i = 0; i < GamePad::CONNECT_PAD_MAX; i++) {
 		g_pad[i] = &m_pad[i];
 	}

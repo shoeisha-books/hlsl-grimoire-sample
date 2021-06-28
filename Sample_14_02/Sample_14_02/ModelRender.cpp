@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "ModelRender.h"
 #include "RenderingEngine.h"
 
@@ -34,7 +34,7 @@ namespace myRenderer
     {
         m_renderingEngine = &renderingEngine;
 
-        // ZPrepass•`‰æ—p‚Ìƒ‚ƒfƒ‹‚ğ‰Šú‰»
+        // ZPrepassæç”»ç”¨ã®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
         {
             ModelInitData modelInitData;
             modelInitData.m_tkmFilePath = tkmFilePath;
@@ -44,7 +44,7 @@ namespace myRenderer
             m_zprepassModel.Init(modelInitData);
         }
 
-        // ƒVƒƒƒhƒEƒ}ƒbƒv•`‰æ—p‚Ìƒ‚ƒfƒ‹‚ğ‰Šú‰»
+        // ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—æç”»ç”¨ã®ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–
         {
             ModelInitData modelInitData;
             modelInitData.m_tkmFilePath = tkmFilePath;
@@ -65,7 +65,7 @@ namespace myRenderer
     {
         if (m_isShadowCaster)
         {
-            // ƒVƒƒƒhƒEƒLƒƒƒXƒ^[
+            // ã‚·ãƒ£ãƒ‰ã‚¦ã‚­ãƒ£ã‚¹ã‚¿ãƒ¼
             for (int ligNo = 0;
                  ligNo < NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT;
                  ligNo++)

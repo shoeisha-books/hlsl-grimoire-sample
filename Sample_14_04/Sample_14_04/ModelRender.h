@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "MyRenderer.h"
 
@@ -6,11 +6,11 @@ namespace myRenderer
 {
     class RenderingEngine;
     /// <summary>
-    /// ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO—p‚Ìƒ‚ƒfƒ‹‰Šú‰»\‘¢‘ÌB
+    /// ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ç”¨ã®ãƒ¢ãƒ‡ãƒ«åˆæœŸåŒ–æ§‹é€ ä½“ã€‚
     /// </summary>
     /// <remark>
-    /// ModelInitData‚ğŒp³‚µ‚Ä‚¢‚Ü‚·B
-    /// ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì‚½‚ß‚É•K—v‚ÈƒfƒtƒHƒ‹ƒgİ’è‚ğƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ås‚Á‚Ä‚­‚ê‚Ü‚·B
+    /// ModelInitDataã‚’ç¶™æ‰¿ã—ã¦ã„ã¾ã™ã€‚
+    /// ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®ãŸã‚ã«å¿…è¦ãªãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã‚’ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§è¡Œã£ã¦ãã‚Œã¾ã™ã€‚
     /// </remark>
     struct ModelInitDataFR : public ModelInitData
     {
@@ -24,36 +24,36 @@ namespace myRenderer
     public:
         
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         /// <remark>
-        /// –{ŠÖ”‚ğ—˜—p‚µ‚Ä‰Šú‰»‚³‚ê‚½ƒ‚ƒfƒ‹‚ÍA
-        /// ƒfƒBƒtƒ@[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX‚Å•`‰æ‚³‚ê‚Ü‚·
-        /// ƒfƒBƒtƒ@[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Å‚Ì•`‰æ‚ÍPBRƒVƒF[ƒ_[‚Åƒ‰ƒCƒeƒBƒ“ƒO‚ªŒvZ‚³‚ê‚Ü‚·
+        /// æœ¬é–¢æ•°ã‚’åˆ©ç”¨ã—ã¦åˆæœŸåŒ–ã•ã‚ŒãŸãƒ¢ãƒ‡ãƒ«ã¯ã€
+        /// ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹ã§æç”»ã•ã‚Œã¾ã™
+        /// ãƒ‡ã‚£ãƒ•ã‚¡ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã§ã®æç”»ã¯PBRã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã§ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ãŒè¨ˆç®—ã•ã‚Œã¾ã™
         /// </remark>
-        /// <param name="renderingEngine">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒGƒ“ƒWƒ“B</param>
-        /// <param name="tkmFilePath">tkmƒtƒ@ƒCƒ‹ƒpƒXB</param>
-        /// <param name="isShadowReciever">ƒVƒƒƒhƒEƒŒƒV[ƒo[ƒtƒ‰ƒO</param>
+        /// <param name="renderingEngine">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¨ãƒ³ã‚¸ãƒ³ã€‚</param>
+        /// <param name="tkmFilePath">tkmãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
+        /// <param name="isShadowReciever">ã‚·ãƒ£ãƒ‰ã‚¦ãƒ¬ã‚·ãƒ¼ãƒãƒ¼ãƒ•ãƒ©ã‚°</param>
         void InitDeferredRendering(RenderingEngine& renderingEngine, const char* tkmFilePath, bool isShadowReciever);
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         /// <remark>
-        /// –{ŠÖ”‚ğ—˜—p‚µ‚Ä‰Šú‰»‚³‚ê‚½ƒ‚ƒfƒ‹‚Í
-        /// ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX‚Å•`‰æ‚³‚ê‚Ü‚·
-        /// “Áê‚ÈƒVƒF[ƒfƒBƒ“ƒO‚ğs‚¢‚½‚¢ê‡‚ÍA‚±‚¿‚ç‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢
+        /// æœ¬é–¢æ•°ã‚’åˆ©ç”¨ã—ã¦åˆæœŸåŒ–ã•ã‚ŒãŸãƒ¢ãƒ‡ãƒ«ã¯
+        /// ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹ã§æç”»ã•ã‚Œã¾ã™
+        /// ç‰¹æ®Šãªã‚·ã‚§ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚’è¡Œã„ãŸã„å ´åˆã¯ã€ã“ã¡ã‚‰ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„
         /// </remark>
-        /// <param name="renderingEngine">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒGƒ“ƒWƒ“</param>
+        /// <param name="renderingEngine">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¨ãƒ³ã‚¸ãƒ³</param>
         /// <param name="modelInitData"></param>
         void InitForwardRendering(RenderingEngine& renderingEngine, ModelInitDataFR& modelInitData);
 
         /// <summary>
-        /// ƒ[ƒ‹ƒhs—ñ‚ğXV‚·‚é
+        /// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’æ›´æ–°ã™ã‚‹
         /// </summary>
-        /// <param name="pos">À•W</param>
-        /// <param name="rot">‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“</param>
-        /// <param name="scale">Šg‘å—¦</param>
+        /// <param name="pos">åº§æ¨™</param>
+        /// <param name="rot">å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³</param>
+        /// <param name="scale">æ‹¡å¤§ç‡</param>
         void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale)
         {
             m_zprepassModel.UpdateWorldMatrix(pos, rot, scale);
@@ -68,12 +68,12 @@ namespace myRenderer
         }
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
         void Draw();
 
         /// <summary>
-        /// ƒVƒƒƒhƒEƒLƒƒƒXƒ^[‚Ìƒtƒ‰ƒO‚ğİ’è‚·‚é
+        /// ã‚·ãƒ£ãƒ‰ã‚¦ã‚­ãƒ£ã‚¹ã‚¿ãƒ¼ã®ãƒ•ãƒ©ã‚°ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         void SetShadowCasterFlag(bool flag)
         {
@@ -82,18 +82,18 @@ namespace myRenderer
 
     private:
         /// <summary>
-        /// ‹¤’Ê‚Ì‰Šú‰»ˆ—
+        /// å…±é€šã®åˆæœŸåŒ–å‡¦ç†
         /// </summary>
-        /// <param name="renderingEngine">ƒŒƒ“ƒ_ƒŠƒ“ƒOƒGƒ“ƒWƒ“</param>
-        /// <param name="tkmFilePath">tkmƒtƒ@ƒCƒ‹ƒpƒX</param>
+        /// <param name="renderingEngine">ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¨ãƒ³ã‚¸ãƒ³</param>
+        /// <param name="tkmFilePath">tkmãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</param>
         void InitCommon(RenderingEngine& renderingEngine, const char* tkmFilePath);
 
     private:
-        RenderingEngine* m_renderingEngine = nullptr;   //ƒŒƒ“ƒ_ƒŠƒ“ƒOƒGƒ“ƒWƒ“
-        Model m_zprepassModel;                  // ZPrepass‚Å•`‰æ‚³‚ê‚éƒ‚ƒfƒ‹
-        Model m_forwardRenderModel;             // ƒtƒHƒ[ƒhƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ì•`‰æƒpƒX‚Å•`‰æ‚³‚ê‚éƒ‚ƒfƒ‹
-        Model m_renderToGBufferModel;           // RenderToGBuffer‚Å•`‰æ‚³‚ê‚éƒ‚ƒfƒ‹
-        Model m_shadowModels[NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT][NUM_SHADOW_MAP];	//ƒVƒƒƒhƒEƒ}ƒbƒv‚É•`‰æ‚·‚éƒ‚ƒfƒ‹
-        bool m_isShadowCaster = false;          // ƒVƒƒƒhƒEƒLƒƒƒXƒ^[ƒtƒ‰ƒO
+        RenderingEngine* m_renderingEngine = nullptr;   //ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚¨ãƒ³ã‚¸ãƒ³
+        Model m_zprepassModel;                  // ZPrepassã§æç”»ã•ã‚Œã‚‹ãƒ¢ãƒ‡ãƒ«
+        Model m_forwardRenderModel;             // ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®æç”»ãƒ‘ã‚¹ã§æç”»ã•ã‚Œã‚‹ãƒ¢ãƒ‡ãƒ«
+        Model m_renderToGBufferModel;           // RenderToGBufferã§æç”»ã•ã‚Œã‚‹ãƒ¢ãƒ‡ãƒ«
+        Model m_shadowModels[NUM_DEFERRED_LIGHTING_DIRECTIONAL_LIGHT][NUM_SHADOW_MAP];	//ã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã«æç”»ã™ã‚‹ãƒ¢ãƒ‡ãƒ«
+        bool m_isShadowCaster = false;          // ã‚·ãƒ£ãƒ‰ã‚¦ã‚­ãƒ£ã‚¹ã‚¿ãƒ¼ãƒ•ãƒ©ã‚°
     };
 }

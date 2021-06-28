@@ -1,23 +1,23 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Model.h"
 #include "Material.h"
 
 void Model::Init(const ModelInitData& initData)
 {
-	/* ƒŒƒCƒgƒŒŒü‚¯‚Ì‰Šú‰»‚Ì‚É‚Ím_fxFilePath‚Íw’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ª‚ ‚é‚Ì‚ÅƒXƒ‹[‚·‚éB
+	/* ãƒ¬ã‚¤ãƒˆãƒ¬å‘ã‘ã®åˆæœŸåŒ–ã®æ™‚ã«ã¯m_fxFilePathã¯æŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´åˆãŒã‚ã‚‹ã®ã§ã‚¹ãƒ«ãƒ¼ã™ã‚‹ã€‚
 	MY_ASSERT(
 		initData.m_fxFilePath, 
-		"error : initData.m_fxFilePath‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
+		"error : initData.m_fxFilePathãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
 	);
 	*/
 	MY_ASSERT(
 		initData.m_tkmFilePath,
-		"error : initData.m_tkmFilePath‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
+		"error : initData.m_tkmFilePathãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
 	);
 	
 	
 	if (initData.m_skeleton != nullptr) {
-		//ƒXƒPƒ‹ƒgƒ“‚ªw’è‚³‚ê‚Ä‚¢‚éB
+		//ã‚¹ã‚±ãƒ«ãƒˆãƒ³ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã€‚
 		m_meshParts.BindSkeleton(*initData.m_skeleton);
 	}
 	
@@ -25,7 +25,7 @@ void Model::Init(const ModelInitData& initData)
 
 	auto tkmFile = g_engine->GetTkmFileFromBank(initData.m_tkmFilePath);
 	if (tkmFile == nullptr) {
-		//–¢“o˜^
+		//æœªç™»éŒ²
 		tkmFile = new TkmFile;
 		tkmFile->Load(initData.m_tkmFilePath);
 		g_engine->RegistTkmFileToBank(initData.m_tkmFilePath, tkmFile);
@@ -65,13 +65,13 @@ void Model::UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale)
 void Model::ChangeAlbedoMap(const char* materialName, Texture& albedoMap)
 {
 	m_meshParts.QueryMeshs([&](const SMesh& mesh) {
-		//todo ƒ}ƒeƒŠƒAƒ‹–¼‚ğtkmƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ä‚È‚©‚Á‚½B
-		//todo ¡‚Í‘Sƒ}ƒeƒŠƒAƒ‹·‚µ‘Ö‚¦‚Ü‚·
+		//todo ãƒãƒ†ãƒªã‚¢ãƒ«åã‚’tkmãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¦ãªã‹ã£ãŸã€‚
+		//todo ä»Šã¯å…¨ãƒãƒ†ãƒªã‚¢ãƒ«å·®ã—æ›¿ãˆã¾ã™
 		for (Material* material : mesh.m_materials) {
 			material->GetAlbedoMap().InitFromD3DResource(albedoMap.Get());
 		}
 	});
-	//ƒfƒBƒXƒNƒŠƒvƒ^ƒq[ƒv‚ÌÄì¬B
+	//ãƒ‡ã‚£ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã®å†ä½œæˆã€‚
 	m_meshParts.CreateDescriptorHeaps();
 	
 }

@@ -1,26 +1,26 @@
-#pragma once
+﻿#pragma once
 
 
 /*!
-*@brief	�X�g�b�v�E�H�b�`�N���X�B
+*@brief	ストップウォッチクラス。
 *@details
-* C#��Stopwatch�̂悤�Ɏg����B</br>
+* C#のStopwatchのように使える。</br>
 *@code
-�T���v���R�[�h
+サンプルコード
 Stopwatch sw;
-sw.Start();		//�v���J�n�B
+sw.Start();		//計測開始。
 for(int i = 0; i < 100; i++ ){
 }
-sw.Stop();		//�v���I��
-printf("�o�ߎ��� = %lf(�P�ʁF�b)\n", sw.GetElapsed());
-printf("�o�ߎ��� = %lf(�P�ʁF�~��)\n", sw.GetElapsedMillisecond());
+sw.Stop();		//計測終了
+printf("経過時間 = %lf(単位：秒)\n", sw.GetElapsed());
+printf("経過時間 = %lf(単位：ミリ)\n", sw.GetElapsedMillisecond());
 *@endcode
 *
 */
 class Stopwatch {
 public:
 	/*!
-		*@brief	�R���X�g���N�^�B
+		*@brief	コンストラクタ。
 		*/
 	Stopwatch()
 	{
@@ -32,20 +32,20 @@ public:
 		elapsedMicro = 0.0;
 	}
 	/*!
-		*@brief	�f�X�g���N�^�B
+		*@brief	デストラクタ。
 		*/
 	~Stopwatch()
 	{
 	}
 	/*!
-		*@brief	�v���J�n�B
+		*@brief	計測開始。
 		*/
 	void Start()
 	{
 		::QueryPerformanceCounter( (LARGE_INTEGER*)&begin );
 	}
 	/*!
-		*@brief	�v���I��
+		*@brief	計測終了
 		*/
 	void Stop()
 	{
@@ -56,21 +56,21 @@ public:
 		elapsedMicro = elapsedMill * 1000.0;
 	}
 	/*!
-		*@brief	�o�ߎ��Ԃ��擾(�P��:�b)
+		*@brief	経過時間を取得(単位:秒)
 		*/
 	double GetElapsed() const
 	{
 		return elapsed;
 	}
 	/*!
-		*@brief	�o�ߎ��Ԃ��擾(�P��:�~���b)
+		*@brief	経過時間を取得(単位:ミリ秒)
 		*/
 	double GetElapsedMillisecond() const
 	{
 		return elapsedMill;
 	}
 	/*!
-		*@brief	�o�ߎ��Ԃ��擾(�P��:�}�C�N���b)
+		*@brief	経過時間を取得(単位:マイクロ秒)
 		*/
 	double GetElapsedMicrosecond() const
 	{
@@ -80,8 +80,8 @@ private:
 	LONGLONG freq;
 	LONGLONG end;
 	LONGLONG begin;
-	double elapsed;			//�o�ߎ���(�P�ʁF�b)
-	double elapsedMill;		//�o�ߎ���(�P�ʁF�~���b)
-	double elapsedMicro;	//�o�ߎ���(�P�ʁF�}�C�N���b)
+	double elapsed;			//経過時間(単位：秒)
+	double elapsedMill;		//経過時間(単位：ミリ秒)
+	double elapsedMicro;	//経過時間(単位：マイクロ秒)
 	
 };

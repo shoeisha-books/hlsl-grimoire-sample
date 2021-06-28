@@ -1,5 +1,5 @@
-/*!
- * @brief	s—ñB
+ï»¿/*!
+ * @brief	è¡Œåˆ—ã€‚
  */
 
 #include "stdafx.h"
