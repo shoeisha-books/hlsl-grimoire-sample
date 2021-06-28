@@ -47,10 +47,10 @@ public:
 	/// </remarks>
 	struct SVertex {
 		Vector3 pos;			//座標。
-		Vector3 normal;		//法線。
+		Vector3 normal;			//法線。
 		Vector3 tangent;		//接ベクトル。
 		Vector3 binormal;		//従ベクトル。
-		Vector2 uv;			//UV座標。
+		Vector2 uv;				//UV座標。
 		int indices[4];			//スキンインデックス。
 		Vector4 skinWeights;	//スキンウェイト。
 	};
@@ -70,17 +70,17 @@ public:
 	/// メッシュパーツ。
 	/// </summary>
 	struct SMesh {
-		bool isFlatShading;							//フラットシェーディング？
-		std::vector< SMaterial > materials;				//マテリアルの配列。
-		std::vector< SVertex >	vertexBuffer;			//頂点バッファ。
-		std::vector<SIndexBuffer32> indexBuffer32Array;	//インデックスバッファの配列。マテリアルの数分だけインデックスバッファはあるよ。
-		std::vector< SIndexbuffer16> indexBuffer16Array;
+		bool isFlatShading;									//フラットシェーディング？
+		std::vector< SMaterial > materials;					//マテリアルの配列。
+		std::vector< SVertex >	vertexBuffer;				//頂点バッファ。
+		std::vector<SIndexBuffer32> indexBuffer32Array;		//インデックスバッファ(32ビット)の配列。マテリアルの数分だけインデックスバッファはあるよ。
+		std::vector< SIndexbuffer16> indexBuffer16Array;	//インデックスバッファ(16ビット)の配列。
 	};
 		
 	/// <summary>
 	/// 3Dモデルをロード。
 	/// </summary>
-	/// <param name="filePath">ファイルパス。</param>
+	/// <param name="filePath">tkmファイルのファイルパス。</param>
 	void Load(const char* filePath);
 		
 	/// <summary>
@@ -96,7 +96,7 @@ public:
 	/// <summary>
 	/// メッシュパーツを取得。
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>メッシュパーツの可変長配列</returns>
 	const std::vector< SMesh>& GetMeshParts() const
 	{
 		return m_meshParts;
@@ -104,7 +104,7 @@ public:
 	/// <summary>
 	/// メッシュの数を取得。
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>メッシュの数</returns>
 	int GetNumMesh() const
 	{
 		return (int)(m_meshParts.size());
@@ -113,8 +113,8 @@ private:
 	/// <summary>
 	/// テクスチャ名をロード。
 	/// </summary>
-	/// <param name="fp"></param>
-	/// <returns></returns>
+	/// <param name="fp">ファイルポインタ</param>
+	/// <returns>テクスチャ名</returns>
 	std::string LoadTextureFileName(FILE* fp);
 	/// <summary>
 	/// インデックスバッファをロード。
@@ -124,7 +124,9 @@ private:
 	/// <summary>
 	/// マテリアルを構築。
 	/// </summary>
-	/// <param name="tkmMat"></param>
+	/// <param name="tkmMat">tkmマテリアルの構築先</param>
+	/// <param name="fp">ファイルポインタ</param>
+	/// <param name="filePath">ロード中のtkmファイルのファイルパス。</param>
 	void BuildMaterial(SMaterial& tkmMat, FILE* fp, const char* filePath);
 	/// <summary>
 	/// 接ベクトルと従ベクトルを計算する。

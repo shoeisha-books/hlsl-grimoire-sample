@@ -20,9 +20,9 @@ public:
 		int no;							//ボーンの番号。
 	};
 	/// <summary>
-	/// TKSファイルをロードする。
+	/// tksファイルをロードする。
 	/// </summary>
-	/// <param name="filePath"></param>
+	/// <param name="filePath">tkfファイルのファイルパス。</param>
 	bool Load(const char* filePath);
 	/// <summary>
 	/// ボーンに対してクエリを行う。
