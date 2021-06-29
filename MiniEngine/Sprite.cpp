@@ -193,7 +193,7 @@
         
         //ルートシグネチャの初期化。
         m_rootSignature.Init(
-            D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+            initData.m_samplerFilter,
             D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
             D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
             D3D12_TEXTURE_ADDRESS_MODE_CLAMP);

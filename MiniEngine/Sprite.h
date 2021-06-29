@@ -25,17 +25,18 @@ enum AlphaBlendMode {
 /// スプライトの初期化データ。
 /// </summary>
 struct SpriteInitData {
-	std::array<const char*, MAX_TEXTURE> m_ddsFilePath= {nullptr};	//DDSファイルのファイルパス。
-	std::array<Texture*, MAX_TEXTURE> m_textures = { nullptr };		//使用するテクスチャ。DDSファイルのパスが指定されている場合は、このパラメータは無視されます。
-	const char* m_vsEntryPointFunc = "VSMain";						//頂点シェーダーのエントリーポイント。
-	const char* m_psEntryPoinFunc = "PSMain";						//ピクセルシェーダーのエントリーポイント。
-	const char* m_fxFilePath = nullptr;								//.fxファイルのファイルパス。
-	UINT m_width = 0;												//スプライトの幅。
-	UINT m_height = 0;												//スプライトの高さ。
-	void* m_expandConstantBuffer = nullptr;							//ユーザー拡張の定数バッファ
-	int m_expandConstantBufferSize = 0;								//ユーザー拡張の定数バッファのサイズ。
-	IShaderResource* m_expandShaderResoruceView = nullptr;			//ユーザー拡張のシェーダーリソース。
-	AlphaBlendMode m_alphaBlendMode = AlphaBlendMode_None;			//アルファブレンディングモード。
+	std::array<const char*, MAX_TEXTURE> m_ddsFilePath= {nullptr};	// DDSファイルのファイルパス。
+	std::array<Texture*, MAX_TEXTURE> m_textures = { nullptr };		// 使用するテクスチャ。DDSファイルのパスが指定されている場合は、このパラメータは無視されます。
+	const char* m_vsEntryPointFunc = "VSMain";						// 頂点シェーダーのエントリーポイント。
+	const char* m_psEntryPoinFunc = "PSMain";						// ピクセルシェーダーのエントリーポイント。
+	const char* m_fxFilePath = nullptr;								// .fxファイルのファイルパス。
+	UINT m_width = 0;												// スプライトの幅。
+	UINT m_height = 0;												// スプライトの高さ。
+	void* m_expandConstantBuffer = nullptr;							// ユーザー拡張の定数バッファ
+	int m_expandConstantBufferSize = 0;								// ユーザー拡張の定数バッファのサイズ。
+	IShaderResource* m_expandShaderResoruceView = nullptr;			// ユーザー拡張のシェーダーリソース。
+	AlphaBlendMode m_alphaBlendMode = AlphaBlendMode_None;			// アルファブレンディングモード。
+	D3D12_FILTER m_samplerFilter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;	// サンプラのフィルター。
 	std::array<DXGI_FORMAT, MAX_RENDERING_TARGET> m_colorBufferFormat = { 
 		DXGI_FORMAT_R8G8B8A8_UNORM,
 		DXGI_FORMAT_UNKNOWN,
