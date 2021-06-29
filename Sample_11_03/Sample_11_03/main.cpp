@@ -56,7 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     bgModelInitData.m_fxFilePath = "Assets/shader/sampleShadowReciever.fx";
 
     // シャドウマップを拡張SRVに設定する
-    bgModelInitData.m_expandShaderResoruceView = &shadowMap.GetRenderTargetTexture();
+    bgModelInitData.m_expandShaderResoruceView[0] = &shadowMap.GetRenderTargetTexture();
 
     // ライトビュープロジェクション行列を拡張定数バッファーに設定する
     bgModelInitData.m_expandConstantBuffer = (void*)&lightCamera.GetViewProjectionMatrix();
@@ -102,7 +102,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
-        renderContext.SetViewport(g_graphicsEngine->GetFrameBufferViewport());
+        renderContext.SetViewportAndScissor(g_graphicsEngine->GetFrameBufferViewport());
 
         // ティーポットモデルを描画
         teapotModel.Draw(renderContext);
