@@ -30,7 +30,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     myRenderer::ModelRender bgModelRender;
     bgModelRender.InitDeferredRendering(renderingEngine, "Assets/modelData/bg/bg.tkm", true);
 
-    // step-1 ティーポットの描画処理を初期化する
+    // ティーポットの描画処理を初期化する
     myRenderer::ModelInitDataFR modelInitData;
     modelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
     modelInitData.m_fxFilePath = "Assets/shader/sample.fx";
@@ -45,15 +45,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // フォワードレンダリングの描画パスで描画される
     teapotModelRender.InitForwardRendering(renderingEngine, modelInitData);
 
-    //シャドウキャスターフラグをオンにする
+    // シャドウキャスターフラグをオンにする
     teapotModelRender.SetShadowCasterFlag(true);
 
-    teapotModelRender.UpdateWorldMatrix({ 0.0f, 50.0f, 0.0f }, g_quatIdentity, g_vec3One);
+    teapotModelRender.UpdateWorldMatrix({ 0.0f, 25.0f, 0.0f }, g_quatIdentity, g_vec3One);
 
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
+
+    Quaternion qRot;
 
     // ここからゲームループ
     while (DispatchWindowMessage())
@@ -63,14 +65,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         g_camera3D->MoveForward(g_pad[0]->GetLStickYF());
         g_camera3D->MoveRight(g_pad[0]->GetLStickXF());
         g_camera3D->MoveUp(g_pad[0]->GetRStickYF());
-
+        
         //////////////////////////////////////
         // ここから絵を描くコードを記述する
         //////////////////////////////////////
 
+        qRot.AddRotationY(-0.01f);
+        teapotModelRender.UpdateWorldMatrix( { 0.0f, 25.0f, 0.0f }, qRot, g_vec3One );
         bgModelRender.Draw();
 
-        // step-2 ティーポットを描画する
+        // ティーポットを描画する
         teapotModelRender.Draw();
 
         //レンダリングエンジンを実行

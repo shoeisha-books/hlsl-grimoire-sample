@@ -107,6 +107,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);
     
     // step-1 斜め下方向のライトと法線の内積の結果を利用して光の強さを切り替える。
-
+    // ライトの方向を計算する。
+    float3 ligDir = normalize( float3( 1.0f, -1.0f, -1.0f) );
+    // 法線とライトの方向とで内積を計算する。
+    float t = dot( psIn.normal, -ligDir ) ;
+    // 内積の結果が0.1以下なら、最終カラーの色味を若干落とす。
+    if( t < 0.1f){
+        finalColor.xyz *= 0.8f;
+    }
     return finalColor;
 }

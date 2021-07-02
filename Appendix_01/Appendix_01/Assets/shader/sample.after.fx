@@ -84,11 +84,23 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
     // step-1 サーフェイスの法線を利用してリムライトの強さを求める。
+    // カメラ空間でのZ値の値を使って、リムライトの強さを計算する。
+    float limLight = 1.0f - max(0.0f, psIn.normalInView.z * -1.0f);
 
     // step-2 pow()を使用して、強さの変化を指数関数的にする
+    // 今回は効果を分かりやすくするためにリムの強さを３倍にしている。
+    limLight = pow(limLight, 1.5f) * 3.0f;
 
     // step-3 最終的な反射光にリムライトの反射光を合算する
+    // 最終的な反射光にリムの反射光を合算する。
+    // 今回のサンプルはリムの効果を分かりやすくするために、、
+    // シンプルな環境光とリムライトの効果のみとする
+    float3 finalLig = ambientLight + limLight;
 
-    // step-4 反射光とテクスチャカラーを乗算して、最終出力カラーを求める。
-    
+    // テクスチャカラーに求めた光を乗算して最終出力カラーを求める。
+    // テクスチャカラーをサンプリング。
+    float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);
+    finalColor.xyz *= finalLig;
+
+    return finalColor;
 }
