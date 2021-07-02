@@ -20,7 +20,8 @@ public:
 		int numSrv,
 		int numCbv,
 		UINT offsetInDescriptorsFromTableStartCB,
-		UINT offsetInDescriptorsFromTableStartSRV
+		UINT offsetInDescriptorsFromTableStartSRV,
+		D3D12_FILTER samplerFilter
 	);
 	/// <summary>
 	/// レンダリングを開始するときに呼び出す関数。

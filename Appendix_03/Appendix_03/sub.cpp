@@ -79,8 +79,6 @@ void InitBGModel(Model& model, Light& light)
     modelInitData.m_fxFilePath = "Assets/shader/preset/sample3D.fx";
     modelInitData.m_expandConstantBuffer = &light;
     modelInitData.m_expandConstantBufferSize = sizeof(light);
-    modelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    modelInitData.m_colorBufferFormat[1] = DXGI_FORMAT_R32_FLOAT;
 
     model.Init(modelInitData);
 }
@@ -157,4 +155,5 @@ void MoveCamera()
 {
     g_camera3D->MoveForward(g_pad[0]->GetLStickYF() * 3.0f );
     g_camera3D->MoveRight(g_pad[0]->GetLStickXF() * 3.0f );
+    g_camera3D->MoveUp(g_pad[0]->GetRStickYF() * 3.0f);
 }

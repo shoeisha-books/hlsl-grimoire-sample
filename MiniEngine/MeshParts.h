@@ -44,6 +44,7 @@ public:
 	/// <param name="vsSkinEntryPointFunc">スキンありマテリアル用の頂点シェーダーのエントリーポイントの関数名</param>
 	/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
 	/// <param name="colorBufferFormat">このモデルをレンダリングするカラーバッファのフォーマット</param>
+	/// <param name="samplerFilter">サンプラフィルタ</param>
 	void InitFromTkmFile(
 		const TkmFile& tkmFile,
 		const char* fxFilePath,
@@ -53,7 +54,8 @@ public:
 		void* expandData,
 		int expandDataSize,
 		const std::array<IShaderResource*, MAX_MODEL_EXPAND_SRV>& expandShaderResourceView, 
-		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat
+		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat,
+		D3D12_FILTER samplerFilter
 	);
 	/// <summary>
 	/// 描画。
@@ -100,6 +102,7 @@ private:
 	/// <param name="vsSkinEntryPointFunc">スキンありマテリアル用の頂点シェーダーのエントリーポイントの関数名</param>
 	/// <param name="psEntryPointFunc">ピクセルシェーダーのエントリーポイントの関数名</param>
 	/// <param name="colorBufferFormat">このモデルをレンダリングするカラーバッファのフォーマット</param>
+	/// <param name="samplerFilter">サンプラフィルタ</param>
 	void CreateMeshFromTkmMesh(
 		const TkmFile::SMesh& mesh, 
 		int meshNo,
@@ -108,7 +111,9 @@ private:
 		const char* vsEntryPointFunc,
 		const char* vsSkinEntryPointFunc,
 		const char* psEntryPointFunc,
-		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat);
+		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat,
+		D3D12_FILTER samplerFilter
+	);
 
 	
 private:

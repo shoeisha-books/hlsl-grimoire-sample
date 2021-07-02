@@ -38,20 +38,15 @@ struct SPSIn
     //step-7 カメラ空間でのZ値を記録する変数を追加。
     float3 depthInView : TEXCOORD2; // カメラ空間でのZ値。
 };
-//step-8 ピクセルシェーダーからの出力構造体を定義する。
-struct SPSOut{
-    float4 color : SV_Target0;  //レンダリングターゲット0に描きこむ。
-    float depth : SV_Target1;   //レンダリングターゲット1に描きこむ。
-};
+
 ///////////////////////////////////////////////////
 // グローバル変数
 ///////////////////////////////////////////////////
 // サンプラーステート
 sampler g_sampler : register(s0);
 
-//物理ベースの処理をインクルード
-#include "pbr.h"
 
+Texture2D<float4> g_albedo : register(t0);      // アルベドマップ
 
 /// <summary>
 /// 頂点シェーダー
@@ -76,13 +71,7 @@ SPSIn VSMain(SVSIn vsIn)
 /// <summary>
 /// ピクセルシェーダー
 /// </summary>
-SPSOut PSMain(SPSIn psIn) 
+float4 PSMain(SPSIn psIn)  : SV_Target0
 {
-    //step-10 ピクセルシェーダーからカラーとZ値を出力する。
-    SPSOut psOut;
-    //カラーを計算。
-    psOut.color = CalcPBR(psIn);
-    //カメラ空間での深度値を設定。
-    psOut.depth = psIn.depthInView;
-    return psOut;
+    return g_albedo.Sample( g_sampler, psIn.uv);
 }

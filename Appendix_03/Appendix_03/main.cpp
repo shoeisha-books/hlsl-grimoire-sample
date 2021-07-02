@@ -19,36 +19,65 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // ここから初期化を行うコードを記述する
     //////////////////////////////////////
 
-    // メインレンダリングターゲットと深度レンダリングターゲットを作成
-    RenderTarget mainRenderTarget, depthRenderTarget;;
-    InitMainDepthRenderTarget(mainRenderTarget, depthRenderTarget);
 
-    // メインレンダリングターゲットの絵をフレームバッファにコピーするためのスプライトを初期化
-    // スプライトの初期化オブジェクトを作成する
-    Sprite copyToFrameBufferSprite;
-    InitCopyToFrameBufferTargetSprite(
-        copyToFrameBufferSprite,                    // 初期化されるスプライト
-        mainRenderTarget.GetRenderTargetTexture()   // メインレンダリングターゲットのテクスチャ
-    );
-
+    
     // 背景モデルを初期化
     Light light;
     Model model, coneModel;
     InitBGModel(model, light);
 
+    //　コーンモデルを初期化。
     ModelInitData modelInitData;
-    modelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
+    modelInitData.m_tkmFilePath = "Assets/modelData/human.tkm";
     modelInitData.m_fxFilePath = "Assets/shader/preset/sample3D.fx";
     modelInitData.m_expandConstantBuffer = &light;
     modelInitData.m_expandConstantBufferSize = sizeof(light);
-    modelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    modelInitData.m_colorBufferFormat[1] = DXGI_FORMAT_R32_FLOAT;
+    modelInitData.m_samplerFilter = D3D12_FILTER_MIN_MAG_MIP_POINT;
 
     coneModel.Init(modelInitData);
+
+    // 板ポリモデルを初期化。
+    ModelInitData planeModelInitData;
+    modelInitData.m_tkmFilePath = "Assets/modelData/plane.tkm";
+    modelInitData.m_fxFilePath = "Assets/shader/preset/pixelArt.fx";
+    modelInitData.m_expandConstantBuffer = &light;
+    modelInitData.m_expandConstantBufferSize = sizeof(light);
+    modelInitData.m_samplerFilter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+
+    Model planeModel;
+    planeModel.Init(modelInitData);
+
+    // コーンモデルをレンダリングするためのレンダリングターゲットを初期化。
+    float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    RenderTarget drawConeModelRT;
+    drawConeModelRT.Create(
+        100.0f,
+        100.0f,
+        1,
+        1,
+        DXGI_FORMAT_R8G8B8A8_UNORM,
+        DXGI_FORMAT_D32_FLOAT,
+        clearColor
+    );
+    // コーンモデルを描画するためのカメラを作成。
+    Camera drawConeModelCamera;
+    drawConeModelCamera.SetUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);
+    drawConeModelCamera.SetWidth( 200.0f );
+    drawConeModelCamera.SetHeight( 200.0f );
+    drawConeModelCamera.SetNear(1.0f);
+    drawConeModelCamera.SetFar( 1000.0f );
+    drawConeModelCamera.SetPosition(0.0f, 100.0f, 200.0f);
+    drawConeModelCamera.SetTarget(0.0f, 100.0f, 0.0f);
+    drawConeModelCamera.SetUp(0.0f, 1.0f, 0.0f);
+    drawConeModelCamera.Update();
+
+    planeModel.ChangeAlbedoMap("", drawConeModelRT.GetRenderTargetTexture());
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
+
+    Quaternion qRot;
 
     // ここからゲームループ
     while (DispatchWindowMessage())
@@ -61,28 +90,23 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
         MoveCamera();
 
-        // 2枚のレンダリングターゲットを設定して、モデルを描画する
-        // 2枚のレンダリングターゲットのポインタを持つ配列を定義する
-        RenderTarget* rts[] = {
-            &mainRenderTarget,
-            &depthRenderTarget
-        };
+        qRot.AddRotationY(0.01f);
+        coneModel.UpdateWorldMatrix(g_vec3Zero, qRot, g_vec3One);
 
-        // レンダリングターゲットとして利用できるまで待つ
-        renderContext.WaitUntilToPossibleSetRenderTargets(2, rts);
+        // コーンモデルを描画。
+         // レンダリングターゲットとして利用できるまで待つ
+        renderContext.WaitUntilToPossibleSetRenderTarget(drawConeModelRT);
 
         // レンダリングターゲットを設定
-        renderContext.SetRenderTargetsAndViewport(2, rts);
+        renderContext.SetRenderTargetAndViewport(drawConeModelRT);
 
         // レンダリングターゲットをクリア
-        renderContext.ClearRenderTargetViews(2, rts);
+        renderContext.ClearRenderTargetView(drawConeModelRT);
 
-        // モデルをドロー
-        model.Draw(renderContext);
-        coneModel.Draw(renderContext);
+        coneModel.Draw(renderContext, drawConeModelCamera);
 
         // レンダリングターゲットへの書き込み終了待ち
-        renderContext.WaitUntilFinishDrawingToRenderTargets(2, rts);
+        renderContext.WaitUntilFinishDrawingToRenderTarget(drawConeModelRT);
 
 
         // メインレンダリングターゲットの絵をフレームバッファーにコピー
@@ -90,7 +114,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
-
         // ビューポートを指定する
         D3D12_VIEWPORT viewport;
         viewport.TopLeftX = 0;
@@ -101,7 +124,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         viewport.MaxDepth = 1.0f;
 
         renderContext.SetViewportAndScissor(viewport);
-        copyToFrameBufferSprite.Draw(renderContext);
+
+        
+        // モデルをドロー
+        model.Draw(renderContext);
+        planeModel.Draw(renderContext);
+        
 
         // 1フレーム終了
         g_engine->EndFrame();

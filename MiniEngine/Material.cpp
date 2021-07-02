@@ -157,7 +157,8 @@ void Material::InitFromTkmMaterila(
 	int numSrv,
 	int numCbv,
 	UINT offsetInDescriptorsFromTableStartCB,
-	UINT offsetInDescriptorsFromTableStartSRV
+	UINT offsetInDescriptorsFromTableStartSRV,
+	D3D12_FILTER samplerFilter
 )
 {
 	//テクスチャをロード。
@@ -172,7 +173,7 @@ void Material::InitFromTkmMaterila(
 	//ルートシグネチャを初期化。
 	D3D12_STATIC_SAMPLER_DESC samplerDescArray[2];
 	//デフォルトのサンプラ
-	samplerDescArray[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDescArray[0].Filter = samplerFilter;
 	samplerDescArray[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
 	samplerDescArray[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
 	samplerDescArray[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
