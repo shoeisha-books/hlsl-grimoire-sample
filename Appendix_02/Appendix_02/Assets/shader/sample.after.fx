@@ -43,33 +43,18 @@ Texture2D<float4> g_depthTexture : register(t10);
 ///////////////////////////////////////////
 sampler g_sampler : register(s0);
 
-/// <summary>
-/// モデル用の頂点シェーダーのエントリーポイント
-/// </summary>
-SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
-{
-    SPSIn psIn;
-
-    psIn.pos = mul(mWorld, vsIn.pos);   // モデルの頂点をワールド座標系に変換
-    psIn.pos = mul(mView, psIn.pos);    // ワールド座標系からカメラ座標系に変換
-    psIn.pos = mul(mProj, psIn.pos);    // カメラ座標系からスクリーン座標系に変換
-    psIn.uv = vsIn.uv;
-    psIn.normal = mul( mWorld, vsIn.normal );
-
-    //頂点の正規化スクリーン座標系の座標をピクセルシェーダーに渡す
-    psIn.posInProj = psIn.pos;
-    psIn.posInProj.xy /= psIn.posInProj.w;
-
-    return psIn;
-}
+///////////////////////////////////////////
+// 関数
+///////////////////////////////////////////
 
 /// <summary>
-/// モデル用のピクセルシェーダーのエントリーポイント
+/// 輪郭線を描画する必要があるかどうか判定。
 /// </summary>
-float4 PSMain(SPSIn psIn) : SV_Target0
+int IsDrawEdge(SPSIn psIn)
 {
     // 近傍8テクセルの深度値を計算して、エッジを抽出する
     // 正規化スクリーン座標系からUV座標系に変換する
+    psIn.posInProj.xy /= psIn.posInProj.w;
     float2 uv = psIn.posInProj.xy * float2( 0.5f, -0.5f) + 0.5f;
 
     // 近傍8テクセルへのUVオフセット
@@ -98,8 +83,39 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     // 自身の深度値と近傍8テクセルの深度値の差を調べる
     if(abs(depth - depth2) > 0.00005f)
     {
-        // 深度値が結構違う場合はピクセルカラーを黒にする
-        // ->これがエッジカラーとなる
+        return 1;
+    }
+    return 0;
+}
+
+/// <summary>
+/// モデル用の頂点シェーダーのエントリーポイント
+/// </summary>
+SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
+{
+    SPSIn psIn;
+
+    psIn.pos = mul(mWorld, vsIn.pos);   // モデルの頂点をワールド座標系に変換
+    psIn.pos = mul(mView, psIn.pos);    // ワールド座標系からカメラ座標系に変換
+    psIn.pos = mul(mProj, psIn.pos);    // カメラ座標系からスクリーン座標系に変換
+    psIn.uv = vsIn.uv;
+    psIn.normal = mul( mWorld, vsIn.normal );
+
+    //頂点の正規化スクリーン座標系の座標をピクセルシェーダーに渡す
+    psIn.posInProj = psIn.pos;
+
+    return psIn;
+}
+
+/// <summary>
+/// モデル用のピクセルシェーダーのエントリーポイント
+/// </summary>
+float4 PSMain(SPSIn psIn) : SV_Target0
+{
+    // 輪郭線を描く必要があるか判定する。
+    if( IsDrawEdge( psIn ) )
+    {
+        // 輪郭線を描画する必要があるので、輪郭線のカラーを出力する。
         return float4( 0.0f, 0.0f, 0.0f, 1.0f);
     }
 
@@ -107,7 +123,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);
     
     // step-1 斜め下方向のライトと法線の内積の結果を利用して光の強さを切り替える。
-    // ライトの方向を計算する。
+    // ライトの方向を定義する。
     float3 ligDir = normalize( float3( 1.0f, -1.0f, -1.0f) );
     // 法線とライトの方向とで内積を計算する。
     float t = dot( psIn.normal, -ligDir ) ;
@@ -115,5 +131,6 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     if( t < 0.1f){
         finalColor.xyz *= 0.8f;
     }
+    
     return finalColor;
 }

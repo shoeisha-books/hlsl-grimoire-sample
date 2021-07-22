@@ -86,7 +86,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     // カメラ空間でのZ値の値を使って、リムライトの強さを計算する。
     float limLight = 1.0f - max(0.0f, psIn.normalInView.z * -1.0f);
 
-    // step-2 pow()を使用して、強さの変化を指数関数的にする
+    // step-2 累乗関数を使用して、強さの変化を指数関数的にする
     // 今回は効果を分かりやすくするためにリムの強さを３倍にしている。
     limLight = pow(limLight, 1.5f) * 3.0f;
 
