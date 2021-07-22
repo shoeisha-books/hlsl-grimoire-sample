@@ -72,7 +72,6 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
     psIn.normal = mul(mWorld, vsIn.normal); // 法線を回転させる
     psIn.uv = vsIn.uv;
 
-    // step-2 カメラ空間の法線を求める
     psIn.normalInView = mul(mView, psIn.normal); // カメラ空間の法線を求める
 
     return psIn;
@@ -93,10 +92,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
     // step-3 最終的な反射光にリムライトの反射光を合算する
     // 最終的な反射光にリムの反射光を合算する。
-    // 今回のサンプルはリムの効果を分かりやすくするために、、
+    // 今回のサンプルはリムの効果を分かりやすくするために
     // シンプルな環境光とリムライトの効果のみとする
     float3 finalLig = ambientLight + limLight;
 
+     // step-4 反射光とテクスチャカラーを乗算して、最終出力カラーを求める。
     // テクスチャカラーに求めた光を乗算して最終出力カラーを求める。
     // テクスチャカラーをサンプリング。
     float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);

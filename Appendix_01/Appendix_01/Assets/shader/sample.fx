@@ -72,7 +72,7 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
     psIn.normal = mul(mWorld, vsIn.normal); // 法線を回転させる
     psIn.uv = vsIn.uv;
 
-    // step-2 カメラ空間の法線を求める
+    // カメラ空間の法線を求める
     psIn.normalInView = mul(mView, psIn.normal); // カメラ空間の法線を求める
 
     return psIn;
