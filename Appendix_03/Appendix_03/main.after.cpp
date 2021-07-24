@@ -2,9 +2,7 @@
 #include "system/system.h"
 #include "sub.h"
 
-// 関数宣言
-void InitRootSignature(RootSignature& rs);
-void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
+
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数
@@ -16,86 +14,72 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     //////////////////////////////////////
-    //  ここから初期化を行うコードを記述する
+    // ここから初期化を行うコードを記述する
     //////////////////////////////////////
-
-    // メインレンダリングターゲットと深度レンダリングターゲットを作成
-    RenderTarget mainRenderTarget, depthRenderTarget;;
-    InitMainDepthRenderTarget(mainRenderTarget, depthRenderTarget);
-
-    // step-1 各種レンダリングターゲットを初期化する
-    RenderTarget rtVerticalBlur;    // 垂直ブラーをかけるためのレンダリングターゲット
-    RenderTarget rtDiagonalBlur;    // 対角線ブラーをかけるためのレンダリングターゲット
-    RenderTarget rtPhomboidBlur;    // 六角形ブラー
-    rtVerticalBlur.Create(1280, 720, 1, 1,
-            DXGI_FORMAT_R32G32B32A32_FLOAT, DXGI_FORMAT_UNKNOWN);
-    rtDiagonalBlur.Create(1280, 720, 1, 1,
-            DXGI_FORMAT_R32G32B32A32_FLOAT, DXGI_FORMAT_UNKNOWN);
-    rtPhomboidBlur.Create(1280, 720, 1, 1,
-            DXGI_FORMAT_R32G32B32A32_FLOAT, DXGI_FORMAT_UNKNOWN);
-
-    // step-2 垂直、対角線ブラーをかけるためのスプライトを初期化
-    SpriteInitData vertDiagonalBlurSpriteInitData;
-    vertDiagonalBlurSpriteInitData.m_textures[0] = &mainRenderTarget.GetRenderTargetTexture();
-    vertDiagonalBlurSpriteInitData.m_width = 1280;
-    vertDiagonalBlurSpriteInitData.m_height = 720;
-    vertDiagonalBlurSpriteInitData.m_fxFilePath = "Assets/shader/sample.fx";
-
-    // 垂直、対角線ブラー用のピクセルシェーダーを指定する
-    vertDiagonalBlurSpriteInitData.m_psEntryPoinFunc = "PSVerticalDiagonalBlur";
-    vertDiagonalBlurSpriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    vertDiagonalBlurSpriteInitData.m_colorBufferFormat[1] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-
-    Sprite vertDIagonalBlurSprite;
-    vertDIagonalBlurSprite.Init(vertDiagonalBlurSpriteInitData);
-
-    // step-3 六角形ブラーをかけるためのスプライトを初期化
-    SpriteInitData phomboidBlurSpriteInitData;
-    phomboidBlurSpriteInitData.m_textures[0] = &rtVerticalBlur.GetRenderTargetTexture();
-    phomboidBlurSpriteInitData.m_textures[1] = &rtDiagonalBlur.GetRenderTargetTexture();
-    phomboidBlurSpriteInitData.m_width = 1280;
-    phomboidBlurSpriteInitData.m_height = 720;
-    phomboidBlurSpriteInitData.m_fxFilePath = "Assets/shader/sample.fx";
-
-    // 六角形ブラー用のピクセルシェーダーを指定する
-    phomboidBlurSpriteInitData.m_psEntryPoinFunc = "PSRhomboidBlur";
-    phomboidBlurSpriteInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32G32B32A32_FLOAT;
-
-    Sprite phomboidBlurSprite;
-    phomboidBlurSprite.Init(phomboidBlurSpriteInitData);
-
-    // ボケ画像をメインレンダリングターゲットに合成するためののスプライトを初期化する
-    Sprite combineBokeImageSprite;
-    InitCombimeBokeImageToSprite(
-        combineBokeImageSprite,                     // 初期化されるスプライト
-        rtPhomboidBlur.GetRenderTargetTexture(),    // ボケテクスチャ
-        depthRenderTarget.GetRenderTargetTexture()  // 深度テクスチャ
-    );
-
-    // メインレンダリングターゲットの絵をフレームバッファにコピーするためのスプライトを初期化
-    // スプライトの初期化オブジェクトを作成する
-    Sprite copyToFrameBufferSprite;
-    InitCopyToFrameBufferTargetSprite(
-        copyToFrameBufferSprite,                    // 初期化されるスプライト
-        mainRenderTarget.GetRenderTargetTexture()   // メインレンダリングターゲットのテクスチャ
-    );
 
     // 背景モデルを初期化
     Light light;
     Model model;
     InitBGModel(model, light);
 
-    // 球体モデルを初期化
-    Light sphereLight[50];
-    Model sphereModels[50];
-    InitSphereModels(sphereModels, sphereLight, ARRAYSIZE(sphereModels));
+    // step-1 人型モデルを描画するレンダリングターゲットを初期化。
+    float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    RenderTarget drawHumanModelRT;
+    drawHumanModelRT.Create(
+        100,
+        100,
+        1,
+        1,
+        DXGI_FORMAT_R8G8B8A8_UNORM,
+        DXGI_FORMAT_D32_FLOAT,
+        clearColor
+    );
 
+    // step-2 人型モデルを初期化。
+    ModelInitData modelInitData;
+    modelInitData.m_tkmFilePath = "Assets/modelData/human.tkm";
+    modelInitData.m_fxFilePath = "Assets/shader/preset/sample3D.fx";
+    modelInitData.m_expandConstantBuffer = &light;
+    modelInitData.m_expandConstantBufferSize = sizeof(light);
+    modelInitData.m_samplerFilter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+
+    Model humanModel;
+    humanModel.Init(modelInitData);
+
+    // step-3 人型モデルのテクスチャを貼り付ける板ポリモデルを初期化。
+    ModelInitData planeModelInitData;
+    modelInitData.m_tkmFilePath = "Assets/modelData/plane.tkm";
+    modelInitData.m_fxFilePath = "Assets/shader/samplePixelArt.fx";
+    modelInitData.m_expandConstantBuffer = &light;
+    modelInitData.m_expandConstantBufferSize = sizeof(light);
+    modelInitData.m_samplerFilter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+    Model planeModel;
+    planeModel.Init(modelInitData);
+    // 板ポリモデルのアルベドテクスチャを差し替える。
+    planeModel.ChangeAlbedoMap("", drawHumanModelRT.GetRenderTargetTexture());
+  
+
+    // step-4 人型モデルを描画するためのカメラを作成。
+    Camera drawHumanModelCamera;
+    drawHumanModelCamera.SetUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);
+    drawHumanModelCamera.SetWidth( 200.0f );
+    drawHumanModelCamera.SetHeight( 200.0f );
+    drawHumanModelCamera.SetNear(1.0f);
+    drawHumanModelCamera.SetFar( 1000.0f );
+    drawHumanModelCamera.SetPosition(0.0f, 100.0f, 200.0f);
+    drawHumanModelCamera.SetTarget(0.0f, 100.0f, 0.0f);
+    drawHumanModelCamera.SetUp(0.0f, 1.0f, 0.0f);
+    drawHumanModelCamera.Update();
+
+   
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-    //  ここからゲームループ
+    Quaternion qRot;
+
+    // ここからゲームループ
     while (DispatchWindowMessage())
     {
         // 1フレームの開始
@@ -105,80 +89,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         // 絵を描くコードを書くのはここまで！！！
         //////////////////////////////////////
         MoveCamera();
-        // 2枚のレンダリングターゲットを設定して、モデルを描画する
-        // 2枚のレンダリングターゲットのポインタを持つ配列を定義する
-        RenderTarget* rts[] = {
-            &mainRenderTarget,
-            &depthRenderTarget
-        };
 
+        // 人間のモデルを回転させる。
+        qRot.AddRotationY(0.01f);
+        humanModel.UpdateWorldMatrix(g_vec3Zero, qRot, g_vec3One);
+
+        // step-5 人型モデルを描画。
         // レンダリングターゲットとして利用できるまで待つ
-        renderContext.WaitUntilToPossibleSetRenderTargets(2, rts);
-
+        renderContext.WaitUntilToPossibleSetRenderTarget(drawHumanModelRT);
         // レンダリングターゲットを設定
-        renderContext.SetRenderTargetsAndViewport(2, rts);
-
+        renderContext.SetRenderTargetAndViewport(drawHumanModelRT);
         // レンダリングターゲットをクリア
-        renderContext.ClearRenderTargetViews(2, rts);
-
-        // モデルをドロー
-        model.Draw(renderContext);
-        for (auto& sphereModel : sphereModels)
-        {
-            sphereModel.Draw(renderContext);
-        }
-
+        renderContext.ClearRenderTargetView(drawHumanModelRT);
+        // 人間モデルを描画。
+        humanModel.Draw(renderContext, drawHumanModelCamera);
         // レンダリングターゲットへの書き込み終了待ち
-        renderContext.WaitUntilFinishDrawingToRenderTargets(2, rts);
+        renderContext.WaitUntilFinishDrawingToRenderTarget(drawHumanModelRT);
 
-        // step-4 垂直、対角線ブラーをかける
-        RenderTarget* blurRts[] = {
-            &rtVerticalBlur,
-            &rtDiagonalBlur
-        };
-
-        // レンダリングターゲットとして利用できるまで待つ
-        renderContext.WaitUntilToPossibleSetRenderTargets(2, blurRts);
-
-        // レンダリングターゲットを設定
-        renderContext.SetRenderTargetsAndViewport(2, blurRts);
-
-        // レンダリングターゲットをクリア
-        renderContext.ClearRenderTargetViews(2, blurRts);
-
-        //
-        vertDIagonalBlurSprite.Draw(renderContext);
-
-        // レンダリングターゲットへの書き込み終了待ち
-        renderContext.WaitUntilFinishDrawingToRenderTargets(2, blurRts);
-
-        // step-5 六角形ブラーをかける
-        renderContext.WaitUntilToPossibleSetRenderTarget(rtPhomboidBlur);
-        renderContext.SetRenderTargetAndViewport(rtPhomboidBlur);
-
-        phomboidBlurSprite.Draw(renderContext);
-
-        // レンダリングターゲットへの書き込み終了待ち
-        renderContext.WaitUntilFinishDrawingToRenderTarget(rtPhomboidBlur);
-
-        // ボケ画像と深度テクスチャを利用して、ボケ画像を描きこんでいく
-        // メインレンダリングターゲットを設定
-        renderContext.WaitUntilToPossibleSetRenderTarget(mainRenderTarget);
-        renderContext.SetRenderTargetAndViewport(mainRenderTarget);
-
-        // スプライトを描画&
-        combineBokeImageSprite.Draw(renderContext);
-
-        // レンダリングターゲットへの書き込み終了待ち
-        renderContext.WaitUntilFinishDrawingToRenderTarget(mainRenderTarget);
-
-        // メインレンダリングターゲットの絵をフレームバッファーにコピー
+        // step-6 レンダリングターゲットをフレームバッファに戻す。
         renderContext.SetRenderTarget(
             g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
             g_graphicsEngine->GetCurrentFrameBuffuerDSV()
         );
-
-        // ビューポートを指定する
+        // step-7 ビューポートとシザリング矩形を指定する。
         D3D12_VIEWPORT viewport;
         viewport.TopLeftX = 0;
         viewport.TopLeftY = 0;
@@ -186,55 +119,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         viewport.Height = 720;
         viewport.MinDepth = 0.0f;
         viewport.MaxDepth = 1.0f;
-
         renderContext.SetViewportAndScissor(viewport);
-        copyToFrameBufferSprite.Draw(renderContext);
 
+        // step-8 板ポリを描画。
+        planeModel.Draw(renderContext);
+
+        // 背景モデルをドロー
+        model.Draw(renderContext);
+        
         // 1フレーム終了
         g_engine->EndFrame();
     }
     return 0;
-}
-
-// ルートシグネチャの初期化
-void InitRootSignature(RootSignature& rs)
-{
-    rs.Init(D3D12_FILTER_MIN_MAG_MIP_LINEAR,
-            D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-            D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-            D3D12_TEXTURE_ADDRESS_MODE_WRAP);
-}
-
-// パイプラインステートの初期化
-void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps)
-{
-
-    // 頂点レイアウトを定義する
-    D3D12_INPUT_ELEMENT_DESC inputElementDescs[] =
-    {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 16, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-    };
-
-    // パイプラインステートを作成
-    D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = { 0 };
-    psoDesc.InputLayout = { inputElementDescs, _countof(inputElementDescs) };
-    psoDesc.pRootSignature = rs.Get();
-    psoDesc.VS = CD3DX12_SHADER_BYTECODE(vs.GetCompiledBlob());
-    psoDesc.PS = CD3DX12_SHADER_BYTECODE(ps.GetCompiledBlob());
-    psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-    psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
-    psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-    psoDesc.DepthStencilState.DepthEnable = FALSE;
-    psoDesc.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
-    psoDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
-    psoDesc.DepthStencilState.StencilEnable = FALSE;
-    psoDesc.SampleMask = UINT_MAX;
-    psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-    psoDesc.NumRenderTargets = 1;
-    psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-    psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
-    psoDesc.SampleDesc.Count = 1;
-    psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-    pipelineState.Init(psoDesc);
 }

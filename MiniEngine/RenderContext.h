@@ -197,6 +197,7 @@ public:
 	{
 		m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, &dsvHandle);
 	}
+	
 	/// <summary>
 	/// レンダリングターゲットをスロット0に設定する。
 	/// </summary>
@@ -228,6 +229,7 @@ public:
 	/// <param name="numRT">設定するレンダリングターゲットの枚数</param>
 	/// <param name="renderTargets">レンダリングターゲットの配列。</param>
 	void SetRenderTargetsAndViewport(UINT numRT, RenderTarget* renderTargets[]);
+	
 	/// <summary>
 	/// 複数枚のレンダリングターゲットをクリア。
 	/// </summary>

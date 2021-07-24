@@ -25,3 +25,6 @@ void InitCopyToFrameBufferTargetSprite(Sprite& sprite, Texture& srcTexture);
 void InitBGModel(Model& model, Light& light);
 void InitSphereModels(Model* model, Light* light, int numModel);
 void MoveCamera();
+// 関数宣言
+void InitRootSignature(RootSignature& rs);
+void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
