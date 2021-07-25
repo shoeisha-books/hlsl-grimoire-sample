@@ -21,20 +21,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // ここから初期化を行うコードを記述する
     //////////////////////////////////////
 
-    // 背景モデルを初期化
-    Light light;
-    Model model;
-    InitBGModel(model, light);
-
-
-
+    // step-1 500体分のモデルの座標を計算する。
     const int width = 50;
     const int height = 10;
     const int numHumanModel = width * height;
-    Vector3* humanPos = new Vector3[numHumanModel];
-    Matrix* worldMatrixArray = new Matrix[numHumanModel];
-    StructuredBuffer worldMatrixSB;
-    worldMatrixSB.Init(sizeof(Matrix), numHumanModel, nullptr);
+    Vector3* humanPos = new Vector3[numHumanModel];    
+    
     int humanNo = 0;
     for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
@@ -47,24 +39,30 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
     }
 
-    
-    // 人型モデルを初期化。
+    // step-2 500体分のワールド行列各種バッファを確保。
+    // まずは計算用のバッファをメインメモリ上に確保する。
+    Matrix* worldMatrixArray = new Matrix[numHumanModel];
+    // 続いて、シェーダー側でワールド行列を使用するためのストラクチャードバッファをVRAM上に確保する。
+    StructuredBuffer worldMatrixSB;
+    worldMatrixSB.Init(
+        sizeof(Matrix), // 第一引数は１要素のサイズ。
+        numHumanModel,  // 第二引数は要素数。
+        nullptr         // 第三引数は初期値データ。初期値は指定しないので、今回はnullptr。
+    );
+
+    // step-3 人型モデルを初期化。
     // モデルの初期化データを設定する。
     ModelInitData modelInitData;
     // tkmファイルのパスを指定。
     modelInitData.m_tkmFilePath = "Assets/modelData/human.tkm";
     // 使用するシェーダーファイルのパスを指定。
-    modelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
-    // 拡張定数バッファにライトの情報を渡す。
-    modelInitData.m_expandConstantBuffer = &light;
-    modelInitData.m_expandConstantBufferSize = sizeof(light);
+    modelInitData.m_fxFilePath = "Assets/shader/sample3DInstancing.fx";
+    // 【注目】拡張SRVにストラクチャードバッファを渡す。
     modelInitData.m_expandShaderResoruceView[0] = &worldMatrixSB;
-
     // 設定したデータでモデルを初期化。
     Model humanModel;
     humanModel.Init(modelInitData);
 
-   
 
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
@@ -88,13 +86,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         // 人間のモデルを回転させる。
         qRot.AddRotationY(0.01f);
 
+        // step-4 ワールド行列を計算する。
         for (int i = 0; i < numHumanModel; i++) {
             // ワールド行列を計算する。
-            humanModel.UpdateWorldMatrix(humanPos[i], qRot, g_vec3One);
-            worldMatrixArray[i] = humanModel.GetWorldMatrix();
+            worldMatrixArray[i] = humanModel.CalcWorldMatrix(humanPos[i], qRot, g_vec3One);
         }
+        // step-5 ワールド行列の内容をグラフィックメモリにコピー。
         worldMatrixSB.Update(worldMatrixArray);
+        
+        // step-6 人型のモデルをインスタンシグ描画。
         humanModel.DrawInstancing(renderContext, numHumanModel);
+
         // 1フレーム終了
         g_engine->EndFrame();
 
