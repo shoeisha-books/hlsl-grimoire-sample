@@ -12,6 +12,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     srand((unsigned int)time(nullptr));
     // ゲームの初期化
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
+    g_camera3D->SetPosition({ 0.0f, 70.0f, 150.0f });
+    g_camera3D->SetTarget({ 0.0f, 70.0f, 0.0f });
 
     //////////////////////////////////////
     // ここから初期化を行うコードを記述する
@@ -29,7 +31,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // step-3 人型モデルのテクスチャを貼り付ける板ポリモデルを初期化。
 
     // step-4 人型モデルを描画するためのカメラを作成。
-   
+    
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
     //////////////////////////////////////
@@ -53,12 +55,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         humanModel.UpdateWorldMatrix(g_vec3Zero, qRot, g_vec3One);
 
         // step-5 人型モデルを描画。
-
-        // step-6 レンダリングターゲットをフレームバッファに戻す。
+ 
+        // step-6 板ポリを描画。
         
-        // step-7 ビューポートとシザリング矩形を指定する。
-
-        // step-8 板ポリを描画。
 
         // 背景モデルをドロー
         model.Draw(renderContext);

@@ -61,7 +61,7 @@ float4 PSMain(SPSIn psIn)  : SV_Target0
     //テクスチャカラーをサンプリングする。
     float4 baseColor = g_albedo.Sample( g_sampler, psIn.uv);
 
-    // step-9 輪郭付近のカラーを暗くする。
+    // step-7 輪郭付近のカラーを暗くする。
     // 近傍8テクセルへのUVオフセット
     float2 uvOffset[8] = {
         float2(           0.0f,  1.0f / 100.0f), //上
@@ -90,7 +90,6 @@ float4 PSMain(SPSIn psIn)  : SV_Target0
         // α値値が結構違うので輪郭付近なので、カラーを暗くする。
         // ->これがエッジカラーとなる
         baseColor.xyz *= 0.3f;
-        
     }
 
     return baseColor;

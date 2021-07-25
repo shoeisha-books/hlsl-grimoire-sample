@@ -61,38 +61,7 @@ float4 PSMain(SPSIn psIn)  : SV_Target0
     //テクスチャカラーをサンプリングする。
     float4 baseColor = g_albedo.Sample( g_sampler, psIn.uv);
 
-    // step-9 輪郭付近のカラーを暗くする。
-    // 近傍8テクセルへのUVオフセット
-    float2 uvOffset[8] = {
-        float2(           0.0f,  1.0f / 100.0f), //上
-        float2(           0.0f, -1.0f / 100.0f), //下
-        float2( 1.0f / 100.0f,           0.0f), //右
-        float2(-1.0f / 100.0f,           0.0f), //左
-        float2( 1.0f / 100.0f,  1.0f / 100.0f), //右上
-        float2(-1.0f / 100.0f,  1.0f / 100.0f), //左上
-        float2( 1.0f / 100.0f, -1.0f / 100.0f), //右下
-        float2(-1.0f / 100.0f, -1.0f / 100.0f)  //左下
-    };
-
-    // このピクセルのα値を取得
-    float alpha = g_albedo.Sample( g_sampler, psIn.uv).a;
-
-    // 近傍8テクセルのα値の平均値を計算する
-    float alpha2 = 0.0f;
-    for( int i = 0; i < 8; i++)
-    {
-        alpha2 += g_albedo.Sample(g_sampler, psIn.uv + uvOffset[i]).a;
-    }
-    alpha2 /= 8.0f;
-
-    // 自身の深度値と近傍8テクセルの深度値の差を調べる
-    if(abs(alpha2 - alpha) > 0.2f)
-    {
-        // α値値が結構違うので輪郭付近なので、カラーを暗くする。
-        // ->これがエッジカラーとなる
-        baseColor.xyz *= 0.3f;
-        
-    }
+    // step-7 輪郭付近のカラーを暗くする。
 
     return baseColor;
 }
