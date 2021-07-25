@@ -235,13 +235,13 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 	psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
 	psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	psoDesc.BlendState.AlphaToCoverageEnable = TRUE;
-
 	psoDesc.DepthStencilState.DepthEnable = TRUE;
 	psoDesc.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
 	psoDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 	psoDesc.DepthStencilState.StencilEnable = FALSE;
 	psoDesc.SampleMask = UINT_MAX;
 	psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	
 	int numRenderTarget = 0;
 	for (auto& format : colorBufferFormat) {
 		if (format == DXGI_FORMAT_UNKNOWN) {
@@ -252,16 +252,6 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 		numRenderTarget++;
 	}
 	psoDesc.NumRenderTargets = numRenderTarget;
-#if 0 //古い実装。
-	psoDesc.RTVFormats[0] = colorBufferFormat;		//アルベドカラー出力用。
-#ifdef SAMPE_16_02
-	psoDesc.RTVFormats[1] = DXGI_FORMAT_R16G16B16A16_FLOAT;	//法線出力用。	
-	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32_FLOAT;						//Z値。
-#else
-	psoDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;			//法線出力用。	
-	psoDesc.RTVFormats[2] = DXGI_FORMAT_R32G32B32A32_FLOAT;	//Z値。
-#endif
-#endif
 	psoDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 	psoDesc.SampleDesc.Count = 1;
 
