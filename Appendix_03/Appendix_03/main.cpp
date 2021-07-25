@@ -24,13 +24,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     Model model;
     InitBGModel(model, light);
 
-    // step-1 人型モデルを描画するレンダリングターゲットを初期化。
+    // step-1 人物のモデルを描画するレンダリングターゲットを初期化。
 
-    // step-2 人型モデルを初期化。
+    // step-2 人物のモデルを初期化。
 
-    // step-3 人型モデルのテクスチャを貼り付ける板ポリモデルを初期化。
+    // step-3 人物のモデルのテクスチャを貼り付ける板ポリモデルを初期化。
 
-    // step-4 人型モデルを描画するためのカメラを作成。
+    // step-4 人物のモデルを描画するためのカメラを作成。
     
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
@@ -50,11 +50,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
         MoveCamera();
 
-        // 人間のモデルを回転させる。
+        // 人物のモデルを回転させる。
         qRot.AddRotationY(0.01f);
         humanModel.UpdateWorldMatrix(g_vec3Zero, qRot, g_vec3One);
 
-        // step-5 人型モデルを描画。
+        // step-5 人物のモデルを描画。
  
         // step-6 板ポリを描画。
         
