@@ -45,9 +45,11 @@ void Model::Init(const ModelInitData& initData)
 	);
 
 	UpdateWorldMatrix(g_vec3Zero, g_quatIdentity, g_vec3One);
+
 	m_isInited = true;
 	
 }
+
 
 void Model::UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale)
 {
@@ -97,5 +99,16 @@ void Model::Draw(RenderContext& rc, const Matrix& viewMatrix, const Matrix& proj
 		m_world,
 		viewMatrix,
 		projMatrix
+	);
+}
+
+void Model::DrawInstancing(RenderContext& rc, int numInstance)
+{
+	// インスタンスの数が0以上なら描画。
+	m_meshParts.DrawInstancing(
+		rc, 
+		numInstance, 
+		g_camera3D->GetViewMatrix(), 
+		g_camera3D->GetProjectionMatrix()
 	);
 }

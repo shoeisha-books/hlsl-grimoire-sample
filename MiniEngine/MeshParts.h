@@ -67,6 +67,14 @@ public:
 	/// <param name="light">ライト</param>
 	void Draw(RenderContext& rc, const Matrix& mWorld, const Matrix& mView, const Matrix& mProj);
 	/// <summary>
+	/// インスタンシング描画
+	/// </summary>
+	/// <param name="rc">レンダリングコンテキスト</param>
+	/// <param name="numInstance">インスタンス数</param>
+	/// <param name="mView">ビュー行列</param>
+	/// <param name="mProj">プロジェクション行列</param>
+	void DrawInstancing(RenderContext& rc, int numInstance, const Matrix& mView, const Matrix& mProj );
+	/// <summary>
 	/// スケルトンを関連付ける。
 	/// </summary>
 	/// <param name="skeleton">スケルトン</param>
@@ -114,7 +122,14 @@ private:
 		const std::array<DXGI_FORMAT, MAX_RENDERING_TARGET>& colorBufferFormat,
 		D3D12_FILTER samplerFilter
 	);
-
+	/// <summary>
+	/// 描画処理の共通処理
+	/// </summary>
+	/// <param name="rc">レンダリングコンテキスト</param>
+	/// <param name="mWorld">ワールド行列</param>
+	/// <param name="mView">ビュー行列</param>
+	/// <param name="mProj">プロジェクション行列</param>
+	void DrawCommon(RenderContext& rc, const Matrix& mWorld, const Matrix& mView, const Matrix& mProj);
 	
 private:
 	//拡張SRVが設定されるレジスタの開始番号。

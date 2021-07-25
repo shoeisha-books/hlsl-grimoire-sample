@@ -74,10 +74,10 @@ void MeshParts::CreateDescriptorHeaps()
 		for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
 			
 			//ディスクリプタヒープにディスクリプタを登録していく。
-			m_descriptorHeap.RegistShaderResource(srvNo, mesh->m_materials[matNo]->GetAlbedoMap());		//アルベドマップ。
+			m_descriptorHeap.RegistShaderResource(srvNo, mesh->m_materials[matNo]->GetAlbedoMap());			//アルベドマップ。
 			m_descriptorHeap.RegistShaderResource(srvNo+1, mesh->m_materials[matNo]->GetNormalMap());		//法線マップ。
 			m_descriptorHeap.RegistShaderResource(srvNo+2, mesh->m_materials[matNo]->GetSpecularMap());		//スペキュラマップ。
-			m_descriptorHeap.RegistShaderResource(srvNo+3, m_boneMatricesStructureBuffer);							//ボーンのストラクチャードバッファ。
+			m_descriptorHeap.RegistShaderResource(srvNo+3, m_boneMatricesStructureBuffer);					//ボーンのストラクチャードバッファ。
 			for (int i = 0; i < MAX_MODEL_EXPAND_SRV; i++) {
 				if (m_expandShaderResourceView[i]) {
 					m_descriptorHeap.RegistShaderResource(srvNo + EXPAND_SRV_REG__START_NO + i, *m_expandShaderResourceView[i]);
@@ -188,12 +188,7 @@ void MeshParts::BindSkeleton(Skeleton& skeleton)
 		m_skeleton->GetBoneMatricesTopAddress()
 	);
 }
-void MeshParts::Draw(
-	RenderContext& rc,
-	const Matrix& mWorld,
-	const Matrix& mView,
-	const Matrix& mProj
-)
+void MeshParts::DrawCommon(RenderContext& rc, const Matrix& mWorld, const Matrix& mView, const Matrix& mProj)
 {
 	//メッシュごとにドロー
 	//プリミティブのトポロジーはトライアングルリストのみ。
@@ -205,7 +200,7 @@ void MeshParts::Draw(
 	cb.mView = mView;
 	cb.mProj = mProj;
 	m_commonConstantBuffer.CopyToVRAM(cb);
-	
+
 	if (m_expandData) {
 		m_expandConstantBuffer.CopyToVRAM(m_expandData);
 	}
@@ -213,6 +208,17 @@ void MeshParts::Draw(
 		//ボーン行列を更新する。
 		m_boneMatricesStructureBuffer.Update(m_skeleton->GetBoneMatricesTopAddress());
 	}
+}
+void MeshParts::Draw(
+	RenderContext& rc,
+	const Matrix& mWorld,
+	const Matrix& mView,
+	const Matrix& mProj
+)
+{
+	//定数バッファの設定、更新など描画の共通処理を実行する。
+	DrawCommon(rc, mWorld, mView, mProj);
+	
 	int descriptorHeapNo = 0;
 	for (auto& mesh : m_meshs) {
 		//1. 頂点バッファを設定。
@@ -232,4 +238,30 @@ void MeshParts::Draw(
 			descriptorHeapNo++;
 		}
 	}
+}
+void MeshParts::DrawInstancing(RenderContext& rc, int numInstance, const Matrix& mView, const Matrix& mProj)
+{
+	//定数バッファの設定、更新など描画の共通処理を実行する。
+	DrawCommon(rc, g_matIdentity, mView, mProj);
+
+	int descriptorHeapNo = 0;
+	for (auto& mesh : m_meshs) {
+		//1. 頂点バッファを設定。
+		rc.SetVertexBuffer(mesh->m_vertexBuffer);
+		//マテリアルごとにドロー。
+		for (int matNo = 0; matNo < mesh->m_materials.size(); matNo++) {
+			//このマテリアルが貼られているメッシュの描画開始。
+			mesh->m_materials[matNo]->BeginRender(rc, mesh->skinFlags[matNo]);
+			//2. ディスクリプタヒープを設定。
+			rc.SetDescriptorHeap(m_descriptorHeap);
+			//3. インデックスバッファを設定。
+			auto& ib = mesh->m_indexBufferArray[matNo];
+			rc.SetIndexBuffer(*ib);
+
+			//4. ドローコールを実行。
+			rc.DrawIndexedInstanced(ib->GetCount(), numInstance);
+			descriptorHeapNo++;
+		}
+	}
+
 }

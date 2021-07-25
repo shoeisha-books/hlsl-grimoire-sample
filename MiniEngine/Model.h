@@ -24,6 +24,7 @@ struct ModelInitData {
 	const char* m_fxFilePath = nullptr;								//.fxファイルのファイルパス。
 	void* m_expandConstantBuffer = nullptr;							//ユーザー拡張の定数バッファ。
 	int m_expandConstantBufferSize = 0;								//ユーザー拡張の定数バッファのサイズ。
+																	//インスタンシング描画を行う場合は、このパラメータに最大のインスタンスウを指定してください。
 	std::array<IShaderResource*, MAX_MODEL_EXPAND_SRV> m_expandShaderResoruceView = { nullptr };			//ユーザー拡張のシェーダーリソース。
 	Skeleton* m_skeleton = nullptr;									//スケルトン。
 	EnModelUpAxis m_modelUpAxis = enModelUpAxisZ;					//モデルの上方向。
@@ -65,6 +66,7 @@ public:
 	/// </summary>
 	/// <param name="renderContext">レンダリングコンテキスト</param>
 	void Draw(RenderContext& renderContext);
+	
 	/// <summary>
 	/// 描画(カメラ指定版)
 	/// </summary>
@@ -78,6 +80,12 @@ public:
 	/// <param name="viewMatrix">ビュー行列</param>
 	/// <param name="projMatrix">プロジェクション行列</param>
 	void Draw(RenderContext& renderContext, const Matrix& viewMatrix, const Matrix& projMatrix);
+	/// <summary>
+	/// インスタンシング描画
+	/// </summary>
+	/// <param name="renderContext">レンダリングコンテキスト</param>
+	/// <param name="numInstance">インスタンスの数</param>
+	void DrawInstancing(RenderContext& renderContext, int numInstance);
 	/// <summary>
 	/// ワールド行列を取得。
 	/// </summary>
@@ -125,10 +133,13 @@ public:
 		return m_isInited;
 	}
 private:
-	bool m_isInited = false;						//初期化されている？
-	Matrix m_world;									//ワールド行列。
-	TkmFile* m_tkmFile;								//tkmファイル。
-	Skeleton m_skeleton;							//スケルトン。
-	MeshParts m_meshParts;							//メッシュパーツ。
-	EnModelUpAxis m_modelUpAxis = enModelUpAxisY;	//モデルの上方向。
+	
+private:
+	bool m_isInited = false;						// 初期化されている？
+	Matrix m_world;									// ワールド行列。
+	TkmFile* m_tkmFile;								// tkmファイル。
+	Skeleton m_skeleton;							// スケルトン。
+	MeshParts m_meshParts;							// メッシュパーツ。
+	EnModelUpAxis m_modelUpAxis = enModelUpAxisY;	// モデルの上方向。
+	
 };
