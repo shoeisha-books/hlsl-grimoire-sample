@@ -232,7 +232,15 @@ void Material::InitPipelineState(const std::array<DXGI_FORMAT, MAX_RENDERING_TAR
 	psoDesc.VS = CD3DX12_SHADER_BYTECODE(m_vsSkinModel->GetCompiledBlob());
 	psoDesc.PS = CD3DX12_SHADER_BYTECODE(m_psModel->GetCompiledBlob());
 	psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+#ifdef SAMPLE_11
+	// 背面を描画していないと影がおかしくなるため、
+	// シャドウのサンプルのみカリングをオフにする。
+	// 本来はアプリ側からカリングモードを渡すのがいいのだけど、
+	// 書籍に記載しているコードに追記がいるので、エンジン側で吸収する。
+	psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+#else
 	psoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
+#endif
 	psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 #ifdef TK_ENABLE_ALPHA_TO_COVERAGE
 	psoDesc.BlendState.AlphaToCoverageEnable = TRUE;
