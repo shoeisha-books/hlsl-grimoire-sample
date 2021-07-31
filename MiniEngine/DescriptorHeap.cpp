@@ -115,6 +115,9 @@ void DescriptorHeap::Commit()
 		//UAVリソースのディスクリプタヒープの開始ハンドルを計算。
 		m_uavGpuDescriptorStart[bufferNo] = gpuHandle;
 		m_uavGpuDescriptorStart[bufferNo].ptr += (UINT64)g_graphicsEngine->GetCbrSrvDescriptorSize() * ( m_numShaderResource + m_numConstantBuffer );
+
+		gpuHandle.ptr += (UINT64)g_graphicsEngine->GetCbrSrvDescriptorSize() * (m_numShaderResource + m_numConstantBuffer + m_numUavResource);
+		
 		bufferNo++;
 	}
 }
