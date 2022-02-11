@@ -101,7 +101,7 @@ public:
 	/// <summary>
 	/// サンプラステート用のディスクリプタヒープへの登録。
 	/// </summary>
-	void CommitSamperHeap();
+	void CommitSamplerHeap();
 	
 	/// <summary>
 	/// 定数バッファのディスクリプタの開始ハンドルを取得。

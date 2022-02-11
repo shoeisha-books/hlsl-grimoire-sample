@@ -25,7 +25,7 @@ DescriptorHeap::~DescriptorHeap()
 		}
 	}
 }
-void DescriptorHeap::CommitSamperHeap()
+void DescriptorHeap::CommitSamplerHeap()
 {
 	const auto& d3dDevice = g_graphicsEngine->GetD3DDevice();
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
