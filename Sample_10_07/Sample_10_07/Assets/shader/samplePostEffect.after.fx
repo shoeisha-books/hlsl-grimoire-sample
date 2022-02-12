@@ -47,9 +47,9 @@ float4 PSMain(PSInput In) : SV_Target0
     // カメラ空間での深度値をサンプリング
     float depth = depthTexture.Sample(Sampler, In.uv);
 
-    // カメラ空間での深度値が200以下ならピクセルキル
+    // カメラ空間での深度値が800以下ならピクセルキル
     //      -> ボケ画像を描きこまない
-    clip(depth - 200.0f);
+    clip(depth - 800.0f);
 
     // ボケ画像をサンプリング
     float4 boke = bokeTexture.Sample(Sampler, In.uv);
