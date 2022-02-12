@@ -4,7 +4,7 @@
 
 struct OutputData
 {
-    float avarageScore; // 平均点
+    float averageScore; // 平均点
     float maxScore;     // 最高得点
     float minScore;     // 最小得点
 
@@ -97,7 +97,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
             inputData[0],
             inputData[1],
             inputData[2],
-            outputData->avarageScore,
+            outputData->averageScore,
             outputData->maxScore,
             outputData->minScore
         );

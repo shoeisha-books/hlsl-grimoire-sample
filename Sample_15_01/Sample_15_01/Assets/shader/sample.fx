@@ -4,7 +4,7 @@
 // 出力データ構造体
 struct OutputData
 {
-    float avarageScore; // 平均点
+    float averageScore; // 平均点
     float maxScore;     // 最高点
     float minScore;     // 最小点
 
@@ -31,7 +31,7 @@ void CSMain(uint3 DTid : SV_DispatchThreadID)
         g_outputData[0].maxScore = max(g_outputData[0].maxScore, g_scores[i]);
         g_outputData[0].minScore = min(g_outputData[0].minScore, g_scores[i]);
     }
-    g_outputData[0].avarageScore = totalScore / NUM_STUDENT;
+    g_outputData[0].averageScore = totalScore / NUM_STUDENT;
 
     // step-2 合計点を出力する
 }
