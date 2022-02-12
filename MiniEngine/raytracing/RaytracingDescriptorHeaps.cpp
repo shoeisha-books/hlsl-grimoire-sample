@@ -79,7 +79,7 @@ namespace raytracing {
 
 		//サンプラステートをディスクリプタヒープに登録する。
 		m_samplerDescriptorHeap.RegistSamplerDesc(0, samplerDesc);
-		m_samplerDescriptorHeap.CommitSamperHeap();
+		m_samplerDescriptorHeap.CommitSamplerHeap();
 		m_srvUavCbvHeap.Commit();
 	}
 }
