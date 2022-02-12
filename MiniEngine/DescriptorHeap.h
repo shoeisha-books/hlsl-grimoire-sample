@@ -50,7 +50,7 @@ public:
 		RegistResource(
 			registerNo, 
 			&sr,
-			&m_uavResoruces.front(), 
+			&m_uavResources.front(), 
 			m_numUavResource, 
 			MAX_SHADER_RESOURCE, 
 			L"DescriptorHeap::RegistUnorderAccessResource() レジスタ番号が範囲外です。"
@@ -225,7 +225,7 @@ private:
 	int m_numSamplerDesc = 0;		//サンプラの数。
 	ID3D12DescriptorHeap* m_descriptorHeap[2] = { nullptr };					//ディスクリプタヒープ。
 	std::vector<IShaderResource*> m_shaderResources;		//シェーダーリソース。
-	std::vector < IUnorderAccessResrouce*> m_uavResoruces;	//UAVリソース。
+	std::vector < IUnorderAccessResrouce*> m_uavResources;	//UAVリソース。
 	std::vector < ConstantBuffer*> m_constantBuffers;		//定数バッファ。
 	D3D12_SAMPLER_DESC m_samplerDescs[MAX_SAMPLER_STATE];						//サンプラステート。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_cbGpuDescriptorStart[2];						//定数バッファのディスクリプタヒープの開始ハンドル。

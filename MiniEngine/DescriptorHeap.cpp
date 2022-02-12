@@ -5,12 +5,12 @@
 DescriptorHeap::DescriptorHeap()
 {
 	m_shaderResources.resize(MAX_SHADER_RESOURCE);
-	m_uavResoruces.resize(MAX_SHADER_RESOURCE);
+	m_uavResources.resize(MAX_SHADER_RESOURCE);
 	m_constantBuffers.resize(MAX_CONSTANT_BUFFER);
 	for (auto& srv : m_shaderResources) {
 		srv = nullptr;
 	}
-	for (auto& uav : m_uavResoruces) {
+	for (auto& uav : m_uavResources) {
 		uav = nullptr;
 	}
 	for (auto& cbv : m_constantBuffers) {
@@ -100,8 +100,8 @@ void DescriptorHeap::Commit()
 
 		//続いてUAV。
 		for (int i = 0; i < m_numUavResource; i++) {
-			if (m_uavResoruces[i] != nullptr) {
-				m_uavResoruces[i]->RegistUnorderAccessView(cpuHandle, bufferNo);
+			if (m_uavResources[i] != nullptr) {
+				m_uavResources[i]->RegistUnorderAccessView(cpuHandle, bufferNo);
 			}
 			//次に進める。
 			cpuHandle.ptr += g_graphicsEngine->GetCbrSrvDescriptorSize();
