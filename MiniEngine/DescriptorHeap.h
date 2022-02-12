@@ -107,20 +107,20 @@ public:
 	/// 定数バッファのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	/// <returns></returns>
-	D3D12_GPU_DESCRIPTOR_HANDLE GetConstantBufferGpuDescritorStartHandle() const;
+	D3D12_GPU_DESCRIPTOR_HANDLE GetConstantBufferGpuDescriptorStartHandle() const;
 	/// <summary>
 	/// シェーダーリソースのディスクリプタの開始ハンドルを取得。
 	/// </summary>
 	/// <returns></returns>
-	D3D12_GPU_DESCRIPTOR_HANDLE GetShaderResourceGpuDescritorStartHandle() const;
+	D3D12_GPU_DESCRIPTOR_HANDLE GetShaderResourceGpuDescriptorStartHandle() const;
 	/// <summary>
 	/// Unorder Access リソースのディスクリプタの開始ハンドルを取得。
 	/// </summary>
-	D3D12_GPU_DESCRIPTOR_HANDLE GetUavResourceGpuDescritorStartHandle() const;
+	D3D12_GPU_DESCRIPTOR_HANDLE GetUavResourceGpuDescriptorStartHandle() const;
 	/// <summary>
 	/// Samplerのディスクリプタの開始ハンドルを取得。
 	/// </summary>
-	D3D12_GPU_DESCRIPTOR_HANDLE GetSamplerResourceGpuDescritorStartHandle() const;
+	D3D12_GPU_DESCRIPTOR_HANDLE GetSamplerResourceGpuDescriptorStartHandle() const;
 	/// <summary>
 	/// シェーダーリソースが一つでも登録されているか判定。
 	/// </summary>

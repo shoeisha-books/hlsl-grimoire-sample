@@ -87,7 +87,7 @@ namespace raytracing {
 					//SRV_CBVのディスクリプタヒープ				
 					*(uint64_t*)(pDst) = hitGroup_pbrCameraRaySrvHeapStart;
 					pDst += sizeof(D3D12_GPU_DESCRIPTOR_HANDLE);
-					*(uint64_t*)(pDst) = samplerDescriptorHeap.GetSamplerResourceGpuDescritorStartHandle().ptr;
+					*(uint64_t*)(pDst) = samplerDescriptorHeap.GetSamplerResourceGpuDescriptorStartHandle().ptr;
 
 				}
 				//次。

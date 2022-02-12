@@ -7,13 +7,13 @@ inline void RenderContext::SetDescriptorHeap(DescriptorHeap& descHeap)
 
 	//ディスクリプタテーブルに登録する。
 	if (descHeap.IsRegistConstantBuffer()) {
-		SetGraphicsRootDescriptorTable(0, descHeap.GetConstantBufferGpuDescritorStartHandle());
+		SetGraphicsRootDescriptorTable(0, descHeap.GetConstantBufferGpuDescriptorStartHandle());
 	}
 	if (descHeap.IsRegistShaderResource()) {
-		SetGraphicsRootDescriptorTable(1, descHeap.GetShaderResourceGpuDescritorStartHandle());
+		SetGraphicsRootDescriptorTable(1, descHeap.GetShaderResourceGpuDescriptorStartHandle());
 	}
 	if (descHeap.IsRegistUavResource()) {
-		SetGraphicsRootDescriptorTable(2, descHeap.GetUavResourceGpuDescritorStartHandle());
+		SetGraphicsRootDescriptorTable(2, descHeap.GetUavResourceGpuDescriptorStartHandle());
 	}
 }
 inline void RenderContext::SetComputeDescriptorHeap(DescriptorHeap& descHeap)
@@ -23,13 +23,13 @@ inline void RenderContext::SetComputeDescriptorHeap(DescriptorHeap& descHeap)
 
 	//ディスクリプタテーブルに登録する。
 	if (descHeap.IsRegistConstantBuffer()) {
-		SetComputeRootDescriptorTable(0, descHeap.GetConstantBufferGpuDescritorStartHandle());
+		SetComputeRootDescriptorTable(0, descHeap.GetConstantBufferGpuDescriptorStartHandle());
 	}
 	if (descHeap.IsRegistShaderResource()) {
-		SetComputeRootDescriptorTable(1, descHeap.GetShaderResourceGpuDescritorStartHandle());
+		SetComputeRootDescriptorTable(1, descHeap.GetShaderResourceGpuDescriptorStartHandle());
 	}
 	if (descHeap.IsRegistUavResource()) {
-		SetComputeRootDescriptorTable(2, descHeap.GetUavResourceGpuDescritorStartHandle());
+		SetComputeRootDescriptorTable(2, descHeap.GetUavResourceGpuDescriptorStartHandle());
 	}
 }
 inline void RenderContext::WaitUntilFinishDrawingToRenderTarget(RenderTarget& renderTarget)
