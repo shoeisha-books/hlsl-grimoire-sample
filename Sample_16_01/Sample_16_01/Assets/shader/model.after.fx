@@ -25,7 +25,7 @@ cbuffer ModelCb : register(b0)
 cbuffer PointLightCb : register(b1)
 {
     SPointLight pointsLights[NUM_POINT_LIGHT];
-}
+};
 
 // 頂点シェーダーへの入力
 struct SVSIn
