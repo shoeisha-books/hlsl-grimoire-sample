@@ -220,7 +220,7 @@ public:
 //関数宣言
 /////////////////////////////////////////////////////////////////
 void InitRootSignature(RootSignature& rs);
-void InitStandardＩＯConsole();
+void InitStandardIOConsole();
 void InitLight(Light& light);
 void InitModel(Model& teapotModel, Model& bgModel, Light& light, IShaderResource& pointLightNoListInTileUAV);
 
@@ -233,7 +233,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
 
     // 標準入出力コンソールの初期化
-    InitStandardＩＯConsole();
+    InitStandardIOConsole();
 
     //////////////////////////////////////
     // ここから初期化を行うコードを記述する
@@ -324,7 +324,7 @@ void InitRootSignature(RootSignature& rs)
 /// <summary>
 /// 標準入出力コンソールを初期化
 /// </summary>
-void InitStandardＩＯConsole()
+void InitStandardIOConsole()
 {
     ::AllocConsole();               // コマンドプロンプトが表示される
     freopen("CON", "w", stdout);    // 標準出力の割り当て

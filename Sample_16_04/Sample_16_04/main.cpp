@@ -245,7 +245,7 @@ void InitRootSignature(RootSignature& rs)
 /// <summary>
 /// 標準入出力コンソールを初期化
 /// </summary>
-void InitStandardＩＯConsole()
+void InitStandardIOConsole()
 {
     ::AllocConsole();               // コマンドプロンプトが表示される
     freopen("CON", "w", stdout);    // 標準出力の割り当て
