@@ -39,7 +39,7 @@ float4 GetPixelColor(int x, int y, int2 texSize)
     x = clamp(0, texSize.x, x);
     y = clamp(0, texSize.y, y);
 
-    uint pixelIndex = GetPixelIndexFromXYCoord(x, y, texSize.y);
+    uint pixelIndex = GetPixelIndexFromXYCoord(x, y, texSize.x);
     return UnpackedRGBA32ToFloat4(inputImage[ pixelIndex]);
 }
 
