@@ -117,16 +117,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
     // step-5 ライトカリング用のディスクリプタヒープを作成
 
-    // ポストエフェクト的にディファードライティングを行うためのスプライトを初期化
-    Sprite defferdLightingSpr;
-    InitDefferedLightingSprite(
-        defferdLightingSpr,
-        gbuffers,
-        ARRAYSIZE(gbuffers),
-        light,
-        pointLightNoListInTileUAV
-    );
-
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
     //////////////////////////////////////
