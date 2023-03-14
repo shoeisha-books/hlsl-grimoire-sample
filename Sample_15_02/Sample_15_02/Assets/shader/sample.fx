@@ -4,8 +4,6 @@
 
 // step-7 t0、u0に設定されているバッファーにアクセスするための変数を定義
 
-StructuredBuffer<uint> inputImage : register(t0);
-RWStructuredBuffer<uint> outputBuffer : register(u0);
 
 /*!
  * @brief float4をRGBA32フォーマットに変換
