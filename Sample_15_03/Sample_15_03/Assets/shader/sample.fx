@@ -2,9 +2,9 @@
  * @brief ガウシアンブラーのコンピュートシェーダー
  */
 
-// step-8 各種定数バッファーにアクセスするための変数を定義
+// step-10 各種定数バッファーにアクセスするための変数を定義
 
-// step-9 入出力画像にアクセスするための変数を定義
+// step-11 入出力画像にアクセスするための変数を定義
 
 /*!
  * @brief float4をRGBA32フォーマットに変換
@@ -43,8 +43,8 @@ float4 GetPixelColor(int x, int y, int2 texSize)
     return UnpackedRGBA32ToFloat4(inputImage[ pixelIndex]);
 }
 
-// step-10 Xブラーを実装
+// step-12 Xブラーを実装
 
-// step-11 Yブラーを実装
+// step-13 Yブラーを実装
 
-// step-12 最終出力を実装
+// step-14 最終出力を実装
