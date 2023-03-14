@@ -182,8 +182,6 @@ public:
 
         // 背景のモデルを初期化
         ModelInitData bgModelInitData;
-
-        // ユーザー拡張データとしてポイントライトのリストを渡す
         bgModelInitData.m_tkmFilePath = "Assets/modelData/bg.tkm";
 
         // シェーダーをZPrepass用にする
