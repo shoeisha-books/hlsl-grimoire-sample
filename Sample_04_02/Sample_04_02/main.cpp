@@ -20,7 +20,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
     // step-2 ディレクションライトのデータを作成する
 
-    // step-3 球体モデルを初期化する
+    // step-3 モデルを初期化する
 
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
