@@ -41,17 +41,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // 頂点配列を定義
     SimpleVertex vertices[] = {
         {
-            {-0.5f, -0.5f, 0.0f},
+            {-0.5f, -0.5f, 0.0f}, //左下
             { 1.0f, 0.0f, 0.0f }
         },
         {
-            { 0.0f, 0.5f, 0.0f },
+            { -0.5f, 0.5f, 0.0f }, //左上
+            { 0.0f, 0.0f, 1.0f }
+        },
+        {
+            { 0.5f, 0.5f, 0.0f }, //右上
             { 0.0f, 1.0f, 0.0f }
         },
         {
-            { 0.5f, -0.5f, 0.0f },
+            { 0.5f, -0.5f, 0.0f }, //右下
             { 0.0f, 0.0f, 1.0f }
         }
+        
     };
 
     VertexBuffer triangleVB;
@@ -61,7 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // 5. 三角形のインデックスバッファを作成
     //インデックス配列
     uint16_t indices[] = {
-        0,1,2
+        0,1,2,0,2,3
     };
     IndexBuffer triangleIB;
     triangleIB.Init(sizeof(indices), 2);
@@ -72,9 +77,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     //////////////////////////////////////
     auto& renderContext = g_graphicsEngine->GetRenderContext();
 
+
+    float f = 0;
     // ここからゲームループ
     while (DispatchWindowMessage())
     {
+        f++;
+        triangleVB.Init(sizeof(vertices), sizeof(vertices[0]));
+        triangleVB.Copy(vertices);
+
+
+
         // レンダリング開始
         g_engine->BeginFrame();
 
@@ -93,7 +106,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         // 5. インデックスバッファを設定
         renderContext.SetIndexBuffer(triangleIB);
         // 6. ドローコール
-        renderContext.DrawIndexed(3);
+        renderContext.DrawIndexed(6);
+        //renderContext.DrawIndexed(3);
 
         /// //////////////////////////////////////
         // 絵を描くコードを書くのはここまで！！！
