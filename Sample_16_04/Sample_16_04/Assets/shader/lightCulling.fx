@@ -1,38 +1,38 @@
 /*!
- * @brief ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì‰e‹¿”ÍˆÍ‚ğƒ^ƒCƒ‹ƒx[ƒX‚ÅŒvZ‚·‚éƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[
+ * @brief ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®å½±éŸ¿ç¯„å›²ã‚’ã‚¿ã‚¤ãƒ«ãƒ™ãƒ¼ã‚¹ã§è¨ˆç®—ã™ã‚‹ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
  */
 
-// ˆê“x‚ÉÀs‚³‚ê‚éƒXƒŒƒbƒh”B
+// ä¸€åº¦ã«å®Ÿè¡Œã•ã‚Œã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰æ•°ã€‚
 #define TILE_WIDTH 16
 #define TILE_HEIGHT 16
 
-// ƒ^ƒCƒ‹‚Ì‘”B
+// ã‚¿ã‚¤ãƒ«ã®ç·æ•°ã€‚
 #define TILE_SIZE (TILE_WIDTH * TILE_HEIGHT)
 
-// ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒgB
+// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã€‚
 struct DirectionLight
 {
-    float3 color; //ƒ‰ƒCƒg‚ÌƒJƒ‰[B
-    float3 direction; //ƒ‰ƒCƒg‚Ì•ûŒüB
+    float3 color; //ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼ã€‚
+    float3 direction; //ãƒ©ã‚¤ãƒˆã®æ–¹å‘ã€‚
 };
 
-// ƒ|ƒCƒ“ƒgƒ‰ƒCƒgB
+// ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã€‚
 struct PointLight
 {
-    float3 position;        //À•WB
-    float3 positionInView;  //ƒJƒƒ‰‹óŠÔ‚Å‚ÌÀ•WB
-    float3 color;           //ƒJƒ‰[B
-    float range;            //”ÍˆÍB
+    float3 position;        //åº§æ¨™ã€‚
+    float3 positionInView;  //ã‚«ãƒ¡ãƒ©ç©ºé–“ã§ã®åº§æ¨™ã€‚
+    float3 color;           //ã‚«ãƒ©ãƒ¼ã€‚
+    float range;            //ç¯„å›²ã€‚
 };
 
-static const int NUM_DIRECTION_LIGHT = 4;   //ƒfƒBƒŒƒNƒVƒ‡ƒ“ƒ‰ƒCƒg‚Ì”B
-static const int MAX_POINT_LIGHT = 1000;    //ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌÅ‘å”B
+static const int NUM_DIRECTION_LIGHT = 4;   //ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒˆã®æ•°ã€‚
+static const int MAX_POINT_LIGHT = 1000;    //ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æœ€å¤§æ•°ã€‚
 
-// ’è”ƒoƒbƒtƒ@[
+// å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ¼
 cbuffer cbCameraParam : register(b0)
 {
-    float4x4 mtxProj : packoffset(c0);      // “Š‰es—ñ
-    float4x4 mtxProjInv : packoffset(c4);   // “Š‰es—ñ‚Ì‹ts—ñ
+    float4x4 mtxProj : packoffset(c0);      // æŠ•å½±è¡Œåˆ—
+    float4x4 mtxProjInv : packoffset(c4);   // æŠ•å½±è¡Œåˆ—ã®é€†è¡Œåˆ—
     float4x4 mtxViewRot : packoffset(c8);
 };
 
@@ -40,40 +40,40 @@ cbuffer Light : register(b1)
 {
     DirectionLight directionLight[NUM_DIRECTION_LIGHT];
     PointLight pointLight[MAX_POINT_LIGHT];
-    float4x4 mViewProjInv;  //ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚Ì‹ts—ñB
-    float4 screenParam;     // ƒXƒNƒŠ[ƒ“ƒpƒ‰ƒ[ƒ^inear, far, screenWidth, screenHeightj
-    float3 eyePos;          //‹“_B
-    float specPow;          //ƒXƒyƒLƒ…ƒ‰‚Ìi‚èB
-    int numPointLight;      //ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”B
+    float4x4 mViewProjInv;  //ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã®é€†è¡Œåˆ—ã€‚
+    float4 screenParam;     // ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼ˆnear, far, screenWidth, screenHeightï¼‰
+    float3 eyePos;          //è¦–ç‚¹ã€‚
+    float specPow;          //ã‚¹ãƒšã‚­ãƒ¥ãƒ©ã®çµã‚Šã€‚
+    int numPointLight;      //ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æ•°ã€‚
 };
 
-// “ü—Í
-// [“xƒeƒNƒXƒ`ƒƒB
+// å…¥åŠ›
+// æ·±åº¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€‚
 Texture2D depthTexture : register(t0);
 
-// o—Í—p‚Ìƒoƒbƒtƒ@B
-RWStructuredBuffer<uint> rwLightIndices : register( u0 ); // ƒ‰ƒCƒgƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@[
-RWStructuredBuffer<float> hoge : register(u1); // ƒ‰ƒCƒgƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@[
+// å‡ºåŠ›ç”¨ã®ãƒãƒƒãƒ•ã‚¡ã€‚
+RWStructuredBuffer<uint> rwLightIndices : register( u0 ); // ãƒ©ã‚¤ãƒˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ¼
+RWStructuredBuffer<float> hoge : register(u1); // ãƒ©ã‚¤ãƒˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ¼
 
-// ‹¤—Lƒƒ‚ƒŠB
-groupshared uint sMinZ; //ƒ^ƒCƒ‹‚ÌÅ¬[“xB
-groupshared uint sMaxZ; //ƒ^ƒCƒ‹‚ÌÅ‘å[“xB
-groupshared uint sTileLightIndices[MAX_POINT_LIGHT]; //ƒ^ƒCƒ‹‚ÉÚG‚µ‚Ä‚¢‚éƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌƒCƒ“ƒfƒbƒNƒXB
-groupshared uint sTileNumLights; //ƒ^ƒCƒ‹‚ÉÚG‚µ‚Ä‚¢‚éƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì”B
+// å…±æœ‰ãƒ¡ãƒ¢ãƒªã€‚
+groupshared uint sMinZ; //ã‚¿ã‚¤ãƒ«ã®æœ€å°æ·±åº¦ã€‚
+groupshared uint sMaxZ; //ã‚¿ã‚¤ãƒ«ã®æœ€å¤§æ·±åº¦ã€‚
+groupshared uint sTileLightIndices[MAX_POINT_LIGHT]; //ã‚¿ã‚¤ãƒ«ã«æ¥è§¦ã—ã¦ã„ã‚‹ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚
+groupshared uint sTileNumLights; //ã‚¿ã‚¤ãƒ«ã«æ¥è§¦ã—ã¦ã„ã‚‹ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®æ•°ã€‚
 
 groupshared uint ligNum = 0;
 
 /*!
- * @brief ƒ^ƒCƒ‹‚²‚Æ‚Ì‹„‘ä•½–Ê‚ğ‹‚ß‚éB
+ * @brief ã‚¿ã‚¤ãƒ«ã”ã¨ã®è¦–æ¨å°å¹³é¢ã‚’æ±‚ã‚ã‚‹ã€‚
  */
 void GetTileFrustumPlane( out float4 frustumPlanes[6], uint3 groupId )
 {
-    // ƒ^ƒCƒ‹‚ÌÅ‘åEÅ¬[“x‚ğ•‚“®¬”“_‚É•ÏŠ·
+    // ã‚¿ã‚¤ãƒ«ã®æœ€å¤§ãƒ»æœ€å°æ·±åº¦ã‚’æµ®å‹•å°æ•°ç‚¹ã«å¤‰æ›
     float minTileZ = asfloat(sMinZ);
     float maxTileZ = asfloat(sMaxZ);
 
-    // Intel‚ÌƒTƒ“ƒvƒ‹‚Æ”÷–­‚Éˆá‚¤‚Ì‚Í‰EèŒn‚Å‚â‚Á‚Ä‚¢‚é‚©‚ç
-    // ‚ ‚ÆAIntel‚ÌƒTƒ“ƒvƒ‹‚Í”÷–­‚ÉŠÔˆá‚Á‚Ä‚é‚Æv‚¤
+    // Intelã®ã‚µãƒ³ãƒ—ãƒ«ã¨å¾®å¦™ã«é•ã†ã®ã¯å³æ‰‹ç³»ã§ã‚„ã£ã¦ã„ã‚‹ã‹ã‚‰
+    // ã‚ã¨ã€Intelã®ã‚µãƒ³ãƒ—ãƒ«ã¯å¾®å¦™ã«é–“é•ã£ã¦ã‚‹ã¨æ€ã†
     float2 tileScale = screenParam.zw * rcp( float(2 * TILE_WIDTH) );
     float2 tileBias = tileScale - float2(groupId.xy);
 
@@ -88,7 +88,7 @@ void GetTileFrustumPlane( out float4 frustumPlanes[6], uint3 groupId )
     frustumPlanes[4] = float4(0.0, 0.0, 1.0, -minTileZ);
     frustumPlanes[5] = float4(0.0, 0.0, -1.0, maxTileZ);
 
-    // –@ü‚ª³‹K‰»‚³‚ê‚Ä‚¢‚È‚¢4–Ê‚É‚Â‚¢‚Ä‚¾‚¯³‹K‰»‚·‚é
+    // æ³•ç·šãŒæ­£è¦åŒ–ã•ã‚Œã¦ã„ãªã„4é¢ã«ã¤ã„ã¦ã ã‘æ­£è¦åŒ–ã™ã‚‹
     [unroll]
     for (uint i = 0; i < 4; ++i)
     {
@@ -97,7 +97,7 @@ void GetTileFrustumPlane( out float4 frustumPlanes[6], uint3 groupId )
 }
 
 /*!
- * @brief ƒJƒƒ‰‹óŠÔ‚Å‚ÌÀ•W‚ğŒvZ‚·‚éB
+ * @brief ã‚«ãƒ¡ãƒ©ç©ºé–“ã§ã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹ã€‚
  */
 float3 ComputePositionInCamera( uint2 globalCoords )
 {
@@ -121,43 +121,43 @@ void CSMain(
     uint3 groupThreadId    : SV_GroupThreadID
 )
 {
-    // ƒ^ƒCƒ‹“à‚Å‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ‹‚ß‚é
+    // ã‚¿ã‚¤ãƒ«å†…ã§ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’æ±‚ã‚ã‚‹
     uint groupIndex = groupThreadId.y * TILE_WIDTH + groupThreadId.x;
-    // ƒ‰ƒCƒg‚Ì”‚ğæ“¾‚·‚é
-    //‹¤—Lƒƒ‚ƒŠ‚ğ‰Šú‰»‚·‚éB
+    // ãƒ©ã‚¤ãƒˆã®æ•°ã‚’å–å¾—ã™ã‚‹
+    //å…±æœ‰ãƒ¡ãƒ¢ãƒªã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚
     if(groupIndex == 0)
     {
         sTileNumLights = 0;
-        sMinZ = 0x7F7FFFFF; // float‚ÌÅ‘å’l
+        sMinZ = 0x7F7FFFFF; // floatã®æœ€å¤§å€¤
         sMaxZ = 0;
     }
 
     uint2 frameUV = dispatchThreadId.xy;
 
-    //ƒrƒ…[‹óŠÔ‚Å‚ÌÀ•W‚ğŒvZ‚·‚éB
+    //ãƒ“ãƒ¥ãƒ¼ç©ºé–“ã§ã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹ã€‚
     float3 posInView = ComputePositionInCamera(frameUV);
 
-    // ‚±‚±‚Å“¯Šú‚ğæ‚é
+    // ã“ã“ã§åŒæœŸã‚’å–ã‚‹
     GroupMemoryBarrierWithGroupSync();
 
-    // ƒ^ƒCƒ‹‚ÌÅ‘åEÅ¬[“x‚ğ‹‚ß‚é
-    // ‚±‚Ìˆ—‚Í•À—ñ‚·‚éƒXƒŒƒbƒh‘S‚Ä‚Å”r‘¼“I‚Éˆ—‚³‚ê‚é
+    // ã‚¿ã‚¤ãƒ«ã®æœ€å¤§ãƒ»æœ€å°æ·±åº¦ã‚’æ±‚ã‚ã‚‹
+    // ã“ã®å‡¦ç†ã¯ä¸¦åˆ—ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰å…¨ã¦ã§æ’ä»–çš„ã«å‡¦ç†ã•ã‚Œã‚‹
     InterlockedMin( sMinZ, asuint(posInView.z) );
     InterlockedMax( sMaxZ, asuint(posInView.z) );
 
-    // ‚±‚±‚Å“¯Šú‚ğæ‚é‚±‚Æ‚Åƒ^ƒCƒ‹‚ÌÅ‘åEÅ¬[“x‚ğ³‚µ‚¢‚à‚Ì‚É‚·‚é
+    // ã“ã“ã§åŒæœŸã‚’å–ã‚‹ã“ã¨ã§ã‚¿ã‚¤ãƒ«ã®æœ€å¤§ãƒ»æœ€å°æ·±åº¦ã‚’æ­£ã—ã„ã‚‚ã®ã«ã™ã‚‹
     GroupMemoryBarrierWithGroupSync();
 
-    // ƒ^ƒCƒ‹‚Ì‘ä‚ğ‹‚ß‚é
+    // ã‚¿ã‚¤ãƒ«ã®éŒ˜å°ã‚’æ±‚ã‚ã‚‹
     float4 frustumPlanes[6];
     GetTileFrustumPlane( frustumPlanes, groupId );
 
-    // ƒ^ƒCƒ‹‚Æƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌÕ“Ë”»’è
+    // ã‚¿ã‚¤ãƒ«ã¨ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã®è¡çªåˆ¤å®š
     for (uint lightIndex = groupIndex; lightIndex < numPointLight; lightIndex += TILE_SIZE)
     {
         PointLight light = pointLight[lightIndex];
 
-        // ƒ^ƒCƒ‹‚Æ‚Ì”»’è
+        // ã‚¿ã‚¤ãƒ«ã¨ã®åˆ¤å®š
         bool inFrustum = true;
         for (uint i = 0; i < 6; ++i)
         {
@@ -166,7 +166,7 @@ void CSMain(
             inFrustum = inFrustum && (d >= -light.range);
         }
 
-        // ƒ^ƒCƒ‹‚ÆÕ“Ë‚µ‚Ä‚¢‚éê‡
+        // ã‚¿ã‚¤ãƒ«ã¨è¡çªã—ã¦ã„ã‚‹å ´åˆ
         if (inFrustum)
         {
             uint listIndex;
@@ -175,10 +175,10 @@ void CSMain(
         }
     }
 
-    // ‚±‚±‚Å“¯Šú‚ğæ‚é‚ÆAsTileLightIndices‚Éƒ^ƒCƒ‹‚ÆÕ“Ë‚µ‚Ä‚¢‚éƒ‰ƒCƒg‚ÌƒCƒ“ƒfƒbƒNƒX‚ªÏ‚Ü‚ê‚Ä‚¢‚é
+    // ã“ã“ã§åŒæœŸã‚’å–ã‚‹ã¨ã€sTileLightIndicesã«ã‚¿ã‚¤ãƒ«ã¨è¡çªã—ã¦ã„ã‚‹ãƒ©ã‚¤ãƒˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒç©ã¾ã‚Œã¦ã„ã‚‹
     GroupMemoryBarrierWithGroupSync();
 
-    // ƒ‰ƒCƒgƒCƒ“ƒfƒbƒNƒX‚ğo—Íƒoƒbƒtƒ@‚Éo—Í
+    // ãƒ©ã‚¤ãƒˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å‡ºåŠ›ãƒãƒƒãƒ•ã‚¡ã«å‡ºåŠ›
     uint numCellX = (screenParam.z + TILE_WIDTH - 1) / TILE_WIDTH;
     uint tileIndex = floor( frameUV.x / TILE_WIDTH ) + floor( frameUV.y / TILE_WIDTH ) * numCellX;
     uint lightStart = numPointLight * tileIndex;
@@ -189,7 +189,7 @@ void CSMain(
    
     if ((groupIndex == 0) && (sTileNumLights < numPointLight))
     {
-        //-1‚Å”Ô•ºB
+        //-1ã§ç•ªå…µã€‚
         rwLightIndices[lightStart + sTileNumLights] = 0xffffffff;
     }
 }
