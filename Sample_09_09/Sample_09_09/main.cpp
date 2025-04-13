@@ -66,7 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         // ワイプサイズを増やして少しずつワイプさせる
         monochromeRate += 0.01f;
         if (monochromeRate > 1.0f) {
-            monochromeRate = 1.0f;
+            monochromeRate = 0.0f;
         }
         // スプライトのドローコールを実行する
         test2D.Draw(renderContext);
