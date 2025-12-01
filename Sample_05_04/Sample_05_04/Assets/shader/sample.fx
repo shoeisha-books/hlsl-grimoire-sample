@@ -40,6 +40,9 @@ cbuffer DirectionLightCb : register(b1)
     float3 ambientLight;    // アンビエントライト
 
     // step-3 半球ライトのデータにアクセスするための変数を追加
+    float3 groundColor;//照り返しのライト
+    float3 skyColor;//天球ライト
+    float3 groundNormal;//地面の法線
 
 };
 
@@ -89,11 +92,20 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     float3 directionLig = CalcLigFromDirectionLight(psIn);
 
     // step-4 半球ライトを計算する
+    //サーフェイスの法線と地面の法線との内積を計算する
+    float t = dot(psIn.normal, groundNormal);
+    
+    //内積の結果を0～1の範囲に変換する
+    t = (t + 1.0f) / 2.0f;
+    
+    //地面色と天球色を補給率tで線形補間する
+    float3 hemiLight = lerp(groundColor, skyColor, t);
 
     // 各種ライトの反射光を足し算して最終的な反射光を求める
     float3 finalLig = directionLig + ambientLight;
 
     // step-5 半球ライトを最終的な反射光に加算する
+    finalLig += hemiLight;
     float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);
 
     // テクスチャカラーに求めた光を乗算して最終出力カラーを求める

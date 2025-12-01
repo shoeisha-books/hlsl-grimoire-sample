@@ -32,6 +32,11 @@ cbuffer ModelCb : register(b0)
 };
 
 // step-5 ディレクションライト用のデータを受け取る定数バッファーを用意する
+cbuffer diDirectionLightCb : register(b1)
+{
+    float3 ligDirection; // ライトの方向
+    float3 ligColor; // ライトの色
+}
 
 ///////////////////////////////////////////
 // シェーダーリソース
@@ -56,6 +61,7 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
     psIn.pos = mul(mProj, psIn.pos);    // カメラ座標系からスクリーン座標系に変換
 
     // step-6 頂点法線をピクセルシェーダーに渡す
+    psIn.normal = mul(mWorld, vsIn.normal);
 
     psIn.uv = vsIn.uv;
 
@@ -68,14 +74,24 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
     // step-7 ピクセルの法線とライトの方向の内積を計算する
+    float t = dot(psIn.normal, ligDirection);
+    
+    //内積の結果に-1を乗算する
+    t *= -1.0f;
 
     // step-8 内積の結果が0以下なら0にする
+    if (t < 0.0f)
+    {
+        t = 0.0f;
+    }
 
     // step-9 ピクセルが受けているライトの光を求める
+    float3 diffuseLig = ligColor * t;
 
     float4 finalColor = g_texture.Sample(g_sampler, psIn.uv);
 
     // step-10 最終出力カラーに光を乗算する
+    finalColor.xyz *= diffuseLig;
 
     return finalColor;
 }

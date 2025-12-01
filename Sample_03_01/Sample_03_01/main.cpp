@@ -26,8 +26,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     triangle.Init(rootSignature);
 
     // step-1 定数バッファを作成
+    ConstantBuffer cb;
+	cb.Init(sizeof(Matrix)); // 1つの行列分のサイズで初期化//sizeofはバイト数を数える関数
 
     // step-2 ディスクリプタヒープを作成
+    DescriptorHeap ds;
+	ds.RegistConstantBuffer(0, cb); // レジスタ番号0に定数バッファを登録
+	ds.Commit(); // ディスクリプタヒープへの登録を確定
 
     //////////////////////////////////////
     // 初期化を行うコードを書くのはここまで！！！
@@ -48,10 +53,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         renderContext.SetRootSignature(rootSignature);
 
         // step-3 ワールド行列を作成
+        Matrix mWorld;
+        mWorld.MakeTranslation(0.5f, 0.4f, 0.0f);//移動
 
         // step-4 ワールド行列をグラフィックメモリにコピー
+		cb.CopyToVRAM(mWorld);
 
         // step-5 ディスクリプタヒープを設定
+		renderContext.SetDescriptorHeap(ds);//step-6
 
         //三角形をドロー
         triangle.Draw(renderContext);

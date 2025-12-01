@@ -51,5 +51,6 @@ SPSIn VSMain(SVSIn vsIn, uniform bool hasSkin)
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
     // step-4 テクスチャを貼り付ける
-    return float4(1.0f, 0.0f, 0.0f, 1.0f);
+    //return float4(1.0f, 0.0f, 0.0f, 1.0f);
+    return g_texture.Sample(g_sampler, psIn.uv);
 }
