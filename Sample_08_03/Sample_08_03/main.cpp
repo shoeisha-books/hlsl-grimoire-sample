@@ -44,6 +44,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     spriteInitData.m_height = 128.0f;
 
     // step-1 加算合成の設定で描画する
+	spriteInitData.m_alphaBlendMode = AlphaBlendMode_Add;
 
     // Spriteクラスのオブジェクトを定義して初期化する
     Sprite test2D;

@@ -60,6 +60,14 @@ struct SPSIn
 ///////////////////////////////////////////////////
 
 // step-1 各種マップにアクセスするための変数を追加
+//アルベドマップ
+Texture2D<float4> g_albedo : register(t0);
+
+//法線マップ
+Texture2D<float4> g_normalMap : register(t1);
+
+//メタリックスムースマップ。rにメタリック、aに滑らかさ
+Texture2D<float4> g_metallicSmoothMap : register(t2);
 
 // サンプラーステート
 sampler g_sampler : register(s0);
@@ -152,7 +160,17 @@ float CookTorranceSpecular(float3 L, float3 V, float3 N, float metallic)
 float CalcDiffuseFromFresnel(float3 N, float3 L, float3 V)
 {
     // step-4 フレネル反射を考慮した拡散反射光を求める
-
+    //法線と光源に向かうベクトルがどれだけ似ているかを内積で求める
+    //saturateで0〜1にクランプしている
+    //0〜1の範囲に収めることで、負の値や1を超える値が出ないようにしている
+    float dotNL = saturate(dot(N, L));
+    
+    //法線と光源に向かうベクトルがどれだけ似ているかを内積で求める
+    float dotNV = saturate(dot(N, V));
+    
+    //法線と光源への方向に依存する拡散反射率と、法線と視点ベクトルに依存する拡散反射率を
+    //乗算して最終的な拡散反射率を求めている
+    return (dotNL * dotNV);
 }
 
 /// <summary>
@@ -182,6 +200,17 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     float3 normal = GetNormal(psIn.normal, psIn.tangent, psIn.biNormal, psIn.uv);
 
     // step-2 各種マップをサンプリングする
+    //アルベドカラー（拡散反射光）
+    float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
+    
+    //スペキュラカラーはアルベドカラーと同じにする
+    float3 specColor = albedoColor;
+    
+    //金属度
+    float metallic = g_metallicSmoothMap.Sample(g_sampler, psIn.uv).r;
+    
+    //滑らかさ
+    float smooth = g_metallicSmoothMap.Sample(g_sampler, psIn.uv).a;
 
     // 視線に向かって伸びるベクトルを計算する
     float3 toEye = normalize(eyePos - psIn.worldPos);
@@ -190,11 +219,30 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     for(int ligNo = 0; ligNo < NUM_DIRECTIONAL_LIGHT; ligNo++)
     {
         // step-3 シンプルなディズニーベースの拡散反射を実装する
+        //フレネル反射を考慮した拡散反射を計算
+        float diffuseFromFresnel = CalcDiffuseFromFresnel(
+        normal, -directionalLight[ligNo].direction, toEye);
+        
+        //正規化Lambert拡散反射を求める
+        float NdotL = saturate(dot(normal, -directionalLight[ligNo].direction));
+        float3 lambertDiffuse = directionalLight[ligNo].color * NdotL / PI;
+        
+        //最終的な拡散反射光を計算する
+        float3 diffuse = albedoColor * diffuseFromFresnel * lambertDiffuse;
 
         // step-5 Cook-Torranceモデルを利用した鏡面反射率を計算する
+        //Cook-Torranceモデルの鏡面反射率を計算する
+        float3 spec = CookTorranceSpecular(
+        -directionalLight[ligNo].direction, toEye, normal, smooth)
+        * directionalLight[ligNo].color;
+        
+        //金属度が高ければ、鏡面反射はスペキュラカラー、低ければ白
+        //スペキュラカラーの強さを鏡面反射率として扱う
+        spec *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
         // step-6 滑らかさを使って、拡散反射光と鏡面反射光を合成する
-
+        //滑らかさが高ければ、拡散反射は弱くなる
+        lig += diffuse * (1.0f - smooth) + spec;
     }
 
     // 環境光による底上げ

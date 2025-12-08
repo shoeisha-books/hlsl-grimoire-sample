@@ -85,6 +85,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
         float3 diffuse = directionalLight[ligNo].color * NdotL;
 
         // step-1 拡散反射光を正規化する
+        diffuse /= 3.1415926f;
 
         // 拡散反射光を反射光に足し算する
         lig += diffuse;

@@ -30,14 +30,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     triangle.Init(rootSignature);
 
     // step-1 三角形ポリゴンにUV座標を設定
+	triangle.SetUVCoord(0, 0.0f, 1.0f); //頂点の番号,U座標,V座標
+	triangle.SetUVCoord(1, -0.5f, 0.0f); //頂点1の番号,U座標,V座標//U座標をマイナスにして左右反転
+	triangle.SetUVCoord(2, -1.0f, 1.0f); //頂点2の番号,U座標,V座標
 
     // step-2 テクスチャをロード
+    Texture tex;
+    tex.InitFromDDSFile(L"Assets/image/sample_00.dds");
 
     // ディスクリプタヒープを作成
     DescriptorHeap ds;
     ds.RegistConstantBuffer(0, cb); // ディスクリプタヒープに定数バッファを登録
 
     // step-3 テクスチャをディスクリプタヒープに登録
+	ds.RegistShaderResource(0, tex);//レジスタ番号,レジスタに設定するテクスチャ
 
     ds.Commit();                    //ディスクリプタヒープへの登録を確定
 
@@ -70,6 +76,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
         //三角形をドロー
         triangle.Draw(renderContext);
+
+        renderContext.DrawIndexed(6);
 
         /// //////////////////////////////////////
         //絵を描くコードを書くのはここまで！！！
