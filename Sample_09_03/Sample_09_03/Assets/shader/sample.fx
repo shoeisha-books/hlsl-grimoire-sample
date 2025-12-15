@@ -41,8 +41,10 @@ float4 PSMain(PSInput In) : SV_Target0
     float4 color = colorTexture.Sample(Sampler, In.uv);
 
     // step-1 画面の中央からこのピクセルに向かって伸びるベクトルを計算する
+    float2 posFromCenter = In.pos.xy - float2(640.0f, 360.0f); // 画面中央が(640,360)の場合
 
     // step-2 画面の中央からの距離とwipeSizeを利用してピクセルキル
+    clip(length(posFromCenter) - wipeSize);
 
     return color;
 }

@@ -41,6 +41,8 @@ float4 PSMain(PSInput In) : SV_Target0
     float4 color = colorTexture.Sample(Sampler, In.uv);
 
     //step-1 ピクセルのY座標を割った余りとワイプサイズを利用してピクセルキル
+    float t = (int) fmod(In.pos.y, 64.0f);
+    clip(t - wipeSize);
 
     return color;
 }

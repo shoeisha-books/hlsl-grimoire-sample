@@ -25,8 +25,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     //////////////////////////////////////
 
     // step-1 ワイプパラメータ構造体を定義する
+    struct WipePram
+    {
+        Vector2 wipeDir;//【注目】ワイプする方向
+		float wipeSize;// ワイプの大きさ
+    };
 
     // step-2 ワイプパラメータを初期化する
+	WipePram wipeParam;
+
+    //ワイプする方向を設定する
+    //今回は右下に向かってワイプする
+    wipeParam.wipeDir.Set(1.0f, 1.0f);
+	wipeParam.wipeDir.Normalize();
+
+    //ワイプサイズを初期化する
+	wipeParam.wipeSize = 0.0f;
 
     // まずはSpriteクラスの初期化オブジェクトを作成する
     SpriteInitData spriteInitData;
@@ -63,7 +77,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
         // ここから絵を描くコードを記述する
         //////////////////////////////////////
-        wipeParam.wipeSize += 5.0f;
+        wipeParam.wipeSize += 2.0f;
 
         // スプライトのドローコールを実行する
         test2D.Draw(renderContext);

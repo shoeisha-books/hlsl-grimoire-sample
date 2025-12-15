@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "system/system.h"
+//#include "Assets/shader/sample.fx"
 
 // 頂点構造体
 struct SimpleVertex
@@ -43,6 +44,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     spriteInitData.m_expandConstantBuffer = &monochromeRate;
     spriteInitData.m_expandConstantBufferSize = sizeof(monochromeRate);
 
+    //往復処理する際のフラグ
+    bool isIncreasing = true;
+
     // Spriteクラスのオブジェクトを定義して初期化する
     Sprite test2D;
 
@@ -63,11 +67,31 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
         // ここから絵を描くコードを記述する
         //////////////////////////////////////
+        //徐々にネガポジ反転して徐々に戻るのを繰り返す処理
+        if (isIncreasing) 
+        {
+            monochromeRate += 0.01f;
+            if (monochromeRate >= 1.0f) 
+            {
+                monochromeRate = 1.0f;
+                isIncreasing = false;
+            }
+        }
+        else
+        {
+            monochromeRate -= 0.01f;
+            if (monochromeRate <= 0.0f)
+            {
+                monochromeRate = 0.0f;
+                isIncreasing = true;
+            }
+        }
+         
         // ワイプサイズを増やして少しずつワイプさせる
-        monochromeRate += 0.01f;
+        /*monochromeRate += 0.01f;
         if (monochromeRate > 1.0f) {
             monochromeRate = 1.0f;
-        }
+        }*/
         // スプライトのドローコールを実行する
         test2D.Draw(renderContext);
 
