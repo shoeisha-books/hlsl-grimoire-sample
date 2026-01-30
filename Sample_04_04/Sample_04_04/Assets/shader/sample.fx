@@ -105,7 +105,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
     }
 
     // 鏡面反射の強さを絞る
-    t = pow(t, 10.0f);
+    // 右の値を変えて、絞りを変える
+    t = pow(t, 1.0f);
 
     // 鏡面反射光を求める
     float3 specularLig = directionLight.color * t;
