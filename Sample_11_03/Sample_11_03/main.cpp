@@ -37,8 +37,35 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     lightCamera.Update();
 
     // step-1 シャドウマップ描画用のレンダリングターゲットを作成する
+	float clearColor[4] = { 1.0f,1.0f,1.0f, 1.0f };
+	RenderTarget shadowMap;
+    shadowMap.Create(
+        1024,
+        1024,
+        1,
+        1,
+        //【注目】シャドウマップのカラーバッファーののフォーマットを変更している
+        DXGI_FORMAT_R32_FLOAT,
+        DXGI_FORMAT_D32_FLOAT,
+        clearColor
+    );
 
     // step-2 シャドウマップに描画するモデルを初期化する
+	ModelInitData teapotShadowModelInitData;
+
+    //シャドウマップ描画用のシェーダーを指定する
+	teapotShadowModelInitData.m_fxFilePath = "Assets/shader/sampleDrawShadowMap.fx";
+    teapotShadowModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
+
+    //【注目】カラーバッファーのフォーマットに変更が入ったのでこちらも変更する
+    teapotShadowModelInitData.m_colorBufferFormat[0] = DXGI_FORMAT_R32_FLOAT;
+    Model teapotShadowModel;
+    teapotShadowModel.Init(teapotShadowModelInitData);
+    teapotShadowModel.UpdateWorldMatrix(
+        { 0,50,0 },
+        g_quatIdentity,
+        g_vec3One
+    );
 
     // 通常描画のティーポットモデルを初期化
     ModelStandard teapotModel;

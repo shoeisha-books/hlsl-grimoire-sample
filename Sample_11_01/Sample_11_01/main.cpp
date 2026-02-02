@@ -20,10 +20,51 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     InitRootSignature(rs);
 
     // step-1 シャドウマップ描画用のレンダリングターゲットを作成する
+    //カラーバッファーのクリアカラー
+    //今回はカラーバッファーは真っ白にする
+	float clearColor[4] = { 1.0f,1.0f, 1.0f, 1.0f };
+    RenderTarget shadowMap;
+    shadowMap.Create(
+        1024,
+        1024,
+        1,
+        1,
+        DXGI_FORMAT_R8G8B8A8_UNORM,
+        DXGI_FORMAT_D32_FLOAT,
+        clearColor
+    );
 
     // step-2 影描画用のライトカメラを作成する
+    Camera lightCamera;
+
+    //カメラの位置を設定。これはライトの位置
+	lightCamera.SetPosition(0, 600, 0);
+
+    //カメラ視点の注視点を設定。これがライトが照らしている場所
+	lightCamera.SetTarget(0, 0, 0);
+
+    //【注目】上方向を設定。今回はライトが真下を向いているので、X方向を上にしている
+	lightCamera.SetUp(1, 0, 0);
+
+    //今回のサンプルでは画角をせまめにしておく
+	lightCamera.SetViewAngle(Math::DegToRad(20.0f));
+
+    //ライトビュープロジェクション行列を計算している
+	lightCamera.Update();
 
     // step-3 シャドウマップ描画用のモデルを用意する
+	ModelInitData teapotShadowModelInitData;
+
+    //【注目】シャドウマップ描画用のシェーダーを設定する
+	teapotShadowModelInitData.m_fxFilePath = "Assets/shader/sampleDrawShadowMap.fx";
+	teapotShadowModelInitData.m_tkmFilePath = "Assets/modelData/teapot.tkm";
+	Model teapotShadowModel;
+	teapotShadowModel.Init(teapotShadowModelInitData);
+    teapotShadowModel.UpdateWorldMatrix(
+        { 0,50,0 },
+        g_quatIdentity,
+        g_vec3One
+    );
 
     // シャドウマップを表示するためのスプライトを初期化する
     SpriteInitData spriteInitData;
@@ -64,6 +105,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
 
         // step-4 影を生成したいモデルをシャドウマップに描画する
+        //レンダリングターゲットをシャドウマップに変更する
+        renderContext.WaitUntilToPossibleSetRenderTarget(shadowMap);
+		renderContext.SetRenderTargetAndViewport(shadowMap);
+		renderContext.ClearRenderTargetView(shadowMap);
+
+        //影モデルを描画
+		teapotShadowModel.Draw(renderContext, lightCamera);
+
+        //書き込み終了待ち
+		renderContext.WaitUntilFinishDrawingToRenderTarget(shadowMap);
 
         // 通常レンダリング
         // レンダリングターゲットをフレームバッファに戻す

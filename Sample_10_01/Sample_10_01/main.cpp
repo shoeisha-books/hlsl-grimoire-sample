@@ -18,10 +18,48 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     //////////////////////////////////////
 
     // step-1 オフスクリーン描画用のレンダリングターゲットを作成
+    //RenderTargetクラスのオブジェクトを定義
+    RenderTarget offscreenRenderTarget;
+
+    //RenderTarget::Create()を利用して、レンダリングターゲットを作成する
+    offscreenRenderTarget.Create(
+        1280,                       //テクスチャの幅
+        720,                        //テクスチャの高さ
+        1,                          //Mipmapレベル
+        1,                          //テクスチャ配列のサイズ
+        DXGI_FORMAT_R8G8B8A8_UNORM, //カラーバッファーのフォーマット
+        DXGI_FORMAT_D32_FLOAT       //デプスステンシルバッファーのフォーマット
+    );
 
     // step-2 各種モデルを初期化する
+    //箱モデルを初期化
+    ModelInitData boxModelInitData;
+    boxModelInitData.m_tkmFilePath = "Assets/modelData/box.tkm";
+    boxModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
+    Model boxModel;
+    boxModel.Init(boxModelInitData);
+    boxModel.UpdateWorldMatrix({ 100.0f,0.0f,0.0f }, g_quatIdentity, g_vec3One);
+
+    //背景モデルを初期化
+    ModelInitData bgModelInitData;
+    bgModelInitData.m_tkmFilePath = "Assets/modelData/bg/bg.tkm";
+    bgModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
+    Model bgModel;
+    bgModel.Init(bgModelInitData);
+
+    //プレイヤーモデルの初期化
+    ModelInitData plModelInitData;
+    plModelInitData.m_tkmFilePath = "Assets/modelData/sample.tkm";
+    plModelInitData.m_fxFilePath = "Assets/shader/sample3D.fx";
+    Model plModel;
+    plModel.Init(plModelInitData);
 
     // step-3 箱モデルに貼り付けるテクスチャを変更する
+    // 箱モデルのテクスチャをオフスクリーンレンダリングされるテクスチャに切り替える
+    boxModel.ChangeAlbedoMap(
+        "",
+        offscreenRenderTarget.GetRenderTargetTexture()
+    );
 
     Vector3 plPos;
 
@@ -48,12 +86,42 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         //////////////////////////////////////
 
         // step-4 レンダリングターゲットをoffscreenRenderTargetに変更する
+        RenderTarget* rtArray[] = { &offscreenRenderTarget };
+
+        //レンダリングターゲットとして利用できるまで待つ
+        renderContext.WaitUntilToPossibleSetRenderTargets(1, rtArray);
+
+        //レンダリングターゲットを設定
+        renderContext.SetRenderTargets(1, rtArray);
+
+        //レンダリングターゲットをクリア
+        renderContext.ClearRenderTargetViews(1, rtArray);
 
         // step-5 offscreenRenderTargetに背景、プレイヤーを描画する
+        //背景モデルをドロー
+        bgModel.Draw(renderContext);
+
+        //プレイヤーをドロー
+        plModel.Draw(renderContext);
+
+        //レンダリングターゲットへの書き込み終了待ち
+        renderContext.WaitUntilFinishDrawingToRenderTargets(1, rtArray);
 
         // step-6 画面に表示されるレンダリングターゲットに戻す
+        renderContext.SetRenderTarget(
+            g_graphicsEngine->GetCurrentFrameBuffuerRTV(),
+            g_graphicsEngine->GetCurrentFrameBuffuerDSV()
+        );
 
         // step-7 画面に表示されるレンダリングターゲットに各種モデルを描画する
+        //背景モデルをドロー
+        bgModel.Draw(renderContext);
+
+        //プレイヤーをドロー
+        plModel.Draw(renderContext);
+
+        //箱を描画
+        boxModel.Draw(renderContext);
 
         //////////////////////////////////////
         //絵を描くコードを書くのはここまで！！！

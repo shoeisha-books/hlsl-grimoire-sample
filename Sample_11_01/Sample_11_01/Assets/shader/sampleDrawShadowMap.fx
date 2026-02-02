@@ -44,4 +44,5 @@ SPSIn VSMain(SVSIn vsIn)
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
     // step-5 シャドウマップ描画用のピクセルシェーダーを作成する
+    return float4(0.5f, 0.5f, 0.5f, 0.5f);
 }

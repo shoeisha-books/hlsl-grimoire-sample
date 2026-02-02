@@ -43,4 +43,15 @@ sampler Sampler : register(s0);
 float4 PSSamplingLuminance(PSInput In) : SV_Target0
 {
     // step-14 輝度を抽出するピクセルシェーダーを実装
+    //メインレンダリングターゲットからカラーをサンプリング
+    float4 color = mainRenderTargetTexture.Sample(Sampler, In.uv);
+    
+    //サンプリング下カラーの明るさを計算
+    float t = dot(color.xyz, float3(0.2125f, 0.7154f, 0.0721f));
+    
+    //clip()関数は引数の値がマイナスになると、移行の処理をスキップする
+    //なので、マイナスになるとピクセルカラーは出力されない
+    //今回の実装はカラーの明るさが1以下ならピクセルキルする
+    clip(t - 1.0f);
+    return color;
 }

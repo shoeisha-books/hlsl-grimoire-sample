@@ -37,8 +37,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     float clearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
     RenderTarget shadowMap;
     shadowMap.Create(
-        1024,
-        1024,
+        1024*8,
+        1024*8,
         1,
         1,
         // 【注目】シャドウマップのカラーバッファーのフォーマットを変更している
