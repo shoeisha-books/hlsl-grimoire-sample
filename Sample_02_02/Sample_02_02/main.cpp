@@ -11,7 +11,10 @@ struct SimpleVertex
 // 関数宣言
 void InitRootSignature(RootSignature& rs);
 void InitPipelineState(PipelineState& pipelineState, RootSignature& rs, Shader& vs, Shader& ps);
+//
 
+
+//課題:二等辺三角形
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数
 ///////////////////////////////////////////////////////////////////
@@ -103,6 +106,308 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     }
     return 0;
 }
+
+
+////課題:上が白、右が赤、左が青
+//
+/////////////////////////////////////////////////////////////////////
+//// ウィンドウプログラムのメイン関数
+/////////////////////////////////////////////////////////////////////
+//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+//{
+//    // ゲームの初期化
+//    InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
+//
+//    //////////////////////////////////////
+//    // ここから初期化を行うコードを記述する
+//    //////////////////////////////////////
+//
+//    // 1. ルートシグネチャを作成
+//    RootSignature rootSignature;
+//    InitRootSignature(rootSignature);
+//
+//    // 2. シェーダーをロード
+//    Shader vs, ps;
+//    vs.LoadVS("Assets/shader/sample.fx", "VSMain");
+//    ps.LoadPS("Assets/shader/sample.fx", "PSMain");
+//
+//    // 3. パイプラインステートを作成
+//    PipelineState pipelineState;
+//    InitPipelineState(pipelineState, rootSignature, vs, ps);
+//
+//    //課題, 上白, 右赤, 左青
+//    // 頂点配列を定義
+//    SimpleVertex vertices[] = {
+//        {
+//            {-0.5f, -0.5f, 0.0f},
+//            { 0.0f, 0.0f, 1.0f }
+//        },
+//        {
+//            { 0.0f, 0.5f, 0.0f },
+//            { 1.0f, 1.0f, 1.0f }
+//        },
+//        {
+//            { 0.5f, -0.5f, 0.0f },
+//            { 1.0f, 0.0f, 0.0f }
+//        }
+//    };
+//
+//
+//    VertexBuffer triangleVB;
+//    triangleVB.Init(sizeof(vertices), sizeof(vertices[0]));
+//    triangleVB.Copy(vertices);
+//
+//    // 5. 三角形のインデックスバッファを作成
+//    //インデックス配列
+//    uint16_t indices[] = {
+//        0,1,2
+//    };
+//    IndexBuffer triangleIB;
+//    triangleIB.Init(sizeof(indices), 2);
+//    triangleIB.Copy(indices);
+//
+//    //////////////////////////////////////
+//    // 初期化を行うコードを書くのはここまで！！！
+//    //////////////////////////////////////
+//    auto& renderContext = g_graphicsEngine->GetRenderContext();
+//
+//    // ここからゲームループ
+//    while (DispatchWindowMessage())
+//    {
+//        // レンダリング開始
+//        g_engine->BeginFrame();
+//
+//        //////////////////////////////////////
+//        // ここから絵を描くコードを記述する
+//        //////////////////////////////////////
+//
+//        // 1. ルートシグネチャを設定
+//        renderContext.SetRootSignature(rootSignature);
+//        // 2. パイプラインステートを設定
+//        renderContext.SetPipelineState(pipelineState);
+//        // 3. プリミティブのトポロジーを設定
+//        renderContext.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+//        // 4. 頂点バッファを設定
+//        renderContext.SetVertexBuffer(triangleVB);
+//        // 5. インデックスバッファを設定
+//        renderContext.SetIndexBuffer(triangleIB);
+//        // 6. ドローコール
+//        renderContext.DrawIndexed(3);
+//
+//        /// //////////////////////////////////////
+//        // 絵を描くコードを書くのはここまで！！！
+//        //////////////////////////////////////
+//        // レンダリング終了
+//        g_engine->EndFrame();
+//    }
+//    return 0;
+//}
+
+
+////課題:四角形
+//
+/////////////////////////////////////////////////////////////////////
+//// ウィンドウプログラムのメイン関数
+/////////////////////////////////////////////////////////////////////
+//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+//{
+//    // ゲームの初期化
+//    InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
+//
+//    //////////////////////////////////////
+//    // ここから初期化を行うコードを記述する
+//    //////////////////////////////////////
+//
+//    // 1. ルートシグネチャを作成
+//    RootSignature rootSignature;
+//    InitRootSignature(rootSignature);
+//
+//    // 2. シェーダーをロード
+//    Shader vs, ps;
+//    vs.LoadVS("Assets/shader/sample.fx", "VSMain");
+//    ps.LoadPS("Assets/shader/sample.fx", "PSMain");
+//
+//    // 3. パイプラインステートを作成
+//    PipelineState pipelineState;
+//    InitPipelineState(pipelineState, rootSignature, vs, ps);
+//
+//    //課題, 上白, 右赤, 左青
+//    // 頂点配列を定義
+//    SimpleVertex vertices[] = {
+//        {
+//            {-0.5f, -0.5f, 0.0f},
+//            { 0.0f, 0.0f, 1.0f }
+//        },
+//        {
+//            { -0.5f, 0.5f, 0.0f },
+//            { 1.0f, 1.0f, 1.0f }
+//        },
+//        {
+//            { 0.5f, 0.5f, 0.0f },
+//            { 1.0f, 0.0f, 0.0f }
+//        },
+//        {
+//            { 0.5f, -0.5f, 0.0f },
+//            { 0.0f, 1.0f, 0.0f }
+//        }
+//    };
+//
+//
+//    VertexBuffer triangleVB;
+//    triangleVB.Init(sizeof(vertices), sizeof(vertices[0]));
+//    triangleVB.Copy(vertices);
+//
+//    // 5. 四角形のインデックスバッファを作成
+//    //インデックス配列
+//    uint16_t indices[] = {
+//        0,1,2,
+//        0,2,3
+//    };
+//    IndexBuffer squareIB;
+//    squareIB.Init(sizeof(indices), 2);
+//    squareIB.Copy(indices);
+//
+//    //////////////////////////////////////
+//    // 初期化を行うコードを書くのはここまで！！！
+//    //////////////////////////////////////
+//    auto& renderContext = g_graphicsEngine->GetRenderContext();
+//
+//    // ここからゲームループ
+//    while (DispatchWindowMessage())
+//    {
+//        // レンダリング開始
+//        g_engine->BeginFrame();
+//
+//        //////////////////////////////////////
+//        // ここから絵を描くコードを記述する
+//        //////////////////////////////////////
+//
+//        // 1. ルートシグネチャを設定
+//        renderContext.SetRootSignature(rootSignature);
+//        // 2. パイプラインステートを設定
+//        renderContext.SetPipelineState(pipelineState);
+//        // 3. プリミティブのトポロジーを設定
+//        renderContext.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+//        // 4. 頂点バッファを設定
+//        renderContext.SetVertexBuffer(triangleVB);
+//        // 5. インデックスバッファを設定
+//        renderContext.SetIndexBuffer(squareIB);
+//        // 6. ドローコール
+//        renderContext.DrawIndexed(6);
+//
+//        /// //////////////////////////////////////
+//        // 絵を描くコードを書くのはここまで！！！
+//        //////////////////////////////////////
+//        // レンダリング終了
+//        g_engine->EndFrame();
+//    }
+//    return 0;
+//}
+
+////課題:五角形
+//
+/////////////////////////////////////////////////////////////////////
+//// ウィンドウプログラムのメイン関数
+/////////////////////////////////////////////////////////////////////
+//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+//{
+//    // ゲームの初期化
+//    InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("Game"));
+//
+//    //////////////////////////////////////
+//    // ここから初期化を行うコードを記述する
+//    //////////////////////////////////////
+//
+//    // 1. ルートシグネチャを作成
+//    RootSignature rootSignature;
+//    InitRootSignature(rootSignature);
+//
+//    // 2. シェーダーをロード
+//    Shader vs, ps;
+//    vs.LoadVS("Assets/shader/sample.fx", "VSMain");
+//    ps.LoadPS("Assets/shader/sample.fx", "PSMain");
+//
+//    // 3. パイプラインステートを作成
+//    PipelineState pipelineState;
+//    InitPipelineState(pipelineState, rootSignature, vs, ps);
+//
+//    //課題, 上白, 右赤, 左青
+//    // 頂点配列を定義
+//    SimpleVertex vertices[] = {
+//        {
+//            {-0.5f, -0.7f, 0.0f},
+//            { 0.0f, 0.0f, 1.0f }
+//        },
+//        {
+//            { -0.7f, 0.5f, 0.0f },
+//            { 1.0f, 1.0f, 1.0f }
+//        },
+//        {
+//            { 0.0f, 0.9f, 0.0f },
+//            { 1.0f, 0.0f, 0.0f }
+//        },
+//        {
+//            { 0.7f, 0.5f, 0.0f },
+//            { 0.0f, 1.0f, 0.0f }
+//        },
+//        {
+//            { 0.5f, -0.7f, 0.0f },
+//            { 0.0f, 0.0f, 0.0f }
+//        }
+//    };
+//
+//
+//    VertexBuffer triangleVB;
+//    triangleVB.Init(sizeof(vertices), sizeof(vertices[0]));
+//    triangleVB.Copy(vertices);
+//
+//    // 5. 四角形のインデックスバッファを作成
+//    //インデックス配列
+//    uint16_t indices[] = {
+//        0,1,2,
+//        0,2,4,
+//        2,3,4
+//    };
+//    IndexBuffer squareIB;
+//    squareIB.Init(sizeof(indices), 2);
+//    squareIB.Copy(indices);
+//
+//    //////////////////////////////////////
+//    // 初期化を行うコードを書くのはここまで！！！
+//    //////////////////////////////////////
+//    auto& renderContext = g_graphicsEngine->GetRenderContext();
+//
+//    // ここからゲームループ
+//    while (DispatchWindowMessage())
+//    {
+//        // レンダリング開始
+//        g_engine->BeginFrame();
+//
+//        //////////////////////////////////////
+//        // ここから絵を描くコードを記述する
+//        //////////////////////////////////////
+//
+//        // 1. ルートシグネチャを設定
+//        renderContext.SetRootSignature(rootSignature);
+//        // 2. パイプラインステートを設定
+//        renderContext.SetPipelineState(pipelineState);
+//        // 3. プリミティブのトポロジーを設定
+//        renderContext.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+//        // 4. 頂点バッファを設定
+//        renderContext.SetVertexBuffer(triangleVB);
+//        // 5. インデックスバッファを設定
+//        renderContext.SetIndexBuffer(squareIB);
+//        // 6. ドローコール
+//        renderContext.DrawIndexed(9);
+//
+//        /// //////////////////////////////////////
+//        // 絵を描くコードを書くのはここまで！！！
+//        //////////////////////////////////////
+//        // レンダリング終了
+//        g_engine->EndFrame();
+//    }
+//    return 0;
+//}
 
 // ルートシグネチャの初期化
 void InitRootSignature( RootSignature& rs )

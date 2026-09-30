@@ -27,14 +27,21 @@ VSOutput VSMain(VSInput In)
 float4 PSMain(VSOutput vsOut) : SV_Target0
 {
     // 赤色を出力している
-    return float4(1.0f, 0.0f , 0.0f, 1.0f);
+    //return float4(1.0f, 0.0f , 0.0f, 1.0f);
 
     // step-1 三角形を青色にする
+    //return float4(0.0f, 1.0f, 0.0f, 1.0f);
 
     // step-2 三角形を緑色にする
-
+    //return float4(0.0f, 0.0f, 1.0f, 1.0f);
+    
     // step-3 三角形を黄色にする
+    //return float4(1.0f, 1.0f, 0.0f, 1.0f);
 
     // step-4 頂点シェーダーから受け取ったカラーを出力する
-
+    return float4(vsOut.color, 1.0f);
+    
+    //課題 縞模様
+    //float wave = step(0.5f, sin(vsOut.pos.y / 10.0f));
+    //return float4(wave, wave, wave, 1.0f);
 }
