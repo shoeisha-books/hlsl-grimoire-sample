@@ -30,15 +30,37 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     triangle.Init(rootSignature);
 
     // step-1 三角形ポリゴンにUV座標を設定
+    triangle.SetUVCoord(
+        0,      // 頂点の番号
+        0.0f,   // U座標
+        1.0f    // V座標
+    );
+
+    triangle.SetUVCoord(
+        1,      // 頂点の番号
+        0.5f,   // U座標
+        0.0f    // V座標
+    );
+
+    triangle.SetUVCoord(
+        2,      // 頂点の番号
+        1.0f,   // U座標
+        1.0f    // V座標
+    );
 
     // step-2 テクスチャをロード
+    Texture tex;
+    tex.InitFromDDSFile(L"Assets/image/sample_00.dds");
 
     // ディスクリプタヒープを作成
     DescriptorHeap ds;
     ds.RegistConstantBuffer(0, cb); // ディスクリプタヒープに定数バッファを登録
 
     // step-3 テクスチャをディスクリプタヒープに登録
-
+    ds.RegistShaderResource(
+        0,      // レジスタ番号
+        tex     // レジスタに設定するテクスチャ
+    );
     ds.Commit();                    //ディスクリプタヒープへの登録を確定
 
     //////////////////////////////////////

@@ -18,6 +18,7 @@ float4x4 g_worldMatrix : register(b0);
 sampler g_sampler : register(s0);
 
 // step-4 t0レジスタのテクスチャにアクセスする変数を追加する
+Texture2D g_texture : register(t0);
 
 // 頂点シェーダー
 // 1. 引数は変換前の頂点情報
@@ -35,5 +36,12 @@ VSOutput VSMain(VSInput In)
 float4 PSMain(VSOutput vsOut) : SV_Target0
 {
     // step-5 テクスチャカラーをサンプリングして返す
-    return float4(vsOut.color, 1.0f);
+    float4 texColor = g_texture.Sample(
+    g_sampler,  // 第1引数はサンプラー。今は気にしなくてよい
+    vsOut.uv    // 第2引数はUV座標
+);
+    return texColor;
+    
+    // 元々のコードは要らない
+    //return float4(vsOut.color, 1.0f);
 }
